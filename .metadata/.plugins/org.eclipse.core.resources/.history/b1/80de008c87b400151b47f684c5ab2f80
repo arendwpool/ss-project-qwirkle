@@ -12,6 +12,10 @@ import java.util.Map;
  */
 public class Tiles {
 	/**
+	 * De mogelijke kleuren die een tegel kan hebben.
+	 */
+	public static final String[] kleuren = {"rood", "oranje", "geel", "groen","blauw", "paars"};
+	/**
 	 * De mogelijke symbolen die een tegel kan hebben.
 	 */
 	public static final String[] symbolen = {"circel", "kruis", "ruit", "vierkant", "ster", "plus"};
