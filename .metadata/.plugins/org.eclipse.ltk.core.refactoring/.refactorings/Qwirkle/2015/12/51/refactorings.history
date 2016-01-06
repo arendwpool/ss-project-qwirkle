@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;localGame&apos; to &apos;localgame&apos;&#x0D;&#x0A;- Original project: &apos;Qwirkle&apos;&#x0D;&#x0A;- Original element: &apos;Qwirkle/src/localGame&apos;&#x0D;&#x0A;- Renamed element: &apos;Qwirkle/src/localgame&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;localGame&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;localGame" name="localgame" qualified="false" references="true" stamp="1450464497324" textual="false" version="1.0"/>
+</session>
