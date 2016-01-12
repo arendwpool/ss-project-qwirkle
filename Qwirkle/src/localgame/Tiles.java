@@ -1,12 +1,6 @@
 package localgame;
-
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * De klasse die alle tegels maakt die een spel kan hebben.
+ * De klasse die een bepaalde tegel representeerd.
  * @author Bob Breemhaar en Arend Pool.
  *
  */
@@ -15,58 +9,67 @@ public class Tiles {
 	 * De mogelijke symbolen die een tegel kan hebben.
 	 */
 	public static final String[] symbolen = {"circel", "kruis", "ruit", "vierkant", "ster", "plus"};
+	
 	/**
 	 * De mogelijke kleuren die een tegel kan hebben.
 	 */
 	public static final String[] kleuren = {"rood", "oranje", "geel", "groen", "blauw", "paars"};
+	
 	/**
 	 * Aantal tegels in een spel.
 	 */
 	public static final int NUMBER_TILES = 108;
-	/**
-	 * Een map die een tegel voorstelt.
-	 */
-	public Map<String, String> tileMap = new HashMap<String, String>();
-	/**
-	 * Een array van losse maps die tegels voorstellen.
-	 */
-	public Map<String, String>[] tiles;
 	
+	/**
+	 * De kleur van deze tegel.
+	 */
+	private String color;
+	
+	/**
+	 * Het symbool van deze tegel.
+	 */
+	private String symbol;
+	
+	/**
+	 * Constructor die een tegel samenstelt.
+	 */
 	public Tiles(){
-		//TODO implement
+		
 	}
 	
 	/**
-	 * Genereer een nieuwe array met tegels.
+	 * Geeft de tegel een kleur.
+	 * @param color
 	 */
-	public void generateTiles(){
-		tiles = new Map[NUMBER_TILES];
-		int tilesIndex = 0;
-		for (int kleur = 0; kleur < kleuren.length*3; kleur++){
-			for (int symbool = 0; symbool < kleuren.length*3; symbool++){
-				tileMap.put(kleuren[kleur%6], symbolen[symbool%6]);
-				while(tilesIndex<NUMBER_TILES){
-					tiles[tilesIndex] = tileMap;
-					tilesIndex++;
-				}
-				tileMap.clear();
-			}
-		}
+	public void setColor(String color){
+		this.color = color;
 	}
+	
 	/**
-	 * Geeft de map met tegels terug.
-	 * @return this.tiles.
+	 * Geeft de tegel een symbool.
+	 * @param symbol
 	 */
-	/*@pure*/
-	public Map<String, String>[] getTiles(){
-		return tiles;
+	public void setSymbol(String symbol){
+		this.symbol = symbol;
 	}
-	public static void main(String[] args){
-		Tiles a = new Tiles();
-		a.generateTiles();
-		for(int i = 0; i < 108; i++){
-			System.out.println(i+1 + ":	" + a.getTiles()[i]);
-		}
+	
+	/**
+	 * Weergeeft de kleur van de tegel.
+	 * @return this.color
+	 */
+	/*@Pure*/
+	public String getColor(){
+		return color;
 	}
+	
+	/**
+	 * Weergeeft de symbool van de tegel.
+	 * @return this.symbol
+	 */
+	/*@Pure*/
+	public String getSymbol(){
+		return symbol;
+	}
+	
 }
 	
