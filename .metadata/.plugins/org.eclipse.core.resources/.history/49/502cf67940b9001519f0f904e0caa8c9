@@ -30,7 +30,10 @@ public class Game {
 		tiles = new ArrayList<Tiles>();
 		for (int color = 0; color < Tiles.NUMBER_COLORS; color++){
 			for(int symbol = 0; symbol < Tiles.NUMBER_SYMBOLS; symbol++){
-				tiles.add(new Tiles(Tiles.kleuren[color], Tiles.symbolen[symbol]));
+				Tiles newTile = new Tiles();
+				newTile.setColor(Tiles.kleuren[color]);
+				newTile.setSymbol(Tiles.symbolen[symbol]);
+				tiles.add(newTile);
 			}
 		}
 		
@@ -39,7 +42,7 @@ public class Game {
 		Game a = new Game();
 		a.generateTiles();
 		for(int i = 0; i < 36; i++){
-		System.out.println(i+1 + a.tiles.get(i).getColor()+" "+ a.tiles.get(i).getSymbol());
+		System.out.println(i + a.tiles.get(i).getColor()+" "+ a.tiles.get(i).getSymbol());
 		}
 	}
 	

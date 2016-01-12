@@ -28,19 +28,13 @@ public class Game {
 	 */
 	public void generateTiles(){
 		tiles = new ArrayList<Tiles>();
-		for (int color = 0; color < Tiles.NUMBER_COLORS; color++){
-			for(int symbol = 0; symbol < Tiles.NUMBER_SYMBOLS; symbol++){
-				tiles.add(new Tiles(Tiles.kleuren[color], Tiles.symbolen[symbol]));
+		for (int color = 0; color < Tiles.NUMBER_TILES; color++){
+			Tiles newTile = new Tiles();
+			for(int symbol = 0; symbol < Tiles.NUMBER_TILES; symbol++){
+				
 			}
 		}
 		
-	}
-	public static void main(String[] args){
-		Game a = new Game();
-		a.generateTiles();
-		for(int i = 0; i < 36; i++){
-		System.out.println(i+1 + a.tiles.get(i).getColor()+" "+ a.tiles.get(i).getSymbol());
-		}
 	}
 	
 	public void gameOver(){

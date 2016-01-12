@@ -41,13 +41,10 @@ public class Tiles {
 	private String symbol;
 	
 	/**
-	 * Constructor die een tegel samenstelt met een gegeven kleur en symbool.
-	 * @param color
-	 * @param symbol
+	 * Constructor die een tegel samenstelt.
 	 */
-	public Tiles(String color, String symbol){
-		this.color = color;
-		this.symbol = symbol;
+	public Tiles(){
+		
 	}
 	
 	/**

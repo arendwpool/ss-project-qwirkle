@@ -10,15 +10,8 @@ public class Tiles {
 	 */
 	public static final String[] symbolen = {"circel", "kruis", "ruit", "vierkant", "ster", "plus"};
 	
-	/**
-	 * het aantal verschillende symbolen van de tegels.
-	 */
 	public static final int NUMBER_SYMBOLS = 6;
-	
-	/**
-	 * Het aantal verschillende kleluren van de tegels.
-	 */
-	public static final int NUMBER_COLORS = 6;
+	public static final int NUMBER_SYMBOLS = 6;
 	
 	/**
 	 * De mogelijke kleuren die een tegel kan hebben.
@@ -41,12 +34,25 @@ public class Tiles {
 	private String symbol;
 	
 	/**
-	 * Constructor die een tegel samenstelt met een gegeven kleur en symbool.
+	 * Constructor die een tegel samenstelt.
+	 */
+	public Tiles(){
+		
+	}
+	
+	/**
+	 * Geeft de tegel een kleur.
 	 * @param color
+	 */
+	public void setColor(String color){
+		this.color = color;
+	}
+	
+	/**
+	 * Geeft de tegel een symbool.
 	 * @param symbol
 	 */
-	public Tiles(String color, String symbol){
-		this.color = color;
+	public void setSymbol(String symbol){
 		this.symbol = symbol;
 	}
 	
