@@ -1,0 +1,51 @@
+package localgame;
+
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * De klasse die een bepaalde tegel representeerd.
+ * @author Bob Breemhaar en Arend Pool.
+ *
+ */
+public class Tiles {
+	/**
+	 * De mogelijke symbolen die een tegel kan hebben.
+	 */
+	public static final String[] symbolen = {"circel", "kruis", "ruit", "vierkant", "ster", "plus"};
+	
+	/**
+	 * De mogelijke kleuren die een tegel kan hebben.
+	 */
+	public static final String[] kleuren = {"rood", "oranje", "geel", "groen", "blauw", "paars"};
+	
+	/**
+	 * Aantal tegels in een spel.
+	 */
+	public static final int NUMBER_TILES = 108;
+	
+	/**
+	 * De kleur van deze tegel
+	 */
+	private String color;
+	
+	/**
+	 * Het symbool van deze tegel
+	 */
+	private String symbol;
+	
+	/**
+	 * Constructor die een tegel samenstelt.
+	 */
+	public Tiles(){
+		
+	}
+	
+	public void setColor(String color){
+		if ()
+	}
+	
+}
+	
