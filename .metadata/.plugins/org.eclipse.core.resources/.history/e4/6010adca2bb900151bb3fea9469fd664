@@ -1,4 +1,10 @@
 package localgame;
+
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * De klasse die een bepaalde tegel representeerd.
  * @author Bob Breemhaar en Arend Pool.

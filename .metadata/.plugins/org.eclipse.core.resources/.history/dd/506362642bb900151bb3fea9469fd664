@@ -1,4 +1,10 @@
 package localgame;
+
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * De klasse die een bepaalde tegel representeerd.
  * @author Bob Breemhaar en Arend Pool.
@@ -21,12 +27,12 @@ public class Tiles {
 	public static final int NUMBER_TILES = 108;
 	
 	/**
-	 * De kleur van deze tegel.
+	 * De kleur van deze tegel
 	 */
 	private String color;
 	
 	/**
-	 * Het symbool van deze tegel.
+	 * Het symbool van deze tegel
 	 */
 	private String symbol;
 	
@@ -38,37 +44,15 @@ public class Tiles {
 	}
 	
 	/**
-	 * Geeft de tegel een kleur.
+	 * Geeft de tegel een kleur
 	 * @param color
 	 */
 	public void setColor(String color){
 		this.color = color;
 	}
 	
-	/**
-	 * Geeft de tegel een symbool.
-	 * @param symbol
-	 */
 	public void setSymbol(String symbol){
 		this.symbol = symbol;
-	}
-	
-	/**
-	 * Weergeeft de kleur van de tegel.
-	 * @return this.color
-	 */
-	/*@Pure*/
-	public String getColor(){
-		return color;
-	}
-	
-	/**
-	 * Weergeeft de symbool van de tegel.
-	 * @return this.symbol
-	 */
-	/*@Pure*/
-	public String getSymbol(){
-		return symbol;
 	}
 	
 }
