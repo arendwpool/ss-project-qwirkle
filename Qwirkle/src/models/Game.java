@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Klasse die het de regels van het spel implementeerd.
@@ -24,42 +25,64 @@ public class Game {
 	private int noOfPlayers;
 	
 	/**
-	 * Genereer alle tegels die in een spel zitten.
+	 * Genereer alle tegels die in een spel zitten. Dit zijn er 108: 3 van elke tegel.
 	 */
+	//@ensures this.tiles = new ArrayList<Tiles>();
 	public void generateTiles(){
 		tiles = new ArrayList<Tiles>();
-		for (int color = 0; color < Tiles.NUMBER_COLORS; color++){
+		for (int color = 0; color < Tiles.NUMBER_COLORS * Tiles.NUMBER_DUPLICATES; color++){
 			for(int symbol = 0; symbol < Tiles.NUMBER_SYMBOLS; symbol++){
-				tiles.add(new Tiles(Tiles.kleuren[color], Tiles.symbolen[symbol]));
+				tiles.add(new Tiles(Tiles.kleuren[color%Tiles.NUMBER_COLORS], Tiles.symbolen[symbol]));
 			}
 		}
 		
 	}
-	public static void main(String[] args){
-		Game a = new Game();
-		a.generateTiles();
-		for(int i = 0; i < 36; i++){
-		System.out.println(i+1 + a.tiles.get(i).getColor()+" "+ a.tiles.get(i).getSymbol());
-		}
+	
+	public boolean hasWinner(){
+		//TODO implement: winnaar is de speler met de meeste punten als er geen tiles meer over zijn.
+		return false;
 	}
 	
-	public void gameOver(){
-		
+	/**
+	 * Geeft aan of het spel over is.
+	 * @return hasWinner();
+	 */
+	/*@pure*/
+	public boolean gameOver(){
+		return noTilesLeft();
 	}
 	
 	public Player winner(){
+		//TODO implement: return de speler met de meeste punten.
 		return null;
 	}
 	
-	public void tradeTiles(){
-		
+	public void tradeTiles(Player player, Set<Tiles> tilesToTrade){
+		if (noTilesLeft() == false){
+			for(Tiles tile : player.getTiles()){
+				
+			}
+		}
 	}
+	
 	
 	public void start(){
 		
 	}
 	
+	public void update(){
+		
+	}
+	
 	public boolean isValidMove(){
+		return false;
+	}
+	
+	public ArrayList<Tiles> getTiles(){
+		return tiles;
+	}
+	
+	public boolean noTilesLeft(){
 		return false;
 	}
 }
