@@ -46,4 +46,8 @@ public class Game {
 	public boolean isValidMove(){
 		return false;
 	}
+	
+	public void makeMove(){
+		
+	}
 }

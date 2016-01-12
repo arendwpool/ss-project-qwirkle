@@ -1,0 +1,10 @@
+package localgame;
+
+/**
+ * 
+ * @author Bob Breemhaar en Arend Pool
+ *
+ */
+public class Game {
+	
+}
