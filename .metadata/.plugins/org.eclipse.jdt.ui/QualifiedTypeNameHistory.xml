@@ -10,8 +10,8 @@
 <fullyQualifiedTypeName name="exceptions.FalseAmountOfTilesException"/>
 <fullyQualifiedTypeName name="exceptions.NoTilesLeftInPileException"/>
 <fullyQualifiedTypeName name="models.Board"/>
-<fullyQualifiedTypeName name="exceptions.InvalidMoveException"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="exceptions.FullGameException"/>
+<fullyQualifiedTypeName name="exceptions.InvalidMoveException"/>
 </qualifiedTypeNameHistroy>
