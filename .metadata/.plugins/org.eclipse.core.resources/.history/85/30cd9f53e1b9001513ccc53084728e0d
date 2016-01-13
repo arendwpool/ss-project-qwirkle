@@ -7,7 +7,7 @@ package models;
 public class Board {
     private int Coordinaten[] [];
     private	Tiles[] [] coordinaten;
-    private static final int DIM = 179;
+    private static final int DIM = 0;
 	
 	/*
 	 * Constructor van het Board
@@ -20,10 +20,10 @@ public class Board {
 	 * creeërt een kopie van het speelveld
 	 */
 	public Board deepCopy(){
-		coordinaten = new Tile[DIM][DIM];
+		coordinaten = new Tile[][];
 		for (int x = 0; x < coordinaten.length; x++) {
 			for (int y = 0; y < coordinaten.length; y++) {
-				coordinaten[x][y] = new Tile();
+				coordinaten[x][y] = new Tile(Color.Empty, Shape.EMPTY);
 				}
 			}
 		}
@@ -53,34 +53,23 @@ public class Board {
 	/*
 	 * returns true als een verwezen field pair(x,y) leeg is
 	 */
-	public boolean isEmptyField(int x, int y){
-		return (coordinaten[x][y] == null);
-	}
-	
-	
-	
-	public boolean isValidMove(int x, int y){
-		if(isEmptyField(x, y) == false){
-			return false;
-		}else if(x == 90 & y == 90){
-			return true;
-		}else{
-		return false;
-		}
+	public boolean isEmptyField(int y, int x){
+		return (coordinaten[x][y].toString().equals(""));
 	}
 	
 	/* 
 	 * Moet de Move van de player verwerken.
 	 */
-	public void processMove(int x, int y, Tiles tile){
+	public void makeMove(int x, int y, Tiles tile){
+		if(moveIsValid == True){
 			coordinaten[x][y] = tile;
-		
+		}
 		
 	}
 	
 	public void reset() {
-		for (int x = 0; x < DIM*DIM; x++) {
-			for (int y = 0; y < DIM*DIM; y++) {
+		for (int x = 0; x < DIM; x++) {
+			for (int y = 0; y < DIM; y++) {
 				coordinaten[x][y] = null;
 			}
 		}
