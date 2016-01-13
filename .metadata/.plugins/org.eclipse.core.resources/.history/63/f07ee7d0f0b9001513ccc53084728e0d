@@ -70,7 +70,7 @@ public class Board {
 			}
 		}else{
 			return false;
-		}//TODO Meer invalid shit vinden
+		}
 	}
 	
 	public boolean compareSymbool(Tiles tileA, Tiles tileB){

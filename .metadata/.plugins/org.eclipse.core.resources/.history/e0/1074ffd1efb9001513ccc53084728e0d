@@ -5,6 +5,7 @@ package models;
  *
  */
 public class Board {
+	private int Coordinaten[] [];
 	private	Tiles[] [] coordinaten;
 	private static final int DIM = 179;
 	private boolean initialMove;
@@ -21,13 +22,12 @@ public class Board {
 	 * creeërt een kopie van het speelveld
 	 */
 	public Board deepCopy(){
-		coordinaten = new Tiles[DIM][DIM];
+		coordinaten = new Tile[DIM][DIM];
 		for (int x = 0; x < coordinaten.length; x++) {
 			for (int y = 0; y < coordinaten.length; y++) {
-				coordinaten[x][y] = null;
+				coordinaten[x][y] = new Tiles();
 				}
 			}
-		return null; //TODO FIX dit LUL
 		}
 	
 	/* 
@@ -70,7 +70,7 @@ public class Board {
 			}
 		}else{
 			return false;
-		}//TODO Meer invalid shit vinden
+		}
 	}
 	
 	public boolean compareSymbool(Tiles tileA, Tiles tileB){
