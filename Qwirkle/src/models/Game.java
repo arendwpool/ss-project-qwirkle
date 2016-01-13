@@ -1,9 +1,11 @@
 package models;
-
 import java.util.ArrayList;
-import java.util.Set;
-
+import java.util.HashMap;
+import java.util.Map;
 import exceptions.FalseAmountOfTilesException;
+import exceptions.FullGameException;
+import exceptions.InvalidMoveException;
+import exceptions.NoTilesLeftInPileException;
 
 /**
  * Klasse die het de regels van het spel implementeerd.
@@ -27,6 +29,22 @@ public class Game {
 	private int noOfPlayers;
 	
 	/**
+	 * Een hashmap van spelers die meedoen gemapt aan hun ID
+	 */
+	private Map<Player, Integer> players;
+	/**
+	 * Het nieuwe bord dat bij dit spel hoort
+	 */
+	private Board board;
+	
+	/**
+	 * Contrueert  een nieuw spel.
+	 */
+	public Game(Board board){
+		this.board = board;
+		players = new HashMap<Player, Integer>();
+	}
+	/**
 	 * Genereer alle tegels die in een spel zitten. Dit zijn er 108: 3 van elke tegel.
 	 */
 	//@ensures this.tiles = new ArrayList<Tiles>();
@@ -40,9 +58,12 @@ public class Game {
 		
 	}
 	
+	/**
+	 * controleert of het spel een winnaar heeft
+	 * @return winner() != null
+	 */
 	public boolean hasWinner(){
-		//TODO implement: winnaar is de speler met de meeste punten als er geen tiles meer over zijn.
-		return false;
+		return winner() != null;
 	}
 	
 	/**
@@ -54,12 +75,33 @@ public class Game {
 		return noTilesLeft();
 	}
 	
+	/**
+	 * Geeft aan welke speler winnaar is, geeft null als er nog geen winnaar is.
+	 * @return Player withHighscore || null
+	 */
 	public Player winner(){
-		//TODO implement: return de speler met de meeste punten.
-		return null;
+		if(noTilesLeft() == true){
+			int score = 0;
+			Player withHighscore = null;
+			for(Player player : players.keySet()){
+				if(player.getScore() > score){
+					score = player.getScore();
+					withHighscore = player;
+				}
+			}
+			return withHighscore;
+		}else{
+			return null;
+		}
 	}
 	
-	public void tradeTiles(Player player, ArrayList<Tiles> tilesToTrade){
+	/**
+	 * Verwisselt tegels met de tilesTotrade van een gegeven speler.
+	 * @param player
+	 * @param tilesToTrade
+	 * @throws NoTilesLeftInPileException
+	 */
+	public void tradeTiles(Player player, ArrayList<Tiles> tilesToTrade) throws NoTilesLeftInPileException{
 		if (noTilesLeft() == false){
 			ArrayList<Tiles> tilesToGive = new ArrayList<Tiles>();
 			for(Tiles tile : player.getTiles()){
@@ -70,29 +112,96 @@ public class Game {
 			try{
 				player.replaceTiles(tilesToTrade, tilesToGive);
 			}catch (FalseAmountOfTilesException e){
-				;
+				//TODO implementeer de actie als er te weinig tegels zijn.
 			}
+		}else{
+			throw new NoTilesLeftInPileException();
 		}
 	}
 	
-	
+	/**
+	 * Start het spel.
+	 */
 	public void start(){
 		
 	}
 	
+	/**
+	 * Update de situatie van het spel na elke actie van een speler.
+	 */
 	public void update(){
 		
 	}
 	
-	public boolean isValidMove(){
-		return false;
+	/**
+	 * probeert een move te maken, vangt een InvalidMoveException als de move invalid is.
+	 * @param x
+	 * @param y
+	 * @param tile
+	 */
+	public void makeMove(int x, int y, Tiles tile){
+		try{
+			board.processMove(x, y, tile);
+		}catch (InvalidMoveException e){
+			//TODO implement actie na de catch
+		}
 	}
 	
-	public ArrayList<Tiles> getTiles(){
+	/**
+	 * Geeft een volle pile van alle tegels
+	 * @return this.pile
+	 */
+	public ArrayList<Tiles> getPile(){
 		return tiles;
 	}
 	
+	/**
+	 * Controleert of er geen tegels meer zijn in een spel. 
+	 * @return !playerHasNoTiles || false
+	 */
 	public boolean noTilesLeft(){
-		return false;
+		// tiles is nooit leeg, dit moet vervangen worden met de pile in het bord.
+		if(tiles.size() == 0){
+			boolean playerHasNoTiles = false;
+			for(Player player : players.keySet()){
+				if (player.getTiles().size() == 0){
+					playerHasNoTiles = true;
+				}
+			}
+			return !playerHasNoTiles;
+		}else{
+			return false;
+		}
+	}
+	
+	/**
+	 * Voegt een speler toe aan een spel.
+	 * @param player
+	 * @throws FullGameException 
+	 */
+	public void addPlayer(Player player) throws FullGameException{
+		if(players.keySet().size() < 4){
+			players.put(player, players.keySet().size());
+		}else{
+			throw new FullGameException();
+		}
+	}
+	
+	/**
+	 * Geeft het bord instantie van dit spel
+	 * @return
+	 */
+	public Board getBoard(){
+		return board;
+	}
+	
+	/**
+	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore
+	 * @param player
+	 */
+	public void generateScore(Player player){
+		//TODO implement
+		int points = 0;
+		player.addScore(points);
 	}
 }

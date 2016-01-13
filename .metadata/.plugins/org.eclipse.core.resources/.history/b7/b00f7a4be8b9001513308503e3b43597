@@ -1,0 +1,116 @@
+package models;
+//TODO vraag: checkstyle
+import java.util.ArrayList;
+import exceptions.FalseAmountOfTilesException;
+import exceptions.InvalidMoveException;
+import exceptions.NoTilesLeftInPileException;
+
+/**
+ * Klasse die het de regels van het spel implementeerd.
+ * @author Bob Breemhaar en Arend Pool
+ *
+ */
+public class Game {
+	/*
+	 * ArrayList met alle tegels in een spel.
+	 */
+	private ArrayList<Tiles> pile;
+	
+	/**
+	 * Geeft aan welke speler de volgende move moet maken.
+	 */
+	private Player currentPlayer;
+	
+	/*
+	 * Geeft de hoeveelheid meespelende spelers mee. 
+	 */
+	private int noOfPlayers;
+	
+	/**
+	 * Het nieuwe bord dat bij dit spel hoort
+	 */
+	private Board board;
+	
+	/**
+	 * Contrueert  een nieuw spel.
+	 */
+	public Game(Board board){
+		this.board = board;
+		//TODO vraag: spelers joinen een game, of game voegt spelers toe.
+	}
+	/**
+	 * Genereer alle tegels die in een spel zitten. Dit zijn er 108: 3 van elke tegel.
+	 */
+	//@ensures this.tiles = new ArrayList<Tiles>();
+	public void generateTiles(){
+		pile = new ArrayList<Tiles>();
+		for (int color = 0; color < Tiles.NUMBER_COLORS * Tiles.NUMBER_DUPLICATES; color++){
+			for(int symbol = 0; symbol < Tiles.NUMBER_SYMBOLS; symbol++){
+				pile.add(new Tiles(Tiles.kleuren[color%Tiles.NUMBER_COLORS], Tiles.symbolen[symbol]));
+			}
+		}
+		
+	}
+	
+	public boolean hasWinner(){
+		//TODO implement: winnaar is de speler met de meeste punten als er geen tiles meer over zijn.
+		return false;
+	}
+	
+	/**
+	 * Geeft aan of het spel over is.
+	 * @return hasWinner();
+	 */
+	/*@pure*/
+	public boolean gameOver(){
+		return noTilesLeft();
+	}
+	
+	public Player winner(){
+		//TODO implement: return de speler met de meeste punten.
+		return null;
+	}
+	
+	public void tradeTiles(Player player, ArrayList<Tiles> tilesToTrade) throws NoTilesLeftInPileException{
+		if (noTilesLeft() == false){
+			ArrayList<Tiles> tilesToGive = new ArrayList<Tiles>();
+			for(Tiles tile : player.getTiles()){
+				if (tilesToTrade.contains(tile)){
+					tilesToGive.add(tile);
+				}
+			}
+			try{
+				player.replaceTiles(tilesToTrade, tilesToGive);
+			}catch (FalseAmountOfTilesException e){
+				//TODO implementeer de actie als er te weinig tegels zijn.
+			}
+		}else{
+			throw new NoTilesLeftInPileException();
+		}
+	}
+	
+	
+	public void start(){
+		
+	}
+	
+	public void update(){
+		
+	}
+	
+	public void makeMove(int x, int y, Tiles tile){
+		try{
+			board.processMove(x, y, tile);
+		}catch (InvalidMoveException e){
+			//TODO implement actie na de catch
+		}
+	}
+	
+	public ArrayList<Tiles> getPile(){
+		return pile;
+	}
+	
+	public boolean noTilesLeft(){
+		return false;
+	}
+}
