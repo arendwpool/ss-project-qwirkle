@@ -1,0 +1,76 @@
+package models;
+/**
+ *De klasse die een speelbord representeerd maakt met een naam en tegels.
+ * @author Bob Breemhaar en Arend Pool.
+ *
+ */
+public class Board {
+	public int MINx = -1;
+	public int MINy = -1;
+	public int MAXx = 1;
+	public int MAXy = 1;
+	
+    
+    private	Tiles[] fields = new Tiles[(MAXy - MINy) * (MAXx - MINx)];
+	
+	/*
+	 * Constructor van het Board
+	 */
+	public Board(){	
+		reset(); //TODO reset creeëren?
+	}
+	
+	/*
+	 * creeërt een kopie van het speelveld
+	 */
+	public Board deepCopy(){
+		Board board = new Board();
+		for(int i = 0; i < ((MAXy - MINy) * (MAXx - MINx)); i++){
+			
+		}
+	}
+	
+	/*
+	 * berekend een index.
+	 */
+	public int index(int x, int y){
+		return 0;
+	}
+	
+	/* 
+	 * returns de inhoud van field i.
+	 */
+	public Tiles getField(int i){
+		return null;
+	}
+	
+	/*
+	 * returns de inhoud verwezen door het paar (x,y) .
+	 */
+	public Tiles getField(int y, int x){
+		return null;
+	}
+	
+	/*
+	 * return true als een field i leeg is.
+	 */
+	public boolean isEmptyField(int i){
+		return false;
+	}
+	
+	/*
+	 * returns true als een verwezen field pair(x,y) leeg is
+	 */
+	public boolean isEmptyField(int y, int x){
+		return false;
+	}
+	
+	/* 
+	 * Moet de Move van de player verwerken.
+	 */
+	public void makeMove(){
+		
+	}
+	
+
+}

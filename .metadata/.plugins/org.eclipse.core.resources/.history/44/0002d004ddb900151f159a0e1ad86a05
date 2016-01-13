@@ -32,9 +32,8 @@ public class Board {
 	/*
 	 * berekend een index.
 	 */
-	public int[] [] getSideFields(){
-		int[][] sideFields = new int[2][2];
-		
+	public int index(int x, int y){
+		return 0;
 	}
 	
 	/* 
@@ -49,7 +48,6 @@ public class Board {
 		return coordinaten[x] [y];
 	}
 	
-	
 	/*
 	 * returns true als een verwezen field pair(x,y) leeg is
 	 */
@@ -60,19 +58,9 @@ public class Board {
 	/* 
 	 * Moet de Move van de player verwerken.
 	 */
-	public void makeMove(int x, int y, Tiles tile){
-		if(moveIsValid == True){
-			coordinaten[x][y] = tile;
-		}
+	public void makeMove(){
 		
 	}
 	
-	public void reset() {
-		for (int x = 0; x < DIM; x++) {
-			for (int y = 0; y < DIM; y++) {
-				coordinaten[x][y] = null;
-			}
-		}
-	}
 
 }
