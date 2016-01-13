@@ -73,6 +73,6 @@ public class Tiles {
 	public String getSymbol(){
 		return symbol;
 	}
-	
+	//TODO hernoem Tiles naar Tile
 }
 	
