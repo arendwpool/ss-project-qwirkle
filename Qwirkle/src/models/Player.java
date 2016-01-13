@@ -1,7 +1,9 @@
 package models;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+
+import exceptions.FalseAmountOfTilesException;
+import exceptions.FullGameException;
 
 /**
  * Abstracte klasse die een nieuwe speler maakt met een naam en tegels.
@@ -15,17 +17,32 @@ public abstract class Player {
 	private String name;
 	
 	/**
+	 * Koppelt de speler aan een spel
+	 */
+	private Game game;
+	/**
 	 * De tegels die de betreffende speler heeft
 	 */
-	private Set<Tiles> tiles;
+	private ArrayList<Tile> tiles;
+	
+	/**
+	 * De score van de Speler
+	 */
+	private int score;
 	
 	/**
 	 * Creëert een nieuw object Player
 	 */
-	public Player(String name){
+	public Player(String name, Game game){
 		this.name = name;
-		tiles = new HashSet<Tiles>();
-		//TODO voeg random tegels in de set
+		this.game = game;
+		score = 0;
+		try{
+			game.addPlayer(this);
+		}catch (FullGameException e){
+			//TODO implement
+		}
+		tiles = new ArrayList<Tile>();
 	}
 	
 	/**
@@ -38,7 +55,35 @@ public abstract class Player {
 	/**
 	 * Geef een set met de tegels die de betreffende speler heeft
 	 */
-	public Set<Tiles> getTiles(){
+	public ArrayList<Tile> getTiles(){
 		return tiles;
+	}
+	
+	/**
+	 * Zet tegels in de tiles Set
+	 */
+	public void setTiles(ArrayList<Tile> tilesToGive){
+		tiles.addAll(tilesToGive);
+	}
+	
+	/**
+	 * Vervangt gegeven tegels met de tegels waarvoor deze vervangen worden
+	 * @throws FalseAmountOfTilesException 
+	 */
+	public void replaceTiles(ArrayList<Tile> tilesToReplace, ArrayList<Tile> tilesToGive) throws FalseAmountOfTilesException{
+		if (tilesToReplace.size() == tilesToGive.size()){
+			tiles.removeAll(tilesToReplace);
+			setTiles(tilesToGive);
+		}else{
+			throw new FalseAmountOfTilesException();
+		}
+	}
+	
+	public int getScore(){
+		return score;
+	}
+	
+	public void addScore(int points){
+		score += points;
 	}
 }
