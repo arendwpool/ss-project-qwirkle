@@ -3,8 +3,6 @@ package models;
 import java.util.ArrayList;
 import java.util.Set;
 
-import exceptions.FalseAmountOfTilesException;
-
 /**
  * Klasse die het de regels van het spel implementeerd.
  * @author Bob Breemhaar en Arend Pool
@@ -59,18 +57,13 @@ public class Game {
 		return null;
 	}
 	
-	public void tradeTiles(Player player, ArrayList<Tiles> tilesToTrade){
+	public void tradeTiles(Player player, Set<Tiles> tilesToTrade){
 		if (noTilesLeft() == false){
-			ArrayList<Tiles> tilesToGive = new ArrayList<Tiles>();
+			Set<Tiles> tilesToGive = new HashSet<Tiles>();
 			for(Tiles tile : player.getTiles()){
 				if (tilesToTrade.contains(tile)){
-					tilesToGive.add(tile);
+					
 				}
-			}
-			try{
-				player.replaceTiles(tilesToTrade, tilesToGive);
-			}catch (FalseAmountOfTilesException e){
-				;
 			}
 		}
 	}

@@ -6,6 +6,7 @@
 <fullyQualifiedTypeName name="exceptions.ColorNotValidException"/>
 <fullyQualifiedTypeName name="models.Game"/>
 <fullyQualifiedTypeName name="models.Tiles"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="exceptions.FalseAmountOfTilesException"/>
 </qualifiedTypeNameHistroy>

@@ -3,8 +3,6 @@ package models;
 import java.util.ArrayList;
 import java.util.Set;
 
-import exceptions.FalseAmountOfTilesException;
-
 /**
  * Klasse die het de regels van het spel implementeerd.
  * @author Bob Breemhaar en Arend Pool
@@ -66,11 +64,6 @@ public class Game {
 				if (tilesToTrade.contains(tile)){
 					tilesToGive.add(tile);
 				}
-			}
-			try{
-				player.replaceTiles(tilesToTrade, tilesToGive);
-			}catch (FalseAmountOfTilesException e){
-				;
 			}
 		}
 	}

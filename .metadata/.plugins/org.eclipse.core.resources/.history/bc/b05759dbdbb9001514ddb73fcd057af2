@@ -2,8 +2,6 @@ package models;
 
 import java.util.ArrayList;
 
-import exceptions.FalseAmountOfTilesException;
-
 /**
  * Abstracte klasse die een nieuwe speler maakt met een naam en tegels.
  * @author Bob Breemhaar en Arend Pool.
@@ -47,18 +45,5 @@ public abstract class Player {
 	 */
 	public void setTiles(ArrayList<Tiles> tilesToGive){
 		tiles.addAll(tilesToGive);
-	}
-	
-	/**
-	 * Vervangt gegeven tegels met de tegels waarvoor deze vervangen worden
-	 * @throws FalseAmountOfTilesException 
-	 */
-	public void replaceTiles(ArrayList<Tiles> tilesToReplace, ArrayList<Tiles> tilesToGive) throws FalseAmountOfTilesException{
-		if (tilesToReplace.size() == tilesToGive.size()){
-			tiles.removeAll(tilesToReplace);
-			setTiles(tilesToGive);
-		}else{
-			throw new FalseAmountOfTilesException();
-		}
 	}
 }
