@@ -1,0 +1,9 @@
+package tests;
+/**
+ * Een enumeratie van alle tegels die in een spel moeten zitten.
+ * @author Bob Breemhaar en Arend Pool
+ *
+ */
+public enum GeneratedTilesEnum {
+	
+}

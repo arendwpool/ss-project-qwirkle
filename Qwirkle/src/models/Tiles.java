@@ -27,6 +27,11 @@ public class Tiles {
 	public static final int NUMBER_COLORS = 6;
 	
 	/**
+	 * Het aantal duplicate tegels in een spel
+	 */
+	public static final int NUMBER_DUPLICATES = 3;
+	
+	/**
 	 * Aantal tegels in een spel.
 	 */
 	public static final int NUMBER_TILES = 108;
