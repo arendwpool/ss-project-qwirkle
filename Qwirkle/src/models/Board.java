@@ -39,7 +39,7 @@ public class Board {
 		coordinaten = new Tile[DIM][DIM];
 		for (int x = 0; x < coordinaten.length; x++) {
 			for (int y = 0; y < coordinaten.length; y++) {
-				board.coordinaten[x][y] = coordinaten[x][y];
+				board.setTile(x, y, this.getField(x, y));
 				}
 			}
 		return board;
@@ -82,7 +82,7 @@ public class Board {
 					 break;
 				}
 			}
-		} //TODO gedaan om errors te voorkomen
+		} //TODO hoe deze methode te gebruiken?
 	}
 	
 	
@@ -98,7 +98,7 @@ public class Board {
 	 * returns true als een verwezen field pair(x,y) leeg is
 	 */
 	public boolean isEmptyField(int x, int y){
-		return (coordinaten[x][y] == null);
+		return getField(x, y) == null;
 	}
 	
 	/*
@@ -110,11 +110,11 @@ public class Board {
 		boolean rightIsEmpty = false;
 		int xOrig = x;
 		ArrayList<Tile> xAxis = new ArrayList<Tile>();
-		xAxis.add(coordinaten[x][y]);
+		xAxis.add(getField(x, y));
 		while(leftIsEmpty == false){
 			x--;
 			if(isEmptyField(x,y) == false){
-				xAxis.add(coordinaten[x][y]);
+				xAxis.add(getField(x, y));
 			}else{
 				break; 
 			}
@@ -123,7 +123,7 @@ public class Board {
 		while(rightIsEmpty == false){
 			x++;
 			if(isEmptyField(x,y) == false){
-				xAxis.add(coordinaten[x][y]);
+				xAxis.add(getField(x, y));
 			}else{
 				break; 
 			}
@@ -139,11 +139,11 @@ public class Board {
 		boolean lowerIsEmpty = false;
 		int yOrig = y;
 		ArrayList<Tile> yAxis = new ArrayList<Tile>();
-		yAxis.add(coordinaten[x][y]);
+		yAxis.add(getField(x, y));
 		while(lowerIsEmpty == false){
 			y--;
 			if(isEmptyField(x,y) == false){
-				yAxis.add(coordinaten[x][y]);
+				yAxis.add(getField(x, y));
 			}else{
 				break; 
 			}
@@ -152,7 +152,7 @@ public class Board {
 		while(upperIsEmpty == false){
 			y++;
 			if(isEmptyField(x,y) == false){
-				yAxis.add(coordinaten[x][y]);
+				yAxis.add(getField(x, y));
 			}else{
 				break; 
 			}
@@ -167,8 +167,8 @@ public class Board {
 		ArrayList<Tile> copy = new ArrayList<Tile>(lastSet);
 		copy.add(tileToSet);
 		boolean contains = true;
-		for(Tile gh : copy){
-			if(!axis.contains(gh)){
+		for(Tile tile : copy){
+			if(!axis.contains(tile)){
 				contains = false;
 			}
 		}
@@ -178,6 +178,7 @@ public class Board {
 	/*
 	 * Controleert of de aangelegde stenen wel volgens de spelregels mogen
 	 */
+	//TODO analyzeren: nadat locatie is toegevoegd aan tile, is dit te verbeteren?
 	public boolean isValidMove(int x, int y, Tile tile){
 		Board board = deepCopy();
 		board.setTile(x, y, tile);
@@ -214,6 +215,7 @@ public class Board {
 	 */
 	private void setTile(int x, int y, Tile tile){
 		coordinaten[x][y] = tile;
+		tile.setLocation(x, y);
 	}
 	
 	
@@ -236,14 +238,14 @@ public class Board {
 	 */
 	public void processMove(int x, int y, Tile tile) throws InvalidMoveException{
 		if(isValidMove(x, y, tile) && (sharedLine(tile, tilesOnYAxis(x, y)) || sharedLine(tile, tilesOnXAxis(x, y)))){
-			coordinaten[x][y] = tile;
+			setTile(x, y, tile);
 			initialMove = false;
 			rememberMove(tile);
 		}else{
 			rememberMove(null);
 			throw new InvalidMoveException();
 		}
-		//TODO aanpassen op een overzichtelijke manier: welke tile wordt gezet en welke is ter controle
+		//TODO in zijn geheel opnieuw implementeren
 	}
 	
 	public void rememberMove(Tile tile){
@@ -252,13 +254,16 @@ public class Board {
 	public void clearLastMoves(){
 		lastSet.clear();
 	}
+	public ArrayList<Tile> getLastMoves(){
+		return lastSet;
+	}
 	/*
 	 * Maakt het hele board leeg
 	 */
 	public void reset() {
 		for (int x = 0; x <= (DIM); x++) {
 			for (int y = 0; y <= (DIM); y++) {
-				coordinaten[x][y] = null;
+				setTile(x, y, null);
 			}
 		}
 	}

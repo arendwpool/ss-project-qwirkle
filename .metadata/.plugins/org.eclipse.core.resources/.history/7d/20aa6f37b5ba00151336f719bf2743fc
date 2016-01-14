@@ -1,0 +1,282 @@
+package models;
+
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import exceptions.InvalidMoveException;
+
+/**
+ *De klasse die een speelbord representeerd maakt met een naam en tegels.
+ * @author Bob Breemhaar en Arend Pool.
+ *
+ */
+public class Board {
+	private	Tile[][] coordinaten;
+	private static final int DIM = 179;
+	private boolean initialMove;
+	private ArrayList<HashMap<Tile, Point>> lastSet;
+	
+	private int viewOfMinX;
+	private int viewOfMaxX;
+	private int viewOfMinY;
+	private int viewOfMaxY;
+	private int startPointX;
+	private int startPointY;
+
+	/*
+	 * Constructor van het Board
+	 */
+	public Board(){	
+		reset(); //TODO reset creeëren?
+		initialMove = true;
+		startPointX = 90;
+		startPointY = 90;
+		viewOfMinX = 88;
+		viewOfMaxX = 92;
+		viewOfMinY = 88;
+		viewOfMaxY = 92;
+	}
+	
+	
+	/*
+	 * creeërt een kopie van het speelveld
+	 */
+	public Board deepCopy(){
+		Board board = new Board();
+		coordinaten = new Tile[DIM][DIM];
+		for (int x = 0; x < coordinaten.length; x++) {
+			for (int y = 0; y < coordinaten.length; y++) {
+				board.coordinaten[x][y] = coordinaten[x][y];
+				}
+			}
+		return board;
+		}
+	
+	/*
+	 * De klasse controlleert de laagste en hoogste x en y as en maakt daarbij
+	 * de nieuwe coordinaten van de grote van het bord
+	 */
+	
+	public void boardSize(){
+		for (int x = 0; x <= DIM; x++) {
+			for (int y = 0; y <= DIM; y++) {
+				if(isEmptyField(x, y) == false){
+					 viewOfMinX = (x - 1);
+					 break;
+				}
+			}
+		}
+		for (int x = DIM; x >= DIM; x--) {
+			for (int y = 0; y <= DIM; y++) {
+				if(isEmptyField(x, y) == false){
+					 viewOfMaxX = (x + 1);
+					 break;
+				}
+			}
+		}
+		for (int y = 0; y <= DIM; y++) {
+			for (int x = 0; x <= DIM; x++) {
+				if(isEmptyField(x, y) == false){
+					 viewOfMinY = (y - 1) ;
+					 break;
+				}
+			}
+		}
+		for (int y = 0; y >= DIM; y--) {
+			for (int x = 0; x <= DIM; x++) {
+				if(isEmptyField(x, y) == false){
+					 viewOfMaxY = (y + 1) ;
+					 break;
+				}
+			}
+		} //TODO gedaan om errors te voorkomen
+	}
+	
+	
+	/*
+	 * returns de inhoud verwezen door het paar (x,y) .
+	 */
+	public Tile getField(int x, int y){
+		return coordinaten[x][y];
+	}
+	
+	
+	/*
+	 * returns true als een verwezen field pair(x,y) leeg is
+	 */
+	public boolean isEmptyField(int x, int y){
+		return (coordinaten[x][y] == null);
+	}
+	
+	/*
+	 * Deze Arraylist is gemaakt om alle aanliggende tegels te onthouden
+	 */
+	//TODO eventueel code verbeteren door de hoeveelheid duplicaatcode te verminderen
+	public ArrayList<Tile> tilesOnXAxis(int x, int y){
+		boolean leftIsEmpty = false;
+		boolean rightIsEmpty = false;
+		int xOrig = x;
+		ArrayList<Tile> xAxis = new ArrayList<Tile>();
+		xAxis.add(coordinaten[x][y]);
+		while(leftIsEmpty == false){
+			x--;
+			if(isEmptyField(x,y) == false){
+				xAxis.add(coordinaten[x][y]);
+			}else{
+				break; 
+			}
+		}
+		x = xOrig;
+		while(rightIsEmpty == false){
+			x++;
+			if(isEmptyField(x,y) == false){
+				xAxis.add(coordinaten[x][y]);
+			}else{
+				break; 
+			}
+		}
+		return xAxis;
+	}
+	
+	/*
+	 * Deze Arraylist is gemaakt om alle aanliggende tegels te onthouden
+	 */
+	public ArrayList<Tile> tilesOnYAxis(int x, int y){
+		boolean upperIsEmpty = false;
+		boolean lowerIsEmpty = false;
+		int yOrig = y;
+		ArrayList<Tile> yAxis = new ArrayList<Tile>();
+		yAxis.add(coordinaten[x][y]);
+		while(lowerIsEmpty == false){
+			y--;
+			if(isEmptyField(x,y) == false){
+				yAxis.add(coordinaten[x][y]);
+			}else{
+				break; 
+			}
+		}
+		y = yOrig;
+		while(upperIsEmpty == false){
+			y++;
+			if(isEmptyField(x,y) == false){
+				yAxis.add(coordinaten[x][y]);
+			}else{
+				break; 
+			}
+		}
+		return yAxis;
+	}
+	
+	/*
+	 * Deze klasse kijkt of alle aangelegde steenjes dezelfde x of y coordinaten hebben
+	 */
+	public boolean sharedLine(Tile tileToSet, ArrayList<Tile> axis){
+		ArrayList<Tile> copy = new ArrayList<Tile>(lastSet);
+		copy.add(tileToSet);
+		boolean contains = true;
+		for(Tile gh : copy){
+			if(!axis.contains(gh)){
+				contains = false;
+			}
+		}
+		return contains;
+	}
+	
+	/*
+	 * Controleert of de aangelegde stenen wel volgens de spelregels mogen
+	 */
+	public boolean isValidMove(int x, int y, Tile tile){
+		Board board = deepCopy();
+		board.setTile(x, y, tile);
+		ArrayList<Tile> xAxis = tilesOnXAxis(x,y);
+		ArrayList<Tile> yAxis = tilesOnYAxis(x,y);
+		if(isEmptyField(x, y) == false){
+			return false;
+		}else if(xAxis.size() > 6 || yAxis.size() > 6){
+			return false;
+		}else if(initialMove == true){ //In Controller x en y 90,90 maken, bij elke eerste zet.
+			return true;
+		}else if(initialMove == false && xAxis.size() == 1 && yAxis.size() == 1){
+			return false;
+		}else{
+			for(Tile tileToCompare : xAxis){
+				Tile tileOrig = tileToCompare;
+				xAxis.remove(tile);
+				for (Tile tileToCompareWith : xAxis){
+					if (compareColor(tileToCompareWith, tileOrig) == true && compareSymbol(tileToCompareWith, tileOrig) == true){
+						return false;
+					}else if (compareColor(tileToCompareWith, tileOrig) == true || compareSymbol(tileToCompareWith, tileOrig) == true){
+						return true;
+					}else{
+						return false;
+					}
+				}
+			}
+		}
+		return false; //TODO oplossing voor nu
+	}
+	
+	/*
+	 * bind een coordinaat aan een steen 
+	 */
+	private void setTile(int x, int y, Tile tile){
+		coordinaten[x][y] = tile;
+	}
+	
+	
+	/*
+	 * Vergelijkt Symbolen van twee verschillende Tiles
+	 */
+	public boolean compareSymbol(Tile tileA, Tile tileB){
+		return(tileA.getSymbol() == tileB.getSymbol());
+		
+	}
+	/*
+	 * Vergelijkt Kleuren van twee verschillende Tiles
+	 */
+	public boolean compareColor(Tile tileA, Tile tileB){
+		return(tileA.getColor() == tileB.getColor());
+	}
+	
+	/* 
+	 * Moet de Move van de player verwerken.
+	 */
+	public void processMove(int x, int y, Tile tile) throws InvalidMoveException{
+		if(isValidMove(x, y, tile) && (sharedLine(tile, tilesOnYAxis(x, y)) || sharedLine(tile, tilesOnXAxis(x, y)))){
+			coordinaten[x][y] = tile;
+			initialMove = false;
+			rememberMove(tile);
+		}else{
+			rememberMove(null);
+			throw new InvalidMoveException();
+		}
+		//TODO aanpassen op een overzichtelijke manier: welke tile wordt gezet en welke is ter controle
+	}
+	
+	public void rememberMove(Tile tile, Point point){
+		HashMap<Tile, Point> tileMap = new HashMap<Tile, Point>();
+		tileMap.put(tile, point);
+		lastSet.add(tileMap);
+	}
+	public void clearLastMoves(){
+		lastSet.clear();
+	}
+	
+	public ArrayList<HashMap<Tile, Point>> getLastMoves(){
+		return lastSet;
+	}
+	/*
+	 * Maakt het hele board leeg
+	 */
+	public void reset() {
+		for (int x = 0; x <= (DIM); x++) {
+			for (int y = 0; y <= (DIM); y++) {
+				coordinaten[x][y] = null;
+			}
+		}
+	}
+	
+	//TODO Hoeveelheid stenen op het bord kunnen controleren checken
+
+}

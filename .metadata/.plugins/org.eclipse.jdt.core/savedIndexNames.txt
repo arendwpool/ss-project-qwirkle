@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 INDEX VERSION 1.127+C:\Users\Bob\Documents\ss-project-qwirkle\.metadata\.plugins\org.eclipse.jdt.core
 4282262597.index
 2689061861.index
@@ -7,8 +8,12 @@ INDEX VERSION 1.127+C:\Users\Bob\Documents\ss-project-qwirkle\.metadata\.plugins
 =======
 168168922.index
 71698844.index
+=======
+INDEX VERSION 1.127+C:\Users\Arend\Documents\$SSHome\Programmeer project\ss-project-qwirkle\.metadata\.plugins\org.eclipse.jdt.core
+>>>>>>> 5._implementatie_van_Game.java
 4135478709.index
 322690031.index
+<<<<<<< HEAD
 2142348700.index
 1508714259.index
 >>>>>>> 121f375a334169cee3cf7d49901c7a8f2b659e94
@@ -23,4 +28,20 @@ INDEX VERSION 1.127+C:\Users\Bob\Documents\ss-project-qwirkle\.metadata\.plugins
 1984797805.index
 1642629014.index
 3604818565.index
+=======
+1984797805.index
+3604818565.index
+2921179834.index
+2410559617.index
+3425653186.index
+287837708.index
+4247270281.index
+1256513231.index
+4133831525.index
+71698844.index
+1482259783.index
+2142348700.index
+1853852832.index
+1642629014.index
+>>>>>>> 5._implementatie_van_Game.java
 4097853004.index

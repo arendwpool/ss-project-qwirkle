@@ -1,0 +1,66 @@
+package tests;
+
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+
+import models.Board;
+import models.Game;
+import models.Tile;
+
+/**
+ * 
+ * @author Bob Breemhaar en Arend Pool
+ *
+ */
+public class GameTest {
+
+	/**
+	 * Declareert een Spel om de tests mee te draaien.
+	 */
+	private Game testGame;
+	
+	/**
+	 * textuele representatie van de verwachte uitkomst van de lijst Tiles
+	 */
+	private String[] generatedTiles = {"roodcircel", "roodkruis", "roodruit", "roodvierkant", "roodster", "roodplus",
+			"oranjecircel", "oranjekruis", "oranjeruit", "oranjevierkant", "oranjester", "oranjeplus", "geelcircel", 
+			"geelkruis", "geelruit", "geelvierkant", "geelster", "geelplus", "groencircel", "groenkruis", "groenruit", 
+			"groenvierkant", "groenster", "groenplus", "blauwcircel", "blauwkruis", "blauwruit", "blauwvierkant", "blauwster",
+			"blauwplus", "paarscircel", "paarskruis", "paarsruit", "paarsvierkant", "paarsster", "paarsplus", "roodcircel", 
+			"roodkruis", "roodruit", "roodvierkant", "roodster", "roodplus", "oranjecircel", "oranjekruis", "oranjeruit", 
+			"oranjevierkant", "oranjester", "oranjeplus", "geelcircel", "geelkruis", "geelruit", "geelvierkant", "geelster", 
+			"geelplus", "groencircel", "groenkruis", "groenruit", "groenvierkant", "groenster", "groenplus", "blauwcircel", 
+			"blauwkruis", "blauwruit", "blauwvierkant", "blauwster", "blauwplus", "paarscircel", "paarskruis", "paarsruit",
+			"paarsvierkant", "paarsster", "paarsplus", "roodcircel", "roodkruis", "roodruit", "roodvierkant", "roodster", 
+			"roodplus", "oranjecircel", "oranjekruis", "oranjeruit", "oranjevierkant", "oranjester", "oranjeplus", "geelcircel", 
+			"geelkruis", "geelruit", "geelvierkant", "geelster", "geelplus", "groencircel", "groenkruis", "groenruit",
+			"groenvierkant", "groenster", "groenplus", "blauwcircel", "blauwkruis", "blauwruit", "blauwvierkant", 
+			"blauwster", "blauwplus", "paarscircel", "paarskruis", "paarsruit", "paarsvierkant", "paarsster", "paarsplus", };
+	
+	@Before
+	public void setUp() throws Exception {
+		/**
+		 * instantieert testGame
+		 */
+		testGame = new Game(new Board());
+		
+	}
+
+	/**
+	 * test de methode generateTiles van de klasse Game. Omdat de gegenereerde lijst uit Tiles bestaat,
+	 * zetten we de lijst om in een textuele representatie.
+	 */
+	@Test
+	public void testGenerateTiles() {
+		testGame.generateTiles();
+		String[] tilesToString = new String[Tile.NUMBER_TILES];
+		for(int i = 0; i < testGame.getPile().size(); i++){
+			String tile = testGame.getPile().get(i).getColor() + testGame.getPile().get(i).getSymbol();
+			tilesToString[i] = tile;
+		}
+		assertArrayEquals(tilesToString, generatedTiles);
+	}
+	//TODO verbeteren
+
+}

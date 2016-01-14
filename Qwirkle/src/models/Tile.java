@@ -1,4 +1,6 @@
 package models;
+
+import java.awt.Point;
 /**
  * De klasse die een bepaalde tegel representeerd.
  * @author Bob Breemhaar en Arend Pool.
@@ -47,6 +49,11 @@ public class Tile {
 	private String symbol;
 	
 	/**
+	 * De locatie op het bord van de tegel.
+	 */
+	private Point point;
+	
+	/**
 	 * Constructor die een tegel samenstelt met een gegeven kleur en symbool.
 	 * @param color
 	 * @param symbol
@@ -73,6 +80,21 @@ public class Tile {
 	public String getSymbol(){
 		return symbol;
 	}
-	//TODO hernoem Tiles naar Tile
+	/**
+	 * geeft de mogelijkheid om de Tile aan een punt te koppelen.
+	 * @param x
+	 * @param y
+	 */
+	public void setLocation(int x, int y){
+		point = new Point(x, y);
+	}
+	/**
+	 * geeft de mogelijkheid om de locatie aan te vragen van deze Tile.
+	 * @return point
+	 */
+	public Point getLocation(){
+		return point;
+	}
+	
 }
 	
