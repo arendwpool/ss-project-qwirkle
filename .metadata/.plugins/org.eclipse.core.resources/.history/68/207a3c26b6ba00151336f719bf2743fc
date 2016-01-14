@@ -173,15 +173,11 @@ public class Board {
 	 */
 	public boolean sharedLine(Tile tileToSet, Point point, ArrayList<Tile> axis){
 		ArrayList<HashMap<Tile, Point>> copy = new ArrayList<HashMap<Tile, Point>>(lastSet);
-		HashMap<Tile, Point> tileToSetMap = new HashMap<Tile, Point>();
-		tileToSetMap.put(tileToSet, point);
-		copy.add(tileToSetMap);
+		;
 		boolean contains = true;
-		for(HashMap map : copy){
-			for(Tile tile : map.keySet()){
-				if(!axis.contains(tile)){
-					contains = false;
-				}
+		for(Tile gh : copy){
+			if(!axis.contains(gh)){
+				contains = false;
 			}
 		}
 		return contains;

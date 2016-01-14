@@ -200,9 +200,11 @@ public class Game {
 	 * @param player
 	 */
 	public void generateScore(ArrayList<Tile> lastSet){
-		
+		lastSet.size() == 1;
 		//Leg een steen neer, kijk naar de aanliggende tiles op de x as is dit lager dan 6, tel het aantal tegels,
 		//doe hetzelfde voor de x as, is de lijst van de array 6 doe + 6 bij score
+		
+		currentPlayer.addScore(5);
 	}
 	
 	public void finishMove(){

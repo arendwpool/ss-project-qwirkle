@@ -177,11 +177,9 @@ public class Board {
 		tileToSetMap.put(tileToSet, point);
 		copy.add(tileToSetMap);
 		boolean contains = true;
-		for(HashMap map : copy){
-			for(Tile tile : map.keySet()){
-				if(!axis.contains(tile)){
-					contains = false;
-				}
+		for(Tile gh : copy){
+			if(!axis.contains(gh)){
+				contains = false;
 			}
 		}
 		return contains;

@@ -1,8 +1,6 @@
 package models;
 
-import java.awt.Point;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import exceptions.InvalidMoveException;
 
@@ -15,7 +13,7 @@ public class Board {
 	private	Tile[][] coordinaten;
 	private static final int DIM = 179;
 	private boolean initialMove;
-	private ArrayList<HashMap<Tile, Point>> lastSet;
+	private ArrayList<Tile> lastSet;
 	
 	private int viewOfMinX;
 	private int viewOfMaxX;
@@ -171,17 +169,13 @@ public class Board {
 	/*
 	 * Deze klasse kijkt of alle aangelegde steenjes dezelfde x of y coordinaten hebben
 	 */
-	public boolean sharedLine(Tile tileToSet, Point point, ArrayList<Tile> axis){
-		ArrayList<HashMap<Tile, Point>> copy = new ArrayList<HashMap<Tile, Point>>(lastSet);
-		HashMap<Tile, Point> tileToSetMap = new HashMap<Tile, Point>();
-		tileToSetMap.put(tileToSet, point);
-		copy.add(tileToSetMap);
+	public boolean sharedLine(Tile tileToSet, ArrayList<Tile> axis){
+		ArrayList<Tile> copy = new ArrayList<Tile>(lastSet);
+		copy.add(tileToSet);
 		boolean contains = true;
-		for(HashMap map : copy){
-			for(Tile tile : map.keySet()){
-				if(!axis.contains(tile)){
-					contains = false;
-				}
+		for(Tile gh : copy){
+			if(!axis.contains(gh)){
+				contains = false;
 			}
 		}
 		return contains;
@@ -247,27 +241,25 @@ public class Board {
 	 * Moet de Move van de player verwerken.
 	 */
 	public void processMove(int x, int y, Tile tile) throws InvalidMoveException{
-		Point point = new Point(x, y);
-		if(isValidMove(x, y, tile) && (sharedLine(tile, point, tilesOnYAxis(x, y)) || sharedLine(tile, point, tilesOnXAxis(x, y)))){
+		if(isValidMove(x, y, tile) && (sharedLine(tile, tilesOnYAxis(x, y)) || sharedLine(tile, tilesOnXAxis(x, y)))){
 			coordinaten[x][y] = tile;
 			initialMove = false;
-			rememberMove(tile, point);
+			rememberMove(tile);
 		}else{
+			rememberMove(null);
 			throw new InvalidMoveException();
 		}
 		//TODO aanpassen op een overzichtelijke manier: welke tile wordt gezet en welke is ter controle
 	}
 	
-	public void rememberMove(Tile tile, Point point){
-		HashMap<Tile, Point> tileMap = new HashMap<Tile, Point>();
-		tileMap.put(tile, point);
-		lastSet.add(tileMap);
+	public void rememberMove(Tile tile){
+		lastSet.add(tile);
 	}
 	public void clearLastMoves(){
 		lastSet.clear();
 	}
 	
-	public ArrayList<HashMap<Tile, Point>> getLastMoves(){
+	public ArrayList<Tile> getLastMoves(){
 		return lastSet;
 	}
 	/*
