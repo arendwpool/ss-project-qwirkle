@@ -124,14 +124,13 @@ public class Game {
 	 * Start het spel.
 	 */
 	public void start(){
-		//TODO te implementeren als de tijd rijp is
+		
 	}
 	
 	/**
 	 * Update de situatie van het spel na elke actie van een speler.
 	 */
 	public void update(){
-		//TODO te implementeren als de tijd rijp is
 		
 	}
 	
@@ -162,7 +161,7 @@ public class Game {
 	 * @return !playerHasNoTiles || false
 	 */
 	public boolean noTilesLeft(){
-		// tiles is nooit leeg, dit moet vervangen worden met Pile.java.
+		// tiles is nooit leeg, dit moet vervangen worden met de pile in het bord.
 		if(tiles.size() == 0){
 			boolean playerHasNoTiles = false;
 			for(Player player : players.keySet()){

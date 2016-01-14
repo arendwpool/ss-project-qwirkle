@@ -101,7 +101,7 @@ public class Game {
 	 * @param player
 	 * @param tilesToTrade
 	 * @throws NoTilesLeftInPileException
-	 *///TODO migreren naar Pile.java?
+	 */
 	public void tradeTiles(Player player, ArrayList<Tile> tilesToTrade) throws NoTilesLeftInPileException{
 		if (noTilesLeft() == false){
 			ArrayList<Tile> tilesToGive = new ArrayList<Tile>();
@@ -124,14 +124,13 @@ public class Game {
 	 * Start het spel.
 	 */
 	public void start(){
-		//TODO te implementeren als de tijd rijp is
+		
 	}
 	
 	/**
 	 * Update de situatie van het spel na elke actie van een speler.
 	 */
 	public void update(){
-		//TODO te implementeren als de tijd rijp is
 		
 	}
 	
@@ -143,7 +142,7 @@ public class Game {
 	 */
 	public void makeMove(int x, int y, Tile tile){
 		try{
-			board.processMove(x, y, tile);//TODO Player toevoegen aan de parameter om aan te duiden wie de speler is?
+			board.processMove(x, y, tile);
 		}catch (InvalidMoveException e){
 			//TODO implement actie na de catch
 		}
@@ -162,7 +161,7 @@ public class Game {
 	 * @return !playerHasNoTiles || false
 	 */
 	public boolean noTilesLeft(){
-		// tiles is nooit leeg, dit moet vervangen worden met Pile.java.
+		// tiles is nooit leeg, dit moet vervangen worden met de pile in het bord.
 		if(tiles.size() == 0){
 			boolean playerHasNoTiles = false;
 			for(Player player : players.keySet()){
@@ -203,37 +202,37 @@ public class Game {
 	 */
 	public void generateScore(){
 		Point point = null;
-		boolean retainMultipleX = false;
-		boolean retainMultipleY = false;
-		ArrayList<Tile> row = null;
-		ArrayList<Tile> column = null;
-		int score = 0;
 		for(Tile tile : board.getLastMoves()){
 			point = tile.getLocation();
+			int score = 0;
 			int x = (int) point.getX();
 			int y = (int) point.getY();
-			row = board.tilesOnXAxis(x, y);
-			column = board.tilesOnYAxis(x, y);
+			ArrayList<Tile> row = board.tilesOnXAxis(x, y);
+			ArrayList<Tile> column = board.tilesOnYAxis(x, y);
 			ArrayList<Tile> commonX = new ArrayList<Tile>(board.getLastMoves());
 			ArrayList<Tile> commonY = new ArrayList<Tile>(board.getLastMoves());
 			commonX.retainAll(row);
 			commonY.retainAll(column);
-			retainMultipleX = commonX.size() > 1;
-			retainMultipleY = commonY.size() > 1;
-			if(retainMultipleX == true){
-				score += column.size();
-			}else if(retainMultipleY == true){
-				score += row.size();
+			if()
+				
+		}
+	}
+	
+	/*
+	public boolean hasMultipleInRow(ArrayList<Tile> axis){
+		Point point = null;
+		int contains = 0;
+		for(Tile tile : board.getLastMoves()){
+			point = tile.getLocation();
+			if(axis.contains(tile)){
+				contains++;
 			}
 		}
-		if(retainMultipleX == true){
-			score += row.size();
-		}else if(retainMultipleY == true){
-			score += column.size();
-		}else{
-			score += row.size();
-			score += column.size();
-		}
-		currentPlayer.addScore(score); // TODO currentPlayer moet eventueel vervangen worden als de implementatie verandert.
+		return contains > 1;
 	}
+	public void finishMove(){
+		generateScore();
+		board.clearLastMoves();
+	}*/
 }
+//TODO is misschine onnodige methode.

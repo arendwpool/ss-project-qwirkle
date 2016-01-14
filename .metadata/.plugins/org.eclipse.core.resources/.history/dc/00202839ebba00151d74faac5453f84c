@@ -124,14 +124,13 @@ public class Game {
 	 * Start het spel.
 	 */
 	public void start(){
-		//TODO te implementeren als de tijd rijp is
+		
 	}
 	
 	/**
 	 * Update de situatie van het spel na elke actie van een speler.
 	 */
 	public void update(){
-		//TODO te implementeren als de tijd rijp is
 		
 	}
 	
