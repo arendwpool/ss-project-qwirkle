@@ -11,14 +11,13 @@ public abstract class TUI implements Observer {
 	 * De string op index 0 is altijd een beschrijving bij een menu
 	 */
 	private static final String[] PRE_MENU = {null, "Voer uw naam in:"};
-	private static final String[] MAIN_MENU = {null, "Nieuw spel starten", "Opties", "Top-5", "Afsluiten"};
+	private static final String[] MAIN_MENU = {null, "Nieuw spel starten", "Opties", "Top-5"};
 	private static final String[] NEW_GAME_MENU = {"Hallo [naam]! Onderstaande opties zijn te veranderen door het gepaste nummer te selecteren. Als de opties kloppen \"Start\" selecteren.", 
 													"Online", "Tegen computer", "Aantal tegenstanders", "Start", "Terug"};
-	private static final String[] OPTIONS_MENU = {null, "Ander interface laden", "Terug"};
+	private static final String[] OPTIONS_MENU = {null, "Ander interface laden"};
 	private static final int AMOUNT_CHARACTERS = 50;
 	private String playerName = "Arend";
 	private Scanner scanner = new Scanner(System.in);
-	boolean terminated = false;
 	
 	public TUI(){
 	}
@@ -30,6 +29,7 @@ public abstract class TUI implements Observer {
 	}
 
 	public void start(){
+		boolean terminated = false;
 		while(terminated == false){
 			renderMenu(PRE_MENU);
 			determineOption(PRE_MENU);
@@ -75,30 +75,12 @@ public abstract class TUI implements Observer {
 	public void determineOption(String[] menu){
 		String choice = scanner.nextLine();
 		if(menu.equals(PRE_MENU)){
-			playerName = choice; //TODO naam mag niet leeg zijn
+			playerName = choice;
 		}else if(menu.equals(MAIN_MENU)){
 			switch (choice){
 				case "1": renderMenu(NEW_GAME_MENU);
-						  break;
 				case "2": renderMenu(OPTIONS_MENU);
-						  break;
-				case "3": //TODO implement; break;
-				case "4": terminated = false;
-						  break;
-			}
-		}else if(menu.equals(NEW_GAME_MENU)){
-			switch (choice){
-			case "1": //TODO implement renderMenu(NEW_GAME_MENU);
-					  break;
-			case "2": //TODO implement renderMenu(OPTIONS_MENU);
-					  break;
-			case "3": //TODO implement; break;
-			case "5": renderMenu(MAIN_MENU);
-			}
-		}else if(menu.equals(OPTIONS_MENU)){
-			switch(choice){
-
-			case "2": renderMenu(MAIN_MENU);
+				case "3": //TODO implement;
 			}
 		}
 	}

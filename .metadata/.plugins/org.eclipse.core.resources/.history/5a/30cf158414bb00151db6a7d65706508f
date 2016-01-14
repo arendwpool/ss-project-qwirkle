@@ -33,9 +33,6 @@ public abstract class TUI implements Observer {
 		while(terminated == false){
 			renderMenu(PRE_MENU);
 			determineOption(PRE_MENU);
-			createSpace();
-			renderMenu(MAIN_MENU);
-			determineOption(MAIN_MENU);
 		}
 	}
 	
@@ -76,6 +73,7 @@ public abstract class TUI implements Observer {
 		String choice = scanner.nextLine();
 		if(menu.equals(PRE_MENU)){
 			playerName = choice; //TODO naam mag niet leeg zijn
+			renderMenu(MAIN_MENU);
 		}else if(menu.equals(MAIN_MENU)){
 			switch (choice){
 				case "1": renderMenu(NEW_GAME_MENU);

@@ -33,9 +33,6 @@ public abstract class TUI implements Observer {
 		while(terminated == false){
 			renderMenu(PRE_MENU);
 			determineOption(PRE_MENU);
-			createSpace();
-			renderMenu(MAIN_MENU);
-			determineOption(MAIN_MENU);
 		}
 	}
 	
