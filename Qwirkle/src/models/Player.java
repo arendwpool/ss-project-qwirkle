@@ -23,7 +23,7 @@ public abstract class Player {
 	/**
 	 * De tegels die de betreffende speler heeft
 	 */
-	private ArrayList<Tiles> tiles;
+	private ArrayList<Tile> tiles;
 	
 	/**
 	 * De score van de Speler
@@ -42,7 +42,7 @@ public abstract class Player {
 		}catch (FullGameException e){
 			//TODO implement
 		}
-		tiles = new ArrayList<Tiles>();
+		tiles = new ArrayList<Tile>();
 	}
 	
 	/**
@@ -55,14 +55,14 @@ public abstract class Player {
 	/**
 	 * Geef een set met de tegels die de betreffende speler heeft
 	 */
-	public ArrayList<Tiles> getTiles(){
+	public ArrayList<Tile> getTiles(){
 		return tiles;
 	}
 	
 	/**
 	 * Zet tegels in de tiles Set
 	 */
-	public void setTiles(ArrayList<Tiles> tilesToGive){
+	public void setTiles(ArrayList<Tile> tilesToGive){
 		tiles.addAll(tilesToGive);
 	}
 	
@@ -70,7 +70,7 @@ public abstract class Player {
 	 * Vervangt gegeven tegels met de tegels waarvoor deze vervangen worden
 	 * @throws FalseAmountOfTilesException 
 	 */
-	public void replaceTiles(ArrayList<Tiles> tilesToReplace, ArrayList<Tiles> tilesToGive) throws FalseAmountOfTilesException{
+	public void replaceTiles(ArrayList<Tile> tilesToReplace, ArrayList<Tile> tilesToGive) throws FalseAmountOfTilesException{
 		if (tilesToReplace.size() == tilesToGive.size()){
 			tiles.removeAll(tilesToReplace);
 			setTiles(tilesToGive);

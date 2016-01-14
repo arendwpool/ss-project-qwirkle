@@ -16,7 +16,7 @@ public class Game {
 	/*
 	 * ArrayList met alle tegels in een spel.
 	 */
-	private ArrayList<Tiles> tiles;
+	private ArrayList<Tile> tiles;
 	
 	/**
 	 * Geeft aan welke speler de volgende move moet maken.
@@ -49,10 +49,10 @@ public class Game {
 	 */
 	//@ensures this.tiles = new ArrayList<Tiles>();
 	public void generateTiles(){
-		tiles = new ArrayList<Tiles>();
-		for (int color = 0; color < Tiles.NUMBER_COLORS * Tiles.NUMBER_DUPLICATES; color++){
-			for(int symbol = 0; symbol < Tiles.NUMBER_SYMBOLS; symbol++){
-				tiles.add(new Tiles(Tiles.kleuren[color%Tiles.NUMBER_COLORS], Tiles.symbolen[symbol]));
+		tiles = new ArrayList<Tile>();
+		for (int color = 0; color < Tile.NUMBER_COLORS * Tile.NUMBER_DUPLICATES; color++){
+			for(int symbol = 0; symbol < Tile.NUMBER_SYMBOLS; symbol++){
+				tiles.add(new Tile(Tile.kleuren[color%Tile.NUMBER_COLORS], Tile.symbolen[symbol]));
 			}
 		}
 		
@@ -101,10 +101,10 @@ public class Game {
 	 * @param tilesToTrade
 	 * @throws NoTilesLeftInPileException
 	 */
-	public void tradeTiles(Player player, ArrayList<Tiles> tilesToTrade) throws NoTilesLeftInPileException{
+	public void tradeTiles(Player player, ArrayList<Tile> tilesToTrade) throws NoTilesLeftInPileException{
 		if (noTilesLeft() == false){
-			ArrayList<Tiles> tilesToGive = new ArrayList<Tiles>();
-			for(Tiles tile : player.getTiles()){
+			ArrayList<Tile> tilesToGive = new ArrayList<Tile>();
+			for(Tile tile : player.getTiles()){
 				if (tilesToTrade.contains(tile)){
 					tilesToGive.add(tile);
 				}
@@ -139,7 +139,7 @@ public class Game {
 	 * @param y
 	 * @param tile
 	 */
-	public void makeMove(int x, int y, Tiles tile){
+	public void makeMove(int x, int y, Tile tile){
 		try{
 			board.processMove(x, y, tile);
 		}catch (InvalidMoveException e){
@@ -151,7 +151,7 @@ public class Game {
 	 * Geeft een volle pile van alle tegels
 	 * @return this.pile
 	 */
-	public ArrayList<Tiles> getPile(){
+	public ArrayList<Tile> getPile(){
 		return tiles;
 	}
 	

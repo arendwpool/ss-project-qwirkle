@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import models.Board;
 import models.Game;
-import models.Tiles;
+import models.Tile;
 
 /**
  * 
@@ -54,7 +54,7 @@ public class GameTest {
 	@Test
 	public void testGenerateTiles() {
 		testGame.generateTiles();
-		String[] tilesToString = new String[Tiles.NUMBER_TILES];
+		String[] tilesToString = new String[Tile.NUMBER_TILES];
 		for(int i = 0; i < testGame.getPile().size(); i++){
 			String tile = testGame.getPile().get(i).getColor() + testGame.getPile().get(i).getSymbol();
 			tilesToString[i] = tile;
