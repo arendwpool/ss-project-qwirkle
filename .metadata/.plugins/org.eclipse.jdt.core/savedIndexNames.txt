@@ -1,10 +1,29 @@
+<<<<<<< HEAD
+INDEX VERSION 1.127+C:\Users\Bob\Documents\ss-project-qwirkle\.metadata\.plugins\org.eclipse.jdt.core
+168168922.index
+4282262597.index
+2410559617.index
+2689061861.index
+71698844.index
+=======
 INDEX VERSION 1.127+C:\Users\Arend\Documents\$SSHome\Programmeer project\ss-project-qwirkle\.metadata\.plugins\org.eclipse.jdt.core
+>>>>>>> a4b9379b4c421c0b09e44e39abc0df946ef422b2
 4135478709.index
 3150109421.index
 4282262597.index
 3620173291.index
 2689061861.index
 322690031.index
+<<<<<<< HEAD
+2142348700.index
+1508714259.index
+3425653186.index
+4247270281.index
+287837708.index
+2921179834.index
+1256513231.index
+3150109421.index
+=======
 1984797805.index
 3604818565.index
 2921179834.index
@@ -12,6 +31,11 @@ INDEX VERSION 1.127+C:\Users\Arend\Documents\$SSHome\Programmeer project\ss-proj
 3425653186.index
 287837708.index
 4247270281.index
+<<<<<<< HEAD
+=======
+>>>>>>> a4b9379b4c421c0b09e44e39abc0df946ef422b2
+4133831525.index
+>>>>>>> 1cac3c43aefe9f26d5ef80f957c4d7e5fc76e301
 1256513231.index
 4133831525.index
 71698844.index
@@ -19,4 +43,8 @@ INDEX VERSION 1.127+C:\Users\Arend\Documents\$SSHome\Programmeer project\ss-proj
 2142348700.index
 1853852832.index
 1642629014.index
+<<<<<<< HEAD
+3604818565.index
+=======
+>>>>>>> a4b9379b4c421c0b09e44e39abc0df946ef422b2
 4097853004.index
