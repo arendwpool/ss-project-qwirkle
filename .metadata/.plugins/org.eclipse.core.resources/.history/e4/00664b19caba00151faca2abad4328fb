@@ -41,6 +41,10 @@ public class Pile {
 		}
 	}
 	
+	public void getTile(){
+		
+	}
+	
 	public void removeTile(Tile tile){
 		
 		tiles.remove(0);
