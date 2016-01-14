@@ -5,3 +5,4 @@ Hallo [naam]! Onderstaande opties zijn te veranderen door het gepaste nummer te 
 4. Poort nummer (van toepassing als "online" is geselecteerd)
 5. Aantal tegenstanders
 6. Start
+7. terug
