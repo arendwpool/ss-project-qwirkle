@@ -206,6 +206,7 @@ public class Game {
 		int y = (int) point.getY();
 		int containsOnX = 0;
 		int containsOnY = 0;
+		int score = 0;
 		ArrayList<Tile> row = board.tilesOnXAxis(x, y);
 		ArrayList<Tile> column = board.tilesOnYAxis(x, y);
 		for(Tile tile : board.getLastMoves()){
@@ -215,7 +216,11 @@ public class Game {
 			}else if(column.contains(tile)){
 				containsOnY++;
 			}
-		}		
+		}
+		if(containsOnX > 0)
+		
+		
+		
 	}
 	
 	public void finishMove(){

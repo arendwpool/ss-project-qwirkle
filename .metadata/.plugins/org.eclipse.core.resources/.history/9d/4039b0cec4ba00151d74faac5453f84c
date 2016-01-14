@@ -184,7 +184,6 @@ public class Board {
 	/*
 	 * Controleert of de aangelegde stenen wel volgens de spelregels mogen
 	 */
-	//TODO analyzeren: nadat locatie is toegevoegd aan tile, is dit te verbeteren?
 	public boolean isValidMove(int x, int y, Tile tile){
 		Board board = deepCopy();
 		board.setTile(x, y, tile);
@@ -251,7 +250,7 @@ public class Board {
 			rememberMove(null);
 			throw new InvalidMoveException();
 		}
-		//TODO in zijn geheel opnieuw implementeren
+		//TODO aanpassen op een overzichtelijke manier: welke tile wordt gezet en welke is ter controle
 	}
 	
 	public void rememberMove(Tile tile){
@@ -259,9 +258,6 @@ public class Board {
 	}
 	public void clearLastMoves(){
 		lastSet.clear();
-	}
-	public ArrayList<Tile> getLastMoves(){
-		return lastSet;
 	}
 	/*
 	 * Maakt het hele board leeg

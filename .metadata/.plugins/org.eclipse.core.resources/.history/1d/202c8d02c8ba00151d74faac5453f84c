@@ -201,21 +201,15 @@ public class Game {
 	 * @param player
 	 */
 	public void generateScore(){
-		Point point = null;
+		Point point;
 		int x = (int) point.getX();
 		int y = (int) point.getY();
-		int containsOnX = 0;
-		int containsOnY = 0;
 		ArrayList<Tile> row = board.tilesOnXAxis(x, y);
 		ArrayList<Tile> column = board.tilesOnYAxis(x, y);
 		for(Tile tile : board.getLastMoves()){
-			point = tile.getLocation();
-			if(row.contains(tile)){
-				containsOnX++;
-			}else if(column.contains(tile)){
-				containsOnY++;
-			}
-		}		
+			Point point = tile.getLocation();
+			
+		}
 	}
 	
 	public void finishMove(){

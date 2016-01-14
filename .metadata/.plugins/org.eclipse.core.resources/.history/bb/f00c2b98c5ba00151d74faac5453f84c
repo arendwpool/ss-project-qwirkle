@@ -260,9 +260,6 @@ public class Board {
 	public void clearLastMoves(){
 		lastSet.clear();
 	}
-	public ArrayList<Tile> getLastMoves(){
-		return lastSet;
-	}
 	/*
 	 * Maakt het hele board leeg
 	 */

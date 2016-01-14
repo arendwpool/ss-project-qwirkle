@@ -1,5 +1,4 @@
 package models;
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -200,22 +199,10 @@ public class Game {
 	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore
 	 * @param player
 	 */
-	public void generateScore(){
-		Point point = null;
-		int x = (int) point.getX();
-		int y = (int) point.getY();
-		int containsOnX = 0;
-		int containsOnY = 0;
-		ArrayList<Tile> row = board.tilesOnXAxis(x, y);
-		ArrayList<Tile> column = board.tilesOnYAxis(x, y);
-		for(Tile tile : board.getLastMoves()){
-			point = tile.getLocation();
-			if(row.contains(tile)){
-				containsOnX++;
-			}else if(column.contains(tile)){
-				containsOnY++;
-			}
-		}		
+	public void generateScore(Player player){
+		//TODO implement
+		int points = 0;
+		player.addScore(points);
 	}
 	
 	public void finishMove(){
