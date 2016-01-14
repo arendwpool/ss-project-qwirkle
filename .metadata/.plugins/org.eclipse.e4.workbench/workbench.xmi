@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_KefJgLqjEeWhbMgW5VDC4w" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_KefJgbqjEeWhbMgW5VDC4w" bindingContexts="_KefxrbqjEeWhbMgW5VDC4w">
-  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Player.java&quot; tooltip=&quot;Qwirkle/src/models/Player.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Player.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;HumanPlayer.java&quot; tooltip=&quot;Qwirkle/src/models/HumanPlayer.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/HumanPlayer.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Pile.java&quot; tooltip=&quot;Qwirkle/src/models/Pile.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Pile.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Game.java&quot; tooltip=&quot;Qwirkle/src/models/Game.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Game.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;FullGameException.java&quot; tooltip=&quot;Qwirkle/src/exceptions/FullGameException.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/exceptions/FullGameException.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Tiles.java&quot; tooltip=&quot;Qwirkle/src/models/Tiles.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Tiles.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;NoTilesLeftInPileException.java&quot; tooltip=&quot;Qwirkle/src/exceptions/NoTilesLeftInPileException.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/exceptions/NoTilesLeftInPileException.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;InvalidMoveException.java&quot; tooltip=&quot;Qwirkle/src/exceptions/InvalidMoveException.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/exceptions/InvalidMoveException.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;FalseAmountOfTilesException.java&quot; tooltip=&quot;Qwirkle/src/exceptions/FalseAmountOfTilesException.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/exceptions/FalseAmountOfTilesException.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;GameTest.java&quot; tooltip=&quot;Qwirkle/src/tests/GameTest.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/tests/GameTest.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;NoTilesLeftException.java&quot; tooltip=&quot;Qwirkle/src/exceptions/NoTilesLeftException.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/exceptions/NoTilesLeftException.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Board.java&quot; tooltip=&quot;Qwirkle/src/models/Board.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Board.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;GeneratedTilesEnum.java&quot; tooltip=&quot;Qwirkle/src/tests/GeneratedTilesEnum.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/tests/GeneratedTilesEnum.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;test.java&quot; tooltip=&quot;Qwirkle/src/client/test.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/client/test.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Tiles.java&quot; tooltip=&quot;Qwirkle/src/localgame/Tiles.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/localgame/Tiles.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Board.java&quot; tooltip=&quot;Qwirkle/src/models/Board.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Board.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Game.java&quot; tooltip=&quot;Qwirkle/src/models/Game.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Game.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Player.java&quot; tooltip=&quot;Qwirkle/src/models/Player.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Player.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;HumanPlayer.java&quot; tooltip=&quot;Qwirkle/src/models/HumanPlayer.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/HumanPlayer.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Pile.java&quot; tooltip=&quot;Qwirkle/src/models/Pile.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Pile.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;FullGameException.java&quot; tooltip=&quot;Qwirkle/src/exceptions/FullGameException.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/exceptions/FullGameException.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Tiles.java&quot; tooltip=&quot;Qwirkle/src/models/Tiles.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Tiles.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;NoTilesLeftInPileException.java&quot; tooltip=&quot;Qwirkle/src/exceptions/NoTilesLeftInPileException.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/exceptions/NoTilesLeftInPileException.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;InvalidMoveException.java&quot; tooltip=&quot;Qwirkle/src/exceptions/InvalidMoveException.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/exceptions/InvalidMoveException.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;FalseAmountOfTilesException.java&quot; tooltip=&quot;Qwirkle/src/exceptions/FalseAmountOfTilesException.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/exceptions/FalseAmountOfTilesException.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;GameTest.java&quot; tooltip=&quot;Qwirkle/src/tests/GameTest.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/tests/GameTest.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;NoTilesLeftException.java&quot; tooltip=&quot;Qwirkle/src/exceptions/NoTilesLeftException.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/exceptions/NoTilesLeftException.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;GeneratedTilesEnum.java&quot; tooltip=&quot;Qwirkle/src/tests/GeneratedTilesEnum.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/tests/GeneratedTilesEnum.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;test.java&quot; tooltip=&quot;Qwirkle/src/client/test.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/client/test.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Tiles.java&quot; tooltip=&quot;Qwirkle/src/localgame/Tiles.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/localgame/Tiles.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <tags>ModelMigrationProcessor.001</tags>
   <children xsi:type="basic:TrimmedWindow" xmi:id="_KefJgbqjEeWhbMgW5VDC4w" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_KefJgrqjEeWhbMgW5VDC4w" label="%trimmedwindow.label.eclipseSDK" x="0" y="0" width="1024" height="768">
@@ -52,10 +52,11 @@
           <tags>persp.showIn:org.eclipse.ui.navigator.ProjectExplorer</tags>
           <tags>persp.viewSC:org.eclipse.pde.runtime.LogView</tags>
           <tags>persp.perspSC:org.eclipse.wst.xml.ui.perspective</tags>
-          <children xsi:type="basic:PartSashContainer" xmi:id="_KefJhbqjEeWhbMgW5VDC4w" selectedElement="_KefJkLqjEeWhbMgW5VDC4w" horizontal="true">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_KefJhbqjEeWhbMgW5VDC4w" selectedElement="_KefJhrqjEeWhbMgW5VDC4w" horizontal="true">
             <children xsi:type="basic:PartSashContainer" xmi:id="_KefJhrqjEeWhbMgW5VDC4w" containerData="2600" selectedElement="_KefJh7qjEeWhbMgW5VDC4w">
               <children xsi:type="basic:PartStack" xmi:id="_KefJh7qjEeWhbMgW5VDC4w" elementId="topLeft" containerData="5000" selectedElement="_KefJiLqjEeWhbMgW5VDC4w">
                 <tags>org.eclipse.e4.primaryNavigationStack</tags>
+                <tags>active</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_KefJiLqjEeWhbMgW5VDC4w" elementId="org.eclipse.ui.navigator.ProjectExplorer" ref="_KefK5LqjEeWhbMgW5VDC4w"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_KefJibqjEeWhbMgW5VDC4w" elementId="org.eclipse.ui.views.BookmarkView" toBeRendered="false" ref="_KefK_7qjEeWhbMgW5VDC4w"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_KefJirqjEeWhbMgW5VDC4w" elementId="org.eclipse.ui.views.ResourceNavigator" toBeRendered="false" ref="_KefLALqjEeWhbMgW5VDC4w"/>
@@ -106,17 +107,14 @@
       <tags>categoryTag:Help</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_KefK1LqjEeWhbMgW5VDC4w" elementId="org.eclipse.ui.editorss" selectedElement="_KefK1bqjEeWhbMgW5VDC4w">
-      <children xsi:type="basic:PartStack" xmi:id="_KefK1bqjEeWhbMgW5VDC4w" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_KefK1rqjEeWhbMgW5VDC4w">
+      <children xsi:type="basic:PartStack" xmi:id="_KefK1bqjEeWhbMgW5VDC4w" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_KefK37qjEeWhbMgW5VDC4w">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
-        <tags>active</tags>
         <children xsi:type="basic:Part" xmi:id="_KefK1rqjEeWhbMgW5VDC4w" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Game.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Game.java&quot; partName=&quot;Game.java&quot; title=&quot;Game.java&quot; tooltip=&quot;Qwirkle/src/models/Game.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/models/Game.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;4441&quot; selectionTopPixel=&quot;394&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Game.java&quot; partName=&quot;Game.java&quot; title=&quot;Game.java&quot; tooltip=&quot;Qwirkle/src/models/Game.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/models/Game.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;2308&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
-          <tags>active</tags>
-          <tags>activeOnClose</tags>
           <menus xsi:type="menu:PopupMenu" xmi:id="_KefK17qjEeWhbMgW5VDC4w" elementId="#CompilationUnitEditorContext">
             <tags>menuContribution:popup</tags>
             <tags>popup:#CompilationUnitEditorContext</tags>
@@ -200,6 +198,8 @@
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;0&quot;/>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
+      <tags>active</tags>
+      <tags>activeOnClose</tags>
       <menus xmi:id="_KefK5bqjEeWhbMgW5VDC4w" elementId="org.eclipse.ui.navigator.ProjectExplorer">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
@@ -307,7 +307,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_KefLNbqjEeWhbMgW5VDC4w" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_MgSh0LqmEeWGf8PLpUVQWg" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_KegahbqjEeWhbMgW5VDC4w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_KRS94LqqEeWbV_gJXC6dzA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_KegahbqjEeWhbMgW5VDC4w"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_KefLQ7qjEeWhbMgW5VDC4w" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -328,7 +328,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_KefLg7qjEeWhbMgW5VDC4w" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_MgWMMLqmEeWGf8PLpUVQWg" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_KegZ9bqjEeWhbMgW5VDC4w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_KRWoQLqqEeWbV_gJXC6dzA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_KegZ9bqjEeWhbMgW5VDC4w"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_KefLjrqjEeWhbMgW5VDC4w" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -431,10 +431,34 @@
       <children xsi:type="menu:ToolBar" xmi:id="_NNjQcLqmEeWGf8PLpUVQWg" visible="false">
         <tags>Draggable</tags>
       </children>
-      <children xsi:type="menu:ToolBar" xmi:id="_NNlssLqmEeWGf8PLpUVQWg">
+      <children xsi:type="menu:ToolBar" xmi:id="_NNlssLqmEeWGf8PLpUVQWg" visible="false">
         <tags>Draggable</tags>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_NNoI8LqmEeWGf8PLpUVQWg" visible="false">
+        <tags>Draggable</tags>
+      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_uBVIMLqpEeWOCeVncfBkfQ" visible="false">
+        <tags>Draggable</tags>
+      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_uBZZoLqpEeWOCeVncfBkfQ" visible="false">
+        <tags>Draggable</tags>
+      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_uBdEALqpEeWOCeVncfBkfQ" visible="false">
+        <tags>Draggable</tags>
+      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_uBguYLqpEeWOCeVncfBkfQ" visible="false">
+        <tags>Draggable</tags>
+      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_K70hkLqqEeWbV_gJXC6dzA" visible="false">
+        <tags>Draggable</tags>
+      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_K74L8LqqEeWbV_gJXC6dzA" visible="false">
+        <tags>Draggable</tags>
+      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_K76BILqqEeWbV_gJXC6dzA">
+        <tags>Draggable</tags>
+      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_K79EcLqqEeWbV_gJXC6dzA" visible="false">
         <tags>Draggable</tags>
       </children>
       <children xsi:type="menu:ToolControl" xmi:id="_KefLxLqjEeWhbMgW5VDC4w" elementId="PerspectiveSpacer" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.LayoutModifierToolControl">
