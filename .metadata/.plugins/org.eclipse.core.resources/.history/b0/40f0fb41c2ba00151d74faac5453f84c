@@ -180,7 +180,7 @@ public class Game {
 	 * @throws FullGameException 
 	 */
 	public void addPlayer(Player player) throws FullGameException{
-		if(players.keySet().size() < 4){
+		if(players.keySet().size() < 4){ //TODO verander alle integers in constanten
 			players.put(player, players.keySet().size());
 		}else{
 			throw new FullGameException();
@@ -199,13 +199,14 @@ public class Game {
 	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore
 	 * @param player
 	 */
-	public void generateScore(Player player){
-		//TODO implement
-		int points = 0;
-		player.addScore(points);
+	public void generateScore(ArrayList<Tile> lastSet){
+		
+		//Leg een steen neer, kijk naar de aanliggende tiles op de x as is dit lager dan 6, tel het aantal tegels,
+		//doe hetzelfde voor de x as, is de lijst van de array 6 doe + 6 bij score
 	}
 	
 	public void finishMove(){
+		generateScore(board.getLastMoves());
 		board.clearLastMoves();
 	}
 }

@@ -80,21 +80,9 @@ public class Tile {
 	public String getSymbol(){
 		return symbol;
 	}
-	/**
-	 * geeft de mogelijkheid om de Tile aan een punt te koppelen.
-	 * @param x
-	 * @param y
-	 */
+	
 	public void setLocation(int x, int y){
 		point = new Point(x, y);
 	}
-	/**
-	 * geeft de mogelijkheid om de locatie aan te vragen van deze Tile.
-	 * @return point
-	 */
-	public Point getLocation(){
-		return point;
-	}
-	
 }
 	

@@ -158,7 +158,7 @@ public class Board {
 		while(upperIsEmpty == false){
 			y++;
 			if(isEmptyField(x,y) == false){
-				yAxis.add(getField(x, y));
+				yAxis.add(coordinaten[x][y]);
 			}else{
 				break; 
 			}
@@ -243,7 +243,7 @@ public class Board {
 	 */
 	public void processMove(int x, int y, Tile tile) throws InvalidMoveException{
 		if(isValidMove(x, y, tile) && (sharedLine(tile, tilesOnYAxis(x, y)) || sharedLine(tile, tilesOnXAxis(x, y)))){
-			setTile(x, y, tile);
+			coordinaten[x][y] = tile;
 			initialMove = false;
 			rememberMove(tile);
 		}else{
@@ -265,7 +265,7 @@ public class Board {
 	public void reset() {
 		for (int x = 0; x <= (DIM); x++) {
 			for (int y = 0; y <= (DIM); y++) {
-				setTile(x, y, null);
+				coordinaten[x][y] = null;
 			}
 		}
 	}
