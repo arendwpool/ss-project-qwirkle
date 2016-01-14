@@ -28,36 +28,20 @@ public class Pile {
 		Collections.shuffle(tiles);
 	}
 	
-	public void makeHand(){
-		shuffle();
-		ArrayList<Tile> hand = new ArrayList<Tile>();
-		hand.add(tiles.get(0));
-		tiles.remove(0);
-	}
-	
-	public void setHand(){
-		for(i = 0; i < (6 - hand.size()); i++){
-			makeHand();
-		}
-	}
-	
 	public void removeTile(Tile tile){
-		
-		tiles.remove(0);
-	}
-	
-	public void addTile(Tile tile){
-		tiles.add(tile);
+		tiles.remove(tile);
 	}
 	
 	public void tilesLeft(){
-		System.out.println(tiles.size());
+		System.out.println(tiles);
 	}
 	
 	public static void main(String[] args){
 		Pile pile = new Pile();
+		pile.generateTiles();
 		for(Tile tile : pile.tiles){
-			System.out.println(tile.getColor() + tile.getSymbol());
+			System.out.print(tile.getColor() + tile.getSymbol());
 		}
+		pile.tilesLeft();
 	}
 }

@@ -15,12 +15,12 @@ public class Board {
 	private boolean initialMove;
 	private ArrayList<Tile> lastSet;
 	
-	private int viewOfMinX = 88;
-	private int viewOfMaxX = 92;
-	private int viewOfMinY = 88;
-	private int viewOfMaxY = 92;
-	private int startPointX = 90;
-	private int startPointY = 90;
+	private int viewOfMinX;
+	private int viewOfMaxX;
+	private int viewOfMinY;
+	private int viewOfMaxY;
+	private int startPointX;
+	private int startPointY;
 
 	/*
 	 * Constructor van het Board
@@ -28,6 +28,12 @@ public class Board {
 	public Board(){	
 		reset(); //TODO reset creeëren?
 		initialMove = true;
+		startPointX = 90;
+		startPointY = 90;
+		viewOfMinX = 88;
+		viewOfMaxX = 92;
+		viewOfMinY = 88;
+		viewOfMaxY = 92;
 	}
 	
 	
