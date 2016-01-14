@@ -204,8 +204,4 @@ public class Game {
 		int points = 0;
 		player.addScore(points);
 	}
-	
-	public void finishMove(){
-		board.clearLastMoves();
-	}
 }

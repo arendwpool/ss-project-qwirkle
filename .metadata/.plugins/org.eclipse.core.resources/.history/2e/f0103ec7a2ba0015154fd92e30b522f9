@@ -206,6 +206,6 @@ public class Game {
 	}
 	
 	public void finishMove(){
-		board.clearLastMoves();
+		
 	}
 }
