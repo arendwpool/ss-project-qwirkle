@@ -3,8 +3,10 @@ package tests;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import models.Board;
 import models.Game;
-import models.Tiles;
+import models.Tile;
 
 /**
  * 
@@ -41,7 +43,7 @@ public class GameTest {
 		/**
 		 * instantieert testGame
 		 */
-		testGame = new Game();
+		testGame = new Game(new Board());
 		
 	}
 
@@ -52,12 +54,12 @@ public class GameTest {
 	@Test
 	public void testGenerateTiles() {
 		testGame.generateTiles();
-		String[] tilesToString = new String[Tiles.NUMBER_TILES];
-		for(int i = 0; i < testGame.getTiles().size(); i++){
-			String tile = testGame.getTiles().get(i).getColor() + testGame.getTiles().get(i).getSymbol();
+		String[] tilesToString = new String[Tile.NUMBER_TILES];
+		for(int i = 0; i < testGame.getPile().size(); i++){
+			String tile = testGame.getPile().get(i).getColor() + testGame.getPile().get(i).getSymbol();
 			tilesToString[i] = tile;
 		}
-		assertEquals(tilesToString, generatedTiles);
+		assertArrayEquals(tilesToString, generatedTiles);
 	}
 
 }
