@@ -1,0 +1,25 @@
+package models;
+
+import java.util.ArrayList;
+
+public class Pile {
+	
+	private static final int onTileAmount = 3;
+	private ArrayList<Tile> tiles;
+	
+	public Pile(){
+	
+	}
+	
+	public void generateTiles(){
+		tiles = new ArrayList<Tile>();
+		for (int color = 0; color < Tile.NUMBER_COLORS * Tile.NUMBER_DUPLICATES; color++){
+			for(int symbol = 0; symbol < Tile.NUMBER_SYMBOLS; symbol++){
+				tiles.add(new Tile(Tile.kleuren[color%Tile.NUMBER_COLORS], Tile.symbolen[symbol]));
+			}
+		}
+		
+	}
+	
+	
+}

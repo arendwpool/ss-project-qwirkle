@@ -1,6 +1,11 @@
 package models;
-
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import exceptions.FalseAmountOfTilesException;
+import exceptions.FullGameException;
+import exceptions.InvalidMoveException;
+import exceptions.NoTilesLeftInPileException;
 
 /**
  * Klasse die het de regels van het spel implementeerd.
@@ -11,7 +16,7 @@ public class Game {
 	/*
 	 * ArrayList met alle tegels in een spel.
 	 */
-	private ArrayList<Tiles> tiles;
+	private ArrayList<Tile> tiles;
 	
 	/**
 	 * Geeft aan welke speler de volgende move moet maken.
@@ -24,42 +29,183 @@ public class Game {
 	private int noOfPlayers;
 	
 	/**
-	 * Genereer alle tegels die in een spel zitten.
+	 * Een hashmap van spelers die meedoen gemapt aan hun ID
 	 */
+	private Map<Player, Integer> players;
+	/**
+	 * Het nieuwe bord dat bij dit spel hoort
+	 */
+	private Board board;
+	
+	/**
+	 * Contrueert  een nieuw spel.
+	 */
+	public Game(Board board){
+		this.board = board;
+		players = new HashMap<Player, Integer>();
+	}
+	/**
+	 * Genereer alle tegels die in een spel zitten. Dit zijn er 108: 3 van elke tegel.
+	 */
+	//@ensures this.tiles = new ArrayList<Tiles>();
 	public void generateTiles(){
-		tiles = new ArrayList<Tiles>();
-		for (int color = 0; color < Tiles.NUMBER_COLORS; color++){
-			for(int symbol = 0; symbol < Tiles.NUMBER_SYMBOLS; symbol++){
-				tiles.add(new Tiles(Tiles.kleuren[color], Tiles.symbolen[symbol]));
+		tiles = new ArrayList<Tile>();
+		for (int color = 0; color < Tile.NUMBER_COLORS * Tile.NUMBER_DUPLICATES; color++){
+			for(int symbol = 0; symbol < Tile.NUMBER_SYMBOLS; symbol++){
+				tiles.add(new Tile(Tile.kleuren[color%Tile.NUMBER_COLORS], Tile.symbolen[symbol]));
 			}
 		}
 		
 	}
-	public static void main(String[] args){
-		Game a = new Game();
-		a.generateTiles();
-		for(int i = 0; i < 36; i++){
-		System.out.println(i+1 + a.tiles.get(i).getColor()+" "+ a.tiles.get(i).getSymbol());
+	
+	/**
+	 * controleert of het spel een winnaar heeft
+	 * @return winner() != null
+	 */
+	public boolean hasWinner(){
+		return winner() != null;
+	}
+	
+	/**
+	 * Geeft aan of het spel over is.
+	 * @return hasWinner();
+	 */
+	/*@pure*/
+	public boolean gameOver(){
+		return noTilesLeft();
+	}
+	
+	/**
+	 * Geeft aan welke speler winnaar is, geeft null als er nog geen winnaar is.
+	 * @return Player withHighscore || null
+	 */
+	public Player winner(){
+		if(noTilesLeft() == true){
+			int score = 0;
+			Player withHighscore = null;
+			for(Player player : players.keySet()){
+				if(player.getScore() > score){
+					score = player.getScore();
+					withHighscore = player;
+				}
+			}
+			return withHighscore;
+		}else{
+			return null;
 		}
 	}
 	
-	public void gameOver(){
-		
+	/**
+	 * Verwisselt tegels met de tilesTotrade van een gegeven speler.
+	 * @param player
+	 * @param tilesToTrade
+	 * @throws NoTilesLeftInPileException
+	 */
+	public void tradeTiles(Player player, ArrayList<Tile> tilesToTrade) throws NoTilesLeftInPileException{
+		if (noTilesLeft() == false){
+			ArrayList<Tile> tilesToGive = new ArrayList<Tile>();
+			for(Tile tile : player.getTiles()){
+				if (tilesToTrade.contains(tile)){
+					tilesToGive.add(tile);
+				}
+			}
+			try{
+				player.replaceTiles(tilesToTrade, tilesToGive);
+			}catch (FalseAmountOfTilesException e){
+				//TODO implementeer de actie als er te weinig tegels zijn.
+			}
+		}else{
+			throw new NoTilesLeftInPileException();
+		}
 	}
 	
-	public Player winner(){
-		return null;
-	}
-	
-	public void tradeTiles(){
-		
-	}
-	
+	/**
+	 * Start het spel.
+	 */
 	public void start(){
 		
 	}
 	
-	public boolean isValidMove(){
-		return false;
+	/**
+	 * Update de situatie van het spel na elke actie van een speler.
+	 */
+	public void update(){
+		
+	}
+	
+	/**
+	 * probeert een move te maken, vangt een InvalidMoveException als de move invalid is.
+	 * @param x
+	 * @param y
+	 * @param tile
+	 */
+	public void makeMove(int x, int y, Tile tile){
+		try{
+			board.processMove(x, y, tile);
+		}catch (InvalidMoveException e){
+			//TODO implement actie na de catch
+		}
+	}
+	
+	/**
+	 * Geeft een volle pile van alle tegels
+	 * @return this.pile
+	 */
+	public ArrayList<Tile> getPile(){
+		return tiles;
+	}
+	
+	/**
+	 * Controleert of er geen tegels meer zijn in een spel. 
+	 * @return !playerHasNoTiles || false
+	 */
+	public boolean noTilesLeft(){
+		// tiles is nooit leeg, dit moet vervangen worden met de pile in het bord.
+		if(tiles.size() == 0){
+			boolean playerHasNoTiles = false;
+			for(Player player : players.keySet()){
+				if (player.getTiles().size() == 0){
+					playerHasNoTiles = true;
+				}
+			}
+			return !playerHasNoTiles;
+		}else{
+			return false;
+		}
+	}
+	
+	/**
+	 * Voegt een speler toe aan een spel.
+	 * @param player
+	 * @throws FullGameException 
+	 */
+	public void addPlayer(Player player) throws FullGameException{
+		if(players.keySet().size() < 4){
+			players.put(player, players.keySet().size());
+		}else{
+			throw new FullGameException();
+		}
+	}
+	
+	/**
+	 * Geeft het bord instantie van dit spel
+	 * @return
+	 */
+	public Board getBoard(){
+		return board;
+	}
+	
+	/**
+	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore
+	 * @param player
+	 */
+	public void generateScore(Player player){
+		//TODO implement
+		int points = 0;
+		player.addScore(points);
+	}
+	
+	public void finishMove(){
+		board.clearLastMoves();
 	}
 }

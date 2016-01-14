@@ -1,0 +1,42 @@
+package models;
+
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * Abstracte klasse die een nieuwe speler maakt met een naam en tegels.
+ * @author Bob Breemhaar en Arend Pool.
+ *
+ */
+public abstract class Player {
+	/**
+	 * De naam van de betreffende speler.
+	 */
+	private String name;
+	
+	/**
+	 * De tegels die de betreffende speler heeft
+	 */
+	private Set<Tiles> tiles;
+	
+	/**
+	 * Creëert een nieuw object Player
+	 */
+	public Player(String name){
+		this.name = name;
+	}
+	
+	/**
+	 * Geef de naam van de betreffende speler
+	 */
+	public String getName(){
+		return name;
+	}
+	
+	/**
+	 * Geef een set met de tegels die de betreffende speler heeft
+	 */
+	public Set<Tiles> getTiles(){
+		return tiles;
+	}
+}
