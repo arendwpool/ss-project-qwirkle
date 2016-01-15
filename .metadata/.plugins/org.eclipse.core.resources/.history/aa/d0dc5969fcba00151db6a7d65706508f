@@ -1,0 +1,13 @@
+package controllers;
+
+import models.Game;
+import view.TUI;
+
+public class GameCotnroller {
+	private Game game;
+	private TUI ui;
+	
+	public static void main(String[] args){
+		
+	}
+}

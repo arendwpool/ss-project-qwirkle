@@ -1,6 +1,0 @@
-package view;
-
-public class TUI implements Oberserver{
-	private Game game;
-	
-}
