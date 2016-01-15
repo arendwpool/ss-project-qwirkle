@@ -1,0 +1,5 @@
+Hallo [naam]! 
+1. Nieuw spel starten
+2. opties
+3. top 5
+4. afsluiten

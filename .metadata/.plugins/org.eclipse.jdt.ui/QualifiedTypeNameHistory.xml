@@ -10,9 +10,13 @@
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="exceptions.FullGameException"/>
 <fullyQualifiedTypeName name="exceptions.InvalidMoveException"/>
-<fullyQualifiedTypeName name="models.Board"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.awt.Point"/>
-<fullyQualifiedTypeName name="models.Game"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="models.Game"/>
+<fullyQualifiedTypeName name="view.TUI"/>
+<fullyQualifiedTypeName name="models.Board"/>
+<fullyQualifiedTypeName name="view.MenuTUI"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
 </qualifiedTypeNameHistroy>

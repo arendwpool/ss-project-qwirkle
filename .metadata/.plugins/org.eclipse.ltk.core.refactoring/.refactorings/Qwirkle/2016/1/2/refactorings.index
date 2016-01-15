@@ -18,4 +18,10 @@
 1452799126972	Delete element
 1452799604410	Delete element
 1452799625748	Rename package 'protocollen'
+<<<<<<< HEAD
 >>>>>>> d456d1373d3d90bda30f5292bd9dacd2843d73dd
+=======
+1452802896677	Rename type 'GameCotnroller'
+1452853566230	Delete element
+1452853572688	Delete element
+>>>>>>> 8._basic_TUI_implementatie_voor_eigen_relevante_methoden
