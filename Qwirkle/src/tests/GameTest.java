@@ -36,7 +36,7 @@ public class GameTest {
 			"roodplus", "oranjecircel", "oranjekruis", "oranjeruit", "oranjevierkant", "oranjester", "oranjeplus", "geelcircel", 
 			"geelkruis", "geelruit", "geelvierkant", "geelster", "geelplus", "groencircel", "groenkruis", "groenruit",
 			"groenvierkant", "groenster", "groenplus", "blauwcircel", "blauwkruis", "blauwruit", "blauwvierkant", 
-			"blauwster", "blauwplus", "paarscircel", "paarskruis", "paarsruit", "paarsvierkant", "paarsster", "paarsplus", };
+			"blauwster", "blauwplus", "paarscircel", "paarskruis", "paarsruit", "paarsvierkant", "paarsster", "paarsplus"};
 	
 	@Before
 	public void setUp() throws Exception {
@@ -61,5 +61,6 @@ public class GameTest {
 		}
 		assertArrayEquals(tilesToString, generatedTiles);
 	}
+	//TODO verbeteren
 
 }

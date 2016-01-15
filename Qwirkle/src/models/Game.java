@@ -1,4 +1,5 @@
 package models;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -100,8 +101,13 @@ public class Game {
 	 * @param player
 	 * @param tilesToTrade
 	 * @throws NoTilesLeftInPileException
+<<<<<<< HEAD
 	 */
 	public void tradeTiles(AbstractPlayer player, ArrayList<Tile> tilesToTrade) throws NoTilesLeftInPileException{
+=======
+	 *///TODO migreren naar Pile.java?
+	public void tradeTiles(Player player, ArrayList<Tile> tilesToTrade) throws NoTilesLeftInPileException{
+>>>>>>> d456d1373d3d90bda30f5292bd9dacd2843d73dd
 		if (noTilesLeft() == false){
 			ArrayList<Tile> tilesToGive = new ArrayList<Tile>();
 			for(Tile tile : player.getTiles()){
@@ -123,13 +129,14 @@ public class Game {
 	 * Start het spel.
 	 */
 	public void start(){
-		
+		//TODO te implementeren als de tijd rijp is
 	}
 	
 	/**
 	 * Update de situatie van het spel na elke actie van een speler.
 	 */
 	public void update(){
+		//TODO te implementeren als de tijd rijp is
 		
 	}
 	
@@ -141,7 +148,7 @@ public class Game {
 	 */
 	public void makeMove(int x, int y, Tile tile){
 		try{
-			board.processMove(x, y, tile);
+			board.processMove(x, y, tile);//TODO Player toevoegen aan de parameter om aan te duiden wie de speler is?
 		}catch (InvalidMoveException e){
 			//TODO implement actie na de catch
 		}
@@ -160,7 +167,7 @@ public class Game {
 	 * @return !playerHasNoTiles || false
 	 */
 	public boolean noTilesLeft(){
-		// tiles is nooit leeg, dit moet vervangen worden met de pile in het bord.
+		// tiles is nooit leeg, dit moet vervangen worden met Pile.java.
 		if(tiles.size() == 0){
 			boolean playerHasNoTiles = false;
 			for(AbstractPlayer player : players.keySet()){
@@ -199,6 +206,7 @@ public class Game {
 	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore
 	 * @param player
 	 */
+<<<<<<< HEAD
 	public void generateScore(AbstractPlayer player){
 		//TODO implement
 		int points = 0;
@@ -207,5 +215,41 @@ public class Game {
 	
 	public void finishMove(){
 		board.clearLastMoves();
+=======
+	public void generateScore(){
+		Point point = null;
+		boolean retainMultipleX = false;
+		boolean retainMultipleY = false;
+		ArrayList<Tile> row = null;
+		ArrayList<Tile> column = null;
+		int score = 0;
+		for(Tile tile : board.getLastMoves()){
+			point = tile.getLocation();
+			int x = (int) point.getX();
+			int y = (int) point.getY();
+			row = board.tilesOnXAxis(x, y);
+			column = board.tilesOnYAxis(x, y);
+			ArrayList<Tile> commonX = new ArrayList<Tile>(board.getLastMoves());
+			ArrayList<Tile> commonY = new ArrayList<Tile>(board.getLastMoves());
+			commonX.retainAll(row);
+			commonY.retainAll(column);
+			retainMultipleX = commonX.size() > 1;
+			retainMultipleY = commonY.size() > 1;
+			if(retainMultipleX == true){
+				score += column.size();
+			}else if(retainMultipleY == true){
+				score += row.size();
+			}
+		}
+		if(retainMultipleX == true){
+			score += row.size();
+		}else if(retainMultipleY == true){
+			score += column.size();
+		}else{
+			score += row.size();
+			score += column.size();
+		}
+		currentPlayer.addScore(score); // TODO currentPlayer moet eventueel vervangen worden als de implementatie verandert.
+>>>>>>> d456d1373d3d90bda30f5292bd9dacd2843d73dd
 	}
 }

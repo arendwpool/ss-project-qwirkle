@@ -1,0 +1,39 @@
+package view;
+
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+
+import models.Game;
+
+public class TUI implements Observer {
+
+	private Game game;
+	
+	public TUI(Game game){
+		this.game = game;
+	}
+	
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void start(){
+		boolean terminated = false;
+		while(terminated == false){
+			
+		}
+	}
+	
+	public void renderBoard(){
+		
+	}
+	
+	public void renderMenu(int noMenuItems, ArrayList<String> menuItems){ //TODO vervangen van ArrayList?
+		
+	}
+	
+	
+}

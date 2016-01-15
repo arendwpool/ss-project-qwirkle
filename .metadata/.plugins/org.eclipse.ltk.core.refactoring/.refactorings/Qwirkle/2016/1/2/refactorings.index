@@ -10,4 +10,12 @@
 1452679497913	Rename type 'NoTilesLeftException'
 1452691157038	Rename package 'ui'
 1452691177871	Rename type 'Tiles'
+<<<<<<< HEAD
 1452781970072	Rename type 'Player'
+=======
+1452797407293	Delete element
+1452798255427	Rename package 'enumerators'
+1452799126972	Delete element
+1452799604410	Delete element
+1452799625748	Rename package 'protocollen'
+>>>>>>> d456d1373d3d90bda30f5292bd9dacd2843d73dd
