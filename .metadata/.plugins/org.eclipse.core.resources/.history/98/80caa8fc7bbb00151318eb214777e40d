@@ -18,16 +18,14 @@ public class TUI implements Observer {
 	private static final String[] ONLINE_MENU = {null, "IP adres invoeren", "Poort invoeren", "Terug"};
 	private static final String[] IP_MENU = {null, "Voer het gewenste adres in:"};
 	private static final String[] PORT_MENU = {null, "Voer het gewenste poortnummer in: "};
-	private static final String[] AGAINST_PC_MENU = {"Typ uw gewenste moeilijkheidsgraad in(1 voor makkelijk, 2 voor normaal en 3 voor moeilijk).", "Moeilijkheidsgraad: "};
+	private static final String[] AGAINS_PC_MENU = {"Typ uw gewenste moeilijkheidsgraad in(1 voor makkelijk, 2 voor normaal en 3 voor moeilijk).", "Moeilijkheidsgraad: "};
 	private static final String[] OPPONENTS_MENU = {"Typ in hoeveel tegenstanders u wil hebben(minimaal 1, maximaal 3).", "Aantal tegenstanders: "};
 	
 	private static final int AMOUNT_CHARACTERS = 50;
 	private String playerName;
 	private Scanner scanner = new Scanner(System.in);
 	boolean terminated = false;
-	private int noOfPlayers;
-	private String ip;
-	private int port;
+	
 	public TUI(){
 		
 	}
@@ -91,123 +89,32 @@ public class TUI implements Observer {
 							createSpace();
 							break;
 				case "2": 	renderMenu(OPTIONS_MENU);
-						  	determineOption(OPTIONS_MENU);
+						  	determineOption(NEW_GAME_MENU);
 							createSpace();
 							break;
-				case "3": 	renderMenu(TOP_5_MENU);
-							determineOption(TOP_5_MENU);
-							createSpace();
-							break;
+				case "3": 	//TODO implement; break;
 				case "4": 	terminated = false;
 						  	break;
 			}
 		}else if(menu.equals(NEW_GAME_MENU)){
 			switch (choice){
-				case "1": 	renderMenu(ONLINE_MENU);
-			  				determineOption(ONLINE_MENU);
-			  				createSpace();
-			  				break;
-				case "2": 	renderMenu(AGAINST_PC_MENU);
-			  				determineOption(AGAINST_PC_MENU);
-			  				createSpace();
-			  				break;
-				case "3": 	renderMenu(OPPONENTS_MENU);
-			  				determineOption(OPPONENTS_MENU);
-			  				createSpace();
-			  				break;
-				case "4":	renderBoard();
-							break;
-				case "5": 	renderMenu(MAIN_MENU);
-							determineOption(MAIN_MENU);
-							break;
+			case "1": //TODO implement renderMenu(NEW_GAME_MENU);
+					  break;
+			case "2": //TODO implement renderMenu(OPTIONS_MENU);
+					  break;
+			case "3": //TODO implement; break;
+			case "5": renderMenu(MAIN_MENU);
 			}
 		}else if(menu.equals(OPTIONS_MENU)){
 			switch(choice){
-				case "2": 	renderMenu(MAIN_MENU);
-							createSpace();
+
+			case "2": renderMenu(MAIN_MENU);
 			}
-		}else if(menu.equals(TOP_5_MENU)){
-			switch(choice){
-			case "1": 	renderMenu(MAIN_MENU);
-						createSpace();
-		}
-			
-		}else if(menu.equals(ONLINE_MENU)){
-			switch(choice){
-				case "1": 	renderMenu(IP_MENU);
-							createSpace();
-				case "2":	renderMenu(PORT_MENU);
-							createSpace();
-				case "3":   renderMenu(NEW_GAME_MENU);
-							createSpace();
-		}
-			
-		}else if(menu.equals(AGAINST_PC_MENU)){
-			int i = Integer.parseInt(choice);
-			if(i > 0 && i < 4){
-				//TODO implement moeilijkheidsgraad = i;
-				renderMenu(NEW_GAME_MENU);
-				createSpace();
-			}else{
-				System.out.print("Geen geldige invoer, kiezen uit: 1, 2 en 3");
-				renderMenu(AGAINST_PC_MENU);
-				createSpace();
-			}
-			
-		}else if(menu.equals(OPPONENTS_MENU)){
-			int i = Integer.parseInt(choice);
-			if(i > 0 && i < 4){
-				noOfPlayers = i;
-				renderMenu(NEW_GAME_MENU);
-				createSpace();
-			}else{
-				System.out.print("Geen geldige invoer, kiezen uit: 1, 2 en 3");
-				renderMenu(AGAINST_PC_MENU);
-				createSpace();
-			}
-			
-		}else if(menu.equals(IP_MENU)){
-			if (isValidIP(choice)){
-				ip = choice;
-				renderMenu(NEW_GAME_MENU);
-				createSpace();
-			}else{
-				System.out.print("Geen geldig ip adres.");
-				renderMenu(IP_MENU);
-				createSpace();
-			}
-			
-		}else if(menu.equals(PORT_MENU)){
-			int portNo = Integer.parseInt(choice);
-			if (portNo <= 8000 && portNo > 0){
-				port = portNo;
-				renderMenu(NEW_GAME_MENU);
-				createSpace();
-			}else{
-				System.out.print("Geen geldig poortnummner, deze moet onder de 8000 en boven 0 zijn.");
-				renderMenu(PORT_MENU);
-				createSpace();
-			}
-			
-		}else{
-			//TODO implement: wat als er een verkeerde optie is geselecteerd?
 		}
 	}
 	
 	public void createSpace(){
 		System.out.print("\n \n");
-	}
-	
-	public boolean isValidIP(String ip){
-		String[] ints = ip.split(".");
-		boolean isValidInt = true;
-		for(String integer : ints){
-			int i = Integer.parseInt(integer);
-				if(i > 255){
-					isValidInt = false;
-				}
-		}
-		return (isValidInt == true && ints.length == 4);
 	}
 	
 }

@@ -124,22 +124,17 @@ public class TUI implements Observer {
 		}else if(menu.equals(OPTIONS_MENU)){
 			switch(choice){
 				case "2": 	renderMenu(MAIN_MENU);
-							createSpace();
 			}
 		}else if(menu.equals(TOP_5_MENU)){
 			switch(choice){
 			case "1": 	renderMenu(MAIN_MENU);
-						createSpace();
 		}
 			
 		}else if(menu.equals(ONLINE_MENU)){
 			switch(choice){
 				case "1": 	renderMenu(IP_MENU);
-							createSpace();
 				case "2":	renderMenu(PORT_MENU);
-							createSpace();
 				case "3":   renderMenu(NEW_GAME_MENU);
-							createSpace();
 		}
 			
 		}else if(menu.equals(AGAINST_PC_MENU)){
@@ -147,11 +142,9 @@ public class TUI implements Observer {
 			if(i > 0 && i < 4){
 				//TODO implement moeilijkheidsgraad = i;
 				renderMenu(NEW_GAME_MENU);
-				createSpace();
 			}else{
 				System.out.print("Geen geldige invoer, kiezen uit: 1, 2 en 3");
 				renderMenu(AGAINST_PC_MENU);
-				createSpace();
 			}
 			
 		}else if(menu.equals(OPPONENTS_MENU)){
@@ -159,35 +152,18 @@ public class TUI implements Observer {
 			if(i > 0 && i < 4){
 				noOfPlayers = i;
 				renderMenu(NEW_GAME_MENU);
-				createSpace();
 			}else{
 				System.out.print("Geen geldige invoer, kiezen uit: 1, 2 en 3");
 				renderMenu(AGAINST_PC_MENU);
-				createSpace();
 			}
 			
 		}else if(menu.equals(IP_MENU)){
-			if (isValidIP(choice)){
-				ip = choice;
-				renderMenu(NEW_GAME_MENU);
-				createSpace();
-			}else{
-				System.out.print("Geen geldig ip adres.");
-				renderMenu(IP_MENU);
-				createSpace();
-			}
+			
 			
 		}else if(menu.equals(PORT_MENU)){
-			int portNo = Integer.parseInt(choice);
-			if (portNo <= 8000 && portNo > 0){
-				port = portNo;
-				renderMenu(NEW_GAME_MENU);
-				createSpace();
-			}else{
-				System.out.print("Geen geldig poortnummner, deze moet onder de 8000 en boven 0 zijn.");
-				renderMenu(PORT_MENU);
-				createSpace();
-			}
+			switch(choice){
+			case "2": 	renderMenu(MAIN_MENU);
+		}
 			
 		}else{
 			//TODO implement: wat als er een verkeerde optie is geselecteerd?
@@ -199,15 +175,7 @@ public class TUI implements Observer {
 	}
 	
 	public boolean isValidIP(String ip){
-		String[] ints = ip.split(".");
-		boolean isValidInt = true;
-		for(String integer : ints){
-			int i = Integer.parseInt(integer);
-				if(i > 255){
-					isValidInt = false;
-				}
-		}
-		return (isValidInt == true && ints.length == 4);
+		
 	}
 	
 }

@@ -147,11 +147,9 @@ public class TUI implements Observer {
 			if(i > 0 && i < 4){
 				//TODO implement moeilijkheidsgraad = i;
 				renderMenu(NEW_GAME_MENU);
-				createSpace();
 			}else{
 				System.out.print("Geen geldige invoer, kiezen uit: 1, 2 en 3");
 				renderMenu(AGAINST_PC_MENU);
-				createSpace();
 			}
 			
 		}else if(menu.equals(OPPONENTS_MENU)){
@@ -159,22 +157,18 @@ public class TUI implements Observer {
 			if(i > 0 && i < 4){
 				noOfPlayers = i;
 				renderMenu(NEW_GAME_MENU);
-				createSpace();
 			}else{
 				System.out.print("Geen geldige invoer, kiezen uit: 1, 2 en 3");
 				renderMenu(AGAINST_PC_MENU);
-				createSpace();
 			}
 			
 		}else if(menu.equals(IP_MENU)){
 			if (isValidIP(choice)){
 				ip = choice;
 				renderMenu(NEW_GAME_MENU);
-				createSpace();
 			}else{
 				System.out.print("Geen geldig ip adres.");
 				renderMenu(IP_MENU);
-				createSpace();
 			}
 			
 		}else if(menu.equals(PORT_MENU)){
@@ -182,11 +176,9 @@ public class TUI implements Observer {
 			if (portNo <= 8000 && portNo > 0){
 				port = portNo;
 				renderMenu(NEW_GAME_MENU);
-				createSpace();
 			}else{
 				System.out.print("Geen geldig poortnummner, deze moet onder de 8000 en boven 0 zijn.");
 				renderMenu(PORT_MENU);
-				createSpace();
 			}
 			
 		}else{
