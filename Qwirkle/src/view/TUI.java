@@ -4,6 +4,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
+import models.Game;
+
 
 public class TUI implements Observer {
 	/**
@@ -28,8 +30,11 @@ public class TUI implements Observer {
 	private int noOfPlayers;
 	private String ip;
 	private int port;
-	public TUI(){
-		
+	private Game game;
+	
+	
+	public TUI(Game game){
+		this.game = game;
 	}
 	
 	@Override
@@ -48,7 +53,20 @@ public class TUI implements Observer {
 	}
 	
 	public void renderBoard(){
-		
+		for (int x = 90; x <= 90+(game.getBoard().viewOfMaxX - game.getBoard().viewOfMinX); x++){
+			for(int y = 90; y <= 90 + (game.getBoard().viewOfMaxY - game.getBoard().viewOfMinX); y++){
+			if (game.getBoard().getField(x, y).getColor() == "empty" && game.getBoard().getField(x, y).getSymbol() == "empty"){
+				System.out.print("|---");
+				if(y == (90+game.getBoard().viewOfMaxX - game.getBoard().viewOfMinX)){
+					System.out.print("|\n");
+				}
+			}else if(90+game.getBoard().getField(x, y).getColor() == "groen" && game.getBoard().getField(x, y).getSymbol() == "circel")
+				System.out.print("|-O-");
+				/*if(y == (game.getBoard().viewOfMaxX - game.getBoard().viewOfMinX)){
+					System.out.print("|\n");
+				}*/
+			}
+		}
 	}
 	
 	/**
