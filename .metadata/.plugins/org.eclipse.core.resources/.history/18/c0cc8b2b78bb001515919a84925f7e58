@@ -18,7 +18,6 @@ public class TUI implements Observer {
 	private static final String[] ONLINE_MENU = {null, "IP adres invoeren", "Poort invoeren", "Terug"};
 	private static final String[] IP_MENU = {null, "Voer het gewenste adres in:"};
 	private static final String[] PORT_MENU = {null, "Voer het gewenste poortnummer in: "};
-	private static final String[] OPTIONS_MENU = {null, "Ander interface laden", "Terug"};
 	private static final int AMOUNT_CHARACTERS = 50;
 	private String playerName;
 	private Scanner scanner = new Scanner(System.in);

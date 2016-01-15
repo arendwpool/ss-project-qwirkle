@@ -2,6 +2,7 @@ package controllers;
 
 import models.Board;
 import models.Game;
+import view.MenuTUI;
 import view.TUI;
 
 public class GameController {

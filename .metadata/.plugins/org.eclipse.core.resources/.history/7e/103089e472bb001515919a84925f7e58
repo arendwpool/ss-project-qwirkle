@@ -10,14 +10,9 @@ public class TUI implements Observer {
 	 * De string op index 0 is altijd een beschrijving bij een menu
 	 */
 	private static final String[] PRE_MENU = {null, "Voer uw naam in:"};
-	private static final String[] MAIN_MENU = {"Hallo [naam]!", "Nieuw spel starten", "Opties", "Top-5", "Afsluiten"};
-	private static final String[] OPTIONS_MENU = {null, "Ander interface laden", "Terug"};
-	private static final String[] TOP_5_MENU = {null, "Terug"};
-	private static final String[] NEW_GAME_MENU = {"Onderstaande opties zijn te veranderen door het gepaste nummer te selecteren. Als de opties kloppen \"Start\" selecteren.", 
+	private static final String[] MAIN_MENU = {null, "Nieuw spel starten", "Opties", "Top-5", "Afsluiten"};
+	private static final String[] NEW_GAME_MENU = {"Hallo [naam]! Onderstaande opties zijn te veranderen door het gepaste nummer te selecteren. Als de opties kloppen \"Start\" selecteren.", 
 													"Online", "Tegen computer", "Aantal tegenstanders", "Start", "Terug"};
-	private static final String[] ONLINE_MENU = {null, "IP adres invoeren", "Poort invoeren", "Terug"};
-	private static final String[] IP_MENU = {null, "Voer het gewenste adres in:"};
-	private static final String[] PORT_MENU = {null, "Voer het gewenste poortnummer in: "};
 	private static final String[] OPTIONS_MENU = {null, "Ander interface laden", "Terug"};
 	private static final int AMOUNT_CHARACTERS = 50;
 	private String playerName;
@@ -40,6 +35,7 @@ public class TUI implements Observer {
 		renderMenu(MAIN_MENU);
 		while(terminated == false){
 			determineOption(MAIN_MENU);
+			createSpace();
 		}
 	}
 	
@@ -54,7 +50,8 @@ public class TUI implements Observer {
 	 */
 	public void renderMenu(String[] menuItems){ //TODO vervangen van Array?
 		if(menuItems[0] != null){
-			menuItems[0] = menuItems[0].replace("[naam]", playerName);
+			System.out.print(menuItems[0].contains("[naam"));
+			menuItems[0].replace("[naam]", playerName);
 			System.out.println(menuItems[0]);
 		}
 		for(int i = 1; i < menuItems.length; i++){
@@ -105,7 +102,6 @@ public class TUI implements Observer {
 			case "2": renderMenu(MAIN_MENU);
 			}
 		}
-		createSpace();
 	}
 	
 	public void createSpace(){

@@ -1,8 +1,0 @@
-Hallo [naam]! Onderstaande opties zijn te veranderen door het gepaste nummer te selecteren. Als de opties kloppen "Start" selecteren.
-1. online / tegen computers
-2. moeilijkheidsgraad(van toepassing als "tegen computers" is geselecteerd)
-3. IP adress (van toepassing als "online" is geselecteerd)
-4. Poort nummer (van toepassing als "online" is geselecteerd)
-5. Aantal tegenstanders
-6. Start
-7. terug

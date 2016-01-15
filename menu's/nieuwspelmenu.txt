@@ -1,0 +1,6 @@
+Onderstaande opties zijn te veranderen door het gepaste nummer te selecteren. Als de opties kloppen "Start" selecteren.
+1. online
+2. tegen computer
+3. Aantal tegenstanders
+4. Start
+5. terug

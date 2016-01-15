@@ -2,6 +2,7 @@ package controllers;
 
 import models.Board;
 import models.Game;
+import view.MenuTUI;
 import view.TUI;
 
 public class GameController {
@@ -9,7 +10,7 @@ public class GameController {
 	private TUI ui;
 	
 	public GameController(){
-		ui = new TUI();
+		ui = new MenuTUI();
 	}
 	public static void main(String[] args){
 		GameController controller = new GameController();
