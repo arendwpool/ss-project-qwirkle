@@ -8,7 +8,7 @@ public interface Player {
 	
 	public int determineMove();
 	
-	public ArrayList<Tile> getHand();
+	public ArrayList<Tile> getTiles();
 	
 	public void makeMove();
 	

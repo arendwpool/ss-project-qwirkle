@@ -1,0 +1,9 @@
+package models;
+
+public class ComputerPlayer extends AbstractPlayer {
+	private static final String name = "Computer";
+	public ComputerPlayer() {
+		super(name);
+	}
+
+}

@@ -3,12 +3,13 @@ package models;
 import java.util.ArrayList;
 
 public interface Player {
+	public String name = "";
 	
 	public String getName();
 	
 	public int determineMove();
 	
-	public ArrayList<Tile> getHand();
+	public ArrayList<Tile> getTiles();
 	
 	public void makeMove();
 	

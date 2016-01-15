@@ -28,15 +28,16 @@ public class Pile {
 		Collections.shuffle(tiles);
 	}
 	
-	public void giveRandomTile(){
+	public void makeHand(){
 		shuffle();
+		ArrayList<Tile> hand = new ArrayList<Tile>();
 		hand.add(tiles.get(0));
 		tiles.remove(0);
 	}
 	
 	public void setHand(){
-		for(int i = 0; i < (6 - hand.size()); i++){
-			giveRandomTile();
+		for(i = 0; i < (6 - hand.size()); i++){
+			makeHand();
 		}
 	}
 	

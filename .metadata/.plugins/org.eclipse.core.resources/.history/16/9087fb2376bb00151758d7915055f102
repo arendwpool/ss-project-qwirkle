@@ -6,6 +6,7 @@ import java.util.Collections;
 public class Pile {
 	
 	private ArrayList<Tile> tiles;
+	private ArrayList<Tile> hand;
 	
 	
 	public Pile(){
@@ -28,7 +29,7 @@ public class Pile {
 		Collections.shuffle(tiles);
 	}
 	
-	public void giveRandomTile(){
+	public void makeHand(){
 		shuffle();
 		hand.add(tiles.get(0));
 		tiles.remove(0);
@@ -36,7 +37,7 @@ public class Pile {
 	
 	public void setHand(){
 		for(int i = 0; i < (6 - hand.size()); i++){
-			giveRandomTile();
+			makeHand();
 		}
 	}
 	

@@ -6,7 +6,6 @@ public class HumanPlayer implements Player {
 	private ArrayList<Tile> hand;
 	
 	public HumanPlayer(String name) {
-		
 	}
 	
 
@@ -24,7 +23,8 @@ public class HumanPlayer implements Player {
 	
 	@Override
 	public ArrayList<Tile> getHand() {
-		
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

@@ -3,12 +3,9 @@ package models;
 import java.util.ArrayList;
 
 public class HumanPlayer implements Player {
-	private ArrayList<Tile> hand;
-	
+
 	public HumanPlayer(String name) {
-		
 	}
-	
 
 	@Override
 	public String getName() {
@@ -21,10 +18,11 @@ public class HumanPlayer implements Player {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	@Override
-	public ArrayList<Tile> getHand() {
-		
+	public ArrayList<Tile> getTiles() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
