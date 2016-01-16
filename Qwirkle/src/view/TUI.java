@@ -53,18 +53,19 @@ public class TUI implements Observer {
 	}
 	
 	public void renderBoard(){
-		for (int x = 90; x <= 90+(game.getBoard().viewOfMaxX - game.getBoard().viewOfMinX); x++){
-			for(int y = 90; y <= 90 + (game.getBoard().viewOfMaxY - game.getBoard().viewOfMinX); y++){
-			if (game.getBoard().getField(x, y).getColor() == "empty" && game.getBoard().getField(x, y).getSymbol() == "empty"){
-				System.out.print("|---");
-				if(y == (90+game.getBoard().viewOfMaxX - game.getBoard().viewOfMinX)){
-					System.out.print("|\n");
+		for (int x = game.getBoard().viewOfMinX; x <= game.getBoard().viewOfMaxX; x++){
+			for(int y = game.getBoard().viewOfMinY; y <= game.getBoard().viewOfMaxY; y++){
+				if (game.getBoard().getField(x, y).getColor() == "empty" && game.getBoard().getField(x, y).getSymbol() == "empty"){
+					System.out.print("|" +x +"," + y +"|");
+					if(y == (game.getBoard().viewOfMaxY)){
+						System.out.println();
+					}
+				}else{
+					System.out.print("|-"+colorRepresentive(game.getBoard().getField(x, y).getColor())+ "-" + symbolRepresentive(game.getBoard().getField(x, y).getSymbol()) +"-|");
+					if(y == (game.getBoard().viewOfMaxY)){
+						System.out.println();
+					}
 				}
-			}else if(90+game.getBoard().getField(x, y).getColor() == "groen" && game.getBoard().getField(x, y).getSymbol() == "circel")
-				System.out.print("|-O-");
-				/*if(y == (game.getBoard().viewOfMaxX - game.getBoard().viewOfMinX)){
-					System.out.print("|\n");
-				}*/
 			}
 		}
 	}
@@ -228,4 +229,39 @@ public class TUI implements Observer {
 		return (isValidInt == true && ints.length == 4);
 	}
 	
+	public String colorRepresentive(String color){
+		String representive = "";
+		if(color.equals("groen")){
+			representive = "G";
+		}else if (color.equals("rood")){
+			representive = "R";
+		}else if (color.equals("blauw")){
+			representive = "B";
+		}else if (color.equals("paars")){
+			representive = "P";
+		}else if (color.equals("geel")){
+			representive = "Y";
+		}else if (color.equals("oranje")){
+			representive = "O";
+		}
+		return representive;
+	}
+	
+	public String symbolRepresentive(String symbol){
+		String representive = "";
+		if(symbol.equals("circel")){
+			representive = "C";
+		}else if (symbol.equals("ruit")){
+			representive = "R";
+		}else if (symbol.equals("plus")){
+			representive = "P";
+		}else if (symbol.equals("ster")){
+			representive = "S";
+		}else if (symbol.equals("vierkant")){
+			representive = "V";
+		}else if (symbol.equals("kruis")){
+			representive = "K";
+		}
+		return representive;
+		}
 }

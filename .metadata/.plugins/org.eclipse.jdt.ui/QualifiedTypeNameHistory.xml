@@ -20,4 +20,7 @@
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="models.Game"/>
 <fullyQualifiedTypeName name="models.Tile"/>
+<fullyQualifiedTypeName name="models.Player"/>
+<fullyQualifiedTypeName name="models.HumanPlayer"/>
+<fullyQualifiedTypeName name="controllers.GameController"/>
 </qualifiedTypeNameHistroy>
