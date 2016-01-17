@@ -1,5 +1,6 @@
 package view;
 
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
@@ -24,8 +25,8 @@ public class TUI implements Observer {
 	private static final String[] AGAINST_PC_MENU = {"Typ uw gewenste moeilijkheidsgraad in(1 voor makkelijk, 2 voor normaal en 3 voor moeilijk).", "Moeilijkheidsgraad: "};
 	private static final String[] OPPONENTS_MENU = {"Typ in hoeveel tegenstanders u wil hebben(minimaal 1, maximaal 3).", "Aantal tegenstanders: "};
 	private static final String[] BOARD_MENU = {"Als u aan de beurt ben kan u tegels ruilen of neerleggen. Dit gaat per tegel, aan het eind van uw beurt drukt u op: klaar.", "Een tegel neerleggen: ", "Een tegel ruilen", "Klaar"};
-	private static final String[] SET_TILE_MENU = {"Typ uw keuze in de vorm: [kleur].[symbool].[x].[y]", "Uw keuze:"}; //TODO veranderen in [tegelnummer].[x].[y]
-	private static final String[] SWAP_TILE_MENU = {"Typ uw keuze in de vorm: tegelnummer.tegelnummer etc.", "Uw keuze"};
+	private static final String[] SET_TILE_MENU = {"Typ uw keuze in de vorm: [kleur] [symbool] [x] [y]", "Uw keuze:"}; //TODO veranderen in [tegelnummer].[x].[y]
+	private static final String[] SWAP_TILE_MENU = {"Typ uw keuze in de vorm: tegelnummer tegelnummer etc.", "Uw keuze"};
 	
 	private static final int AMOUNT_CHARACTERS = 50;
 	private String playerName;
@@ -57,6 +58,7 @@ public class TUI implements Observer {
 	}
 	
 	public void renderBoard(){
+		clearScreen();
 		for (int x = game.getBoard().viewOfMinX; x <= game.getBoard().viewOfMaxX; x++){
 			for(int y = game.getBoard().viewOfMinY; y <= game.getBoard().viewOfMaxY; y++){
 				if (game.getBoard().getField(x, y).getColor() == "empty" && game.getBoard().getField(x, y).getSymbol() == "empty"){
@@ -83,6 +85,7 @@ public class TUI implements Observer {
 	 * @param menuItems(op index 0 altijd een uitleg bij een menu! zonder uitleg null houden!
 	 */
 	public void renderMenu(String[] menuItems){ //TODO vervangen van Array?
+		clearScreen(); //TODO weghalen, alleen voor exec jar
 		if(menuItems[0] != null){
 			menuItems[0] = menuItems[0].replace("[naam]", playerName);
 			System.out.println(menuItems[0]);
@@ -106,50 +109,58 @@ public class TUI implements Observer {
 		return dots;
 	}
 	
+	//TODO eventueel veranderen door arrays te maken?
 	public void determineOption(String[] menu){
 		createSpace();
 		String choice = scanner.nextLine();
 		if(menu.equals(PRE_MENU)){
 			playerName = choice; //TODO naam mag niet leeg zijn
 		}else if(menu.equals(MAIN_MENU)){
-			switch (choice){
-				case "1": 	renderMenu(NEW_GAME_MENU);
-						  	determineOption(NEW_GAME_MENU);
-				case "2": 	renderMenu(OPTIONS_MENU);
-						  	determineOption(OPTIONS_MENU);
-				case "3": 	renderMenu(TOP_5_MENU);
-							determineOption(TOP_5_MENU);
-				case "4": 	terminated = false;
-						  	break;
+			if(choice.equals("1")){
+				renderMenu(NEW_GAME_MENU);
+				determineOption(NEW_GAME_MENU);
+			}else if(choice.equals("2")){
+				renderMenu(OPTIONS_MENU);
+				determineOption(OPTIONS_MENU);
+			}else if(choice.equals("3")){
+				renderMenu(TOP_5_MENU);
+				determineOption(TOP_5_MENU);
+			}else if(choice.equals("4")){
+				terminated = true;
 			}
 		}else if(menu.equals(NEW_GAME_MENU)){
-			switch (choice){
-				case "1": 	renderMenu(ONLINE_MENU);
-			  				determineOption(ONLINE_MENU);
-				case "2": 	renderMenu(AGAINST_PC_MENU);
-			  				determineOption(AGAINST_PC_MENU);
-				case "3": 	renderMenu(OPPONENTS_MENU);
-			  				determineOption(OPPONENTS_MENU);
-				case "4":	renderBoard();
-				case "5": 	renderMenu(MAIN_MENU);
-							determineOption(MAIN_MENU);
+			if(choice.equals("1")){
+				renderMenu(ONLINE_MENU);
+				determineOption(ONLINE_MENU);
+			}else if(choice.equals("2")){
+				renderMenu(AGAINST_PC_MENU);
+				determineOption(AGAINST_PC_MENU);
+			}else if(choice.equals("3")){
+				renderMenu(OPPONENTS_MENU);
+				determineOption(OPPONENTS_MENU);
+			}else if(choice.equals("4")){
+				renderBoard(); //TODO voorwaarden geven
+			}else if (choice.equals("5")){
+				renderMenu(MAIN_MENU);
+				determineOption(MAIN_MENU);
 			}
 		}else if(menu.equals(OPTIONS_MENU)){
-			switch(choice){
-				case "2": 	renderMenu(MAIN_MENU);
+			if(choice.equals("2")){
+				renderMenu(MAIN_MENU);
 			}
 		}else if(menu.equals(TOP_5_MENU)){
-			switch(choice){
-			case "1": 	renderMenu(MAIN_MENU);
-		}
-			
+			if(choice.equals("1")){
+				renderMenu(MAIN_MENU);
+			}
 		}else if(menu.equals(ONLINE_MENU)){
-			switch(choice){
-				case "1": 	renderMenu(IP_MENU);
-				case "2":	renderMenu(PORT_MENU);
-				case "3":   renderMenu(NEW_GAME_MENU);
-		}
-			
+			if(choice.equals("1")){
+				renderMenu(IP_MENU);
+				determineOption(IP_MENU);
+			}else if(choice.equals("2")){
+				renderMenu(PORT_MENU);
+			}else if(choice.equals("3")){
+				renderMenu(NEW_GAME_MENU);
+			}			
 		}else if(menu.equals(AGAINST_PC_MENU)){
 			int i = Integer.parseInt(choice);
 			if(i > 0 && i < 4){
@@ -174,9 +185,11 @@ public class TUI implements Observer {
 			if (isValidIP(choice)){
 				ip = choice;
 				renderMenu(NEW_GAME_MENU);
+				determineOption(NEW_GAME_MENU);
 			}else{
-				System.out.print("Geen geldig ip adres.");
+				System.out.println("Geen geldig ip adres.");
 				renderMenu(IP_MENU);
+				determineOption(IP_MENU);
 			}
 			
 		}else if(menu.equals(PORT_MENU)){
@@ -189,16 +202,18 @@ public class TUI implements Observer {
 				renderMenu(PORT_MENU);
 			}
 		}else if(menu.equals(BOARD_MENU)){
-			switch(choice){
-			case "1": 	renderMenu(SET_TILE_MENU);
-						determineOption(SET_TILE_MENU);
-			case "2":	renderMenu(SWAP_TILE_MENU);
-						determineOption(SWAP_TILE_MENU);
-			case "3":   //TODO beurt beëindigen
+			if(choice.equals("1")){
+				renderMenu(SET_TILE_MENU);
+				determineOption(SET_TILE_MENU);
+			}else if(choice.equals("2")){
+				renderMenu(SWAP_TILE_MENU);
+				determineOption(SWAP_TILE_MENU);
+			}else if(choice.equals("3")){
+				//TODO beurt beëindigen
 			}
 		}else if(menu.equals(SET_TILE_MENU)){
 			renderMenu(SET_TILE_MENU);
-			String[] move;choice.split(".");
+			String[] move = choice.split(" ");
 			boolean containsColor = false;
 			boolean containsSymbol = false;
 			int x = Integer.parseInt(move[2]);
@@ -214,8 +229,9 @@ public class TUI implements Observer {
 					containsSymbol = true;
 				}
 			}
-			if(containsColor && containsSymbol){
+			if(containsColor && containsSymbol && move.length > 0){
 				determineMove(move[0], move[1], x, y);
+				createSpace();
 				renderBoard();
 			}else{
 				System.out.print("Ongeldige invoer");
@@ -234,7 +250,8 @@ public class TUI implements Observer {
 	}
 	
 	public boolean isValidIP(String ip){
-		String[] ints = ip.split(".");
+		ip = ip.replace(".", " ");
+		String[] ints = ip.split(" ");
 		boolean isValidInt = true;
 		for(String integer : ints){
 			int i = Integer.parseInt(integer);
@@ -284,5 +301,14 @@ public class TUI implements Observer {
 	public void determineMove(String kleur, String symbool, int x, int y){ //TODO aanpassen als een speler tegels kan hebben
 		game.getBoard().setTile(x, y, new Tile(kleur, symbool));
 		game.getBoard().boardSize();
+	}
+	
+	public void clearScreen(){
+		try {
+			Runtime.getRuntime().exec("cls");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
