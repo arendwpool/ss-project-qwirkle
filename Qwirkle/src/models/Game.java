@@ -22,7 +22,7 @@ public class Game {
 	/**
 	 * Geeft aan welke speler de volgende move moet maken.
 	 */
-	private Player currentPlayer;
+	private AbstractPlayer currentPlayer;
 	
 	/*
 	 * Geeft de hoeveelheid meespelende spelers mee. 
@@ -32,7 +32,7 @@ public class Game {
 	/**
 	 * Een hashmap van spelers die meedoen gemapt aan hun ID
 	 */
-	private Map<Player, Integer> players;
+	private Map<AbstractPlayer, Integer> players;
 	/**
 	 * Het nieuwe bord dat bij dit spel hoort
 	 */
@@ -43,7 +43,7 @@ public class Game {
 	 */
 	public Game(Board board){
 		this.board = board;
-		players = new HashMap<Player, Integer>();
+		players = new HashMap<AbstractPlayer, Integer>();
 	}
 	/**
 	 * Genereer alle tegels die in een spel zitten. Dit zijn er 108: 3 van elke tegel.
@@ -80,11 +80,11 @@ public class Game {
 	 * Geeft aan welke speler winnaar is, geeft null als er nog geen winnaar is.
 	 * @return Player withHighscore || null
 	 */
-	public Player winner(){
+	public AbstractPlayer winner(){
 		if(noTilesLeft() == true){
 			int score = 0;
-			Player withHighscore = null;
-			for(Player player : players.keySet()){
+			AbstractPlayer withHighscore = null;
+			for(AbstractPlayer player : players.keySet()){
 				if(player.getScore() > score){
 					score = player.getScore();
 					withHighscore = player;
@@ -101,8 +101,13 @@ public class Game {
 	 * @param player
 	 * @param tilesToTrade
 	 * @throws NoTilesLeftInPileException
+<<<<<<< HEAD
+	 */
+	public void tradeTiles(AbstractPlayer player, ArrayList<Tile> tilesToTrade) throws NoTilesLeftInPileException{
+=======
 	 *///TODO migreren naar Pile.java?
 	public void tradeTiles(Player player, ArrayList<Tile> tilesToTrade) throws NoTilesLeftInPileException{
+>>>>>>> d456d1373d3d90bda30f5292bd9dacd2843d73dd
 		if (noTilesLeft() == false){
 			ArrayList<Tile> tilesToGive = new ArrayList<Tile>();
 			for(Tile tile : player.getTiles()){
@@ -165,7 +170,7 @@ public class Game {
 		// tiles is nooit leeg, dit moet vervangen worden met Pile.java.
 		if(tiles.size() == 0){
 			boolean playerHasNoTiles = false;
-			for(Player player : players.keySet()){
+			for(AbstractPlayer player : players.keySet()){
 				if (player.getTiles().size() == 0){
 					playerHasNoTiles = true;
 				}
@@ -181,7 +186,7 @@ public class Game {
 	 * @param player
 	 * @throws FullGameException 
 	 */
-	public void addPlayer(Player player) throws FullGameException{
+	public void addPlayer(AbstractPlayer player) throws FullGameException{
 		if(players.keySet().size() < 4){
 			players.put(player, players.keySet().size());
 		}else{
@@ -201,6 +206,16 @@ public class Game {
 	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore
 	 * @param player
 	 */
+<<<<<<< HEAD
+	public void generateScore(AbstractPlayer player){
+		//TODO implement
+		int points = 0;
+		player.addScore(points);
+	}
+	
+	public void finishMove(){
+		board.clearLastMoves();
+=======
 	public void generateScore(){
 		Point point = null;
 		boolean retainMultipleX = false;
@@ -235,5 +250,6 @@ public class Game {
 			score += column.size();
 		}
 		currentPlayer.addScore(score); // TODO currentPlayer moet eventueel vervangen worden als de implementatie verandert.
+>>>>>>> d456d1373d3d90bda30f5292bd9dacd2843d73dd
 	}
 }

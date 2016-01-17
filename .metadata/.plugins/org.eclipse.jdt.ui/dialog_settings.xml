@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+	<section name="RefactoringWizard.preview">
+		<item value="600" key="width"/>
+		<item value="400" key="height"/>
+	</section>
+>>>>>>> 090ee0f4d912ba26aff9fe83735a012ca4cdc742
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
 		<item value="false" key="renameSubpackages"/>
 		<item value="false" key="updateQualifiedNames"/>
@@ -60,8 +69,10 @@
 	<section name="NewPackageWizardPage">
 		<item value="false" key="create_package_info_java"/>
 	</section>
+>>>>>>> 8._basic_TUI_implementatie_voor_eigen_relevante_methoden
 	<section name="completion_proposal_size">
 	</section>
+<<<<<<< HEAD
 	<section name="JarPackageWizard">
 		<item value="false" key="JarPackageWizardPage.INCLUDE_DIRECTORY_ENTRIES"/>
 		<item value="" key="JarManifestWizardPage.MANIFEST_LOCATION"/>
@@ -86,5 +97,8 @@
 		</list>
 	</section>
 	<section name="JavaElementSearchActions">
+=======
+	<section name="quick_assist_proposal_size">
+>>>>>>> 090ee0f4d912ba26aff9fe83735a012ca4cdc742
 	</section>
 </section>
