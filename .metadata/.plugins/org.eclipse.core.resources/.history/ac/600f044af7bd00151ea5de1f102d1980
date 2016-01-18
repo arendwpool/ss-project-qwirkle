@@ -25,8 +25,9 @@ public class HumanPlayer implements Player {
 	private int score;
 	
 	
-	public HumanPlayer(String name) {
+	public HumanPlayer(String name, Game game) {
 		hand = new ArrayList<Tile>();
+		this.game = game;
 		this.name = name;
 		score = 0;
 		try{
