@@ -25,10 +25,9 @@ public class HumanPlayer implements Player {
 	private int score;
 	
 	
-	public HumanPlayer(String name, Game game) {
+	public HumanPlayer(String name) {
 		hand = new ArrayList<Tile>();
 		this.name = name;
-		this.game = game;
 		score = 0;
 		try{
 			game.addPlayer(this);
@@ -55,8 +54,8 @@ public class HumanPlayer implements Player {
 	}
 
 	@Override
-	public void makeMove(int x, int y, Tile tile) {
-		game.makeMove(x, y, tile);
+	public void makeMove() {
+		// TODO Auto-generated method stub
 		
 	}
 

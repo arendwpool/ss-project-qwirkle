@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<checkstyle-configurations file-format-version="5.0.0" default-check-configuration="ss">
+<checkstyle-configurations file-format-version="5.0.0" default-check-configuration="checkStyle Bob">
   <check-configuration name="ss" location="C:\Users\Arend\Documents\$SSHome\Programmeer project\ss-project-qwirkle\checkstyle-softwaresystems.xml" type="external" description="">
+    <additional-data name="protect-config-file" value="false"/>
+  </check-configuration>
+  <check-configuration name="checkStyle Bob" location="C:\Users\Bob\Desktop\SS home\checkstyle-softwaresystems.xml" type="external" description="">
     <additional-data name="protect-config-file" value="false"/>
   </check-configuration>
 </checkstyle-configurations>

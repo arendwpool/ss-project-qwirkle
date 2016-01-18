@@ -10,10 +10,11 @@ public interface Player {
 	
 	ArrayList<Tile> getHand();
 	
-	public void makeMove(int x, int y, Tile tile);
+	public void makeMove();
 	
 	public int getScore();
 	
-	public void addScore(int points);
+	public void addScore();
+
 
 }
