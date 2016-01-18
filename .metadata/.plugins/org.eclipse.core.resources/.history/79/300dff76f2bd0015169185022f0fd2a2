@@ -49,7 +49,7 @@ public class Game {
 	public Game(Board board){
 		this.board = board;
 		this.pile = new Pile();
-		players = new HashMap<Player, Integer>();
+		players = new HashMap<AbstractPlayer, Integer>();
 		
 		
 	}
@@ -78,8 +78,8 @@ public class Game {
 	public AbstractPlayer winner(){
 		if(noTilesLeft() == true){
 			int score = 0;
-			Player withHighscore = null;
-			for(Player player : players.keySet()){
+			AbstractPlayer withHighscore = null;
+			for(AbstractPlayer player : players.keySet()){
 				if(player.getScore() > score){
 					score = player.getScore();
 					withHighscore = player;
@@ -95,12 +95,12 @@ public class Game {
 	 * Zet tegels in de tiles Set
 	 * @param tilesToTrade 
 	 */
-	public void replaceTiles(ArrayList<Tile> tilesToTrade, Player player) throws NoTilesLeftInPileException{
+	public void replaceTiles(ArrayList<Tile> tilesToTrade) throws NoTilesLeftInPileException{
 		if(tilesToTrade.size() <= pile.tiles.size()){
 			pile.tiles.addAll(tilesToTrade);
-			player.hand.removeAll(tilesToTrade);
+			AbstractPlayer.hand.removeAll(tilesToTrade);
 			tilesToTrade.clear();
-			setHand(player);
+			setHand(); //TODO player in parameter of veranderen in add(givaRandomTiel())
 		}else{
 			throw new NoTilesLeftInPileException();
 		}
@@ -165,8 +165,8 @@ public class Game {
 		// tiles is nooit leeg, dit moet vervangen worden met Pile.java.
 		if(pile.tiles.size() == 0){
 			boolean playerHasNoTiles = false;
-			for(Player player : players.keySet()){
-				if (Player.getHand().size() == 0){
+			for(AbstractPlayer player : players.keySet()){
+				if (AbstractPlayer.getHand().size() == 0){
 					playerHasNoTiles = true;
 				}
 			}
@@ -181,7 +181,7 @@ public class Game {
 	 * @param player
 	 * @throws FullGameException 
 	 */
-	public void addPlayer(Player player) throws FullGameException{
+	public void addPlayer(AbstractPlayer player) throws FullGameException{
 		if(players.keySet().size() < 4){
 			players.put(player, players.keySet().size());
 		}else{
