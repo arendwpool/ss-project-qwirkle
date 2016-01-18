@@ -252,12 +252,7 @@ public class Game {
 	
 	public void nextPlayer(){
 		int current = players.get(currentPlayer);
-		int next = (current + 1) % noOfPlayers;
-		for(Player player : players.keySet()){
-			if(players.get(player) == next){
-				currentPlayer = player;
-			}
-		}
+		currentPlayer = 
 	}
 	
 	public void determineInitialPlayer(){

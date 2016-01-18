@@ -75,7 +75,7 @@ public class GameTest {
 		}
 		assertTrue("Er zijn nu 3 spelers", testGame.getPlayers().keySet().size() == 3);
 		try{
-			testGame.addPlayer(new HumanPlayer("error", new Game(new Board())));
+			testGame.addPlayer(new HumanPlayer("error"), new Game(new Board()));
 		}catch(FullGameException e){
 			assertTrue("Er is een error", e != null);
 		}

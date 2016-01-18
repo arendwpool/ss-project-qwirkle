@@ -68,14 +68,14 @@ public class GameTest {
 	public void testAddPlayer(){
 		try{
 			testGame.addPlayer(testPlayer);
-			testGame.addPlayer(new HumanPlayer("naam", new Game(new Board())));//TODO parameter game weghalen)
-			testGame.addPlayer(new HumanPlayer("andere", new Game(new Board())));
+			testGame.addPlayer(new HumanPlayer("naam", new Game(new Board()))//TODO parameter game weghalen);
+			testGame.addPlayer(new HumanPlayer("andere"));
 		}catch(FullGameException e){
 			//
 		}
 		assertTrue("Er zijn nu 3 spelers", testGame.getPlayers().keySet().size() == 3);
 		try{
-			testGame.addPlayer(new HumanPlayer("error", new Game(new Board())));
+			testGame.addPlayer(new Player("error"));
 		}catch(FullGameException e){
 			assertTrue("Er is een error", e != null);
 		}

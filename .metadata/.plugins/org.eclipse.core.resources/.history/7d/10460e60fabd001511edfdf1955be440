@@ -141,9 +141,9 @@ public class Game {
 	 * @param y
 	 * @param tile
 	 */
-	public void makeMove(int x, int y, Tile tile, Player player){
+	public void makeMove(int x, int y, Tile tile){
 		try{
-			board.processMove(x, y, tile);//TODO checken of player currenplayer is.
+			board.processMove(x, y, tile);//TODO Player toevoegen aan de parameter om aan te duiden wie de speler is?
 		}catch (InvalidMoveException e){
 			//TODO implement actie na de catch
 		}
@@ -251,42 +251,12 @@ public class Game {
 	}
 	
 	public void nextPlayer(){
-		int current = players.get(currentPlayer);
-		int next = (current + 1) % noOfPlayers;
-		for(Player player : players.keySet()){
-			if(players.get(player) == next){
-				currentPlayer = player;
-			}
-		}
+		
 	}
 	
 	public void determineInitialPlayer(){
-		int longestRow = 0;
-		Player withLongestRow = null;
-		for(Player player : players.keySet()){
-			ArrayList<String> colors = new ArrayList<String>();
-			ArrayList<String> symbols = new ArrayList<String>();
-			for(Tile tile : player.getHand()){
-				if (!colors.contains(tile.getColor()) && !symbols.contains(tile.getSymbol())){
-					colors.add(tile.getColor());
-					symbols.add(tile.getSymbol());
-				}else if(!colors.contains(tile.getColor()) && symbols.contains(tile.getSymbol())){
-					colors.add(tile.getColor());
-				}else if(colors.contains(tile.getColor()) && !symbols.contains(tile.getSymbol())){
-					symbols.add(tile.getSymbol());
-				}
-			}
-			if(colors.size() > longestRow){
-				longestRow = colors.size();
-				withLongestRow = player;
-			}else if(symbols.size() > longestRow){
-				longestRow = symbols.size();
-				withLongestRow = player;
-			}
-		}
-		if(Board.initialMove == true){
-			currentPlayer = withLongestRow;
+		for(Player player : players.keySet())){
+			
 		}
 	}
-
 }

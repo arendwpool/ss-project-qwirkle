@@ -251,13 +251,7 @@ public class Game {
 	}
 	
 	public void nextPlayer(){
-		int current = players.get(currentPlayer);
-		int next = (current + 1) % noOfPlayers;
-		for(Player player : players.keySet()){
-			if(players.get(player) == next){
-				currentPlayer = player;
-			}
-		}
+		
 	}
 	
 	public void determineInitialPlayer(){
@@ -283,9 +277,6 @@ public class Game {
 				longestRow = symbols.size();
 				withLongestRow = player;
 			}
-		}
-		if(Board.initialMove == true){
-			currentPlayer = withLongestRow;
 		}
 	}
 
