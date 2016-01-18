@@ -15,9 +15,9 @@ import exceptions.NoTilesLeftInPileException;
  */
 public class Game {
 	/*
-	 * ArrayList met te geven tegels aan een speler.
+	 * ArrayList met alle tegels in een spel.
 	 */
-	private ArrayList<Tile> tilesToGive;
+	private ArrayList<Tile> tiles;
 	
 	/**
 	 * Geeft aan welke speler de volgende move moet maken.
@@ -39,18 +39,23 @@ public class Game {
 	private Board board;
 	
 	/**
-	 * De nieuwe pile die bij het spel hoort
-	 */
-	Pile pile;
-	
-	/**
 	 * Contrueert  een nieuw spel.
 	 */
 	public Game(Board board){
 		this.board = board;
-		this.pile = new Pile();
 		players = new HashMap<AbstractPlayer, Integer>();
-		
+	}
+	/**
+	 * Genereer alle tegels die in een spel zitten. Dit zijn er 108: 3 van elke tegel.
+	 */
+	//@ensures this.tiles = new ArrayList<Tiles>();
+	public void generateTiles(){
+		tiles = new ArrayList<Tile>();
+		for (int color = 0; color < Tile.NUMBER_COLORS * Tile.NUMBER_DUPLICATES; color++){
+			for(int symbol = 0; symbol < Tile.NUMBER_SYMBOLS; symbol++){
+				tiles.add(new Tile(Tile.kleuren[color%Tile.NUMBER_COLORS], Tile.symbolen[symbol]));
+			}
+		}
 		
 	}
 	
@@ -90,31 +95,33 @@ public class Game {
 			return null;
 		}
 	}
-		
+	
 	/**
-	 * Zet tegels in de tiles Set
-	 * @param tilesToTrade 
+	 * Verwisselt tegels met de tilesTotrade van een gegeven speler.
+	 * @param player
+	 * @param tilesToTrade
+	 * @throws NoTilesLeftInPileException
+<<<<<<< HEAD
 	 */
-	public void replaceTiles(ArrayList<Tile> tilesToTrade) throws NoTilesLeftInPileException{
-		if(tilesToTrade.size() <= pile.tiles.size()){
-			pile.tiles.addAll(tilesToTrade);
-			AbstractPlayer.hand.removeAll(tilesToTrade);
-			tilesToTrade.clear();
-			setHand();
+	public void tradeTiles(AbstractPlayer player, ArrayList<Tile> tilesToTrade) throws NoTilesLeftInPileException{
+=======
+	 *///TODO migreren naar Pile.java?
+	public void tradeTiles(Player player, ArrayList<Tile> tilesToTrade) throws NoTilesLeftInPileException{
+>>>>>>> d456d1373d3d90bda30f5292bd9dacd2843d73dd
+		if (noTilesLeft() == false){
+			ArrayList<Tile> tilesToGive = new ArrayList<Tile>();
+			for(Tile tile : player.getTiles()){
+				if (tilesToTrade.contains(tile)){
+					tilesToGive.add(tile);
+				}
+			}
+			try{
+				player.replaceTiles(tilesToTrade, tilesToGive);
+			}catch (FalseAmountOfTilesException e){
+				//TODO implementeer de actie als er te weinig tegels zijn.
+			}
 		}else{
 			throw new NoTilesLeftInPileException();
-		}
-	}
-	
-	public void giveRandomTile(){
-		pile.shuffle();
-		AbstractPlayer.hand.add(pile.tiles.get(0));
-		pile.tiles.remove(0);
-	}
-	
-	public void setHand(){
-		for(int i = 0; i < (6 - AbstractPlayer.hand.size()); i++){
-			giveRandomTile();
 		}
 	}
 	
@@ -152,7 +159,7 @@ public class Game {
 	 * @return this.pile
 	 */
 	public ArrayList<Tile> getPile(){
-		return pile.tiles;
+		return tiles;
 	}
 	
 	/**
@@ -161,10 +168,10 @@ public class Game {
 	 */
 	public boolean noTilesLeft(){
 		// tiles is nooit leeg, dit moet vervangen worden met Pile.java.
-		if(pile.tiles.size() == 0){
+		if(tiles.size() == 0){
 			boolean playerHasNoTiles = false;
 			for(AbstractPlayer player : players.keySet()){
-				if (AbstractPlayer.getHand().size() == 0){
+				if (player.getTiles().size() == 0){
 					playerHasNoTiles = true;
 				}
 			}

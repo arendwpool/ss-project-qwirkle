@@ -58,11 +58,11 @@ public class TUI implements Observer {
 	}
 	
 	public void renderBoard(){
-		for (int x = game.getBoard().viewOfMinX; x <= game.getBoard().viewOfMaxX; x++){
-			for(int y = game.getBoard().viewOfMinY; y <= game.getBoard().viewOfMaxY; y++){
+		for (int y = game.getBoard().viewOfMinY; y <= game.getBoard().viewOfMaxY; y++){
+			for(int x = game.getBoard().viewOfMinX; x <= game.getBoard().viewOfMaxX; x++){
 				if (game.getBoard().getField(x, y).getColor() == "empty" && game.getBoard().getField(x, y).getSymbol() == "empty"){
 					System.out.print("|" +x +"," + y +"|");
-					if(y == (game.getBoard().viewOfMaxY)){
+					if(x == (game.getBoard().viewOfMaxX)){
 						System.out.println();
 					}
 				}else{

@@ -23,7 +23,7 @@ public abstract class AbstractPlayer {
 	/**
 	 * De tegels die de betreffende speler heeft
 	 */
-	static ArrayList<Tile> hand;
+	private ArrayList<Tile> tiles;
 	
 	/**
 	 * De score van de Speler
@@ -42,8 +42,7 @@ public abstract class AbstractPlayer {
 		}catch (FullGameException e){
 			//TODO implement
 		}
-		hand = new ArrayList<Tile>();
-		
+		tiles = new ArrayList<Tile>();
 	}
 	
 	/**
@@ -56,18 +55,25 @@ public abstract class AbstractPlayer {
 	/**
 	 * Geef een set met de tegels die de betreffende speler heeft
 	 */
-	public static ArrayList<Tile> getHand(){
-		return hand;
+	public ArrayList<Tile> getTiles(){
+		return tiles;
+	}
+	
+	/**
+	 * Zet tegels in de tiles Set
+	 */
+	public void setTiles(ArrayList<Tile> tilesToGive){
+		tiles.addAll(tilesToGive);
 	}
 	
 	/**
 	 * Vervangt gegeven tegels met de tegels waarvoor deze vervangen worden
 	 * @throws FalseAmountOfTilesException 
 	 */
-	public void replaceTiles(ArrayList<Tile> tilesToTrade, ArrayList<Tile> tilesToGive) throws FalseAmountOfTilesException{
-		tilesToTrade.add(hand.get(0 /*TODO dit zouden wij fixen via split met TUI?*/ )) ;
-		if (tilesToTrade.size() <= 6 && tilesToTrade.size() >= 0){
-			game.replaceTiles(tilesToTrade);
+	public void replaceTiles(ArrayList<Tile> tilesToReplace, ArrayList<Tile> tilesToGive) throws FalseAmountOfTilesException{
+		if (tilesToReplace.size() == tilesToGive.size()){
+			tiles.removeAll(tilesToReplace);
+			setTiles(tilesToGive);
 		}else{
 			throw new FalseAmountOfTilesException();
 		}

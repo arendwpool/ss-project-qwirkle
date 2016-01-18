@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class Pile {
 	
-	ArrayList<Tile> tiles;
+	private ArrayList<Tile> tiles;
 	
 	
 	public Pile(){
@@ -35,7 +35,6 @@ public class Pile {
 	}
 	
 	public void setHand(){
-		
 		for(int i = 0; i < (6 - hand.size()); i++){
 			giveRandomTile();
 		}

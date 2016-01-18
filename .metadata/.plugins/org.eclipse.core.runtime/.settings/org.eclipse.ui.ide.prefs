@@ -1,6 +1,14 @@
 PROBLEMS_FILTERS_MIGRATE=true
 TASKS_FILTERS_MIGRATE=true
 eclipse.preferences.version=1
+<<<<<<< HEAD
 platformState=1447074658901
+=======
+<<<<<<< HEAD
+platformState=1447074858977
+=======
+platformState=1447074658901
+>>>>>>> 8._basic_TUI_implementatie_voor_eigen_relevante_methoden
+>>>>>>> ab909275468af63fc03589089e0ce6ca35df6be8
 quickStart=false
 tipsAndTricks=true
