@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="models.Player"/>
+<fullyQualifiedTypeName name="models.HumanPlayer"/>
+<fullyQualifiedTypeName name="tests.GameTest"/>
+<fullyQualifiedTypeName name="models.Game"/>
+<fullyQualifiedTypeName name="exceptions.FullGameException"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+</qualifiedTypeNameHistroy>
