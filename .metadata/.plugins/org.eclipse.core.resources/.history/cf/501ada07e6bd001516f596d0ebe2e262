@@ -81,7 +81,8 @@ public class Board {
 				if(isEmptyField(x, y) == false){
 					 viewOfMinY = (y - 1) ;
 					 break;
-				}
+				}//TODO aangepast: y en x assen lijken omegedraaid in het project?? alle plussen zijn - geworden en vice versa. Ook de min en max omgedraaid
+				// werkt hierdoor wel perfect
 			}
 		} 
 	}
