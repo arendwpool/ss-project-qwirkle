@@ -64,10 +64,9 @@ public abstract class AbstractPlayer {
 	 * Vervangt gegeven tegels met de tegels waarvoor deze vervangen worden
 	 * @throws FalseAmountOfTilesException 
 	 */
-	public void replaceTiles(ArrayList<Tile> tilesToTrade, ArrayList<Tile> tilesToGive) throws FalseAmountOfTilesException{
-		tilesToTrade.add(hand.get(0 /*TODO dit zouden wij fixen via split met TUI?*/ )) ;
-		if (tilesToTrade.size() <= 6 && tilesToTrade.size() >= 0){
-			game.replaceTiles(tilesToTrade);;
+	public void replaceTiles(ArrayList<Tile> tilesToReplace, ArrayList<Tile> tilesToGive) throws FalseAmountOfTilesException{
+		if (tilesToReplace.size() == tilesToGive.size()){
+			hand.removeAll(tilesToReplace);
 		}else{
 			throw new FalseAmountOfTilesException();
 		}

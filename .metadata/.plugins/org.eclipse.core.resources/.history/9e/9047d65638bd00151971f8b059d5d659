@@ -39,16 +39,5 @@ public class ComputerPlayer implements Player {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	public static void dostuff(int number){
-		number = number /5;
-	}
-	public static int returnstuff(int number){
-		dostuff(number);
-		return number;
-	}
-	
-	public static void main(String[] args){
-		returnstuff(3);
-	}
+
 }

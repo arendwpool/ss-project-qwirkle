@@ -6,7 +6,7 @@ public class HumanPlayer implements Player {
 	private ArrayList<Tile> hand;
 	
 	public HumanPlayer(String name) {
-		
+		hand = new ArrayList<Tile>();
 	}
 	
 
@@ -23,8 +23,8 @@ public class HumanPlayer implements Player {
 	}
 	
 	@Override
-	public ArrayList<Tile> getHand() {
-		
+	public ArrayList<Tile> getHand(){
+		return hand;
 	}
 
 	@Override
