@@ -10,7 +10,6 @@ INDEX VERSION 1.127+C:\Users\Bob\Documents\ss-project-qwirkle\.metadata\.plugins
 1508714259.index
 3425653186.index
 4247270281.index
-287837708.index
 2921179834.index
 1256513231.index
 3150109421.index
