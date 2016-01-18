@@ -95,12 +95,12 @@ public class Game {
 	 * Zet tegels in de tiles Set
 	 * @param tilesToTrade 
 	 */
-	public void replaceTiles(ArrayList<Tile> tilesToTrade, Player player) throws NoTilesLeftInPileException{
+	public void replaceTiles(ArrayList<Tile> tilesToTrade) throws NoTilesLeftInPileException{
 		if(tilesToTrade.size() <= pile.tiles.size()){
 			pile.tiles.addAll(tilesToTrade);
-			player.hand.removeAll(tilesToTrade);
+			Player.hand.removeAll(tilesToTrade);
 			tilesToTrade.clear();
-			setHand(player);
+			setHand(); //TODO player in parameter of veranderen in add(givaRandomTiel())
 		}else{
 			throw new NoTilesLeftInPileException();
 		}

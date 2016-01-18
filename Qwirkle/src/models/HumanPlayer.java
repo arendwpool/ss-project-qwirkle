@@ -2,8 +2,18 @@ package models;
 
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 import exceptions.FullGameException;
 
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	public HumanPlayer(String name, Game game) {
+		super(name, game);
+=======
+=======
+>>>>>>> ab909275468af63fc03589089e0ce6ca35df6be8
+>>>>>>> 62713e245ffb390cc7d25517b009b4097b153fa4
 public class HumanPlayer implements Player {
 	/**
 	 * De naam van de betreffende speler.
@@ -70,6 +80,17 @@ public class HumanPlayer implements Player {
 	public void addScore() {
 		// TODO Auto-generated method stub
 		
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 090ee0f4d912ba26aff9fe83735a012ca4cdc742
+=======
+=======
+	public HumanPlayer(String name, Game game) {
+		super(name, game);
+>>>>>>> 8._basic_TUI_implementatie_voor_eigen_relevante_methoden
+>>>>>>> ab909275468af63fc03589089e0ce6ca35df6be8
+>>>>>>> 62713e245ffb390cc7d25517b009b4097b153fa4
 	}
 
 }

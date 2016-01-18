@@ -27,6 +27,7 @@ public class GameTest {
 	 */
 	private Game testGame;
 	private Player testPlayer;
+
 	
 	@Before
 	public void setUp() throws Exception {
