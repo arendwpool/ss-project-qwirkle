@@ -1,14 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-<<<<<<< HEAD
-<fullyQualifiedTypeName name="models.Pile"/>
-<fullyQualifiedTypeName name="models.Player"/>
-=======
-<fullyQualifiedTypeName name="models.Player"/>
-<fullyQualifiedTypeName name="models.HumanPlayer"/>
-<fullyQualifiedTypeName name="tests.GameTest"/>
-<fullyQualifiedTypeName name="models.Game"/>
-<fullyQualifiedTypeName name="exceptions.FullGameException"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
->>>>>>> 62713e245ffb390cc7d25517b009b4097b153fa4
-</qualifiedTypeNameHistroy>
+<qualifiedTypeNameHistroy/>
