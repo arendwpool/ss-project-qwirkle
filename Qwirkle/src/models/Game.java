@@ -7,6 +7,7 @@ import exceptions.FalseAmountOfTilesException;
 import exceptions.FullGameException;
 import exceptions.InvalidMoveException;
 import exceptions.NoTilesLeftInPileException;
+import exceptions.PlayerNotFoundException;
 
 /**
  * Klasse die het de regels van het spel implementeerd.
@@ -46,7 +47,8 @@ public class Game {
 	/**
 	 * Contrueert  een nieuw spel.
 	 */
-	public Game(Board board){
+	public Game(Board board, int noOfPlayers){
+		this.noOfPlayers = noOfPlayers;
 		this.board = board;
 		this.pile = new Pile();
 		players = new HashMap<Player, Integer>();
@@ -109,13 +111,13 @@ public class Game {
 	public Tile giveRandomTile(){
 		pile.shuffle();
 		Tile tile = pile.tiles.get(0);
-		//AbstractPlayer.hand.add(pile.tiles.get(0));
 		pile.tiles.remove(0);
 		return tile;
 	}
 	
-	public void setHand(Player player){
-		for(int i = 0; i < (6 - AbstractPlayer.hand.size()); i++){
+	public void setHand(Player player){ //TODO oploosen vreemde fout in de test.
+		System.out.println(6-player.getHand().size());
+		for(int i = 0; i < (6 - player.getHand().size()); i++){
 			player.getHand().add(giveRandomTile());
 		}
 	}
@@ -182,7 +184,7 @@ public class Game {
 	 * @throws FullGameException 
 	 */
 	public void addPlayer(Player player) throws FullGameException{
-		if(players.keySet().size() < 4){
+		if(players.keySet().size() <= noOfPlayers){
 			players.put(player, players.keySet().size());
 		}else{
 			throw new FullGameException();
@@ -249,10 +251,11 @@ public class Game {
 	public Player getCurrentPlayer(){
 		return currentPlayer;
 	}
-	
+	 public static int next;
 	public void nextPlayer(){
 		int current = players.get(currentPlayer);
-		int next = (current + 1) % noOfPlayers;
+		int next = (current % noOfPlayers) + 1;
+		this.next = next;
 		for(Player player : players.keySet()){
 			if(players.get(player) == next){
 				currentPlayer = player;
@@ -288,5 +291,16 @@ public class Game {
 			currentPlayer = withLongestRow;
 		}
 	}
-
+	
+	public void setCurrentPlayer(Player player){ //TODO alleen voor test
+		currentPlayer = player;
+	}
+	
+	public int getPlayerID(Player player) throws PlayerNotFoundException{
+		if(players.keySet().contains(player)){
+			return players.get(player);
+		}else{
+			throw new PlayerNotFoundException();
+		}
+	}
 }
