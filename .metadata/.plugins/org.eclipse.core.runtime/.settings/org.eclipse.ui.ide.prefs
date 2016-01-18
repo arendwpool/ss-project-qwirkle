@@ -1,10 +1,9 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=8._basic_TUI_implementatie_voor_eigen_relevante_methoden
 PROBLEMS_FILTERS_MIGRATE=true
 TASKS_FILTERS_MIGRATE=true
 eclipse.preferences.version=1
-<<<<<<< HEAD
 platformState=1447074858977
-=======
-platformState=1447074658901
->>>>>>> 8._basic_TUI_implementatie_voor_eigen_relevante_methoden
 quickStart=false
 tipsAndTricks=true

@@ -17,6 +17,23 @@ public class Tile {
 	 */
 	public static final String[] kleuren = {"rood", "oranje", "geel", "groen", "blauw", "paars"};
 	
+	
+	/**
+	 * het aantal verschillende symbolen van de tegels.
+	 */
+	public static final int NUMBER_SYMBOLS = 6;
+	
+	/**
+	 * Het aantal verschillende kleluren van de tegels.
+	 */
+	public static final int NUMBER_COLORS = 6;
+	
+	/**
+	 * Het aantal duplicate tegels in een spel
+	 */
+	public static final int NUMBER_DUPLICATES = 3;
+	
+	
 	/**
 	 * De kleur van deze tegel.
 	 */
