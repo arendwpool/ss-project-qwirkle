@@ -1,22 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.HashSet"/>
-<fullyQualifiedTypeName name="java.awt.List"/>
-<fullyQualifiedTypeName name="exceptions.ColorNotValidException"/>
-<fullyQualifiedTypeName name="models.Tiles"/>
-<fullyQualifiedTypeName name="java.util.Set"/>
-<fullyQualifiedTypeName name="exceptions.FalseAmountOfTilesException"/>
-<fullyQualifiedTypeName name="exceptions.NoTilesLeftInPileException"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="exceptions.FullGameException"/>
-<fullyQualifiedTypeName name="exceptions.InvalidMoveException"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="java.awt.Point"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="models.Game"/>
-<fullyQualifiedTypeName name="view.TUI"/>
-<fullyQualifiedTypeName name="models.Board"/>
-<fullyQualifiedTypeName name="view.MenuTUI"/>
-<fullyQualifiedTypeName name="java.io.IOException"/>
-<fullyQualifiedTypeName name="java.util.Scanner"/>
-</qualifiedTypeNameHistroy>
+<qualifiedTypeNameHistroy/>

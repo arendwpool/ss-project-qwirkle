@@ -2,6 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 public class HumanPlayer implements Player {
 	private ArrayList<Tile> hand;
 	
@@ -43,6 +44,10 @@ public class HumanPlayer implements Player {
 	public void addScore() {
 		// TODO Auto-generated method stub
 		
+=======
+	public HumanPlayer(String name, Game game) {
+		super(name, game);
+>>>>>>> 8._basic_TUI_implementatie_voor_eigen_relevante_methoden
 	}
 
 }
