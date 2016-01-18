@@ -15,17 +15,18 @@ public class Board {
 	private boolean initialMove;
 	private ArrayList<Tile> lastSet;
 	
-	private int viewOfMinX = 88;
-	private int viewOfMaxX = 92;
-	private int viewOfMinY = 88;
-	private int viewOfMaxY = 92;
-	private int startPointX = 90;
-	private int startPointY = 90;
+	public int viewOfMinX = 88;
+	public int viewOfMaxX = 92;
+	public int viewOfMinY = 88;
+	public int viewOfMaxY = 92;
+	public int startPointX = 90;
+	public int startPointY = 90;
 
 	/*
 	 * Constructor van het Board
 	 */
 	public Board(){	
+		coordinaten = new Tile[DIM+1][DIM+1];
 		reset(); //TODO reset creeëren?
 		initialMove = true;
 	}
@@ -54,15 +55,15 @@ public class Board {
 		for (int x = 0; x <= DIM; x++) {
 			for (int y = 0; y <= DIM; y++) {
 				if(isEmptyField(x, y) == false){
-					 viewOfMinX = (x - 1);
+					 viewOfMaxX = (x + 1);
 					 break;
 				}
 			}
 		}
-		for (int x = DIM; x >= DIM; x--) {
+		for (int x = DIM; x >= 0; x--) {
 			for (int y = 0; y <= DIM; y++) {
 				if(isEmptyField(x, y) == false){
-					 viewOfMaxX = (x + 1);
+					 viewOfMinX = (x - 1);
 					 break;
 				}
 			}
@@ -70,19 +71,20 @@ public class Board {
 		for (int y = 0; y <= DIM; y++) {
 			for (int x = 0; x <= DIM; x++) {
 				if(isEmptyField(x, y) == false){
-					 viewOfMinY = (y - 1) ;
-					 break;
-				}
-			}
-		}
-		for (int y = 0; y >= DIM; y--) {
-			for (int x = 0; x <= DIM; x++) {
-				if(isEmptyField(x, y) == false){
 					 viewOfMaxY = (y + 1) ;
 					 break;
 				}
 			}
-		} //TODO hoe deze methode te gebruiken?
+		}
+		for (int y = DIM; y >= 0; y--) {
+			for (int x = 0; x <= DIM; x++) {
+				if(isEmptyField(x, y) == false){
+					 viewOfMinY = (y - 1) ;
+					 break;
+				}//TODO aangepast: y en x assen lijken omegedraaid in het project?? alle plussen zijn - geworden en vice versa. Ook de min en max omgedraaid
+				// werkt hierdoor wel perfect
+			}
+		} 
 	}
 	
 	
@@ -98,7 +100,7 @@ public class Board {
 	 * returns true als een verwezen field pair(x,y) leeg is
 	 */
 	public boolean isEmptyField(int x, int y){
-		return getField(x, y) == null;
+		return getField(x, y).getColor() == "empty" && getField(x,y).getSymbol() == "empty";
 	}
 	
 	/*
@@ -213,11 +215,10 @@ public class Board {
 	/*
 	 * bind een coordinaat aan een steen 
 	 */
-	private void setTile(int x, int y, Tile tile){
-		coordinaten[x][y] = tile;
+	public void setTile(int x, int y, Tile tile){
+		this.coordinaten[x][y] = tile;
 		tile.setLocation(x, y);
 	}
-	
 	
 	/*
 	 * Vergelijkt Symbolen van twee verschillende Tiles
@@ -263,7 +264,7 @@ public class Board {
 	public void reset() {
 		for (int x = 0; x <= (DIM); x++) {
 			for (int y = 0; y <= (DIM); y++) {
-				setTile(x, y, null);
+				setTile(x, y, new Tile("empty", "empty"));
 			}
 		}
 	}

@@ -1,7 +1,11 @@
 package controllers;
 
+import exceptions.FullGameException;
 import models.Board;
 import models.Game;
+import models.HumanPlayer;
+import models.Player;
+import models.Tile;
 import view.TUI;
 
 public class GameController {
@@ -9,7 +13,8 @@ public class GameController {
 	private TUI ui;
 	
 	public GameController(){
-		ui = new TUI();
+		game = new Game(new Board());
+		ui = new TUI(game);
 	}
 	public static void main(String[] args){
 		GameController controller = new GameController();
