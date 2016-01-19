@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="GameTest" project="Qwirkle" tests="6" started="6" failures="0" errors="0" ignored="0">
+  <testsuite name="tests.GameTest" time="0.012">
+    <testcase name="testNextPlayer" classname="tests.GameTest" time="0.001"/>
+    <testcase name="testDetermineInitialPlayer" classname="tests.GameTest" time="0.005"/>
+    <testcase name="testAddPlayer" classname="tests.GameTest" time="0.002"/>
+    <testcase name="testGiveRandomTile" classname="tests.GameTest" time="0.001"/>
+    <testcase name="testReplaceTiles" classname="tests.GameTest" time="0.002"/>
+    <testcase name="testSetHand" classname="tests.GameTest" time="0.001"/>
+  </testsuite>
+</testrun>
