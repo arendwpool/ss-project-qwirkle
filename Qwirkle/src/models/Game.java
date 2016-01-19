@@ -1,5 +1,4 @@
 package models;
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,6 +6,8 @@ import exceptions.FullGameException;
 import exceptions.InvalidMoveException;
 import exceptions.NoTilesLeftInPileException;
 import exceptions.PlayerNotFoundException;
+import util.MoveUtils;
+import util.TileUtils;
 
 /**
  * Klasse die het de regels van het spel implementeert.
@@ -44,12 +45,7 @@ public class Game {
 	/**
 	 * De nieuwe pile die bij het spel hoort.
 	 */
-	Pile pile;
-	
-	/**
-	 * Geeft aan of een speler heeft geruilt in de plaats van een zet maken.
-	 */
-	private boolean hasTraded = false;
+	private Pile pile;
 	
 	/**
 	 * Contrueert  een nieuw spel. Hierbij worden het board element en het aantal spelers opgeslagen
@@ -62,8 +58,6 @@ public class Game {
 		this.board = board;
 		this.pile = new Pile();
 		players = new HashMap<Player, Integer>();
-		
-		
 	}
 	
 	/**
@@ -82,7 +76,7 @@ public class Game {
 	 */
 	/*@pure*/
 	public boolean gameOver() {
-		return noTilesLeft();
+		return TileUtils.noTilesLeft(this);
 	}
 	
 	/**
@@ -91,7 +85,7 @@ public class Game {
 	 * @return Player withHighscore || null //TODO vraag
 	 */
 	public Player winner() {
-		if (noTilesLeft() == true) {
+		if (gameOver() == true) {
 			int score = 0;
 			Player withHighscore = null;
 			for (Player player : players.keySet()) {
@@ -105,62 +99,7 @@ public class Game {
 			return null;
 		}
 	}
-		
-	/**
-	 * Krijgt een lijst met de tegels die geruilt moeten worden. Hiervoor wordt eerst gekeken of de 
-	 * tegels die geruild moeten worden wel in de hand van de betreffende speler zijn. Daarna wordt 
-	 * er gekeken of de Pile wel genoeg stenen heeft om te ruilen. Als er aan deze twee voorwaarden 
-	 * zijn voldaan worden de tegel om te ruilen terug in de Pile gedaan. Vervolgens worden er de 
-	 * tegels uit de hand verwijderd van de player. Daarna wordt de methode setHand() aangeroepen 
-	 * om de hand weer aan te vullen. Als er niet genoeg tegels zijn wordt er een exceptie gegooit.
-	 * @param tilesToTrade
-	 * @param player
-	 * @throws NoTilesLeftInPileException
-	 */
-	public void replaceTiles(ArrayList<Tile> tilesToTrade, Player player) 
-			throws NoTilesLeftInPileException {
-		boolean containsAll = true;
-		for (Tile tile : tilesToTrade) {
-			if (!player.getHand().contains(tile)) {
-				containsAll = false;
-			}
-		}
-		if (tilesToTrade.size() <= pile.getTiles().size() && containsAll == true) {
-			pile.getTiles().addAll(tilesToTrade);
-			player.getHand().removeAll(tilesToTrade);
-			setHand(player);
-			hasTraded = true;
-		} else {
-			throw new NoTilesLeftInPileException();
-		}
-	}
-
-	/**
-	 * Geeft een willekeurige tegel terug. Hiervoor wordt eerst de zak geshuffeld, waarna de eerste
-	 * tegel uit de Pile wordt teruggegeven. TODO niet meer!! De teruggegeven tegel wordt dan ook uit de zak 
-	 * verwijderd.
-	 * @return tile
-	 */
-	public Tile giveRandomTile() {
-		pile.shuffle();
-		Tile tile = pile.getTiles().get(0);
-		return tile;
-	}
 	
-	/**
-	 * 
-	 * Kijkt hoeveel tegels een gegeven speler in zijn hand heeft. Als dit minder dan 6 is worden er 
-	 * een aantal willekeurige tegels gegeven zodat de hand weer 6 tegels heeft.
-	 * @param player
-	 */
-	public void setHand(Player player) {
-		int handSize = DEFAULT_HAND_SIZE - player.getHand().size();
-		for (int i = 0; i < handSize; i++) {
-			Tile tile = giveRandomTile();
-			pile.getTiles().remove(tile);
-			player.getHand().add(tile);
-		}
-	}
 	
 	/**
 	 * Start het spel.
@@ -178,45 +117,11 @@ public class Game {
 	}
 	
 	/**
-	 * Probeert een move te maken door processMove() in Board.java aan te roepen, vangt een 
-	 * InvalidMoveException als de move invalid is.
-	 * @param x
-	 * @param y
-	 * @param tile
-	 */
-	public void makeMove(int x, int y, Tile tile, Player player) {
-		try {
-			board.processMove(x, y, tile);//TODO checken of player currenplayer is.
-		} catch (InvalidMoveException e) {
-			//TODO implement actie na de catch
-		}
-	}
-	
-	/**
 	 * Geeft een volle pile van alle tegels in het spel.
 	 * @return pile
 	 */
 	public Pile getPile() {
 		return pile;
-	}
-	
-	/**
-	 * Controleert of er geen tegels meer zijn in de Pile en er een speler is die geen tegels meer 
-	 * heeft in zijn hand. 
-	 * @return !playerHasNoTiles || false
-	 */
-	public boolean noTilesLeft() {
-		if (pile.getTiles().size() == 0) {
-			boolean playerHasNoTiles = false;
-			for (Player player : players.keySet()) {
-				if (player.getHand().size() == 0) {
-					playerHasNoTiles = true;
-				}
-			}
-			return !playerHasNoTiles;
-		} else {
-			return false;
-		}
 	}
 	
 	/**
@@ -240,70 +145,6 @@ public class Game {
 	 */
 	public Board getBoard() {
 		return board;
-	}
-	
-	
-	/**
-	 * Verwijderd alle laatst gezette tegels van een speler.
-	 * @throws InvalidMoveException 
-	 */
-	public void finishMove(Player player) throws InvalidMoveException {
-		if(board.getLastMoves().size() != 0 || hasTraded == true){
-			generateScore(player);
-			board.clearLastMoves();
-			hasTraded = false;
-			nextPlayer();
-		}else{
-			throw new InvalidMoveException();
-		}
-	}
-	/**
-	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore. Hiervoor
-	 * wordt eerst voor elke tegel die een speler heeft neergelegd alle tegels in een rij op de x-as
-	 * en alle tegels op een rij op de y-as in lijsten opgeslagen. Vervolgens worden deze lijsten
-	 * vergeleken met de lijst van tegels die als laatst zijn neergelegd. De tegels die als laatst
-	 * zijn neergelegd in een rij blijven over. Als dit meer dan 1 element is, moeten de punten van
-	 * deze rij maar één keer opgeteld worden, en niet het aantal keer dat een gelegde tegel in de
-	 * rij voorkomt. Als een rij een lengte van zes heeft wordt er een bonus toegevoegd. Nadat de 
-	 * score is berekend wordt deze aan de speler toegevoegd.
-	 * @param player
-	 */
-	public void generateScore(Player player) {
-		Point point = null;
-		boolean retainMultipleX = false;
-		boolean retainMultipleY = false;
-		ArrayList<Tile> row = null;
-		ArrayList<Tile> column = null;
-		int score = 0;
-		for (Tile tile : board.getLastMoves()) {
-			point = tile.getLocation();
-			int x = (int) point.getX();
-			int y = (int) point.getY();
-			row = board.tilesOnXAxis(x, y);
-			column = board.tilesOnYAxis(x, y);
-			ArrayList<Tile> commonX = deleteCommon(row, board.getLastMoves());
-			ArrayList<Tile> commonY = deleteCommon(column, board.getLastMoves());
-			retainMultipleX = commonX.size() > 1;
-			retainMultipleY = commonY.size() > 1;
-			if (retainMultipleX == false) {
-				score += column.size();
-			} else if (retainMultipleY == false) {
-				score += row.size();
-			}
-		}
-		if (retainMultipleX == true) {
-			score += row.size();
-		} else if (retainMultipleY == true) {
-			score += column.size();
-		}
-		player.addScore(score);
-	}
-	
-	public ArrayList<Tile> deleteCommon(ArrayList<Tile> listToKeep, ArrayList<Tile> listToRemove) {
-		ArrayList<Tile> copy = new ArrayList<Tile>(listToKeep);
-		copy.removeAll(listToRemove);
-		listToKeep.removeAll(copy);
-		return listToKeep;
 	}
 	
 	/**
@@ -382,7 +223,31 @@ public class Game {
 	}
 	
 	/**
-	 * Met deze methode kan handmatig de currentPlayer worden toegewezen. Deze methode is gemaakt 
+	 * Geeft de speler de mogelijkheid om tegels te verwisselen
+	 * @param tilesToTrade
+	 * @param player
+	 * @throws NoTilesLeftInPileException
+	 * @throws InvalidMoveException 
+	 */
+	public void swapTiles(ArrayList<Tile> tilesToTrade, Player player) throws NoTilesLeftInPileException, InvalidMoveException{
+		MoveUtils.replaceTiles(tilesToTrade, player, pile);
+	}
+	/**
+	 * Moet de Move van de player verwerken.
+	 * @param x
+	 * @param y
+	 * @param tile
+	 */
+	public void makeMove(int x, int y, Tile tile) throws InvalidMoveException {
+		MoveUtils.makeMove(x, y, tile, board);
+	}
+	
+	public void finishMove(Player player) throws InvalidMoveException{
+		MoveUtils.processMove(player, this);
+	}
+	
+	/**
+	 * Met deze methode kan handmatig de currentPlayer worden toegewezen. TODO Deze methode is gemaakt 
 	 * voor de testklasse.
 	 * @param player
 	 */

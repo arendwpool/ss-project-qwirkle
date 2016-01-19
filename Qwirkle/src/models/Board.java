@@ -2,7 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
-import exceptions.InvalidMoveException;
+import util.MoveUtils;
 
 /**
  *De klasse die een speelbord representeerd maakt met een naam en tegels.
@@ -19,15 +19,6 @@ public class Board {
 	 * Weergeeft de maximale breedte en hoogte van het bord.
 	 */
 	private static final int DIM = 179;
-	/**
-	 * Bepaalt of het de eerste move van het spel iets of niet.
-	 */
-	public static boolean initialMove;
-	
-	/**
-	 * Geef een set met de tegels die de betreffende speler heeft neergelegd.
-	 */
-	private ArrayList<Tile> lastSet;
 	
 	/**
 	 * geeft de minimale startview van x weer.
@@ -64,8 +55,7 @@ public class Board {
 	 */
 	public Board() {	
 		coordinaten = new Tile[DIM][DIM];
-		reset(); //TODO reset creeëren?
-		initialMove = true;
+		reset();
 	}
 	
 	
@@ -209,7 +199,7 @@ public class Board {
 	 * @return contains;
 	 */
 	public boolean sharedLine(Tile tileToSet, ArrayList<Tile> axis) {
-		ArrayList<Tile> copy = new ArrayList<Tile>(lastSet);
+		ArrayList<Tile> copy = new ArrayList<Tile>(MoveUtils.getLastMoves());
 		copy.add(tileToSet);
 		boolean contains = true;
 		for (Tile tile : copy) {
@@ -220,42 +210,6 @@ public class Board {
 		return contains;
 	}
 	
-	/**
-	 * Controleert of de aangelegde stenen wel volgens de spelregels mogen.
-	 */
-	//TODO analyzeren: nadat locatie is toegevoegd aan tile, is dit te verbeteren?
-	public boolean isValidMove(int x, int y, Tile tile) {
-		Board board = deepCopy();
-		board.setTile(x, y, tile);
-		ArrayList<Tile> xAxis = tilesOnXAxis(x, y);
-		ArrayList<Tile> yAxis = tilesOnYAxis(x, y);
-		if (isEmptyField(x, y) == false) {
-			return false;
-		} else if (xAxis.size() > 6 || yAxis.size() > 6) {
-			return false;
-		} else if (initialMove == true) { //In Controller x en y 90,90 maken, bij elke eerste zet.
-			return true;
-		} else if (initialMove == false && xAxis.size() == 1 && yAxis.size() == 1) {
-			return false;
-		} else {
-			for (Tile tileToCompare : xAxis) {
-				Tile tileOrig = tileToCompare;
-				xAxis.remove(tile);
-				for (Tile tileToCompareWith : xAxis) {
-					if (compareColor(tileToCompareWith, tileOrig) == true &&
-									compareSymbol(tileToCompareWith, tileOrig) == true) {
-						return false;
-					} else if (compareColor(tileToCompareWith, tileOrig) == true 
-									|| compareSymbol(tileToCompareWith, tileOrig) == true) {
-						return true;
-					} else {
-						return false;
-					}
-				}
-			}
-		}
-		return false; //TODO oplossing voor nu
-	}
 	
 	/**
 	 * bind een coordinaat aan een tile.
@@ -268,65 +222,6 @@ public class Board {
 		tile.setLocation(x, y);
 	}
 	
-	/**
-	 * Vergelijkt Symbolen van twee verschillende Tiles.
-	 * @param tileA
-	 * @param tileB
-	 */
-	public boolean compareSymbol(Tile tileA, Tile tileB) {
-		return tileA.getSymbol() == tileB.getSymbol();
-		
-	}
-	
-	/**
-	 * Vergelijkt Kleuren van twee verschillende Tiles.
-	 * @param tileA
-	 * @param tileB
-	 */
-	public boolean compareColor(Tile tileA, Tile tileB) {
-		return tileA.getColor() == tileB.getColor();
-	}
-	
-	/**
-	 * Moet de Move van de player verwerken.
-	 * @param x
-	 * @param y
-	 * @param tile
-	 */
-	public void processMove(int x, int y, Tile tile) throws InvalidMoveException {
-		if (isValidMove(x, y, tile) && (sharedLine(tile, tilesOnYAxis(x, y)) 
-						|| sharedLine(tile, tilesOnXAxis(x, y)))) {
-			setTile(x, y, tile);
-			initialMove = false;
-			rememberMove(tile);
-		} else {
-			rememberMove(null);
-			throw new InvalidMoveException();
-		}
-		//TODO in zijn geheel opnieuw implementeren
-	}
-	
-	/**
-	 * Onthoud de laatste move die een speler gedaan heeft.
-	 * @param tile
-	 */
-	public void rememberMove(Tile tile) {
-		lastSet.add(tile);
-	}
-	
-	/**
-	 * leegt de set met de laaste moves van de speler.
-	 */
-	public void clearLastMoves() {
-		lastSet.clear();
-	}
-	/**
-	 * Weergeeft de lijst met de laastse moves.
-	 * @return lastSet
-	 */
-	public ArrayList<Tile> getLastMoves() {
-		return lastSet;
-	}
 	/**
 	 * Maakt het hele board leeg.
 	 */
