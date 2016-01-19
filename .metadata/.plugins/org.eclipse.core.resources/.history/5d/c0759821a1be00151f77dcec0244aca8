@@ -32,8 +32,7 @@ public class Pile {
 	
 	
 	/**
-	 * Construeert een Pile voor een bepaalde game.
-	 * Hij doet die door eerst een zak met tiles te genereren.
+	 * Construeert een Pile voor een bepaalde game. Hij doet die door eerst een zak met tiles te genereren.
 	 * Zodra de de zak genereert is wordt meteen geschudt. 
 	 */
 	public Pile() {
@@ -50,7 +49,7 @@ public class Pile {
 		tiles = new ArrayList<Tile>();
 		for (int color = 0; color < NUMBER_COLORS * NUMBER_DUPLICATES; color++) {
 			for (int symbol = 0; symbol < NUMBER_SYMBOLS; symbol++) {
-				tiles.add(new Tile(Tile.kleuren[color % NUMBER_COLORS], Tile.symbolen[symbol]));
+				tiles.add(new Tile(Tile.kleuren[color% NUMBER_COLORS], Tile.symbolen[symbol]));
 			}
 		}
 		
@@ -68,7 +67,7 @@ public class Pile {
 	 * Weergeeft de overgebleven tiles in de zak in een lijst.
 	 * @return this.tiles
 	 */
-	public ArrayList<Tile> getTiles() {
+	public ArrayList<Tile> getTiles(){
 		return tiles;
 	}
 	
@@ -76,11 +75,11 @@ public class Pile {
 	 * Haalt een tegel met een bepaalde index uit de lijst met tiles.
 	 * @param index
 	 */
-	public void removeTile(int index) {
+	public void removeTile(int index){
 		tiles.remove(index);
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		Pile pile = new Pile();
 		for (Tile tile : pile.tiles) {
 			System.out.println(tile.getColor() + tile.getSymbol());

@@ -89,12 +89,12 @@ public class Board {
 	 * de nieuwe coordinaten van de grote van het bord.
 	 */
 	
-	public void boardSize() {
+	public void boardSize(){
 		for (int x = 0; x <= DIM; x++) {
 			for (int y = 0; y <= DIM; y++) {
 				if (isEmptyField(x, y) == false) {
-					viewOfMaxX = x + 1;
-					break;
+					 viewOfMaxX = x + 1;
+					 break;
 				}
 			}
 		}
@@ -109,16 +109,16 @@ public class Board {
 		for (int y = 0; y <= DIM; y++) {
 			for (int x = 0; x <= DIM; x++) {
 				if (isEmptyField(x, y) == false) {
-					viewOfMaxY = y + 1;
-					break;
+					 viewOfMaxY = y + 1 ;
+					 break;
 				}
 			}
 		}
 		for (int y = DIM; y >= 0; y--) {
 			for (int x = 0; x <= DIM; x++) {
 				if (isEmptyField(x, y) == false) {
-					viewOfMinY = y - 1;
-					break;
+					 viewOfMinY = y - 1 ;
+					 break;
 				}
 			}
 		} 
@@ -128,7 +128,7 @@ public class Board {
 	/**
 	 * returns de inhoud verwezen door het paar (x,y) .
 	 */
-	public Tile getField(int x, int y) {
+	public Tile getField(int x, int y){
 		return coordinaten[x][y];
 	}
 	
@@ -146,7 +146,7 @@ public class Board {
 	 * @return xAxis;
 	 */
 	//TODO eventueel code verbeteren door de hoeveelheid duplicaatcode te verminderen
-	public ArrayList<Tile> tilesOnXAxis(int x, int y) {
+	public ArrayList<Tile> tilesOnXAxis(int x, int y){
 		boolean leftIsEmpty = false;
 		boolean rightIsEmpty = false;
 		int xOrig = x;
@@ -154,7 +154,7 @@ public class Board {
 		xAxis.add(getField(x, y));
 		while (leftIsEmpty == false) {
 			x--;
-			if (isEmptyField(x, y) == false) {
+			if (isEmptyField(x,y) == false) {
 				xAxis.add(getField(x, y));
 			} else {
 				break; 
@@ -208,7 +208,7 @@ public class Board {
 	 * @param axis
 	 * @return contains;
 	 */
-	public boolean sharedLine(Tile tileToSet, ArrayList<Tile> axis) {
+	public boolean sharedLine(Tile tileToSet, ArrayList<Tile> axis){
 		ArrayList<Tile> copy = new ArrayList<Tile>(lastSet);
 		copy.add(tileToSet);
 		boolean contains = true;
@@ -224,7 +224,7 @@ public class Board {
 	 * Controleert of de aangelegde stenen wel volgens de spelregels mogen.
 	 */
 	//TODO analyzeren: nadat locatie is toegevoegd aan tile, is dit te verbeteren?
-	public boolean isValidMove(int x, int y, Tile tile) {
+	public boolean isValidMove(int x, int y, Tile tile){
 		Board board = deepCopy();
 		board.setTile(x, y, tile);
 		ArrayList<Tile> xAxis = tilesOnXAxis(x, y);
@@ -243,7 +243,7 @@ public class Board {
 				xAxis.remove(tile);
 				for (Tile tileToCompareWith : xAxis) {
 					if (compareColor(tileToCompareWith, tileOrig) == true &&
-									compareSymbol(tileToCompareWith, tileOrig) == true) {
+									compareSymbol(tileToCompareWith, tileOrig) == true){
 						return false;
 					} else if (compareColor(tileToCompareWith, tileOrig) == true 
 									|| compareSymbol(tileToCompareWith, tileOrig) == true) {
@@ -263,7 +263,7 @@ public class Board {
 	 * @param y
 	 * @param tile
 	 */
-	public void setTile(int x, int y, Tile tile) {
+	public void setTile(int x, int y, Tile tile){
 		this.coordinaten[x][y] = tile;
 		tile.setLocation(x, y);
 	}
@@ -273,7 +273,7 @@ public class Board {
 	 * @param tileA
 	 * @param tileB
 	 */
-	public boolean compareSymbol(Tile tileA, Tile tileB) {
+	public boolean compareSymbol(Tile tileA, Tile tileB){
 		return tileA.getSymbol() == tileB.getSymbol();
 		
 	}
@@ -293,7 +293,7 @@ public class Board {
 	 * @param y
 	 * @param tile
 	 */
-	public void processMove(int x, int y, Tile tile) throws InvalidMoveException {
+	public void processMove(int x, int y, Tile tile) throws InvalidMoveException{
 		if (isValidMove(x, y, tile) && (sharedLine(tile, tilesOnYAxis(x, y)) 
 						|| sharedLine(tile, tilesOnXAxis(x, y)))) {
 			setTile(x, y, tile);

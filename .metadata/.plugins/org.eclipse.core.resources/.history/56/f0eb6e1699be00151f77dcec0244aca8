@@ -42,8 +42,8 @@ public class PileTest {
 	public void testGenerateTiles() {
 		testPile.generateTiles();
 		String[] tilesToString = new String[Pile.NUMBER_TILES];
-		for(int i = 0; i < testPile.getTiles().size(); i++){
-			String tile = testPile.getTiles().get(i).getColor() + testPile.getTiles().get(i).getSymbol();
+		for(int i = 0; i < testPile.getPile().size(); i++){
+			String tile = testPile.getPile().get(i).getColor() + testPile.getPile().get(i).getSymbol();
 			tilesToString[i] = tile;
 		}
 		assertArrayEquals(tilesToString, generatedTiles);
@@ -54,8 +54,8 @@ public class PileTest {
 		testPile.generateTiles();
 		testPile.shuffle();
 		String[] tilesToString = new String[Pile.NUMBER_TILES];
-		for(int i = 0; i < testPile.getTiles().size(); i++){
-			String tile = testPile.getTiles().get(i).getColor() + testPile.getTiles().get(i).getSymbol();
+		for(int i = 0; i < testPile.getPile().size(); i++){
+			String tile = testPile.getPile().get(i).getColor() + testPile.getPile().get(i).getSymbol();
 			tilesToString[i] = tile;
 		}
 		assertNotEquals(tilesToString, generatedTiles);
@@ -68,8 +68,8 @@ public class PileTest {
 		
 		assertEquals(generatedTiles.length, Pile.NUMBER_TILES);
 		testPile.generateTiles();
-		testPile.getTiles().remove(0);
-		assertNotEquals(testPile.getTiles().size(), Pile.NUMBER_TILES);
+		testPile.getPile().remove(0);
+		assertNotEquals(testPile.getPile().size(), Pile.NUMBER_TILES);
 	}
 }
 

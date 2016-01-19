@@ -34,15 +34,15 @@ public class HumanPlayer implements Player {
 		this.name = name;
 		this.game = game;
 		score = 0;
-		try {
+		try{
 			game.addPlayer(this);
-		} catch (FullGameException e) {
+		}catch (FullGameException e) {
 			//TODO implement
 		}
 	}
 	
 	/**
-	 *  geeft de naam van de speler.
+	 *  geeft de naam van de speler
 	 *  @return this.name
 	 */
 	@Override
