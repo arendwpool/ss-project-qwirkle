@@ -12,7 +12,7 @@ import exceptions.InvalidMoveException;
 public class Board {
 	private	Tile[][] coordinaten;
 	private static final int DIM = 179;
-	private boolean initialMove;
+	public static boolean initialMove;
 	private ArrayList<Tile> lastSet;
 	
 	public int viewOfMinX = 88;

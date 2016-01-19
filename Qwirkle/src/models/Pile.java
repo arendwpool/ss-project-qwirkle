@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class Pile {
 	
-	ArrayList<Tile> tiles;
+	private ArrayList<Tile> tiles;
 	
 	/**
 	 * Aantal tegels in een spel.
@@ -45,11 +45,17 @@ public class Pile {
 		
 	}
 	
+<<<<<<< HEAD
 	public ArrayList<Tile> getPile(){
 		return tiles;
 	}
 	
 	public void shuffle() {
+=======
+	public void shuffle(){
+>>>>>>> 678c22267c9e4bb0826166fb423069fd979e7b17
+		Collections.shuffle(tiles);
+		Collections.shuffle(tiles);
 		Collections.shuffle(tiles);
 	}
 	
@@ -57,7 +63,19 @@ public class Pile {
 		System.out.println(tiles.size());
 	}
 	
+<<<<<<< HEAD
 	public static void main(String[] args) {
+=======
+	public ArrayList<Tile> getTiles(){
+		return tiles;
+	}
+	
+	public void removeTile(int index){
+		tiles.remove(index);
+	}
+	
+	public static void main(String[] args){
+>>>>>>> 678c22267c9e4bb0826166fb423069fd979e7b17
 		Pile pile = new Pile();
 		for (Tile tile : pile.tiles) {
 			System.out.println(tile.getColor() + tile.getSymbol());
