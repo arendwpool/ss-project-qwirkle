@@ -46,7 +46,7 @@ public class Tile {
 	 * Weergeeft de kleur van de tegel.
 	 * @return this.color
 	 */
-	/*@Pure*/
+	/*@pure*/
 	public String getColor(){
 		return color;
 	}
@@ -55,10 +55,11 @@ public class Tile {
 	 * Weergeeft de symbool van de tegel.
 	 * @return this.symbol
 	 */
-	/*@Pure*/
+	/*@pure*/
 	public String getSymbol(){
 		return symbol;
 	}
+	
 	/**
 	 * geeft de mogelijkheid om de Tile aan een punt te koppelen.
 	 * @param x

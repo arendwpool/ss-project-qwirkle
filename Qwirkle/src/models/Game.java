@@ -9,40 +9,50 @@ import exceptions.NoTilesLeftInPileException;
 import exceptions.PlayerNotFoundException;
 
 /**
- * Klasse die het de regels van het spel implementeerd.
+ * Klasse die het de regels van het spel implementeert.
  * @author Bob Breemhaar en Arend Pool
  *
  */
 public class Game {
-	
 	/**
-	 * Geeft aan welke speler de volgende move moet maken.
+	 * Geeft de grootte van een hand aan in normale omstandigheden.
+	 */
+	public static final int DEFAULT_HAND_SIZE = 6;
+	/**
+	 * Geeft aan welke speler nu aan de beurt is.
 	 */
 	private Player currentPlayer;
 	
-	/*
-	 * Geeft de hoeveelheid meespelende spelers mee. 
+	/**
+	 * Geeft de hoeveelheid meespelende spelers mee, dit aantal wordt meegegeven bij het
+	 * maken van een nieuw spel instantie. 
 	 */
 	private int noOfPlayers;
 	
 	/**
-	 * Een hashmap van spelers die meedoen gemapt aan hun ID
+	 * Een hashmap van spelers die meedoen gemapt aan hun ID. Dit is een nummer die gebruikt
+	 * wordt om aan te geven welke speler aan de beurt is.
 	 */
 	private Map<Player, Integer> players;
+	
 	/**
-	 * Het nieuwe bord dat bij dit spel hoort
+	 * Het nieuwe bord dat bij dit spel hoort. Dit board wordt ook meegegeven in de parameters 
+	 * van de constructor
 	 */
 	private Board board;
 	
 	/**
-	 * De nieuwe pile die bij het spel hoort
+	 * De nieuwe pile die bij het spel hoort.
 	 */
 	Pile pile;
 	
 	/**
-	 * Contrueert  een nieuw spel.
+	 * Contrueert  een nieuw spel. Hierbij worden het board element en het aantal spelers opgeslagen
+	 * in de lokale variabelen. Er wordt in de constructor ook een nieuwe Pile instantie gemaakt.
+	 * Deze Pile is een representatie van de zak met stenen in het spel. Er wordt ook een HashMap
+	 * geïnstantieerd die later wordt gebruikt om de players aan een ID te koppelen.
 	 */
-	public Game(Board board, int noOfPlayers){
+	public Game(Board board, int noOfPlayers) {
 		this.noOfPlayers = noOfPlayers;
 		this.board = board;
 		this.pile = new Pile();
@@ -52,67 +62,95 @@ public class Game {
 	}
 	
 	/**
-	 * controleert of het spel een winnaar heeft
+	 * Controleert of het spel een winnaar heeft, hiervoor kijkt hij of winner() een
+	 * player terug geeft, of een object dat null is.
 	 * @return winner() != null
 	 */
-	public boolean hasWinner(){
+	public boolean hasWinner() {
 		return winner() != null;
 	}
 	
 	/**
-	 * Geeft aan of het spel over is.
-	 * @return hasWinner();
+	 * Geeft aan of het spel over is. Dit is het geval als een speler zijn laatste tegel
+	 * heeft neergelegd en de Pile leeg is.
+	 * @return noTilesLeft();
 	 */
 	/*@pure*/
-	public boolean gameOver(){
+	public boolean gameOver() {
 		return noTilesLeft();
 	}
 	
 	/**
-	 * Geeft aan welke speler winnaar is, geeft null als er nog geen winnaar is.
-	 * @return Player withHighscore || null
+	 * Geeft aan welke speler winnaar is, geeft null als er nog geen winnaar is. Een speler
+	 * is de winnaar als het spel af is, en de meeste punten heeft.
+	 * @return Player withHighscore || null //TODO vraag
 	 */
-	public Player winner(){
-		if(noTilesLeft() == true){
+	public Player winner() {
+		if (noTilesLeft() == true) {
 			int score = 0;
 			Player withHighscore = null;
-			for(Player player : players.keySet()){
-				if(player.getScore() > score){
+			for (Player player : players.keySet()) {
+				if (player.getScore() > score) {
 					score = player.getScore();
 					withHighscore = player;
 				}
 			}
 			return withHighscore;
-		}else{
+		} else {
 			return null;
 		}
 	}
 		
 	/**
-	 * Zet tegels in de tiles Set
-	 * @param tilesToTrade 
+	 * Krijgt een lijst met de tegels die geruilt moeten worden. Hiervoor wordt eerst gekeken of de 
+	 * tegels die geruild moeten worden wel in de hand van de betreffende speler zijn. Daarna wordt 
+	 * er gekeken of de Pile wel genoeg stenen heeft om te ruilen. Als er aan deze twee voorwaarden 
+	 * zijn voldaan worden de tegel om te ruilen terug in de Pile gedaan. Vervolgens worden er de 
+	 * tegels uit de hand verwijderd van de player. Daarna wordt de methode setHand() aangeroepen 
+	 * om de hand weer aan te vullen. Als er niet genoeg tegels zijn wordt er een exceptie gegooit.
+	 * @param tilesToTrade
+	 * @param player
+	 * @throws NoTilesLeftInPileException
 	 */
-	public void replaceTiles(ArrayList<Tile> tilesToTrade, Player player) throws NoTilesLeftInPileException{
-		if(tilesToTrade.size() <= pile.getTiles().size()){
+	public void replaceTiles(ArrayList<Tile> tilesToTrade, Player player) 
+			throws NoTilesLeftInPileException {
+		boolean containsAll = true;
+		for (Tile tile : tilesToTrade) {
+			if (!player.getHand().contains(tile)) {
+				containsAll = false;
+			}
+		}
+		if (tilesToTrade.size() <= pile.getTiles().size() && containsAll == true) {
 			pile.getTiles().addAll(tilesToTrade);
 			player.getHand().removeAll(tilesToTrade);
 			setHand(player);
-		}else{
+		} else {
 			throw new NoTilesLeftInPileException();
 		}
 	}
 
-	
-	public Tile giveRandomTile(){
+	/**
+	 * Geeft een willekeurige tegel terug. Hiervoor wordt eerst de zak geshuffeld, waarna de eerste
+	 * tegel uit de Pile wordt teruggegeven. De teruggegeven tegel wordt dan ook uit de zak 
+	 * verwijderd.
+	 * @return tile
+	 */
+	public Tile giveRandomTile() {
 		pile.shuffle();
 		Tile tile = pile.getTiles().get(0);
 		pile.removeTile(0);
 		return tile;
 	}
 	
-	public void setHand(Player player){
-		int handSize = (6 - player.getHand().size());
-		for(int i = 0; i < handSize ; i++){
+	/**
+	 * 
+	 * Kijkt hoeveel tegels een gegeven speler in zijn hand heeft. Als dit minder dan 6 is worden er 
+	 * een aantal willekeurige tegels gegeven zodat de hand weer 6 tegels heeft.
+	 * @param player
+	 */
+	public void setHand(Player player) {
+		int handSize = DEFAULT_HAND_SIZE - player.getHand().size();
+		for (int i = 0; i < handSize; i++) {
 			player.getHand().add(giveRandomTile());
 		}
 	}
@@ -120,97 +158,103 @@ public class Game {
 	/**
 	 * Start het spel.
 	 */
-	public void start(){
+	public void start() {
 		//TODO te implementeren als de tijd rijp is
 	}
 	
 	/**
 	 * Update de situatie van het spel na elke actie van een speler.
 	 */
-	public void update(){
+	public void update() {
 		//TODO te implementeren als de tijd rijp is
 		
 	}
 	
 	/**
-	 * probeert een move te maken, vangt een InvalidMoveException als de move invalid is.
+	 * Probeert een move te maken door processMove() in Board.java aan te roepen, vangt een 
+	 * InvalidMoveException als de move invalid is.
 	 * @param x
 	 * @param y
 	 * @param tile
 	 */
-	public void makeMove(int x, int y, Tile tile, Player player){
-		try{
+	public void makeMove(int x, int y, Tile tile, Player player) {
+		try {
 			board.processMove(x, y, tile);//TODO checken of player currenplayer is.
-		}catch (InvalidMoveException e){
+		} catch (InvalidMoveException e) {
 			//TODO implement actie na de catch
 		}
 	}
 	
 	/**
-	 * Geeft een volle pile van alle tegels
-	 * @return this.pile
+	 * Geeft een volle pile van alle tegels in het spel.
+	 * @return pile
 	 */
-	public Pile getPile(){
+	public Pile getPile() {
 		return pile;
 	}
 	
 	/**
-	 * Controleert of er geen tegels meer zijn in een spel. 
+	 * Controleert of er geen tegels meer zijn in de Pile en er een speler is die geen tegels meer 
+	 * heeft in zijn hand. 
 	 * @return !playerHasNoTiles || false
 	 */
-	public boolean noTilesLeft(){
-		// tiles is nooit leeg, dit moet vervangen worden met Pile.java.
-		if(pile.getTiles().size() == 0){
+	public boolean noTilesLeft() {
+		if (pile.getTiles().size() == 0) {
 			boolean playerHasNoTiles = false;
-			for(Player player : players.keySet()){
-				if (player.getHand().size() == 0){
+			for (Player player : players.keySet()) {
+				if (player.getHand().size() == 0) {
 					playerHasNoTiles = true;
 				}
 			}
 			return !playerHasNoTiles;
-		}else{
+		} else {
 			return false;
 		}
 	}
 	
 	/**
-	 * Voegt een speler toe aan een spel.
+	 * Voegt een gegeven speler toe aan een spel. Dit kan totdat de hoeveelheid spelers in het spel 
+	 * gelijk is aan het aantal spelers meegegeven in de constructor. Als het spel vol is wordt er 
+	 * een exceptie gegooit.
 	 * @param player
 	 * @throws FullGameException 
 	 */
-	public void addPlayer(Player player) throws FullGameException{
-		if(players.keySet().size() <= noOfPlayers){
+	public void addPlayer(Player player) throws FullGameException {
+		if (players.keySet().size() <= noOfPlayers) {
 			players.put(player, players.keySet().size());
-		}else{
+		} else {
 			throw new FullGameException();
 		}
 	}
 	
 	/**
-	 * Geeft het bord instantie van dit spel
+	 * Geeft het bord instantie van dit spel.
 	 * @return
 	 */
-	public Board getBoard(){
+	public Board getBoard() {
 		return board;
 	}
 	
 	
-	
-	public void finishMove(){
+	/**
+	 * Verwijderd alle laatst gezette tegels van een speler.
+	 */
+	public void finishMove() {
 		board.clearLastMoves();
 	}
 	/**
-	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore
+	 * TODO
+	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore.
 	 * @param player
 	 */
-	public void generateScore(){
+	public void generateScore() {
 		Point point = null;
 		boolean retainMultipleX = false;
 		boolean retainMultipleY = false;
 		ArrayList<Tile> row = null;
 		ArrayList<Tile> column = null;
 		int score = 0;
-		for(Tile tile : board.getLastMoves()){
+		for (Tile tile : board.getLastMoves()) {
 			point = tile.getLocation();
 			int x = (int) point.getX();
 			int y = (int) point.getY();
@@ -222,79 +266,113 @@ public class Game {
 			commonY.retainAll(column);
 			retainMultipleX = commonX.size() > 1;
 			retainMultipleY = commonY.size() > 1;
-			if(retainMultipleX == true){
+			if (retainMultipleX == true) {
 				score += column.size();
-			}else if(retainMultipleY == true){
+			} else if (retainMultipleY == true) {
 				score += row.size();
 			}
 		}
-		if(retainMultipleX == true){
+		if (retainMultipleX == true) {
 			score += row.size();
-		}else if(retainMultipleY == true){
+		} else if (retainMultipleY == true) {
 			score += column.size();
-		}else{
+		} else {
 			score += row.size();
 			score += column.size();
 		}
-		currentPlayer.addScore(score); // TODO currentPlayer moet eventueel vervangen worden als de implementatie verandert.
+		currentPlayer.addScore(score); 
+		// TODO currentPlayer moet eventueel vervangen worden als de implementatie verandert.
 	}
 	
-	public Map<Player, Integer> getPlayers(){
+	/**
+	 * Geeft een Map terug van de spelers in het spel.
+	 * @return this.players
+	 */
+	public Map<Player, Integer> getPlayers() {
 		return players;
 	}
 	
-	public Player getCurrentPlayer(){
+	/**
+	 * Geeft de speler terug die nu aan de beurt is.
+	 * @return this.currentPlayer
+	 */
+	public Player getCurrentPlayer() {
 		return currentPlayer;
 	}
-	 public static int next;
-	public void nextPlayer(){
+	
+	/**
+	 * Zet de lokale variabele currentPlayer naar de speler die de volgende beurt krijgt. Hiervoor 
+	 * wordt eerst door middel van het ID van de huidige speler berekend wat de ID is van de 
+	 * volgende speler. De speler met dit ID wordt dantoegewezen aan currentPlayer.
+	 */
+	public void nextPlayer() {
 		int current = players.get(currentPlayer);
 		int next = (current % noOfPlayers) + 1;
-		this.next = next;
-		for(Player player : players.keySet()){
-			if(players.get(player) == next){
+		for (Player player : players.keySet()) {
+			if (players.get(player) == next) {
 				currentPlayer = player;
 			}
 		}
 	}
 	
-	public void determineInitialPlayer(){	//TODO herschrijven? Lijsten hebben dubbele stenen en verdere logica klopt niet
+	/**
+	 * Zet de lokale variabele currentPlayer naar een speler die het spel mag beginnen. Dit is de 
+	 * speler die in het begin de langste rij kan neerleggen op het bord. Deze methode kijkt eerst 
+	 * naar alle tegels die de spelers in hun hand hebben en gaat op deze manier na welke speler mag
+	 * beginnen.
+	 */
+	public void determineInitialPlayer() {	
+		//TODO herschrijven? Lijsten hebben dubbele stenen en verdere logica klopt niet
 		int longestRow = 0;
 		Player withLongestRow = null;
-		for(Player player : players.keySet()){
+		for (Player player : players.keySet()) {
 			ArrayList<String> colors = new ArrayList<String>();
 			ArrayList<String> symbols = new ArrayList<String>();
-			for(Tile tile : player.getHand()){
-				if (!colors.contains(tile.getColor()) && !symbols.contains(tile.getSymbol())){
+			for (Tile tile : player.getHand()) {
+				if (!colors.contains(tile.getColor()) && !symbols.contains(tile.getSymbol())) {
 					colors.add(tile.getColor());
 					symbols.add(tile.getSymbol());
-				}else if(!colors.contains(tile.getColor()) && symbols.contains(tile.getSymbol())){
+				} else if (!colors.contains(tile.getColor()) &&
+								symbols.contains(tile.getSymbol())) {
 					colors.add(tile.getColor());
-				}else if(colors.contains(tile.getColor()) && !symbols.contains(tile.getSymbol())){
+				} else if (colors.contains(tile.getColor()) &&
+								!symbols.contains(tile.getSymbol())) {
 					symbols.add(tile.getSymbol());
 				}
 			}
-			if(colors.size() > longestRow){
+			if (colors.size() > longestRow) {
 				longestRow = colors.size();
 				withLongestRow = player;
-			}else if(symbols.size() > longestRow){
+			} else if (symbols.size() > longestRow) {
 				longestRow = symbols.size();
 				withLongestRow = player;
 			}
 		}
-		if(Board.initialMove == true){
+		if (Board.initialMove == true) {
 			currentPlayer = withLongestRow;
 		}
 	}
 	
-	public void setCurrentPlayer(Player player){ //TODO alleen voor test
+	/**
+	 * Met deze methode kan handmatig de currentPlayer worden toegewezen. Deze methode is gemaakt 
+	 * voor de testklasse.
+	 * @param player
+	 */
+	public void setCurrentPlayer(Player player) {
 		currentPlayer = player;
 	}
 	
-	public int getPlayerID(Player player) throws PlayerNotFoundException{
-		if(players.keySet().contains(player)){
+	/**
+	 * Deze geeft het ID nummer terug van een gegeven speler. Als een speler niet gevonden kan 
+	 * worden gooit de methode een exception.
+	 * @param player
+	 * @return players.get(player)
+	 * @throws PlayerNotFoundException
+	 */
+	public int getPlayerID(Player player) throws PlayerNotFoundException {
+		if (players.keySet().contains(player)) {
 			return players.get(player);
-		}else{
+		} else {
 			throw new PlayerNotFoundException();
 		}
 	}
