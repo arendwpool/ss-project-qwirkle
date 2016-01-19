@@ -54,8 +54,8 @@ public class HumanPlayer implements Player {
 	}
 
 	@Override
-	public void makeMove(int x, int y, Tile tile, Player player) {
-		game.makeMove(x, y, tile, player);
+	public void makeMove(int x, int y, Tile tile) {
+		game.makeMove(x, y, tile);
 		
 	}
 

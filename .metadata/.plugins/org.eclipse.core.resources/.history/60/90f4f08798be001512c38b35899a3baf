@@ -10,7 +10,7 @@ public interface Player {
 	
 	ArrayList<Tile> getHand();
 	
-	public void makeMove(int x, int y, Tile tile, Player player);
+	public void makeMove(int x, int y, Tile tile);
 	
 	public int getScore();
 	

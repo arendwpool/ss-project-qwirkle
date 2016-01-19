@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 import exceptions.FullGameException;
 
+
 public class HumanPlayer implements Player {
 	/**
 	 * De naam van de betreffende speler.
@@ -54,8 +55,8 @@ public class HumanPlayer implements Player {
 	}
 
 	@Override
-	public void makeMove(int x, int y, Tile tile, Player player) {
-		game.makeMove(x, y, tile, player);
+	public void makeMove(int x, int y, Tile tile) {
+		game.makeMove(x, y, tile);
 		
 	}
 
@@ -68,7 +69,5 @@ public class HumanPlayer implements Player {
 	public void addScore(int points){
 		score += points;
 	}
-
-
 
 }
