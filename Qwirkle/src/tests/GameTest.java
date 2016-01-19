@@ -42,7 +42,6 @@ public class GameTest {
 		tilesToTrade.add(testPlayer.getHand().get(0));
 		tilesToTrade.add(testPlayer.getHand().get(1));
 		tilesToTrade.add(testPlayer.getHand().get(2));
-		ArrayList<Tile> hand = testPlayer.getHand();
 		for(Tile tile : testPlayer.getHand()){
 			System.out.println("first: " + tile.getColor()+tile.getSymbol());
 		}
