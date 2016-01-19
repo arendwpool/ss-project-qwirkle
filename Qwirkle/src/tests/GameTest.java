@@ -38,21 +38,31 @@ public class GameTest {
 	@Test
 	public void testReplaceTiles(){
 		ArrayList<Tile> tilesToTrade = new ArrayList<Tile>();
+		testGame.setHand(testPlayer);
 		tilesToTrade.add(testPlayer.getHand().get(0));
 		tilesToTrade.add(testPlayer.getHand().get(1));
-		tilesToTrade.add(testPlayer.getHand().get(3));
+		tilesToTrade.add(testPlayer.getHand().get(2));
+		ArrayList<Tile> hand = testPlayer.getHand();
+		for(Tile tile : testPlayer.getHand()){
+			System.out.println("first: " + tile.getColor()+tile.getSymbol());
+		}
 		try {
 			testGame.replaceTiles(tilesToTrade, testPlayer);
 		} catch (NoTilesLeftInPileException e) {
 			//Gebeurt niet in deze test
 			System.out.print("FOUT");
 		}
+		for(Tile tile : testPlayer.getHand()){
+			System.out.println("after: " + tile.getColor()+tile.getSymbol());
+		}
 	}
 	
 	@Test
 	public void testGiveRandomTile(){
+		int size = testGame.getPile().getTiles().size();
 		Tile tile = testGame.giveRandomTile();
 		assertTrue(tile != null);
+		assertTrue(testGame.getPile().getTiles().size() == size - 1);
 	}
 	
 	@Test
@@ -60,9 +70,6 @@ public class GameTest {
 		assertTrue("De hand is leeg", testPlayer.getHand().size() == 0);
 		testGame.setHand(testPlayer);
 		assertFalse("De hand heeft geen null tegels", testPlayer.getHand().contains(null));
-		for(int i = 0; i < testPlayer.getHand().size(); i++){
-			System.out.println(testPlayer.getHand().get(1).getColor()+testPlayer.getHand().get(1).getSymbol());
-		}
 		assertTrue("De hand heeft 6 tegels", testPlayer.getHand().size() == 6);
 	}
 	
@@ -131,7 +138,14 @@ public class GameTest {
 		}
 		for(Player player : testGame.getPlayers().keySet()){
 			testGame.setHand(player);
+			for(Tile tile : player.getHand()){
+				System.out.println(player.getName() + ": " + tile.getColor()+tile.getSymbol());
+			}
 		}
+		testGame.determineInitialPlayer();
+		Player player = testGame.getCurrentPlayer();
+		System.out.println(player.getName());
+		assertTrue(testGame.getPlayers().keySet().contains(player));
 	}
 	//TODO te testen: generateScore, finishMove, noTilesLeft, hasWinner, winner en gameOver
 }

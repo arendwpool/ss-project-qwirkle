@@ -15,10 +15,6 @@ import exceptions.PlayerNotFoundException;
  *
  */
 public class Game {
-	/*
-	 * ArrayList met te geven tegels aan een speler.
-	 */
-	private ArrayList<Tile> tilesToGive;
 	
 	/**
 	 * Geeft aan welke speler de volgende move moet maken.
@@ -98,26 +94,26 @@ public class Game {
 	 * @param tilesToTrade 
 	 */
 	public void replaceTiles(ArrayList<Tile> tilesToTrade, Player player) throws NoTilesLeftInPileException{
-		if(tilesToTrade.size() <= pile.tiles.size()){
-			pile.tiles.addAll(tilesToTrade);
+		if(tilesToTrade.size() <= pile.getTiles().size()){
+			pile.getTiles().addAll(tilesToTrade);
 			player.getHand().removeAll(tilesToTrade);
-			tilesToTrade.clear();
 			setHand(player);
 		}else{
 			throw new NoTilesLeftInPileException();
 		}
 	}
+
 	
 	public Tile giveRandomTile(){
 		pile.shuffle();
-		Tile tile = pile.tiles.get(0);
-		pile.tiles.remove(0);
+		Tile tile = pile.getTiles().get(0);
+		pile.removeTile(0);
 		return tile;
 	}
 	
-	public void setHand(Player player){ //TODO oploosen vreemde fout in de test.
-		System.out.println(6-player.getHand().size());
-		for(int i = 0; i < (6 - player.getHand().size()); i++){
+	public void setHand(Player player){
+		int handSize = (6 - player.getHand().size());
+		for(int i = 0; i < handSize ; i++){
 			player.getHand().add(giveRandomTile());
 		}
 	}
@@ -155,8 +151,8 @@ public class Game {
 	 * Geeft een volle pile van alle tegels
 	 * @return this.pile
 	 */
-	public ArrayList<Tile> getPile(){
-		return pile.tiles;
+	public Pile getPile(){
+		return pile;
 	}
 	
 	/**
@@ -165,7 +161,7 @@ public class Game {
 	 */
 	public boolean noTilesLeft(){
 		// tiles is nooit leeg, dit moet vervangen worden met Pile.java.
-		if(pile.tiles.size() == 0){
+		if(pile.getTiles().size() == 0){
 			boolean playerHasNoTiles = false;
 			for(Player player : players.keySet()){
 				if (player.getHand().size() == 0){
@@ -263,7 +259,7 @@ public class Game {
 		}
 	}
 	
-	public void determineInitialPlayer(){
+	public void determineInitialPlayer(){	//TODO herschrijven? Lijsten hebben dubbele stenen en verdere logica klopt niet
 		int longestRow = 0;
 		Player withLongestRow = null;
 		for(Player player : players.keySet()){

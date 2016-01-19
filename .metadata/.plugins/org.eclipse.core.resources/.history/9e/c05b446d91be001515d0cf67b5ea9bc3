@@ -1,0 +1,312 @@
+package models;
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import exceptions.FalseAmountOfTilesException;
+import exceptions.FullGameException;
+import exceptions.InvalidMoveException;
+import exceptions.NoTilesLeftInPileException;
+import exceptions.PlayerNotFoundException;
+
+/**
+ * Klasse die het de regels van het spel implementeerd.
+ * @author Bob Breemhaar en Arend Pool
+ *
+ */
+public class Game {
+	/*
+	 * ArrayList met te geven tegels aan een speler.
+	 */
+	private ArrayList<Tile> tilesToGive;
+	
+	/**
+	 * Geeft aan welke speler de volgende move moet maken.
+	 */
+	private Player currentPlayer;
+	
+	/*
+	 * Geeft de hoeveelheid meespelende spelers mee. 
+	 */
+	private int noOfPlayers;
+	
+	/**
+	 * Een hashmap van spelers die meedoen gemapt aan hun ID
+	 */
+	private Map<Player, Integer> players;
+	/**
+	 * Het nieuwe bord dat bij dit spel hoort
+	 */
+	private Board board;
+	
+	/**
+	 * De nieuwe pile die bij het spel hoort
+	 */
+	Pile pile;
+	
+	/**
+	 * Contrueert  een nieuw spel.
+	 */
+	public Game(Board board, int noOfPlayers){
+		this.noOfPlayers = noOfPlayers;
+		this.board = board;
+		this.pile = new Pile();
+		players = new HashMap<Player, Integer>();
+		
+		
+	}
+	
+	/**
+	 * controleert of het spel een winnaar heeft
+	 * @return winner() != null
+	 */
+	public boolean hasWinner(){
+		return winner() != null;
+	}
+	
+	/**
+	 * Geeft aan of het spel over is.
+	 * @return hasWinner();
+	 */
+	/*@pure*/
+	public boolean gameOver(){
+		return noTilesLeft();
+	}
+	
+	/**
+	 * Geeft aan welke speler winnaar is, geeft null als er nog geen winnaar is.
+	 * @return Player withHighscore || null
+	 */
+	public Player winner(){
+		if(noTilesLeft() == true){
+			int score = 0;
+			Player withHighscore = null;
+			for(Player player : players.keySet()){
+				if(player.getScore() > score){
+					score = player.getScore();
+					withHighscore = player;
+				}
+			}
+			return withHighscore;
+		}else{
+			return null;
+		}
+	}
+		
+	/**
+	 * Zet tegels in de tiles Set
+	 * @param tilesToTrade 
+	 */
+	public void replaceTiles(ArrayList<Tile> tilesToTrade, Player player) throws NoTilesLeftInPileException{
+		if(tilesToTrade.size() <= pile.getTiles().size()){
+			for(Tile tile : player.getHand()){
+				System.out.println("first: " + tile.getColor()+tile.getSymbol());
+			}
+			pile.getTiles().addAll(tilesToTrade);
+			player.getHand().removeAll(tilesToTrade);
+			tilesToTrade.clear();
+			setHand(player);
+			for(Tile tile : player.getHand()){
+				System.out.println("after: " + tile.getColor()+tile.getSymbol());
+			}
+		}else{
+			throw new NoTilesLeftInPileException();
+		}
+	}
+	
+	public Tile giveRandomTile(){
+		pile.shuffle();
+		Tile tile = pile.getTiles().get(0);
+		pile.removeTile(0);
+		return tile;
+	}
+	
+	public void setHand(Player player){
+		int handSize = (6 - player.getHand().size());
+		for(int i = 0; i < handSize ; i++){
+			player.getHand().add(giveRandomTile());
+		}
+	}
+	
+	/**
+	 * Start het spel.
+	 */
+	public void start(){
+		//TODO te implementeren als de tijd rijp is
+	}
+	
+	/**
+	 * Update de situatie van het spel na elke actie van een speler.
+	 */
+	public void update(){
+		//TODO te implementeren als de tijd rijp is
+		
+	}
+	
+	/**
+	 * probeert een move te maken, vangt een InvalidMoveException als de move invalid is.
+	 * @param x
+	 * @param y
+	 * @param tile
+	 */
+	public void makeMove(int x, int y, Tile tile, Player player){
+		try{
+			board.processMove(x, y, tile);//TODO checken of player currenplayer is.
+		}catch (InvalidMoveException e){
+			//TODO implement actie na de catch
+		}
+	}
+	
+	/**
+	 * Geeft een volle pile van alle tegels
+	 * @return this.pile
+	 */
+	public Pile getPile(){
+		return pile;
+	}
+	
+	/**
+	 * Controleert of er geen tegels meer zijn in een spel. 
+	 * @return !playerHasNoTiles || false
+	 */
+	public boolean noTilesLeft(){
+		// tiles is nooit leeg, dit moet vervangen worden met Pile.java.
+		if(pile.getTiles().size() == 0){
+			boolean playerHasNoTiles = false;
+			for(Player player : players.keySet()){
+				if (player.getHand().size() == 0){
+					playerHasNoTiles = true;
+				}
+			}
+			return !playerHasNoTiles;
+		}else{
+			return false;
+		}
+	}
+	
+	/**
+	 * Voegt een speler toe aan een spel.
+	 * @param player
+	 * @throws FullGameException 
+	 */
+	public void addPlayer(Player player) throws FullGameException{
+		if(players.keySet().size() <= noOfPlayers){
+			players.put(player, players.keySet().size());
+		}else{
+			throw new FullGameException();
+		}
+	}
+	
+	/**
+	 * Geeft het bord instantie van dit spel
+	 * @return
+	 */
+	public Board getBoard(){
+		return board;
+	}
+	
+	
+	
+	public void finishMove(){
+		board.clearLastMoves();
+	}
+	/**
+	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore
+	 * @param player
+	 */
+	public void generateScore(){
+		Point point = null;
+		boolean retainMultipleX = false;
+		boolean retainMultipleY = false;
+		ArrayList<Tile> row = null;
+		ArrayList<Tile> column = null;
+		int score = 0;
+		for(Tile tile : board.getLastMoves()){
+			point = tile.getLocation();
+			int x = (int) point.getX();
+			int y = (int) point.getY();
+			row = board.tilesOnXAxis(x, y);
+			column = board.tilesOnYAxis(x, y);
+			ArrayList<Tile> commonX = new ArrayList<Tile>(board.getLastMoves());
+			ArrayList<Tile> commonY = new ArrayList<Tile>(board.getLastMoves());
+			commonX.retainAll(row);
+			commonY.retainAll(column);
+			retainMultipleX = commonX.size() > 1;
+			retainMultipleY = commonY.size() > 1;
+			if(retainMultipleX == true){
+				score += column.size();
+			}else if(retainMultipleY == true){
+				score += row.size();
+			}
+		}
+		if(retainMultipleX == true){
+			score += row.size();
+		}else if(retainMultipleY == true){
+			score += column.size();
+		}else{
+			score += row.size();
+			score += column.size();
+		}
+		currentPlayer.addScore(score); // TODO currentPlayer moet eventueel vervangen worden als de implementatie verandert.
+	}
+	
+	public Map<Player, Integer> getPlayers(){
+		return players;
+	}
+	
+	public Player getCurrentPlayer(){
+		return currentPlayer;
+	}
+	 public static int next;
+	public void nextPlayer(){
+		int current = players.get(currentPlayer);
+		int next = (current % noOfPlayers) + 1;
+		this.next = next;
+		for(Player player : players.keySet()){
+			if(players.get(player) == next){
+				currentPlayer = player;
+			}
+		}
+	}
+	
+	public void determineInitialPlayer(){	//TODO herschrijven? Lijsten hebben dubbele stenen en verdere logica klopt niet
+		int longestRow = 0;
+		Player withLongestRow = null;
+		for(Player player : players.keySet()){
+			ArrayList<String> colors = new ArrayList<String>();
+			ArrayList<String> symbols = new ArrayList<String>();
+			for(Tile tile : player.getHand()){
+				if (!colors.contains(tile.getColor()) && !symbols.contains(tile.getSymbol())){
+					colors.add(tile.getColor());
+					symbols.add(tile.getSymbol());
+				}else if(!colors.contains(tile.getColor()) && symbols.contains(tile.getSymbol())){
+					colors.add(tile.getColor());
+				}else if(colors.contains(tile.getColor()) && !symbols.contains(tile.getSymbol())){
+					symbols.add(tile.getSymbol());
+				}
+			}
+			if(colors.size() > longestRow){
+				longestRow = colors.size();
+				withLongestRow = player;
+			}else if(symbols.size() > longestRow){
+				longestRow = symbols.size();
+				withLongestRow = player;
+			}
+		}
+		if(Board.initialMove == true){
+			currentPlayer = withLongestRow;
+		}
+	}
+	
+	public void setCurrentPlayer(Player player){ //TODO alleen voor test
+		currentPlayer = player;
+	}
+	
+	public int getPlayerID(Player player) throws PlayerNotFoundException{
+		if(players.keySet().contains(player)){
+			return players.get(player);
+		}else{
+			throw new PlayerNotFoundException();
+		}
+	}
+}

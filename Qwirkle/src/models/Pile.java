@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class Pile {
 	
-	ArrayList<Tile> tiles;
+	private ArrayList<Tile> tiles;
 	
 	/**
 	 * Aantal tegels in een spel.
@@ -45,16 +45,22 @@ public class Pile {
 		
 	}
 	
-	public ArrayList<Tile> getPile(){
-		return tiles;
-	}
-	
 	public void shuffle(){
+		Collections.shuffle(tiles);
+		Collections.shuffle(tiles);
 		Collections.shuffle(tiles);
 	}
 	
 	public void tilesLeft(){
 		System.out.println(tiles.size());
+	}
+	
+	public ArrayList<Tile> getTiles(){
+		return tiles;
+	}
+	
+	public void removeTile(int index){
+		tiles.remove(index);
 	}
 	
 	public static void main(String[] args){
