@@ -47,11 +47,6 @@ public class Game {
 	Pile pile;
 	
 	/**
-	 * Geeft aan of een speler heeft geruilt in de plaats van een zet maken.
-	 */
-	private boolean hasTraded = false;
-	
-	/**
 	 * Contrueert  een nieuw spel. Hierbij worden het board element en het aantal spelers opgeslagen
 	 * in de lokale variabelen. Er wordt in de constructor ook een nieuwe Pile instantie gemaakt.
 	 * Deze Pile is een representatie van de zak met stenen in het spel. Er wordt ook een HashMap
@@ -129,7 +124,6 @@ public class Game {
 			pile.getTiles().addAll(tilesToTrade);
 			player.getHand().removeAll(tilesToTrade);
 			setHand(player);
-			hasTraded = true;
 		} else {
 			throw new NoTilesLeftInPileException();
 		}
@@ -245,17 +239,9 @@ public class Game {
 	
 	/**
 	 * Verwijderd alle laatst gezette tegels van een speler.
-	 * @throws InvalidMoveException 
 	 */
-	public void finishMove() throws InvalidMoveException {
-		if(board.getLastMoves().size() != 0 || hasTraded == true){
-			generateScore();
-			board.clearLastMoves();
-			hasTraded = false;
-			nextPlayer();
-		}else{
-			throw new InvalidMoveException();
-		}
+	public void finishMove() {
+		board.clearLastMoves();
 	}
 	/**
 	 * TODO

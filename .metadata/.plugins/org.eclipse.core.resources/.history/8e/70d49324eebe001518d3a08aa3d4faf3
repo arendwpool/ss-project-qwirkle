@@ -249,7 +249,6 @@ public class Game {
 	 */
 	public void finishMove() throws InvalidMoveException {
 		if(board.getLastMoves().size() != 0 || hasTraded == true){
-			generateScore();
 			board.clearLastMoves();
 			hasTraded = false;
 			nextPlayer();

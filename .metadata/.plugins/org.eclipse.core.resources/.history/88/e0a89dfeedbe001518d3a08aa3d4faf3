@@ -245,16 +245,11 @@ public class Game {
 	
 	/**
 	 * Verwijderd alle laatst gezette tegels van een speler.
-	 * @throws InvalidMoveException 
 	 */
-	public void finishMove() throws InvalidMoveException {
+	public void finishMove() {
 		if(board.getLastMoves().size() != 0 || hasTraded == true){
-			generateScore();
 			board.clearLastMoves();
 			hasTraded = false;
-			nextPlayer();
-		}else{
-			throw new InvalidMoveException();
 		}
 	}
 	/**
