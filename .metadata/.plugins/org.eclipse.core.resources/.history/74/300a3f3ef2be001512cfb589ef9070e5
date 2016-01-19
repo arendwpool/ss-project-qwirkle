@@ -47,6 +47,11 @@ public class Game {
 	Pile pile;
 	
 	/**
+	 * Geeft aan of een speler heeft geruilt in de plaats van een zet maken.
+	 */
+	private boolean hasTraded = false;
+	
+	/**
 	 * Contrueert  een nieuw spel. Hierbij worden het board element en het aantal spelers opgeslagen
 	 * in de lokale variabelen. Er wordt in de constructor ook een nieuwe Pile instantie gemaakt.
 	 * Deze Pile is een representatie van de zak met stenen in het spel. Er wordt ook een HashMap
@@ -124,6 +129,7 @@ public class Game {
 			pile.getTiles().addAll(tilesToTrade);
 			player.getHand().removeAll(tilesToTrade);
 			setHand(player);
+			hasTraded = true;
 		} else {
 			throw new NoTilesLeftInPileException();
 		}
@@ -131,14 +137,13 @@ public class Game {
 
 	/**
 	 * Geeft een willekeurige tegel terug. Hiervoor wordt eerst de zak geshuffeld, waarna de eerste
-	 * tegel uit de Pile wordt teruggegeven. De teruggegeven tegel wordt dan ook uit de zak 
+	 * tegel uit de Pile wordt teruggegeven. TODO niet meer!! De teruggegeven tegel wordt dan ook uit de zak 
 	 * verwijderd.
 	 * @return tile
 	 */
 	public Tile giveRandomTile() {
 		pile.shuffle();
 		Tile tile = pile.getTiles().get(0);
-		pile.removeTile(0);
 		return tile;
 	}
 	
@@ -151,7 +156,9 @@ public class Game {
 	public void setHand(Player player) {
 		int handSize = DEFAULT_HAND_SIZE - player.getHand().size();
 		for (int i = 0; i < handSize; i++) {
-			player.getHand().add(giveRandomTile());
+			Tile tile = giveRandomTile();
+			pile.getTiles().remove(tile);
+			player.getHand().add(tile);
 		}
 	}
 	
@@ -238,13 +245,23 @@ public class Game {
 	
 	/**
 	 * Verwijderd alle laatst gezette tegels van een speler.
+	 * @throws InvalidMoveException 
 	 */
-	public void finishMove() {
-		board.clearLastMoves();
+	public void finishMove() throws InvalidMoveException {
+		if(board.getLastMoves().size() != 0 || hasTraded == true){
+			generateScore();
+			board.clearLastMoves();
+			hasTraded = false;
+			nextPlayer();
+		}else{
+			throw new InvalidMoveException();
+		}
 	}
 	/**
-	 * TODO
-	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore.
+	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore. Hiervoor
+	 * wordt eerst voor elke tegel die een speler heeft neergelegd alle tegels in een rij op de x-as
+	 * en alle tegels op een rij op de y-as in lijsten opgeslagen. Vervolgens worden deze lijsten
+	 * vergeleken met 
 	 * @param player
 	 */
 	public void generateScore() {
@@ -284,6 +301,22 @@ public class Game {
 		// TODO currentPlayer moet eventueel vervangen worden als de implementatie verandert.
 	}
 	
+	public static void main(String[] args){
+		ArrayList<Integer> a = new ArrayList<Integer>();
+		a.add(1);
+		a.add(2);
+		a.add(3);
+		a.add(4);
+		a.add(5);
+		a.add(6);
+		ArrayList<Integer> b = new ArrayList<Integer>();
+		b.add(1);
+		b.add(2);
+		b.add(2);
+		b.add(4);
+		System.out.print(b.retainAll(a));
+		
+	}
 	/**
 	 * Geeft een Map terug van de spelers in het spel.
 	 * @return this.players

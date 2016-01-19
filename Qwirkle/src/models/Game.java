@@ -247,9 +247,9 @@ public class Game {
 	 * Verwijderd alle laatst gezette tegels van een speler.
 	 * @throws InvalidMoveException 
 	 */
-	public void finishMove() throws InvalidMoveException {
+	public void finishMove(Player player) throws InvalidMoveException {
 		if(board.getLastMoves().size() != 0 || hasTraded == true){
-			generateScore();
+			generateScore(player);
 			board.clearLastMoves();
 			hasTraded = false;
 			nextPlayer();
@@ -258,11 +258,17 @@ public class Game {
 		}
 	}
 	/**
-	 * TODO
-	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore.
+	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore. Hiervoor
+	 * wordt eerst voor elke tegel die een speler heeft neergelegd alle tegels in een rij op de x-as
+	 * en alle tegels op een rij op de y-as in lijsten opgeslagen. Vervolgens worden deze lijsten
+	 * vergeleken met de lijst van tegels die als laatst zijn neergelegd. De tegels die als laatst
+	 * zijn neergelegd in een rij blijven over. Als dit meer dan 1 element is, moeten de punten van
+	 * deze rij maar één keer opgeteld worden, en niet het aantal keer dat een gelegde tegel in de
+	 * rij voorkomt. Als een rij een lengte van zes heeft wordt er een bonus toegevoegd. Nadat de 
+	 * score is berekend wordt deze aan de speler toegevoegd.
 	 * @param player
 	 */
-	public void generateScore() {
+	public void generateScore(Player player) {
 		Point point = null;
 		boolean retainMultipleX = false;
 		boolean retainMultipleY = false;
@@ -275,15 +281,13 @@ public class Game {
 			int y = (int) point.getY();
 			row = board.tilesOnXAxis(x, y);
 			column = board.tilesOnYAxis(x, y);
-			ArrayList<Tile> commonX = new ArrayList<Tile>(board.getLastMoves());
-			ArrayList<Tile> commonY = new ArrayList<Tile>(board.getLastMoves());
-			commonX.retainAll(row);
-			commonY.retainAll(column);
+			ArrayList<Tile> commonX = deleteCommon(row, board.getLastMoves());
+			ArrayList<Tile> commonY = deleteCommon(column, board.getLastMoves());
 			retainMultipleX = commonX.size() > 1;
 			retainMultipleY = commonY.size() > 1;
-			if (retainMultipleX == true) {
+			if (retainMultipleX == false) {
 				score += column.size();
-			} else if (retainMultipleY == true) {
+			} else if (retainMultipleY == false) {
 				score += row.size();
 			}
 		}
@@ -291,12 +295,15 @@ public class Game {
 			score += row.size();
 		} else if (retainMultipleY == true) {
 			score += column.size();
-		} else {
-			score += row.size();
-			score += column.size();
 		}
-		currentPlayer.addScore(score); 
-		// TODO currentPlayer moet eventueel vervangen worden als de implementatie verandert.
+		player.addScore(score);
+	}
+	
+	public ArrayList<Tile> deleteCommon(ArrayList<Tile> listToKeep, ArrayList<Tile> listToRemove) {
+		ArrayList<Tile> copy = new ArrayList<Tile>(listToKeep);
+		copy.removeAll(listToRemove);
+		listToKeep.removeAll(copy);
+		return listToKeep;
 	}
 	
 	/**
