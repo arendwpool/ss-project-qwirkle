@@ -1,0 +1,87 @@
+package utils;
+
+import java.util.ArrayList;
+
+import exceptions.NoTilesLeftInPileException;
+import models.Game;
+import models.Pile;
+import models.Player;
+import models.Tile;
+
+public class ControllTilesUtil {
+	/**
+	 * Krijgt een lijst met de tegels die geruilt moeten worden. Hiervoor wordt eerst gekeken of de 
+	 * tegels die geruild moeten worden wel in de hand van de betreffende speler zijn. Daarna wordt 
+	 * er gekeken of de Pile wel genoeg stenen heeft om te ruilen. Als er aan deze twee voorwaarden 
+	 * zijn voldaan worden de tegel om te ruilen terug in de Pile gedaan. Vervolgens worden er de 
+	 * tegels uit de hand verwijderd van de player. Daarna wordt de methode setHand() aangeroepen 
+	 * om de hand weer aan te vullen. Als er niet genoeg tegels zijn wordt er een exceptie gegooit.
+	 * @param tilesToTrade
+	 * @param player
+	 * @throws NoTilesLeftInPileException
+	 */
+	public static void replaceTiles(ArrayList<Tile> tilesToTrade, Player player, Pile pile) 
+			throws NoTilesLeftInPileException {
+		boolean containsAll = true;
+		for (Tile tile : tilesToTrade) {
+			if (!player.getHand().contains(tile)) {
+				containsAll = false;
+			}
+		}
+		if (tilesToTrade.size() <= pile.getTiles().size() && containsAll == true) {
+			pile.getTiles().addAll(tilesToTrade);
+			player.getHand().removeAll(tilesToTrade);
+			setHand(player);
+			hasTraded = true;
+		} else {
+			throw new NoTilesLeftInPileException();
+		}
+	}
+
+	/**
+	 * Geeft een willekeurige tegel terug. Hiervoor wordt eerst de zak geshuffeld, waarna de eerste
+	 * tegel uit de Pile wordt teruggegeven. TODO niet meer!! De teruggegeven tegel wordt dan ook uit de zak 
+	 * verwijderd.
+	 * @return tile
+	 */
+	public Tile giveRandomTile() {
+		pile.shuffle();
+		Tile tile = pile.getTiles().get(0);
+		return tile;
+	}
+	
+	/**
+	 * 
+	 * Kijkt hoeveel tegels een gegeven speler in zijn hand heeft. Als dit minder dan 6 is worden er 
+	 * een aantal willekeurige tegels gegeven zodat de hand weer 6 tegels heeft.
+	 * @param player
+	 */
+	public static void setHand(Player player, Pile pile) {
+		int handSize = DEFAULT_HAND_SIZE - player.getHand().size();
+		for (int i = 0; i < handSize; i++) {
+			Tile tile = giveRandomTile();
+			pile.getTiles().remove(tile);
+			player.getHand().add(tile);
+		}
+	}
+
+	
+	/**
+	 * Vergelijkt Symbolen van twee verschillende Tiles.
+	 * @param tileA
+	 * @param tileB
+	 */
+	public static boolean compareSymbol(Tile tileA, Tile tileB) {
+		return tileA.getSymbol() == tileB.getSymbol();
+		
+	}
+	
+	/**
+	 * Vergelijkt Kleuren van twee verschillende Tiles.
+	 * @param tileA
+	 * @param tileB
+	 */
+	public static boolean compareColor(Tile tileA, Tile tileB) {
+		return tileA.getColor() == tileB.getColor();
+	}
+}

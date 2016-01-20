@@ -1,0 +1,92 @@
+package utils;
+
+import java.awt.Point;
+import java.util.ArrayList;
+
+import exceptions.InvalidMoveException;
+import models.Player;
+import models.Tile;
+
+public class ValidateMoveUtil {
+
+	/**
+	 * Geeft aan of een speler heeft geruilt in de plaats van een zet maken.
+	 */
+	private boolean hasTraded = false;
+	
+	/**
+	 * Bepaalt of het de eerste move van het spel iets of niet.
+	 */
+	public static boolean initialMove;
+	
+	/**
+	 * Geef een set met de tegels die de betreffende speler heeft neergelegd.
+	 */
+	private ArrayList<Tile> lastSet;
+	
+
+	/**
+	 * Verwijderd alle laatst gezette tegels van een speler.
+	 * @throws InvalidMoveException 
+	 */
+	public void finishMove(Player player) throws InvalidMoveException {
+		if(board.getLastMoves().size() != 0 || hasTraded == true){
+			generateScore(player);
+			board.clearLastMoves();
+			hasTraded = false;
+			nextPlayer();
+		}else{
+			throw new InvalidMoveException();
+		}
+	}
+
+	
+	/**
+	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore. Hiervoor
+	 * wordt eerst voor elke tegel die een speler heeft neergelegd alle tegels in een rij op de x-as
+	 * en alle tegels op een rij op de y-as in lijsten opgeslagen. Vervolgens worden deze lijsten
+	 * vergeleken met de lijst van tegels die als laatst zijn neergelegd. De tegels die als laatst
+	 * zijn neergelegd in een rij blijven over. Als dit meer dan 1 element is, moeten de punten van
+	 * deze rij maar één keer opgeteld worden, en niet het aantal keer dat een gelegde tegel in de
+	 * rij voorkomt. Als een rij een lengte van zes heeft wordt er een bonus toegevoegd. Nadat de 
+	 * score is berekend wordt deze aan de speler toegevoegd.
+	 * @param player
+	 */
+	public void generateScore(Player player) {
+		Point point = null;
+		boolean retainMultipleX = false;
+		boolean retainMultipleY = false;
+		ArrayList<Tile> row = null;
+		ArrayList<Tile> column = null;
+		int score = 0;
+		for (Tile tile : board.getLastMoves()) {
+			point = tile.getLocation();
+			int x = (int) point.getX();
+			int y = (int) point.getY();
+			row = board.tilesOnXAxis(x, y);
+			column = board.tilesOnYAxis(x, y);
+			ArrayList<Tile> commonX = deleteCommon(row, board.getLastMoves());
+			ArrayList<Tile> commonY = deleteCommon(column, board.getLastMoves());
+			retainMultipleX = commonX.size() > 1;
+			retainMultipleY = commonY.size() > 1;
+			if (retainMultipleX == false) {
+				score += column.size();
+			} else if (retainMultipleY == false) {
+				score += row.size();
+			}
+		}
+		if (retainMultipleX == true) {
+			score += row.size();
+		} else if (retainMultipleY == true) {
+			score += column.size();
+		}
+		player.addScore(score);
+	}
+	
+	public ArrayList<Tile> deleteCommon(ArrayList<Tile> listToKeep, ArrayList<Tile> listToRemove) {
+		ArrayList<Tile> copy = new ArrayList<Tile>(listToKeep);
+		copy.removeAll(listToRemove);
+		listToKeep.removeAll(copy);
+		return listToKeep;
+	}
+}

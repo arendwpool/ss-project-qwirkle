@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="models.Board"/>
 <fullyQualifiedTypeName name="exceptions.PlayerNotFoundException"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="utils.ControllTilesUtil"/>
+<fullyQualifiedTypeName name="utils.MoveUtils"/>
+<fullyQualifiedTypeName name="models.Pile"/>
+<fullyQualifiedTypeName name="util.MoveUtils"/>
+<fullyQualifiedTypeName name="models.Player"/>
+<fullyQualifiedTypeName name="models.HumanPlayer"/>
+<fullyQualifiedTypeName name="models.Board"/>
+<fullyQualifiedTypeName name="models.Game"/>
+<fullyQualifiedTypeName name="util.TileUtils"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,47 @@
+package tests;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
+import util.MoveUtils;
+import util.TileUtils;
+import org.junit.Before;
+import org.junit.Test;
+
+import exceptions.NoTilesLeftInPileException;
+import models.Player;
+import models.Tile;
+
+public class TileUtilsTest {
+	private Player testPlayer;
+
+	@Before
+	public void setUp() throws Exception {
+		testPlayer = new HumanPlayer("Test");
+	}
+
+
+	@Test
+	//TODO testen op traden van stenen die een speler niet heeft, en op een lege pile
+	public void testReplaceTiles(){
+		ArrayList<Tile> tilesToTrade = new ArrayList<Tile>();
+		TileUtils.setHand(testPlayer);
+		tilesToTrade.add(testPlayer.getHand().get(0));
+		tilesToTrade.add(testPlayer.getHand().get(1));
+		tilesToTrade.add(testPlayer.getHand().get(2));
+		for(Tile tile : testPlayer.getHand()){
+			System.out.println("first: " + tile.getColor()+tile.getSymbol());
+		}
+		try {
+			testGame.replaceTiles(tilesToTrade, testPlayer);
+		} catch (NoTilesLeftInPileException e) {
+			//Gebeurt niet in deze test
+			System.out.print("FOUT");
+		}
+		for(Tile tile : testPlayer.getHand()){
+			System.out.println("after: " + tile.getColor()+tile.getSymbol());
+		}
+	}
+
+}

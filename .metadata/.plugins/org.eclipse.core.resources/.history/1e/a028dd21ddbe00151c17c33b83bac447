@@ -1,0 +1,45 @@
+package tests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import exceptions.FullGameException;
+import models.HumanPlayer;
+import models.Player;
+import models.Tile;
+
+public class DetermineInitialPlayerTest {
+
+	@Before
+	public void setUp() throws Exception {
+		Game testGame = new Game(new Board(), 4);
+	}
+
+	@Test
+	public void testDetermineInitialPlayer(){
+		try {
+			testGame.addPlayer(testPlayer);
+			testGame.addPlayer(new HumanPlayer("1", testGame));
+			testGame.addPlayer(new HumanPlayer("2", testGame));
+			testGame.addPlayer(new HumanPlayer("3", testGame));
+		} catch (FullGameException e) {
+			//Gebeurt niet in deze test
+			System.out.println("TestNextPlayer vol");
+		}
+		for(Player player : testGame.getPlayers().keySet()){
+			//TODO reparenen: om een of andere manier worden de tegels niet uit de pile verwijderd
+			testGame.setHand(player);
+			testGame.getPile().shuffle();
+			for(Tile tile : player.getHand()){
+				System.out.println(player.getName() + ": " + tile.getColor()+tile.getSymbol());
+			}
+		}
+		testGame.determineInitialPlayer();
+		Player player = testGame.getCurrentPlayer();
+		System.out.println(player.getName());
+		assertTrue(testGame.getPlayers().keySet().contains(player));
+	}
+
+}

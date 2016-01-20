@@ -1,0 +1,8 @@
+1453242089919	Rename type 'ControllMoveUtil'
+1453242665071	Rename type 'ValidateMoveUtil'
+1453242688493	Rename type 'ControllTilesUtil'
+1453242928596	Rename local variable 'board'
+1453243310391	Rename method 'processMove'
+1453243930994	Rename package 'utils'
+1453244054669	Rename method 'finishMove'
+1453246160183	Delete element
