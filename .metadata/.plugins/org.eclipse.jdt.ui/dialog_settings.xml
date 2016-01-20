@@ -3,6 +3,12 @@
 	<section name="OptionalMessageDialog.hide.">
 		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
 	</section>
+<<<<<<< HEAD
+	<section name="SelfEncapsulateFieldWizard">
+		<item value="false" key="GenerateJavadoc"/>
+	</section>
+=======
+>>>>>>> 0988b41580402554ba5999bf033c9d5be9e8c5f4
 	<section name="completion_proposal_size">
 	</section>
 	<section name="JavaElementSearchActions">
@@ -11,11 +17,17 @@
 		<item value="400" key="height"/>
 		<item value="600" key="width"/>
 	</section>
+<<<<<<< HEAD
 	<section name="quick_assist_proposal_size">
 	</section>
 	<section name="NewClassWizardPage">
 		<item value="false" key="create_constructor"/>
 		<item value="true" key="create_unimplemented"/>
+=======
+<<<<<<< HEAD
+=======
+	<section name="RenameInformationPopup">
+>>>>>>> aee204da1b6cd0575b15efffc3d4ff011aa6e02d
 	</section>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
 		<item value="false" key="updateQualifiedNames"/>
@@ -25,7 +37,16 @@
 		<item value="false" key="updateTextualMatches"/>
 		<item value="false" key="updateSimilarElements"/>
 	</section>
+<<<<<<< HEAD
 	<section name="RenameInformationPopup">
+=======
+>>>>>>> 0988b41580402554ba5999bf033c9d5be9e8c5f4
+	<section name="NewClassWizardPage">
+		<item value="false" key="create_constructor"/>
+		<item value="true" key="create_unimplemented"/>
+	</section>
+	<section name="quick_assist_proposal_size">
+>>>>>>> aee204da1b6cd0575b15efffc3d4ff011aa6e02d
 	</section>
 	<section name="NewPackageWizardPage">
 		<item value="false" key="create_package_info_java"/>

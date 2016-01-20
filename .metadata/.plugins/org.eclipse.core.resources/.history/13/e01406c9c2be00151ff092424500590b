@@ -21,7 +21,7 @@ public class ComputerPlayer implements Player {
 	@Override
 	public ArrayList<Tile> getHand() {
 		// TODO Auto-generated method stub
-		return hand;
+		return null;
 	}
 
 	@Override
