@@ -1,5 +1,0 @@
-package exceptions;
-
-public abstract class FalseAmountOfTilesException extends Exception {
-
-}

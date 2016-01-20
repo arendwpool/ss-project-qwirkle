@@ -6,10 +6,10 @@
 <fullyQualifiedTypeName name="utils.ControllTilesUtil"/>
 <fullyQualifiedTypeName name="utils.MoveUtils"/>
 <fullyQualifiedTypeName name="models.Pile"/>
-<fullyQualifiedTypeName name="util.MoveUtils"/>
 <fullyQualifiedTypeName name="models.Player"/>
 <fullyQualifiedTypeName name="models.HumanPlayer"/>
 <fullyQualifiedTypeName name="models.Board"/>
 <fullyQualifiedTypeName name="models.Game"/>
 <fullyQualifiedTypeName name="util.TileUtils"/>
+<fullyQualifiedTypeName name="util.MoveUtils"/>
 </qualifiedTypeNameHistroy>

@@ -208,8 +208,7 @@ public class Board {
 			}
 		}
 		return contains;
-	}//TODO klopt dit?
-	
+	}
 	
 	
 	/**
