@@ -1,22 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="exceptions.PlayerNotFoundException"/>
-<fullyQualifiedTypeName name="java.util.Arrays"/>
-<fullyQualifiedTypeName name="utils.ControllTilesUtil"/>
-<fullyQualifiedTypeName name="utils.MoveUtils"/>
-<<<<<<< HEAD
-<fullyQualifiedTypeName name="models.Pile"/>
-=======
->>>>>>> a6d32570dd7d9123ac411d3158acdefd9cce8161
-<fullyQualifiedTypeName name="models.Player"/>
-<fullyQualifiedTypeName name="models.Game"/>
-<fullyQualifiedTypeName name="util.TileUtils"/>
-<<<<<<< HEAD
-=======
-<fullyQualifiedTypeName name="java.util.Random"/>
-<fullyQualifiedTypeName name="models.Board"/>
-<fullyQualifiedTypeName name="models.HumanPlayer"/>
-<fullyQualifiedTypeName name="models.Pile"/>
->>>>>>> a6d32570dd7d9123ac411d3158acdefd9cce8161
-<fullyQualifiedTypeName name="util.MoveUtils"/>
-</qualifiedTypeNameHistroy>
+<qualifiedTypeNameHistroy/>
