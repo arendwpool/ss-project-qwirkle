@@ -1,15 +1,14 @@
 package tests;
 
-import static org.junit.Assert.*;
 import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
-
 import exceptions.InvalidMoveException;
 import exceptions.NoTilesLeftInPileException;
 import models.Board;
 import models.Game;
 import models.HumanPlayer;
+import models.Pile;
 import models.Player;
 import models.Tile;
 import util.MoveUtils;
@@ -25,7 +24,8 @@ public class MoveUtilsTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		testGame = new Game(new Board(), 4);
+		Pile pile = new Pile();
+		testGame = new Game(new Board(), pile, 4);
 		testPlayer = new HumanPlayer("test", testGame);
 	}
 	@Test

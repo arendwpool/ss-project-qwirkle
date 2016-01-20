@@ -1,6 +1,8 @@
 package util;
 
+import models.Board;
 import models.Game;
+import models.HumanPlayer;
 import models.Pile;
 import models.Player;
 import models.Tile;
@@ -15,7 +17,6 @@ public class TileUtils {
 	public static Tile giveRandomTile(Pile pile) {
 		pile.shuffle();
 		Tile tile = pile.getTiles().get(0);
-		pile.removeTile(0);
 		return tile;
 	}
 	
@@ -26,13 +27,13 @@ public class TileUtils {
 	 * @param player
 	 */
 	public static void setHand(Player player, Pile pile) {
-		int handSize = Game.DEFAULT_HAND_SIZE - player.getHand().size();
-		for (int i = 0; i < handSize; i++) {
+		int noOfTilesToGive = Game.DEFAULT_HAND_SIZE - player.getHand().size();
+		for(int i = 0; i < noOfTilesToGive; i++){
 			Tile tile = giveRandomTile(pile);
 			player.getHand().add(tile);
+			pile.removeTile(tile);
 		}
 	}
-
 	
 	/**
 	 * Vergelijkt Symbolen van twee verschillende Tiles.

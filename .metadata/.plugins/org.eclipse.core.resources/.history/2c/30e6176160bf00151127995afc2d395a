@@ -1,0 +1,89 @@
+package models;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Pile {
+	
+	
+	/**
+	 * Aantal tegels in een spel.
+	 */
+	public static final int NUMBER_TILES = 108;
+	/**
+	 * het aantal verschillende symbolen van de tegels.
+	 */
+	public static final int NUMBER_SYMBOLS = 6;
+	
+	/**
+	 * Het aantal verschillende kleluren van de tegels.
+	 */
+	public static final int NUMBER_COLORS = 6;
+	
+	/**
+	 * Het aantal duplicate tegels in een spel.
+	 */
+	public static final int NUMBER_DUPLICATES = 3;
+	
+	/**
+	 * Een lijst met alle tegels die in de zak zitten.
+	 */
+	private ArrayList<Tile> tiles;
+	
+	
+	/**
+	 * Construeert een Pile voor een bepaalde game.
+	 * Hij doet die door eerst een zak met tiles te genereren.
+	 * Zodra de de zak genereert is wordt meteen geschudt. 
+	 */
+	public Pile() {
+		generateTiles();
+		shuffle();
+	
+	}
+	/**
+	 * Genereert het aantal tegels NUMBER_TILES. Elke Tegel binnen dit aantal tegels
+	 * wordt gekoppeld aan één kleur en één symbool.
+	 * Binnen dit aantal zijn ook een een duplicaten NUMBER_DUPLICATES.   
+	 */
+	public void generateTiles() {
+		tiles = new ArrayList<Tile>();
+		for (int color = 0; color < NUMBER_COLORS * NUMBER_DUPLICATES; color++) {
+			for (int symbol = 0; symbol < NUMBER_SYMBOLS; symbol++) {
+				tiles.add(new Tile(Tile.kleuren[color % NUMBER_COLORS], Tile.symbolen[symbol]));
+			}
+		}
+		
+	}
+	/**
+	 * Schud de zak een aantal keer.
+	 */
+	public void shuffle() {
+		Collections.shuffle(tiles);
+		Collections.shuffle(tiles);
+		Collections.shuffle(tiles);
+	}
+	
+	/**
+	 * Weergeeft de overgebleven tiles in de zak in een lijst.
+	 * @return this.tiles
+	 */
+	public ArrayList<Tile> getTiles() {
+		return tiles;
+	}
+	
+	/**
+	 * Haalt een tegel met een bepaalde index uit de lijst met tiles.
+	 * @param index
+	 */
+	public void removeTile(int index) {
+		tiles.remove(index);
+	}
+	
+	public static void main(String[] args) {
+		Pile pile = new Pile();
+		for (Tile tile : pile.tiles) {
+			System.out.println(tile.getColor() + tile.getSymbol());
+		}
+	}
+}

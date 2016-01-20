@@ -79,11 +79,11 @@ public class Pile {
 	public void removeTile(int index) {
 		tiles.remove(index);
 	}
-	
-	public static void main(String[] args) {
-		Pile pile = new Pile();
-		for (Tile tile : pile.tiles) {
-			System.out.println(tile.getColor() + tile.getSymbol());
-		}
+	/**
+	 * Haalt een bepaalde tile uit de zak.
+	 * @param tile
+	 */
+	public void removeTile(Tile tile) {
+		tiles.remove(tile);
 	}
 }

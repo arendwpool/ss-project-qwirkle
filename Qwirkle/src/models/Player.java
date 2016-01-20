@@ -6,7 +6,7 @@ public interface Player {
 	
 	public String getName();
 	
-	public int determineMove();
+	public void determineMove();
 	
 	/**
 	 * Geef een set met de tegels die de betreffende speler heeft
