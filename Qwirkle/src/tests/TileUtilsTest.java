@@ -8,17 +8,21 @@ import org.junit.Test;
 import models.Board;
 import models.Game;
 import models.HumanPlayer;
+import models.Pile;
 import models.Player;
 import models.Tile;
 
 public class TileUtilsTest {
 	private Player testPlayer;
+	private Player testPlayer2;
 	private Game testGame;
 
 	@Before
 	public void setUp() throws Exception {
-		testGame = new Game(new Board(), 4);
+		Pile pile = new Pile();
+		testGame = new Game(new Board(), pile, 4);
 		testPlayer = new HumanPlayer("Test", testGame);
+		testPlayer2 = new HumanPlayer("Test2", testGame);
 	}
 	
 	@Test
@@ -29,32 +33,12 @@ public class TileUtilsTest {
 	
 	@Test
 	public void testSetHand(){
-		assertTrue("De hand is leeg", testPlayer.getHand().size() == 0);
 		TileUtils.setHand(testPlayer, testGame.getPile());
-		System.out.println(testGame.getPile().getTiles().size());
-		assertFalse("De hand heeft geen null tegels", testPlayer.getHand().contains(null));
-		assertTrue("De hand heeft 6 tegels", testPlayer.getHand().size() == 6);
-		System.out.println();
-		assertTrue("De pile heeft nu 6 tegels minder", testGame.getPile().getTiles().size() == 102);
-		Player testPlayer2 = new HumanPlayer("test2", testGame);
+		assertEquals(102, testGame.getPile().getTiles().size());
 		TileUtils.setHand(testPlayer2, testGame.getPile());
-		for(Tile tile : testPlayer.getHand()){
-			System.out.println(tile.getColor()+tile.getSymbol());
-		}
-		for(Tile tile : testPlayer.getHand()){
-			System.out.println(tile.getColor()+tile.getSymbol());
-		}
-		assertTrue("De tweede speler heeft nu ook 6 tegels", testPlayer2.getHand().size() == 6);
-		assertTrue("De pile heeft nu 6 tegels minder", testGame.getPile().getTiles().size() == 96);
-		//TODO werkt nog niet?!!
-		int noOfEqual = 0;
-		for(int i = 0; i < testPlayer.getHand().size(); i++){
-			if(testPlayer2.getHand().contains(testPlayer.getHand().get(i))){
-				noOfEqual++;
-			}
-		}
-		System.out.println(noOfEqual);
-		assertTrue(noOfEqual<testPlayer.getHand().size());
+		assertEquals(96, testGame.getPile().getTiles().size());
+		assertFalse(testPlayer.getHand().equals(testPlayer2.getHand()));
+		
 	}
 	
 	//TODO bobs testen toevoegen

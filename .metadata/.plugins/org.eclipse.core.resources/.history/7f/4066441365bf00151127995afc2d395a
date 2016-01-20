@@ -1,0 +1,94 @@
+package util;
+
+import models.Board;
+import models.Game;
+import models.HumanPlayer;
+import models.Pile;
+import models.Player;
+import models.Tile;
+
+public class TileUtils {
+	/**
+	 * Geeft een willekeurige tegel terug. Hiervoor wordt eerst de zak geshuffeld, waarna de eerste
+	 * tegel uit de Pile wordt teruggegeven. De teruggegeven tegel wordt dan ook uit de zak 
+	 * verwijderd.
+	 * @return tile
+	 */
+	public static Tile giveRandomTile(Pile pile) {
+		pile.shuffle();
+		Tile tile = pile.getTiles().get(0);
+		return tile;
+	}
+	
+	/**
+	 * 
+	 * Kijkt hoeveel tegels een gegeven speler in zijn hand heeft. Als dit minder dan 6 is worden er 
+	 * een aantal willekeurige tegels gegeven zodat de hand weer 6 tegels heeft.
+	 * @param player
+	 */
+	public static void setHand(Player player, Pile pile) {
+		int noOfTilesToGive = Game.DEFAULT_HAND_SIZE - player.getHand().size();
+		for(int i = 0; i < noOfTilesToGive; i++){
+			Tile tile = giveRandomTile(pile);
+			player.getHand().add(tile);
+			pile.removeTile(tile);
+		}
+	}
+
+	public static void main(String[] args){
+		Pile pile = new Pile();
+		Board b = new Board();
+		Game a = new Game(b, pile, 4);
+		Player c = new HumanPlayer("1", a);
+		Player d = new HumanPlayer("2", a);
+		setHand(c, pile);
+		setHand(d, pile);
+		for(Player player : testGame.getPlayers().keySet()){
+			//TODO reparenen: om een of andere manier worden de tegels niet uit de pile verwijderd
+			for(Tile tile : player.getHand()){
+				System.out.println(player.getName() + ": " + tile.getColor()+tile.getSymbol());
+			}
+		}
+		
+		
+	}
+	
+	/**
+	 * Vergelijkt Symbolen van twee verschillende Tiles.
+	 * @param tileA
+	 * @param tileB
+	 */
+	public static boolean compareSymbol(Tile tileA, Tile tileB) {
+		return tileA.getSymbol() == tileB.getSymbol();
+		
+	}
+	
+	/**
+	 * Vergelijkt Kleuren van twee verschillende Tiles.
+	 * @param tileA
+	 * @param tileB
+	 */
+	public static boolean compareColor(Tile tileA, Tile tileB) {
+		return tileA.getColor() == tileB.getColor();
+	}
+
+	
+	/**
+	 * Controleert of er geen tegels meer zijn in de Pile en er een speler is die geen tegels meer 
+	 * heeft in zijn hand. 
+	 * @return !playerHasNoTiles || false
+	 */
+	public static boolean noTilesLeft(Game game) {
+		if (game.getPile().getTiles().size() == 0) {
+			boolean playerHasNoTiles = false;
+			for (Player player : game.getPlayers().keySet()) {
+				if (player.getHand().size() == 0) {
+					playerHasNoTiles = true;
+				}
+			}
+			return !playerHasNoTiles;
+		} else {
+			return false;
+		}
+	}
+}

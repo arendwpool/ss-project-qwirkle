@@ -1,0 +1,51 @@
+package tests;
+
+import static org.junit.Assert.*;
+
+import util.TileUtils;
+import org.junit.Before;
+import org.junit.Test;
+import models.Board;
+import models.Game;
+import models.HumanPlayer;
+import models.Pile;
+import models.Player;
+import models.Tile;
+
+public class TileUtilsTest {
+	private Player testPlayer;
+	private Player testPlayer2;
+	private Game testGame;
+
+	@Before
+	public void setUp() throws Exception {
+		Pile pile = new Pile();
+		testGame = new Game(new Board(), pile, 4);
+		testPlayer = new HumanPlayer("Test", testGame);
+		testPlayer2 = new HumanPlayer("Test2", testGame);
+	}
+	
+	@Test
+	public void testGiveRandomTile(){
+		Tile tile = TileUtils.giveRandomTile(testGame.getPile());
+		assertTrue(tile != null);
+	}
+	
+	@Test
+	public void testSetHand(){
+	for(int i = 0; i < 6; i++){
+		Tile tile = TileUtils.giveRandomTile(testGame.getPile());
+		testPlayer.getHand().add(tile);
+		testGame.getPile().removeTile(tile);
+	}
+		System.out.println(testGame.getPile().getTiles().size());
+		for(int i = 0; i < 6; i++){
+			Tile tile = TileUtils.giveRandomTile(testGame.getPile());
+			testPlayer2.getHand().add(tile);
+			testGame.getPile().removeTile(tile);
+		}
+		System.out.println(testGame.getPile().getTiles().size());
+	}
+	
+	//TODO bobs testen toevoegen
+}

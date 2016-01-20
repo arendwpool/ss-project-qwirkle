@@ -1,5 +1,0 @@
-package exceptions;
-
-public class NoTilesLeftException extends Exception {
-	private final String msg = "Er zijn geen tegels meer in de pot";
-}

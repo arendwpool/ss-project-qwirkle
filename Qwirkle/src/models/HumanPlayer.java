@@ -16,7 +16,7 @@ public class HumanPlayer implements Player {
 	/**
 	 * De tegels die de betreffende speler heeft.
 	 */
-	static ArrayList<Tile> hand;
+	private ArrayList<Tile> hand;
 	
 	/**
 	 * De score van de Speler.
