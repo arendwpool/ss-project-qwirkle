@@ -3,7 +3,6 @@ package models;
 import java.util.ArrayList;
 
 public class ComputerPlayer implements Player {
-	private static final String name = "Computer";
 	private ArrayList<Tile> hand;
 	
 	public ComputerPlayer() {
@@ -22,20 +21,23 @@ public class ComputerPlayer implements Player {
 	@Override
 	public ArrayList<Tile> getHand() {
 		// TODO Auto-generated method stub
-		return null;
+		return hand;
 	}
-	@Override
-	public void makeMove() {
-		// TODO Auto-generated method stub
-		
-	}
+
 	@Override
 	public int getScore() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 	@Override
-	public void addScore() {
+	public void makeMove(int x, int y, Tile tile, Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addScore(int points) {
 		// TODO Auto-generated method stub
 		
 	}

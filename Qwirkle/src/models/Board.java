@@ -90,32 +90,32 @@ public class Board {
 	 */
 	
 	public void boardSize() {
-		for (int x = 0; x <= DIM; x++) {
-			for (int y = 0; y <= DIM; y++) {
+		for (int x = 0; x < DIM; x++) {
+			for (int y = 0; y < DIM; y++) {
 				if (isEmptyField(x, y) == false) {
 					viewOfMaxX = x + 1;
 					break;
 				}
 			}
 		}
-		for (int x = DIM; x >= 0; x--) {
-			for (int y = 0; y <= DIM; y++) {
+		for (int x = DIM - 1; x >= 0; x--) {
+			for (int y = 0; y < DIM; y++) {
 				if (isEmptyField(x, y) == false) {
 					viewOfMinX = x - 1;
 					break;
 				}
 			}
 		}
-		for (int y = 0; y <= DIM; y++) {
-			for (int x = 0; x <= DIM; x++) {
+		for (int y = 0; y < DIM; y++) {
+			for (int x = 0; x < DIM; x++) {
 				if (isEmptyField(x, y) == false) {
 					viewOfMaxY = y + 1;
 					break;
 				}
 			}
 		}
-		for (int y = DIM; y >= 0; y--) {
-			for (int x = 0; x <= DIM; x++) {
+		for (int y = DIM - 1; y >= 0; y--) {
+			for (int x = 0; x < DIM; x++) {
 				if (isEmptyField(x, y) == false) {
 					viewOfMinY = y - 1;
 					break;
@@ -331,8 +331,8 @@ public class Board {
 	 * Maakt het hele board leeg.
 	 */
 	public void reset() {
-		for (int x = 0; x <= (DIM); x++) {
-			for (int y = 0; y <= (DIM); y++) {
+		for (int x = 0; x < DIM; x++) {
+			for (int y = 0; y < DIM; y++) {
 				setTile(x, y, new Tile("empty", "empty"));
 			}
 		}
