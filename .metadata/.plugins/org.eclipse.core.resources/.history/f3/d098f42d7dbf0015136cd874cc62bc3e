@@ -18,7 +18,7 @@ public class Board {
 	/**
 	 * Weergeeft de maximale breedte en hoogte van het bord.
 	 */
-	public static final int DIM = 179;
+	private static final int DIM = 179;
 	
 	/**
 	 * geeft de minimale startview van x weer.

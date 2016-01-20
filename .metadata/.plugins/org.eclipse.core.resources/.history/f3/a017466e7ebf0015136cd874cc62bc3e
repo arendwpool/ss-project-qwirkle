@@ -126,29 +126,12 @@ public class BoardTest {
 		testBoard.setTile(18, 43, tile2);
 		testBoard.setTile(2, 65, tile3);
 		testBoard.setTile(89, 8, tile4);
-		boolean containsEmpty = true;
-		for (int x = 0; x < Board.DIM; x++) {
-			for (int y = 0; y < Board.DIM; y++) {
-				if (!testBoard.isEmptyField(x, y)){
-					containsEmpty = false;
-					break;
-				}
+		for (int x = 0; x < testBoard.DIM; x++) {
+			for (int y = 0; y < testBoard.DIM; y++) {
 				
 			}
 		}
-		assertFalse(containsEmpty);
-		testBoard.reset();
-		boolean allIsEmpty = true;
-		for (int x = 0; x < Board.DIM; x++) {
-			for (int y = 0; y < Board.DIM; y++) {
-				if (!testBoard.isEmptyField(x, y)){
-					allIsEmpty = false;
-					break;
-				}
-				
-			}
-		}
-		assertTrue(allIsEmpty);
+		assertFalse(tile1 == null);
 	}
 	
 }
