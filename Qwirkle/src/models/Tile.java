@@ -10,7 +10,7 @@ public class Tile {
 	/**
 	 * De mogelijke symbolen die een tegel kan hebben.
 	 */
-	public static final String[] symbolen = {"circel", "kruis", "ruit", "vierkant", "ster", "plus"};
+	public static final String[] symbolen = {"cirkel", "kruis", "ruit", "vierkant", "ster", "plus"};
 	
 	/**
 	 * De mogelijke kleuren die een tegel kan hebben.

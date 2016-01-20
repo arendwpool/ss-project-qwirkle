@@ -1,0 +1,68 @@
+package controllers;
+
+import exceptions.FullGameException;
+import models.Board;
+import models.ComputerPlayer;
+import models.Game;
+import models.HumanPlayer;
+import models.Pile;
+import models.Player;
+import models.Tile;
+import view.BoardTUI;
+import view.StartTUI;
+import view.TUI;
+
+public class GameController {
+	private Game game;
+	private StartTUI ui;
+	private Player player;
+	private String ip;
+	private String playerName;
+	
+	public GameController(){
+	}
+	public static void main(String[] args){
+		GameController controller = new GameController();
+		controller.start();
+	}
+	
+	public void start(){
+		ui.start();
+	}
+	
+	public void createLocalPlayer(String name){
+		player = new HumanPlayer(name, game);
+		try {
+			game.addPlayer(player);
+		} catch (FullGameException e) {
+			System.out.println("De sessie die u wilt beginnen is al vol");
+		}
+	}
+	
+	public void createNewGame(){
+		game = new Game(new Board(), new Pile(), 2);
+	}
+	public void startGame(){
+		game.start();
+	}
+	
+	public void setIP(String ip){
+		this.ip = ip;
+	}
+	
+	public void setPlayerName(String name){
+		this.playerName = name;
+	}
+	public boolean isValidIP(String ip){
+		ip = ip.replace(".", " ");
+		String[] ints = ip.split(" ");
+		boolean isValidInt = true;
+		for(String integer : ints){
+			int i = Integer.parseInt(integer);
+				if(i > 255){
+					isValidInt = false;
+				}
+		}
+		return (isValidInt == true && ints.length == 4);
+	}
+}

@@ -6,6 +6,7 @@ import org.junit.Test;
 import exceptions.FullGameException;
 import exceptions.PlayerNotFoundException;
 import models.Board;
+import models.ComputerPlayer;
 import models.Game;
 import models.HumanPlayer;
 import models.Pile;
@@ -58,16 +59,11 @@ public class GameTest {
 	
 	@Test
 	public void testNextPlayer(){
-		try {
-			testGame.addPlayer(testPlayer);
-			testGame.addPlayer(new HumanPlayer("1", testGame));
-			testGame.addPlayer(new HumanPlayer("2", testGame));
-			testGame.addPlayer(new HumanPlayer("3", testGame));
-		} catch (FullGameException e) {
-			//Gebeurt niet in deze test
-			System.out.println("TestNextPlayer vol");
-		}
+		Player test2 = new HumanPlayer("2", testGame);
+		Player test3 = new HumanPlayer("2", testGame);
+		Player test4 = new HumanPlayer("2", testGame);
 		testGame.setCurrentPlayer(testPlayer);
+		System.out.println(testGame.getPlayers());
 		try{
 			assertTrue("De eerste speler heeft ID 1", testGame.getPlayerID(testGame.getCurrentPlayer()) == 1);
 			testGame.nextPlayer();
@@ -89,13 +85,12 @@ public class GameTest {
 	public void testDetermineInitialPlayer(){
 		Player player1 = new HumanPlayer("1", testGame);
 		Player player2 = new HumanPlayer("2", testGame);
-		Player player3 = new HumanPlayer("3", testGame);
+		Player player3 = new ComputerPlayer(testGame);
 		TileUtils.setHand(player1, testGame.getPile());
 		TileUtils.setHand(player2, testGame.getPile());
 		TileUtils.setHand(player3, testGame.getPile());
 		TileUtils.setHand(testPlayer, testGame.getPile());
 		for(Player player : testGame.getPlayers().keySet()){
-			//TODO reparenen: om een of andere manier worden de tegels niet uit de pile verwijderd
 			for(Tile tile : player.getHand()){
 				System.out.println(player.getName() + ": " + tile.getColor()+tile.getSymbol());
 			}

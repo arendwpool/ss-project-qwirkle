@@ -23,22 +23,22 @@ public class Board {
 	/**
 	 * geeft de minimale startview van x weer.
 	 */
-	public int viewOfMinX = 88;
+	public int viewOfMinX = 89;
 	
 	/**
 	 * geeft de maximale startview van x weer.
 	 */
-	public int viewOfMaxX = 92;
+	public int viewOfMaxX = 91;
 	
 	/**
 	 * geeft de minimale startview van y weer.
 	 */
-	public int viewOfMinY = 88;
+	public int viewOfMinY = 89;
 	
 	/**
 	 * geeft de maximale startview van y weer.
 	 */
-	public int viewOfMaxY = 92;
+	public int viewOfMaxY = 91;
 	
 	/**
 	 * geeft het midden punt van x weer.

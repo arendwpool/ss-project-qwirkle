@@ -50,6 +50,9 @@ public class MoveUtils {
 		}
 	}
 
+	public static void setInitialMove(boolean bl){
+		initialMove = bl;
+	}
 	
 	/**
 	 * genereer de score van een bepaalde move en stuurt deze door aan de methode addScore. Hiervoor
@@ -175,7 +178,7 @@ public class MoveUtils {
 	 */
 	public static void replaceTiles(ArrayList<Tile> tilesToTrade, Player player, Pile pile) 
 			throws NoTilesLeftInPileException, InvalidMoveException {
-		if (madeMove == false){
+		if (madeMove == false && initialMove == false){
 			boolean containsAll = true;
 			hasTraded = true;
 			for (Tile tile : tilesToTrade) {
@@ -202,12 +205,15 @@ public class MoveUtils {
 	 * @param tile
 	 */
 	public static void makeMove(int x, int y, Tile tile, Board board) throws InvalidMoveException {
-		if (hasTraded == false) {
-			if (isValidMove(x, y, tile, board) && (board.sharedLine(tile, board.tilesOnYAxis(x, y)) 
-					|| board.sharedLine(tile, board.tilesOnXAxis(x, y)))) {
+		if (hasTraded == false && initialMove == false) {
+			if (isValidMove(x, y, tile, board) && ((board.sharedLine(tile, board.tilesOnYAxis(x, y)) 
+					&& !board.sharedLine(tile, board.tilesOnXAxis(x, y))) || ((!board.sharedLine(tile, board.tilesOnYAxis(x, y)) 
+							&& board.sharedLine(tile, board.tilesOnXAxis(x, y)))))) {
 				board.setTile(x, y, tile);
 				rememberMove(tile);
-			}
+			} 
+		} else if(initialMove == true){
+			board.setTile(90, 90, tile);
 		} else {
 			throw new InvalidMoveException();
 		}

@@ -18,6 +18,7 @@ public class ComputerPlayer implements Player {
 	private Game game;
 	
 	public ComputerPlayer(Game game) {
+		hand = new ArrayList<Tile>();
 		this.game = game;
 		score = 0;
 		try {

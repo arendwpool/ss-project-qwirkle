@@ -2,6 +2,8 @@ package models;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
+
 import exceptions.FullGameException;
 import exceptions.InvalidMoveException;
 import exceptions.NoTilesLeftInPileException;
@@ -14,7 +16,7 @@ import util.TileUtils;
  * @author Bob Breemhaar en Arend Pool
  *
  */
-public class Game {
+public class Game extends Observable{
 	/**
 	 * Geeft de grootte van een hand aan in normale omstandigheden.
 	 */
@@ -47,6 +49,8 @@ public class Game {
 	 */
 	private Pile pile;
 	
+	private boolean moveMade;
+	
 	/**
 	 * Contrueert  een nieuw spel. Hierbij worden het board element en het aantal spelers opgeslagen
 	 * in de lokale variabelen. Er wordt in de constructor ook een nieuwe Pile instantie gemaakt.
@@ -58,6 +62,7 @@ public class Game {
 		this.board = board;
 		this.pile = pile;
 		players = new HashMap<Player, Integer>();
+		moveMade = false;
 	}
 	
 	/**
@@ -105,15 +110,24 @@ public class Game {
 	 * Start het spel.
 	 */
 	public void start() {
-		//TODO te implementeren als de tijd rijp is
+		for (Player player : players.keySet()) {
+			TileUtils.setHand(player, pile);
+		}
+		MoveUtils.setInitialMove(true);
+		determineInitialPlayer();
+		System.out.println(currentPlayer.getName());
+		/*while (!gameOver()) {
+			if (moveMade == true) {
+				update();
+			}
+		}*/
 	}
 	
 	/**
 	 * Update de situatie van het spel na elke actie van een speler.
 	 */
 	public void update() {
-		//TODO te implementeren als de tijd rijp is
-		
+		board.boardSize();		
 	}
 	
 	/**
@@ -133,7 +147,7 @@ public class Game {
 	 */
 	public void addPlayer(Player player) throws FullGameException {
 		if (players.keySet().size() <= noOfPlayers) {
-			players.put(player, players.keySet().size());
+			players.put(player, players.keySet().size()+1);
 		} else {
 			throw new FullGameException();
 		}
@@ -240,6 +254,8 @@ public class Game {
 	 */
 	public void makeMove(int x, int y, Tile tile) throws InvalidMoveException {
 		MoveUtils.makeMove(x, y, tile, board);
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**
@@ -249,6 +265,9 @@ public class Game {
 	 */
 	public void finishMove(Player player) throws InvalidMoveException{
 		MoveUtils.processMove(player, this);
+		moveMade = true;
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**
