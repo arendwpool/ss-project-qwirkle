@@ -1,0 +1,63 @@
+package models;
+
+import java.util.ArrayList;
+
+import exceptions.FullGameException;
+import exceptions.InvalidMoveException;
+
+public class ComputerPlayer implements Player {
+	private ArrayList<Tile> hand;
+	private final String name = "Computer";
+	private int score;
+	
+	/**
+	 * Koppelt de speler aan een spel.
+	 */
+	private Game game;
+	
+	public ComputerPlayer(Game game) {
+		this.game = game;
+		score = 0;
+		try {
+			game.addPlayer(this);
+		} catch (FullGameException e) {
+			//TODO implement
+		}
+	}
+	
+	@Override
+	public String getName() {
+		return name;
+	}
+	@Override
+	public int determineMove() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public ArrayList<Tile> getHand() {
+		return hand;
+	}
+
+	@Override
+	public int getScore() {
+		return score;
+	}
+
+	@Override
+	public void makeMove(int x, int y, Tile tile, Player player) {
+		try {
+			game.makeMove(x, y, tile);
+		} catch (InvalidMoveException e) {
+			// TODO implementeren
+		}
+		
+	}
+
+	@Override
+	public void addScore(int points) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -18,7 +18,7 @@ public class Board {
 	/**
 	 * Weergeeft de maximale breedte en hoogte van het bord.
 	 */
-	private static final int DIM = 179;
+	public static final int DIM = 179;
 	
 	/**
 	 * geeft de minimale startview van x weer.
@@ -226,13 +226,8 @@ public class Board {
 	 * Maakt het hele board leeg.
 	 */
 	public void reset() {
-<<<<<<< HEAD
 		for (int x = 0; x < DIM; x++) {
 			for (int y = 0; y < DIM; y++) {
-=======
-		for (int x = 0; x < (DIM); x++) {
-			for (int y = 0; y < (DIM); y++) {
->>>>>>> 0988b41580402554ba5999bf033c9d5be9e8c5f4
 				setTile(x, y, new Tile("empty", "empty"));
 			}
 		}

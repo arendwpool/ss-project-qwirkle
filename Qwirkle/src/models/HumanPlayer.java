@@ -2,6 +2,7 @@ package models;
 
 import java.util.ArrayList;
 import exceptions.FullGameException;
+import exceptions.InvalidMoveException;
 
 public class HumanPlayer implements Player {
 	/**
@@ -21,7 +22,7 @@ public class HumanPlayer implements Player {
 	/**
 	 * De score van de Speler.
 	 */
-	private int score;
+	private int score = 0;
 	
 	/**
 	 * construeert een nieuwe menselijke speler. Deze speler krijgt een hand met tiles mee.
@@ -55,9 +56,8 @@ public class HumanPlayer implements Player {
 	 * De speler hoeft zich echter niet aan suggestie te houden.
 	 */
 	@Override
-	public int determineMove() {
+	public void determineMove() {
 		// TODO Auto-generated method stub
-		return 0;
 	}
 	
 	/**
@@ -75,11 +75,14 @@ public class HumanPlayer implements Player {
 	 * @param x
 	 * @param y
 	 * @param tile
-	 * @param player
 	 */
 	@Override
 	public void makeMove(int x, int y, Tile tile, Player player) {
-		game.makeMove(x, y, tile, player);
+		try {
+			game.makeMove(x, y, tile);
+		} catch (InvalidMoveException e) {
+			// TODO implementeren
+		}
 		
 	}
 

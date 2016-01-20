@@ -212,4 +212,12 @@ public class MoveUtils {
 			throw new InvalidMoveException();
 		}
 	}
+	
+	public static boolean madeMove(){
+		return madeMove;
+	}
+	
+	public static boolean hasTraded(){
+		return hasTraded;
+	}
 }
