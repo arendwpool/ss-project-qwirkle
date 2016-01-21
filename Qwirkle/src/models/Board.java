@@ -144,20 +144,24 @@ public class Board {
 			xAxis.add(getField(x, y));
 		}
 		while (leftIsEmpty == false) {
-			x--;
-			if (isEmptyField(x, y) == false) {
-				xAxis.add(getField(x, y));
-			} else {
-				break; 
+			if (x != 0) {
+				x--;
+				if (isEmptyField(x, y) == false) {
+					xAxis.add(getField(x, y));
+				} else {
+					break; 
+				}
 			}
 		}
 		x = xOrig;
 		while (rightIsEmpty == false) {
-			x++;
-			if (isEmptyField(x, y) == false) {
-				xAxis.add(getField(x, y));
-			} else {
-				break; 
+			if (x != Board.DIM) {
+				x++;
+				if (isEmptyField(x, y) == false) {
+					xAxis.add(getField(x, y));
+				} else {
+					break; 
+				}
 			}
 		}
 		return xAxis;
@@ -176,20 +180,24 @@ public class Board {
 			yAxis.add(getField(x, y));
 		}
 		while (lowerIsEmpty == false) {
-			y--;
-			if (isEmptyField(x, y) == false) {
-				yAxis.add(getField(x, y));
-			} else {
-				break; 
+			if (y != 0) {
+				y--;
+				if (isEmptyField(x, y) == false) {
+					yAxis.add(getField(x, y));
+				} else {
+					break; 
+				}
 			}
 		}
 		y = yOrig;
 		while (upperIsEmpty == false) {
-			y++;
-			if (isEmptyField(x, y) == false) {
-				yAxis.add(getField(x, y));
-			} else {
-				break; 
+			if (y != Board.DIM) {
+				y++;
+				if (isEmptyField(x, y) == false) {
+					yAxis.add(getField(x, y));
+				} else {
+					break; 
+				}
 			}
 		}
 		return yAxis;

@@ -45,11 +45,7 @@ public class StartTUI extends TUI implements Observer{
 			choice = determineOption();
 			createSpace();
 			if (choice == 1) {
-				gc.createLocalPlayer(gc.getPlayerName());
-				Player pc = new ComputerPlayer(gc.getGame());
-				gc.startGame();
-				if(gc.getGame().getCurrentPlayer().equals(gc.getLocalPlayer())) //TODO weghalen
-				gc.getBoardTUI().start();
+				//Doet niets, dit zorgt dat de controller door kan gaan
 			}
 		} else if (choice == 2) {
 			//TODO doe iets

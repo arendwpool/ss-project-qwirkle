@@ -1,6 +1,9 @@
 package controllers;
 
-import exceptions.FullGameException;
+import java.util.ArrayList;
+
+import exceptions.InvalidMoveException;
+import exceptions.NoTilesLeftInPileException;
 import models.Board;
 import models.ComputerPlayer;
 import models.Game;
@@ -19,13 +22,16 @@ public class GameController {
 	private Player player;
 	private String ip;
 	private String playerName;
+	private static final String SEPERATOR = " ";
 	
 	public GameController(){
 		ui = new StartTUI(this);
-		game = new Game(new Board(), new Pile(), 2);
+		game = new Game(new Board(), new Pile(), 4); // TODO veranderen
 		bui = new BoardTUI(this, game);
 		game.addObserver(ui);
 		game.addObserver(bui);
+		game.getPile().addObserver(ui);
+		game.getPile().addObserver(bui);
 	}
 	public static void main(String[] args){
 		GameController controller = new GameController();
@@ -36,8 +42,43 @@ public class GameController {
 		return bui;
 	}
 	
+	public Player getCurrentPlayer(){
+		return game.getCurrentPlayer();
+	}
+	
 	public void start(){
 		ui.start();
+		createLocalPlayer(playerName);
+		Player pc = new ComputerPlayer(game); // TODO weghalen later
+		Player pc1 = new ComputerPlayer(game);
+		Player pc2 = new ComputerPlayer(game);
+		((ComputerPlayer) pc).addObserver(bui);
+		game.start();
+		game.determineInitialPlayer();
+		bui.start();
+		updateGame();
+	}
+
+	public void updateGame(){
+		while (game.gameOver() == false) {
+			bui.showCurrentPlayer();
+			if (game.getCurrentPlayer() instanceof ComputerPlayer) {
+				game.getCurrentPlayer().determineMove();
+			} else {
+				game.setFinishedMove(false);
+				bui.askForInput(game.getCurrentPlayer());
+			}
+			game.nextPlayer();
+		}
+	}
+	
+	public void done(Player player){
+		try {
+			game.finishMove(player);
+		} catch (InvalidMoveException e) {
+			e.printStackTrace();
+			//System.out.println("er is iets verkeerd gegaan");
+		}
 	}
 	
 	public void createLocalPlayer(String name){
@@ -46,9 +87,6 @@ public class GameController {
 	
 	public Player getLocalPlayer(){
 		return player;
-	}
-	public void startGame(){
-		game.start();
 	}
 	
 	public Game getGame(){
@@ -62,10 +100,7 @@ public class GameController {
 	public void setPlayerName(String name){
 		this.playerName = name;
 	}
-	
-	public String getPlayerName(){
-		return playerName;
-	}
+
 	public boolean isValidIP(String ip){
 		ip = ip.replace(".", " ");
 		String[] ints = ip.split(" ");
@@ -77,5 +112,38 @@ public class GameController {
 				}
 		}
 		return (isValidInt == true && ints.length == 4);
+	}
+
+	
+	public void determineMove(String string, Player player) {
+		ArrayList<Tile> tiles = player.getHand();
+		String[] moveArray = string.split(SEPERATOR);
+		int tileNumber = Integer.parseInt(moveArray[0]) - 1;
+		Tile tile = tiles.get(tileNumber);		
+		int x = Integer.parseInt(moveArray[1])+90;
+		int y = Integer.parseInt(moveArray[2])+90;
+		try {
+			player.makeMove(x, y, tile);
+		} catch (InvalidMoveException e) {
+			System.out.println("Deze move mag niet");
+		}
+	}
+	
+	public void determineSwap(String string, Player player) {
+		ArrayList<Tile> tiles = player.getHand();
+		String[] swapArray = string.split(SEPERATOR);
+		ArrayList<Tile> tilesToSwap = new ArrayList<Tile>();
+		for (int i = 0; i < swapArray.length; i++) {
+			int tileNumber = Integer.parseInt(swapArray[i]) - 1;
+			Tile tile = tiles.get(tileNumber);
+			tilesToSwap.add(tile);
+		}
+		try {
+			game.swapTiles(tilesToSwap, player);
+		} catch (NoTilesLeftInPileException e) {
+			System.out.println("Er zitten geen tegels meer in de zak");
+		} catch (InvalidMoveException e) {
+			System.out.println("U mag nu niet ruilen");
+		}		
 	}
 }

@@ -1,16 +1,18 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 import exceptions.FullGameException;
 import exceptions.InvalidMoveException;
 import exceptions.NoTilesLeftInPileException;
 import util.MoveUtils;
 
-public class ComputerPlayer implements Player {
+public class ComputerPlayer extends Observable implements Player {
 	private ArrayList<Tile> hand;
 	private final String name = "Computer";
 	private int score;
+	public boolean moveMade = false;
 	
 	/**
 	 * Koppelt de speler aan een spel.
@@ -34,23 +36,28 @@ public class ComputerPlayer implements Player {
 	}
 	@Override
 	public void determineMove() {
-		for(Tile tile: hand){
-			for(int x = 0; x < Board.DIM; x++){
-				for(int y = 0; y < Board.DIM; y++){
-					if(MoveUtils.isValidMove(x, y, tile, game.getBoard())){
-						makeMove(x, y, tile, this);
+		if (game.getBoard().isEmptyField(90, 90)) {
+			makeMove(90, 90, hand.get(0));
+		} else {
+			for(Tile tile: hand){
+				for(int x = 0; x < Board.DIM; x++){
+					for(int y = 0; y < Board.DIM; y++){
+						if(MoveUtils.isValidMove(x, y, tile, game.getBoard())){
+							makeMove(x, y, tile);
+							System.out.println("PC heeft wat gedaan");
+						}
 					}
-				}
-			}
-			if(MoveUtils.hasTraded() == false){
-				try {
-					MoveUtils.replaceTiles(hand, this, game.getPile());
-				} catch (NoTilesLeftInPileException | InvalidMoveException e) {
-					// TODO Auto-generated catch block
-				}
+				}/*
+				if(MoveUtils.madeMove() == false){
+					try {
+						MoveUtils.replaceTiles(hand, this, game.getPile());
+					} catch (NoTilesLeftInPileException | InvalidMoveException e) {
+						// TODO Auto-generated catch block
+					}
+				}*/
 			}
 		}
-	}
+	}	
 	@Override
 	public ArrayList<Tile> getHand() {
 		return hand;
@@ -62,15 +69,19 @@ public class ComputerPlayer implements Player {
 	}
 
 	@Override
-	public void makeMove(int x, int y, Tile tile, Player player) {
+	public void makeMove(int x, int y, Tile tile) {
 		try {
-			game.makeMove(x, y, tile);
+			game.makeMove(x, y, tile, this);
+			signalController();
 		} catch (InvalidMoveException e) {
 			// TODO implementeren
 		}
-		
 	}
 
+	public void signalController(){
+		setChanged();
+		notifyObservers("PCMadeMove");
+	}
 	@Override
 	public void addScore(int points) {
 		score += points;		

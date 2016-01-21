@@ -1,10 +1,14 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Scanner;
+
 import exceptions.FullGameException;
 import exceptions.InvalidMoveException;
+import util.MoveUtils;
 
-public class HumanPlayer implements Player {
+public class HumanPlayer extends Observable  implements Player {
 	/**
 	 * De naam van de betreffende speler.
 	 */
@@ -57,7 +61,7 @@ public class HumanPlayer implements Player {
 	 */
 	@Override
 	public void determineMove() {
-		// TODO Auto-generated method stub
+		
 	}
 	
 	/**
@@ -75,14 +79,11 @@ public class HumanPlayer implements Player {
 	 * @param x
 	 * @param y
 	 * @param tile
+	 * @throws InvalidMoveException 
 	 */
 	@Override
-	public void makeMove(int x, int y, Tile tile, Player player) {
-		try {
-			game.makeMove(x, y, tile);
-		} catch (InvalidMoveException e) {
-			// TODO implementeren
-		}
+	public void makeMove(int x, int y, Tile tile) throws InvalidMoveException {
+		game.makeMove(x, y, tile, this);
 		
 	}
 

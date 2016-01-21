@@ -5,8 +5,11 @@ import java.util.Observable;
 
 import controllers.GameController;
 import exceptions.InvalidMoveException;
+import exceptions.NoTilesLeftInPileException;
 import models.Game;
+import models.Player;
 import models.Tile;
+import util.MoveUtils;
 
 public class BoardTUI extends TUI{
 	public BoardTUI(GameController gc, Game game) {
@@ -20,29 +23,59 @@ public class BoardTUI extends TUI{
 	private String swap;
 	private static final String[] BOARD_MENU = {"Als u aan de beurt ben kan u tegels ruilen of neerleggen. Dit gaat per tegel, aan het eind van uw beurt drukt u op: klaar.", "Een tegel neerleggen: ", "Een tegel ruilen", "Klaar"};
 	private static final String[] SET_TILE_MENU = {"Typ uw keuze in de vorm: [tegelnummer] [x] [y]", "Uw keuze:"};
-	private static final String[] SWAP_TILE_MENU = {"Typ uw keuze in de vorm: tegelnummer tegelnummer etc.", "Uw keuze"};
+	private static final String[] SWAP_TILE_MENU = {"Typ uw keuze in de vorm: [tegelnummer] [tegelnummer] etc.", "Uw keuze"};
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		System.out.println("Geupdated");
-		game.getBoard().boardSize();
-		start();
+		if (arg1 != null && arg1.equals("PCMadeMove")) {
+			gc.done((Player) arg0); 
+		} /*else if (arg1 != null && arg1.equals("moveFinished")) { 
+			gc.updateGame();
+		}*/
+		else {
+			game.getBoard().boardSize();
+			start();
+		}
 	}
 	
 	public void start(){
 		renderBoard();
 		showTiles();
-		if (game.getCurrentPlayer().equals(gc.getLocalPlayer())) {
-			while(gc.getGame().finishedMove() == false) {
-			renderMenu(BOARD_MENU);
-			int choice = determineOption();
-			if (choice == 1) {
-				renderMenu(SET_TILE_MENU);
-				String move = determineString();
-				determineMove(move);
-			} else if (choice == 2) {
-				renderMenu(SWAP_TILE_MENU);
-			}
+		showScore();
+	}
+	
+	public void showCurrentPlayer() {
+		System.out.println("De huidige speler is "+gc.getCurrentPlayer().getName());
+	}
+
+	private void showScore() {
+		for (Player player : gc.getGame().getPlayers().keySet()) {
+			System.out.println(player.getName() + ": " + player.getScore() + " ");
+		}
+		
+	}
+
+	public void askForInput(Player player){
+		if (player.equals(gc.getLocalPlayer())) {
+			while(true) {
+				renderMenu(BOARD_MENU);
+				int choice = determineOption();
+				if (choice == 1 && MoveUtils.hasTraded() == false) {
+					renderMenu(SET_TILE_MENU);
+					String move = determineString();
+					gc.determineMove(move, player);
+				} else if (choice == 1 && MoveUtils.hasTraded() == true) {
+					System.out.println("U heeft geruild, u mag nu geen tegel zetten");
+				} else if (choice == 2 && MoveUtils.madeMove() == false) {
+					renderMenu(SWAP_TILE_MENU);
+					String swap = determineString();
+					gc.determineSwap(swap, player);
+				} else if (choice == 2 && MoveUtils.madeMove() == true) {
+					System.out.println("U heeft een tegel neergelegd, u kan nu niet ruilen");
+				} else if (choice == 3) {
+					gc.done(player);
+					break;
+				}
 			}
 		}
 	}
@@ -118,20 +151,6 @@ public class BoardTUI extends TUI{
 			System.out.println();
 		} catch (NullPointerException e) {
 			System.out.println("U heeft geen tegels meer");
-		}
-	}
-	
-	public void determineMove(String string) {
-		ArrayList<Tile> tiles = gc.getLocalPlayer().getHand();
-		String[] moveArray = string.split(" ");
-		int tileNumber = Integer.parseInt(moveArray[0]) - 1;
-		Tile tile = tiles.get(tileNumber);		
-		int x = Integer.parseInt(moveArray[1])+90;
-		int y = Integer.parseInt(moveArray[2])+90;
-		try {
-			game.makeMove(x, y, tile);
-		} catch (InvalidMoveException e) {
-			System.out.println("Deze move mag niet");
 		}
 	}
 }

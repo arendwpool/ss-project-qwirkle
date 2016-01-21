@@ -2,8 +2,9 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Observable;
 
-public class Pile {
+public class Pile extends Observable{
 	
 	
 	/**
@@ -53,6 +54,8 @@ public class Pile {
 				tiles.add(new Tile(Tile.kleuren[color % NUMBER_COLORS], Tile.symbolen[symbol]));
 			}
 		}
+		setChanged();
+		notifyObservers("generated");
 		
 	}
 	/**
@@ -71,19 +74,13 @@ public class Pile {
 	public ArrayList<Tile> getTiles() {
 		return tiles;
 	}
-	
-	/**
-	 * Haalt een tegel met een bepaalde index uit de lijst met tiles.
-	 * @param index
-	 */
-	public void removeTile(int index) {
-		tiles.remove(index);
-	}
 	/**
 	 * Haalt een bepaalde tile uit de zak.
 	 * @param tile
 	 */
 	public void removeTile(Tile tile) {
 		tiles.remove(tile);
+		setChanged();
+		notifyObservers("removed");
 	}
 }

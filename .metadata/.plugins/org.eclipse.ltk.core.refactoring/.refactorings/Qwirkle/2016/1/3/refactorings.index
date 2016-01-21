@@ -11,3 +11,5 @@
 1453301121942	Rename method 'determineName'
 1453380388781	Rename local variable 'tileOrig'
 1453389108758	Rename method 'sharedLine'
+1453403977473	Rename method 'finishMove'
+1453410259576	Delete element

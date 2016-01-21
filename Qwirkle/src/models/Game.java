@@ -110,24 +110,19 @@ public class Game extends Observable{
 	 * Start het spel.
 	 */
 	public void start() {
+		reset();
+		pile.generateTiles();
 		for (Player player : players.keySet()) {
 			TileUtils.setHand(player, pile);
 		}
-		MoveUtils.setInitialMove(true);
-		determineInitialPlayer();
-		System.out.println(currentPlayer.getName());
-		/*while (!gameOver()) {
-			if (moveMade == true) {
-				update();
-			}
-		}*/
 	}
 	
-	/**
-	 * Update de situatie van het spel na elke actie van een speler.
-	 */
-	public void update() {
-		board.boardSize();		
+	private void reset() {
+		board.reset();
+		pile.getTiles().clear();
+		for (Player player : players.keySet()) {
+			player.getHand().clear();
+		}
 	}
 	
 	/**
@@ -245,6 +240,8 @@ public class Game extends Observable{
 	 */
 	public void swapTiles(ArrayList<Tile> tilesToTrade, Player player) throws NoTilesLeftInPileException, InvalidMoveException{
 		MoveUtils.replaceTiles(tilesToTrade, player, pile);
+		setChanged();
+		notifyObservers();
 	}
 	/**
 	 * Moet de Move van de player verwerken.
@@ -252,8 +249,8 @@ public class Game extends Observable{
 	 * @param y
 	 * @param tile
 	 */
-	public void makeMove(int x, int y, Tile tile) throws InvalidMoveException {
-		MoveUtils.makeMove(x, y, tile, this);
+	public void makeMove(int x, int y, Tile tile, Player player) throws InvalidMoveException {
+		MoveUtils.makeMove(x, y, tile, player, this);
 		setChanged();
 		notifyObservers();
 	}
@@ -265,9 +262,11 @@ public class Game extends Observable{
 	 */
 	public void finishMove(Player player) throws InvalidMoveException{
 		MoveUtils.processMove(player, this);
+		TileUtils.setHand(player, pile);
+		//nextPlayer();
 		finishedMove = true;
 		setChanged();
-		notifyObservers();
+		notifyObservers("moveFinished");
 	}
 	
 	/**
@@ -296,5 +295,9 @@ public class Game extends Observable{
 	
 	public boolean finishedMove(){
 		return finishedMove;
+	}
+	
+	public void setFinishedMove(boolean bl) {
+		finishedMove = bl;
 	}
 }
