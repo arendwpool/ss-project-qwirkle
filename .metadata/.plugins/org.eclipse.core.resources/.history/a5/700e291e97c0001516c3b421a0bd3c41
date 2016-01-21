@@ -84,4 +84,10 @@ public class ComputerPlayer extends Observable implements Player {
 		setChanged();
 		notifyObservers("PCMadeMove");
 	}
+
+	@Override
+	public void makeMove(int x, int y, Tile tile, Player player) {
+		// TODO Auto-generated method stub
+		
+	}
 }
