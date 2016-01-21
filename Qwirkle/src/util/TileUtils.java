@@ -41,7 +41,7 @@ public class TileUtils {
 	 * @param tileB
 	 */
 	public static boolean compareSymbol(Tile tileA, Tile tileB) {
-		return tileA.getSymbol() == tileB.getSymbol();
+		return tileA.getSymbol().equals(tileB.getSymbol());
 		
 	}
 	
@@ -51,7 +51,7 @@ public class TileUtils {
 	 * @param tileB
 	 */
 	public static boolean compareColor(Tile tileA, Tile tileB) {
-		return tileA.getColor() == tileB.getColor();
+		return tileA.getColor().equals(tileB.getColor());
 	}
 
 	

@@ -1,8 +1,0 @@
-package view;
-
-public class BoardTUI {
-
-	public void start(){
-		
-	}
-}

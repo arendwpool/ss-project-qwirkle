@@ -58,13 +58,8 @@ public class BoardTest {
 		testBoard.setTile(88, 92, tile8);
 		testBoard.setTile(88, 93, tile9);
 		testBoard.setTile(88, 95, tile10);
-		controleLijst = testBoard.tilesOnXAxis(87, 90);
-		System.out.println(controleLijst.size());
-		assertTrue(controleLijst.size() == 4);
-		System.out.println(controleLijst);
-		assertTrue(controleLijst.equals(testBoard.tilesOnXAxis(90, 90)));
-		controleLijst.add(tile4);
-		assertFalse(controleLijst.equals(testBoard.tilesOnXAxis(90, 90)));
+		controleLijst = testBoard.tilesOnXAxis(88, 90);
+		assertTrue(controleLijst.size() == 5);
 	}
 	
 	@Test
@@ -90,12 +85,7 @@ public class BoardTest {
 		testBoard.setTile(88, 92, tile8);
 		testBoard.setTile(88, 93, tile9);
 		testBoard.setTile(88, 95, tile10);
-		controleLijst = testBoard.tilesOnXAxis(88, 92);
-		System.out.println(controleLijst.size());
+		controleLijst = testBoard.tilesOnYAxis(88, 91);
 		assertTrue(controleLijst.size() == 4);
-		System.out.println(controleLijst);
-		assertTrue(controleLijst.equals(testBoard.tilesOnXAxis(90, 90)));
-		controleLijst.add(tile4);
-		assertFalse(controleLijst.equals(testBoard.tilesOnXAxis(90, 90)));
 	}
 }

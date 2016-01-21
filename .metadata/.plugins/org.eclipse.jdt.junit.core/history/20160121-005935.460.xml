@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="MoveUtilsTest" project="Qwirkle" tests="2" started="2" failures="0" errors="0" ignored="0">
-  <testsuite name="tests.MoveUtilsTest" time="0.006">
-    <testcase name="testIsValidMove" classname="tests.MoveUtilsTest" time="0.001"/>
-    <testcase name="testReplaceTiles" classname="tests.MoveUtilsTest" time="0.005"/>
-  </testsuite>
-</testrun>

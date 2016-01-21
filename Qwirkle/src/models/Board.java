@@ -140,7 +140,9 @@ public class Board {
 		boolean rightIsEmpty = false;
 		int xOrig = x;
 		ArrayList<Tile> xAxis = new ArrayList<Tile>();
-		xAxis.add(getField(x, y));
+		if(!isEmptyField(x, y)){
+			xAxis.add(getField(x, y));
+		}
 		while (leftIsEmpty == false) {
 			x--;
 			if (isEmptyField(x, y) == false) {
@@ -170,7 +172,9 @@ public class Board {
 		boolean lowerIsEmpty = false;
 		int yOrig = y;
 		ArrayList<Tile> yAxis = new ArrayList<Tile>();
-		yAxis.add(getField(x, y));
+		if(!isEmptyField(x, y)){
+			yAxis.add(getField(x, y));
+		}
 		while (lowerIsEmpty == false) {
 			y--;
 			if (isEmptyField(x, y) == false) {

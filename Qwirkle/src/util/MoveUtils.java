@@ -78,12 +78,15 @@ public class MoveUtils {
 			int y = (int) point.getY();
 			row = board.tilesOnXAxis(x, y);
 			column = board.tilesOnYAxis(x, y);
-			ArrayList<Tile> commonX = deleteCommon(row, getLastMoves());
-			ArrayList<Tile> commonY = deleteCommon(column, getLastMoves());
+			ArrayList<Tile> commonX = new ArrayList<Tile>(row);
+			ArrayList<Tile> commonY = new ArrayList<Tile>(column);
+			commonX = deleteCommon(commonX, getLastMoves());
+			commonY = deleteCommon(commonY, getLastMoves());
 			retainMultipleX = commonX.size() > 1;
 			retainMultipleY = commonY.size() > 1;
-			if (retainMultipleX == false) {
+			if (retainMultipleX == false && retainMultipleY == false) {
 				score += column.size();
+				score += row.size();
 			} else if (retainMultipleY == false) {
 				score += row.size();
 			}
@@ -105,39 +108,76 @@ public class MoveUtils {
 	/**
 	 * Controleert of de aangelegde stenen wel volgens de spelregels mogen.
 	 */
-	//TODO analyzeren: nadat locatie is toegevoegd aan tile, is dit te verbeteren?
+	//TODO prints weghalen, deze zijn voor de test
 	public static boolean isValidMove(int x, int y, Tile tile, Board board) {
 		Board boardCopy = board.deepCopy();
-		if (board.isEmptyField(x, y) == false) {
-			return false;
-		}
-		boardCopy.setTile(x, y, tile);
-		ArrayList<Tile> xAxis = board.tilesOnXAxis(x, y);
-		ArrayList<Tile> yAxis = board.tilesOnYAxis(x, y);
-		if (xAxis.size() > 6 || yAxis.size() > 6) {
-			return false;
-		} else if (initialMove == true) { //In Controller x en y 90,90 maken, bij elke eerste zet.
-			return true;
-		} else if (initialMove == false && xAxis.size() == 1 && yAxis.size() == 1) {
+		if (boardCopy.isEmptyField(x, y) == false) {
+			System.out.println("Het veld is leeg");
 			return false;
 		} else {
-			for (Tile tileToCompare : xAxis) {
-				Tile tileOrig = tileToCompare;
-				xAxis.remove(tile);
-				for (Tile tileToCompareWith : xAxis) {
-					if (TileUtils.compareColor(tileToCompareWith, tileOrig) == true &&
-									TileUtils.compareSymbol(tileToCompareWith, tileOrig) == true) {
-						return false;
-					} else if (TileUtils.compareColor(tileToCompareWith, tileOrig) == true 
-									|| TileUtils.compareSymbol(tileToCompareWith, tileOrig) == true) {
-						return true;
-					} else {
-						return false;
+			boardCopy.setTile(x, y, tile);
+			ArrayList<Tile> xAxis = boardCopy.tilesOnXAxis(x, y);
+			ArrayList<Tile> yAxis = boardCopy.tilesOnYAxis(x, y);
+			if (xAxis.size() > 6 || yAxis.size() > 6) {
+				System.out.println("De grootte is groter dan 6");
+				return false;
+			} else if (initialMove == true) { 
+				System.out.println("Het is een intial move");
+				return true;
+			} else if (initialMove == false && xAxis.size() == 1 && yAxis.size() == 1) {
+				System.out.println("Het is geen initial move, en beide groottes zijn 1");
+				return false;
+			} else {
+				if(xAxis.size()>1){
+					for(Tile a : xAxis) {
+						System.out.println("x:" +a.getColor()+a.getSymbol());
+					}
+					System.out.println("De x-as is groter dan 1");
+					for (Tile tileToCompare : xAxis) {
+						for (Tile tileToCompareWith : xAxis) {
+							if (!tileToCompare.equals(tileToCompareWith)){
+								System.out.println("ttc:"+tileToCompare.getColor()+tileToCompare.getSymbol());
+								System.out.println("ttcw:"+tileToCompareWith.getColor()+tileToCompareWith.getSymbol());
+								if (TileUtils.compareColor(tileToCompareWith, tileToCompare) == true &&
+												TileUtils.compareSymbol(tileToCompareWith, tileToCompare) == true) {
+									System.out.println("De kleuren en het symbool komen overeen");
+									return false;
+								} else if (!TileUtils.compareColor(tileToCompareWith, tileToCompare) == true 
+												&& !TileUtils.compareSymbol(tileToCompareWith, tileToCompare) == true) {
+									System.out.println("De kleuren en het symbol komen niet overeen");
+									return false;
+								}
+							}
+						}
 					}
 				}
+				if(yAxis.size() > 1) {
+					for(Tile a : yAxis) {
+						System.out.println("y:"+a.getColor()+a.getSymbol());
+					}
+					System.out.println("De y-as is groter dan 1");
+					for (Tile tileToCompare : yAxis) {
+						for (Tile tileToCompareWith : yAxis) {
+							if(!tileToCompare.equals(tileToCompareWith)){
+								System.out.println("ttc:"+tileToCompare.getColor()+tileToCompare.getSymbol());
+								System.out.println("ttcw:"+tileToCompareWith.getColor()+tileToCompareWith.getSymbol());
+								if (TileUtils.compareColor(tileToCompareWith, tileToCompare) == true &&
+												TileUtils.compareSymbol(tileToCompareWith, tileToCompare) == true) {
+									System.out.println("De kleuren en het symbool komen overeen");
+									return false;
+								} else if (TileUtils.compareColor(tileToCompareWith, tileToCompare) == false 
+												&& TileUtils.compareSymbol(tileToCompareWith, tileToCompare) == false) {
+									System.out.println("De kleuren en het symbool komen niet overeen");
+									return false;
+								}
+							}
+						}
+					}
+				}
+				System.out.println("De move is valid");
+				return true;
 			}
 		}
-		return false; //TODO oplossing voor nu
 	}
 
 	

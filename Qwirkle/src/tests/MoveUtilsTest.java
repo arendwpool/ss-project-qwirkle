@@ -61,11 +61,45 @@ public class MoveUtilsTest {
 	@Test
 	public void testIsValidMove(){
 		Board board = testGame.getBoard();
+		MoveUtils.setInitialMove(false);
 		board.setTile(90, 90, new Tile("groen", "cirkel"));
-		assertTrue(board.getField(90, 90).getColor().equals("groen"));
-		assertTrue(MoveUtils.isValidMove(91, 90, new Tile("groen", "vierkant"), board));
-		board.setTile(90, 90, new Tile("groen", "vierkant"));
-		assertFalse(MoveUtils.isValidMove(90, 89, new Tile("rood", "ruit"), board));
+		assertTrue("De gelegde tegel is groen", board.getField(90, 90).getColor().equals("groen"));
+		assertTrue("Deze move mag gelegd worden",MoveUtils.isValidMove(91, 90, new Tile("groen", "vierkant"), board));
+		assertFalse("Deze tegel zit aan geen tegel vast", MoveUtils.isValidMove(98, 85, new Tile("rood", "ruit"), board));
+		board.setTile(91, 90, new Tile("groen", "vierkant"));
+		assertFalse("Een rode ruit mag hier niet", MoveUtils.isValidMove(90, 89, new Tile("rood", "ruit"), board));
+		assertTrue("Een rode circel mag hier wel", MoveUtils.isValidMove(90, 89, new Tile("rood", "cirkel"), board));
+		board.reset();
+		board.setTile(90, 90, new Tile("groen", "plus"));
+		board.setTile(90, 91, new Tile("groen", "ruit"));
+		board.setTile(90, 92, new Tile("groen", "vierkant"));
+		board.setTile(90, 93, new Tile("groen", "ster"));
+		board.setTile(87, 89, new Tile("rood", "cirkel"));
+		board.setTile(89, 89, new Tile("blauw", "cirkel"));
+		board.setTile(88, 89, new Tile("oranje", "cirkel"));
+		assertTrue(MoveUtils.isValidMove(90, 89, new Tile("groen", "cirkel"), board));
+		assertFalse(MoveUtils.isValidMove(90,89, new Tile("groen", "ster"), board));
+	}
+	
+	@Test 
+	public void generateScore(){
+		Board board = testGame.getBoard();
+		board.reset();
+		board.setTile(90, 90, new Tile("groen", "plus"));
+		board.setTile(90, 91, new Tile("groen", "ruit"));
+		board.setTile(90, 92, new Tile("groen", "vierkant"));
+		board.setTile(90, 93, new Tile("groen", "ster"));
+		board.setTile(87, 89, new Tile("rood", "cirkel"));
+		board.setTile(89, 89, new Tile("blauw", "cirkel"));
+		board.setTile(88, 89, new Tile("oranje", "cirkel"));
+		Tile tile = new Tile("groen", "cirkel");
+		tile.setLocation(90, 89);
+		board.setTile(90, 89, tile);
+		MoveUtils.rememberMove(tile);
+		MoveUtils.generateScore(testPlayer, board);
+		assertEquals(9, testPlayer.getScore());
+		board.reset();
+		
 	}
 
 }

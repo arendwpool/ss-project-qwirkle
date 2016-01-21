@@ -4,12 +4,22 @@
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="utils.ControllTilesUtil"/>
 <fullyQualifiedTypeName name="utils.MoveUtils"/>
-<fullyQualifiedTypeName name="models.Player"/>
-<fullyQualifiedTypeName name="models.Game"/>
-<fullyQualifiedTypeName name="util.TileUtils"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="models.Board"/>
-<fullyQualifiedTypeName name="models.HumanPlayer"/>
-<fullyQualifiedTypeName name="models.Pile"/>
 <fullyQualifiedTypeName name="util.MoveUtils"/>
+<fullyQualifiedTypeName name="models.Game"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="models.Tile"/>
+<fullyQualifiedTypeName name="models.HumanPlayer"/>
+<fullyQualifiedTypeName name="util.TileUtils"/>
+<fullyQualifiedTypeName name="models.Pile"/>
+<fullyQualifiedTypeName name="view.BoardTUI"/>
+<fullyQualifiedTypeName name="view.StartTUI"/>
+<fullyQualifiedTypeName name="controllers.GameController"/>
+<fullyQualifiedTypeName name="java.util.Observer"/>
+<fullyQualifiedTypeName name="java.util.Observable"/>
+<fullyQualifiedTypeName name="models.Player"/>
+<fullyQualifiedTypeName name="models.ComputerPlayer"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
 </qualifiedTypeNameHistroy>
