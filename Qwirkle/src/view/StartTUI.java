@@ -4,6 +4,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import controllers.GameController;
+import models.ComputerPlayer;
+import models.Player;
 
 public class StartTUI extends TUI implements Observer{
 	/**
@@ -12,7 +14,6 @@ public class StartTUI extends TUI implements Observer{
 	private static final String[] PRE_MENU = {null, "Ik ben een Menselijke speler", "Ik ben een Computerspeler"};
 	private static final String[] MAIN_MENU = {"Hallo [naam]!", "Start", "Afsluiten"};
 	private static final String[] IP_MENU = {null, "Voer het gewenste ip adres in:"};
-	private BoardTUI boardUI;
 	
 	public StartTUI(GameController gc) {
 		super(gc);
@@ -45,9 +46,10 @@ public class StartTUI extends TUI implements Observer{
 			createSpace();
 			if (choice == 1) {
 				gc.createLocalPlayer(gc.getPlayerName());
-				boardUI = new BoardTUI(gc, gc.getGame());
+				Player pc = new ComputerPlayer(gc.getGame());
 				gc.startGame();
-				boardUI.start();
+				if(gc.getGame().getCurrentPlayer().equals(gc.getLocalPlayer())) //TODO weghalen
+				gc.getBoardTUI().start();
 			}
 		} else if (choice == 2) {
 			//TODO doe iets

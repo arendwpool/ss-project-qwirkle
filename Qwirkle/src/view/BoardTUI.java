@@ -24,8 +24,8 @@ public class BoardTUI extends TUI{
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
+		System.out.println("Geupdated");
 		game.getBoard().boardSize();
-		System.out.print("hallo");
 		start();
 	}
 	
@@ -33,35 +33,37 @@ public class BoardTUI extends TUI{
 		renderBoard();
 		showTiles();
 		if (game.getCurrentPlayer().equals(gc.getLocalPlayer())) {
+			while(gc.getGame().finishedMove() == false) {
 			renderMenu(BOARD_MENU);
 			int choice = determineOption();
 			if (choice == 1) {
 				renderMenu(SET_TILE_MENU);
 				String move = determineString();
+				determineMove(move);
 			} else if (choice == 2) {
 				renderMenu(SWAP_TILE_MENU);
+			}
 			}
 		}
 	}
 	
 	public void renderBoard(){
-		System.out.print("	");
 		for(int i = game.getBoard().viewOfMinX - 90; i <= game.getBoard().viewOfMaxX - 90; i++){
 			System.out.print("	"+i);
 		}
-		System.out.println("\n\n\n");
+		System.out.println("\n\n");
 		for (int y = game.getBoard().viewOfMaxY; y >= game.getBoard().viewOfMinY; y--){
 			for(int x = game.getBoard().viewOfMinX; x <= game.getBoard().viewOfMaxX; x++){
 				if (game.getBoard().getField(x, y).getColor() == "empty" && game.getBoard().getField(x, y).getSymbol() == "empty"){
 					if (x == game.getBoard().viewOfMinX){
 						System.out.print(y-90 + "	");
 					}
-					System.out.print("	-");
+					System.out.print("-	");
 					if(x == (game.getBoard().viewOfMaxX)){
 						System.out.println("\n");
 					}
 				}else{
-					System.out.print("	"+colorRepresentive(game.getBoard().getField(x, y).getColor())+ "-" + symbolRepresentive(game.getBoard().getField(x, y).getSymbol()));
+					System.out.print(colorRepresentive(game.getBoard().getField(x, y).getColor())+ "-" + symbolRepresentive(game.getBoard().getField(x, y).getSymbol())+ "	");
 					if(y == (game.getBoard().viewOfMaxY)){
 						System.out.println();
 					}

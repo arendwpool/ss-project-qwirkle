@@ -49,7 +49,7 @@ public class Game extends Observable{
 	 */
 	private Pile pile;
 	
-	private boolean moveMade;
+	private boolean finishedMove;
 	
 	/**
 	 * Contrueert  een nieuw spel. Hierbij worden het board element en het aantal spelers opgeslagen
@@ -62,7 +62,7 @@ public class Game extends Observable{
 		this.board = board;
 		this.pile = pile;
 		players = new HashMap<Player, Integer>();
-		moveMade = false;
+		finishedMove = false;
 	}
 	
 	/**
@@ -265,7 +265,7 @@ public class Game extends Observable{
 	 */
 	public void finishMove(Player player) throws InvalidMoveException{
 		MoveUtils.processMove(player, this);
-		moveMade = true;
+		finishedMove = true;
 		setChanged();
 		notifyObservers();
 	}
@@ -292,5 +292,9 @@ public class Game extends Observable{
 		} else {
 			throw new PlayerNotFoundException();
 		}
+	}
+	
+	public boolean finishedMove(){
+		return finishedMove;
 	}
 }

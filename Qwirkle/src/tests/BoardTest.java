@@ -37,45 +37,65 @@ public class BoardTest {
 	
 	@Test
 	public void testTilesOnXAxis(){
-		ArrayList<Tile> controleLijst = new ArrayList<Tile>();
-		Tile tile1 = new Tile("groen", "circel");
+		ArrayList<Tile> controleLijst;
+		Tile tile1 = new Tile("groen", "cirkel");
 		Tile tile2 = new Tile("groen", "ruit");
 		Tile tile3 = new Tile("groen", "vierkant");
-		Tile tile4 = new Tile("groen", "circel");
+		Tile tile4 = new Tile("groen", "ster");
+		Tile tile5 = new Tile("groen", "plus");
+		Tile tile6 = new Tile("groen", "kruis");
+		Tile tile7 = new Tile("rood", "vierkant");
+		Tile tile8 = new Tile("blauw", "vierkant");
+		Tile tile9 = new Tile("geel", "vierkant");
+		Tile tile10 = new Tile("paars", "vierkant");
 		testBoard.setTile(90, 90, tile1);
-		testBoard.setTile(88, 90, tile2);
-		testBoard.setTile(89, 90, tile3);
-		testBoard.setTile(89, 89, tile4);
-		testBoard.tilesOnXAxis(91, 90);
-		controleLijst.add(tile1);
-		controleLijst.add(tile3);
-		controleLijst.add(tile2);
-		System.out.print(testBoard.tilesOnXAxis(90, 90));
-		System.out.print(controleLijst);
-		assertTrue(controleLijst == testBoard.tilesOnXAxis(90, 90));
+		testBoard.setTile(89, 90, tile2);
+		testBoard.setTile(88, 90, tile3);
+		testBoard.setTile(87, 90, tile4);
+		testBoard.setTile(86, 90, tile5);
+		testBoard.setTile(84, 90, tile6);
+		testBoard.setTile(88, 91, tile7);
+		testBoard.setTile(88, 92, tile8);
+		testBoard.setTile(88, 93, tile9);
+		testBoard.setTile(88, 95, tile10);
+		controleLijst = testBoard.tilesOnXAxis(87, 90);
+		System.out.println(controleLijst.size());
+		assertTrue(controleLijst.size() == 4);
+		System.out.println(controleLijst);
+		assertTrue(controleLijst.equals(testBoard.tilesOnXAxis(90, 90)));
 		controleLijst.add(tile4);
-		assertFalse(controleLijst ==  testBoard.tilesOnXAxis(90, 90));
+		assertFalse(controleLijst.equals(testBoard.tilesOnXAxis(90, 90)));
 	}
 	
 	@Test
 	public void testTilesOnYAxis(){
-		ArrayList<Tile> controleLijst = new ArrayList<Tile>();
-		Tile tile1 = new Tile("groen", "circel");
+		ArrayList<Tile> controleLijst;
+		Tile tile1 = new Tile("groen", "cirkel");
 		Tile tile2 = new Tile("groen", "ruit");
 		Tile tile3 = new Tile("groen", "vierkant");
-		Tile tile4 = new Tile("groen", "circel");
+		Tile tile4 = new Tile("groen", "ster");
+		Tile tile5 = new Tile("groen", "plus");
+		Tile tile6 = new Tile("groen", "kruis");
+		Tile tile7 = new Tile("rood", "vierkant");
+		Tile tile8 = new Tile("blauw", "vierkant");
+		Tile tile9 = new Tile("geel", "vierkant");
+		Tile tile10 = new Tile("paars", "vierkant");
 		testBoard.setTile(90, 90, tile1);
-		testBoard.setTile(88, 90, tile2);
-		testBoard.setTile(89, 90, tile3);
-		testBoard.setTile(89, 89, tile4);
-		testBoard.tilesOnYAxis(89, 89);
+		testBoard.setTile(89, 90, tile2);
+		testBoard.setTile(88, 90, tile3);
+		testBoard.setTile(87, 90, tile4);
+		testBoard.setTile(86, 90, tile5);
+		testBoard.setTile(84, 90, tile6);
+		testBoard.setTile(88, 91, tile7);
+		testBoard.setTile(88, 92, tile8);
+		testBoard.setTile(88, 93, tile9);
+		testBoard.setTile(88, 95, tile10);
+		controleLijst = testBoard.tilesOnXAxis(88, 92);
+		System.out.println(controleLijst.size());
+		assertTrue(controleLijst.size() == 4);
+		System.out.println(controleLijst);
+		assertTrue(controleLijst.equals(testBoard.tilesOnXAxis(90, 90)));
 		controleLijst.add(tile4);
-		controleLijst.add(tile3);
-		System.out.print(testBoard.tilesOnYAxis(89, 89));
-		System.out.print(controleLijst);
-		assertTrue(controleLijst == testBoard.tilesOnYAxis(89, 89));
-		controleLijst.add(tile1);
-		controleLijst.add(tile2);
-		assertFalse(controleLijst ==  testBoard.tilesOnYAxis(89, 89));
+		assertFalse(controleLijst.equals(testBoard.tilesOnXAxis(90, 90)));
 	}
 }

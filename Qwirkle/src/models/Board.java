@@ -65,9 +65,8 @@ public class Board {
 	 */
 	public Board deepCopy() {
 		Board board = new Board();
-		coordinaten = new Tile[DIM][DIM];
-		for (int x = 0; x < coordinaten.length; x++) {
-			for (int y = 0; y < coordinaten.length; y++) {
+		for (int x = 0; x < DIM; x++) {
+			for (int y = 0; y < DIM; y++) {
 				board.setTile(x, y, this.getField(x, y));
 			}
 		}

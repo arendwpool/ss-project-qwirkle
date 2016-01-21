@@ -12,7 +12,7 @@ import models.Tile;
 
 public abstract class TUI implements Observer {
 	
-	private static final int AMOUNT_CHARACTERS = 50;
+	private static final int AMOUNT_CHARACTERS = 75;
 	private Scanner scanner = new Scanner(System.in);
 	boolean terminated = false;
 	protected GameController gc;
@@ -24,7 +24,9 @@ public abstract class TUI implements Observer {
 		this.gc = gc;
 	}
 	
-	
+	public void start(){
+		
+	}
 	
 	/**
 	 * 
@@ -60,7 +62,10 @@ public abstract class TUI implements Observer {
 		return in;
 	}
 	public String determineString(){
-		String string = scanner.next();
+		if(scanner.hasNextLine()){ //TODO vraag: waarom moet je bij ip 2x invoeren?
+			scanner.nextLine();
+		}
+		String string = scanner.nextLine();
 		return string;
 	}
 	

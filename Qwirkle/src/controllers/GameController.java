@@ -15,6 +15,7 @@ import view.TUI;
 public class GameController {
 	private Game game;
 	private StartTUI ui;
+	private BoardTUI bui;
 	private Player player;
 	private String ip;
 	private String playerName;
@@ -22,12 +23,17 @@ public class GameController {
 	public GameController(){
 		ui = new StartTUI(this);
 		game = new Game(new Board(), new Pile(), 2);
-		Player pc = new ComputerPlayer(game);
+		bui = new BoardTUI(this, game);
 		game.addObserver(ui);
+		game.addObserver(bui);
 	}
 	public static void main(String[] args){
 		GameController controller = new GameController();
 		controller.start();
+	}
+	
+	public BoardTUI getBoardTUI() {
+		return bui;
 	}
 	
 	public void start(){

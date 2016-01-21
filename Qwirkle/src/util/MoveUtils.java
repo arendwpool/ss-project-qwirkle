@@ -108,12 +108,13 @@ public class MoveUtils {
 	//TODO analyzeren: nadat locatie is toegevoegd aan tile, is dit te verbeteren?
 	public static boolean isValidMove(int x, int y, Tile tile, Board board) {
 		Board boardCopy = board.deepCopy();
+		if (board.isEmptyField(x, y) == false) {
+			return false;
+		}
 		boardCopy.setTile(x, y, tile);
 		ArrayList<Tile> xAxis = board.tilesOnXAxis(x, y);
 		ArrayList<Tile> yAxis = board.tilesOnYAxis(x, y);
-		if (board.isEmptyField(x, y) == false) {
-			return false;
-		} else if (xAxis.size() > 6 || yAxis.size() > 6) {
+		if (xAxis.size() > 6 || yAxis.size() > 6) {
 			return false;
 		} else if (initialMove == true) { //In Controller x en y 90,90 maken, bij elke eerste zet.
 			return true;
@@ -214,6 +215,7 @@ public class MoveUtils {
 			} 
 		} else if(initialMove == true){
 			board.setTile(90, 90, tile);
+			initialMove = false;
 		} else {
 			throw new InvalidMoveException();
 		}
