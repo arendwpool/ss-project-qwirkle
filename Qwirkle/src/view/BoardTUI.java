@@ -27,7 +27,7 @@ public class BoardTUI extends TUI{
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if (arg1 != null && arg1.equals("PCMadeMove")) {
+		if (arg1 != null && arg1.equals("MadeMove")) {
 			gc.done((Player) arg0); 
 		} /*else if (arg1 != null && arg1.equals("moveFinished")) { 
 			gc.updateGame();

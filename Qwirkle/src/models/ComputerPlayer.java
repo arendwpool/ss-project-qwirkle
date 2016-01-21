@@ -47,14 +47,14 @@ public class ComputerPlayer extends Observable implements Player {
 							System.out.println("PC heeft wat gedaan");
 						}
 					}
-				}/*
+				}
 				if(MoveUtils.madeMove() == false){
 					try {
 						MoveUtils.replaceTiles(hand, this, game.getPile());
 					} catch (NoTilesLeftInPileException | InvalidMoveException e) {
 						// TODO Auto-generated catch block
 					}
-				}*/
+				}
 			}
 		}
 	}	
@@ -80,7 +80,7 @@ public class ComputerPlayer extends Observable implements Player {
 
 	public void signalController(){
 		setChanged();
-		notifyObservers("PCMadeMove");
+		notifyObservers("MadeMove");
 	}
 	@Override
 	public void addScore(int points) {

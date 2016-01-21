@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="BoardTest" project="Qwirkle" tests="5" started="5" failures="0" errors="0" ignored="0">
-  <testsuite name="tests.BoardTest" time="0.006">
-    <testcase name="testGetField" classname="tests.BoardTest" time="0.0"/>
-    <testcase name="testValidSharedLine" classname="tests.BoardTest" time="0.002"/>
-    <testcase name="testTilesOnXAxis" classname="tests.BoardTest" time="0.001"/>
-    <testcase name="testTilesOnYAxis" classname="tests.BoardTest" time="0.001"/>
-    <testcase name="testIsEmptyField" classname="tests.BoardTest" time="0.001"/>
-  </testsuite>
-</testrun>

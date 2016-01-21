@@ -15,11 +15,13 @@
 <fullyQualifiedTypeName name="models.Pile"/>
 <fullyQualifiedTypeName name="view.BoardTUI"/>
 <fullyQualifiedTypeName name="view.StartTUI"/>
-<fullyQualifiedTypeName name="controllers.GameController"/>
 <fullyQualifiedTypeName name="java.util.Observer"/>
-<fullyQualifiedTypeName name="java.util.Observable"/>
-<fullyQualifiedTypeName name="models.Player"/>
-<fullyQualifiedTypeName name="models.ComputerPlayer"/>
-<fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="util.MoveUtils"/>
+<fullyQualifiedTypeName name="models.Player"/>
+<fullyQualifiedTypeName name="exceptions.InvalidMoveException"/>
+<fullyQualifiedTypeName name="models.ComputerPlayer"/>
+<fullyQualifiedTypeName name="models.AIPlayer"/>
+<fullyQualifiedTypeName name="java.util.Observable"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="controllers.GameController"/>
 </qualifiedTypeNameHistroy>

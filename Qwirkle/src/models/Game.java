@@ -178,8 +178,8 @@ public class Game extends Observable{
 	 * volgende speler. De speler met dit ID wordt dantoegewezen aan currentPlayer.
 	 */
 	public void nextPlayer() {
-		int current = players.get(currentPlayer);
-		int next = (current % noOfPlayers) + 1;
+		int current = players.get(currentPlayer) - 1;
+		int next = (current % noOfPlayers)+1;
 		for (Player player : players.keySet()) {
 			if (players.get(player) == next) {
 				currentPlayer = player;
