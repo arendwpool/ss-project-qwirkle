@@ -253,7 +253,7 @@ public class Game extends Observable{
 	 * @param tile
 	 */
 	public void makeMove(int x, int y, Tile tile) throws InvalidMoveException {
-		MoveUtils.makeMove(x, y, tile, board);
+		MoveUtils.makeMove(x, y, tile, this);
 		setChanged();
 		notifyObservers();
 	}

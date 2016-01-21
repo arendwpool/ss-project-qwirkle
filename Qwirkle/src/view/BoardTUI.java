@@ -109,12 +109,16 @@ public class BoardTUI extends TUI{
 	}
 	
 	public void showTiles(){
-		ArrayList<Tile> tiles = gc.getLocalPlayer().getHand();
-		System.out.println("Uw tegels: ");
-		for (int i = 1; i <= tiles.size(); i++) {
-			System.out.print(i + ": " + tiles.get(i-1).getColor()+tiles.get(i-1).getSymbol()+"  ");
+		try{
+			ArrayList<Tile> tiles = gc.getLocalPlayer().getHand();
+			System.out.println("Uw tegels: ");
+			for (int i = 1; i <= tiles.size(); i++) {
+				System.out.print(i + ": " + tiles.get(i-1).getColor()+tiles.get(i-1).getSymbol()+"  ");
+			}
+			System.out.println();
+		} catch (NullPointerException e) {
+			System.out.println("U heeft geen tegels meer");
 		}
-		System.out.println();
 	}
 	
 	public void determineMove(String string) {

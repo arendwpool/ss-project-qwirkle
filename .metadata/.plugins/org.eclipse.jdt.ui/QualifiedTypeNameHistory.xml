@@ -6,7 +6,6 @@
 <fullyQualifiedTypeName name="utils.MoveUtils"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="models.Board"/>
-<fullyQualifiedTypeName name="util.MoveUtils"/>
 <fullyQualifiedTypeName name="models.Game"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
@@ -22,4 +21,5 @@
 <fullyQualifiedTypeName name="models.Player"/>
 <fullyQualifiedTypeName name="models.ComputerPlayer"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="util.MoveUtils"/>
 </qualifiedTypeNameHistroy>

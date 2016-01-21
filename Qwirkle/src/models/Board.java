@@ -201,16 +201,28 @@ public class Board {
 	 * @param axis
 	 * @return contains;
 	 */
-	public boolean sharedLine(Tile tileToSet, ArrayList<Tile> axis) {
-		ArrayList<Tile> copy = new ArrayList<Tile>(MoveUtils.getLastMoves());
-		copy.add(tileToSet);
-		boolean contains = true;
-		for (Tile tile : copy) {
-			if (!axis.contains(tile)) {
-				contains = false;
+	public boolean validSharedLine(int x, int y, Tile tileToSet) {
+		boolean sameX = true;
+		boolean sameY = true;
+		boolean validSharedLine = false;
+		if (MoveUtils.getLastMoves().size()<1){
+			return true;
+		} else {
+			for (Tile tile : MoveUtils.getLastMoves()) {
+				if ((int) tile.getLocation().getX() != x) {
+					sameX = false;
+				}
+				if ((int) tile.getLocation().getY() != y) {
+					sameY = false;
+				}
 			}
+			if (sameX == true && sameY == false) {
+				validSharedLine = true;
+			} else if (sameX == false && sameY == true) {
+				validSharedLine = true;
+			}
+			return validSharedLine;
 		}
-		return contains;
 	}
 	
 	

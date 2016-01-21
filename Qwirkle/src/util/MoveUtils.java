@@ -87,7 +87,9 @@ public class MoveUtils {
 			if (retainMultipleX == false && retainMultipleY == false) {
 				score += column.size();
 				score += row.size();
-			} else if (retainMultipleY == false) {
+			} else if (retainMultipleY == false && column.size() > 1) {
+				score += column.size();
+			} else if (retainMultipleX == false && row.size() > 1) {
 				score += row.size();
 			}
 		}
@@ -96,6 +98,7 @@ public class MoveUtils {
 		} else if (retainMultipleY == true) {
 			score += column.size();
 		}
+		clearLastMoves();
 		player.addScore(score);
 	}
 	
@@ -245,16 +248,16 @@ public class MoveUtils {
 	 * @param y
 	 * @param tile
 	 */
-	public static void makeMove(int x, int y, Tile tile, Board board) throws InvalidMoveException {
+	public static void makeMove(int x, int y, Tile tile, Game game) throws InvalidMoveException {
 		if (hasTraded == false && initialMove == false) {
-			if (isValidMove(x, y, tile, board) && ((board.sharedLine(tile, board.tilesOnYAxis(x, y)) 
-					&& !board.sharedLine(tile, board.tilesOnXAxis(x, y))) || ((!board.sharedLine(tile, board.tilesOnYAxis(x, y)) 
-							&& board.sharedLine(tile, board.tilesOnXAxis(x, y)))))) {
-				board.setTile(x, y, tile);
+			if (isValidMove(x, y, tile, game.getBoard()) && game.getBoard().validSharedLine(x, y, tile)) {
+				game.getBoard().setTile(x, y, tile);
 				rememberMove(tile);
+				game.getCurrentPlayer().getHand().remove(tile);
 			} 
 		} else if(initialMove == true){
-			board.setTile(90, 90, tile);
+			game.getBoard().setTile(90, 90, tile);
+			game.getCurrentPlayer().getHand().remove(tile);
 			initialMove = false;
 		} else {
 			throw new InvalidMoveException();
