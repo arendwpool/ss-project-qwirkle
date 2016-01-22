@@ -43,9 +43,20 @@ public class ComputerPlayer extends Observable implements Player {
 			for(Tile tile: hand){
 				for(int x = 1; x < Board.DIM-1; x++){
 					for(int y = 1; y < Board.DIM-1; y++){
-						if(MoveUtils.isValidMove(x, y, tile, game.getBoard())){
-							makeMove(x, y, tile);
-							break tileLoop;
+						if (!game.getBoard().isEmptyField(x, y)) {
+							if(MoveUtils.isValidMove((x+1), (y), tile, game.getBoard())){
+								makeMove(x+1, y, tile);
+								break tileLoop;
+							} else if (MoveUtils.isValidMove(x-1, y, tile, game.getBoard())) {
+								makeMove(x-1, y, tile);
+								break tileLoop;
+							} else if (MoveUtils.isValidMove(x, y-1, tile, game.getBoard())) {
+								makeMove(x, y-1, tile);
+								break tileLoop;
+							} else if (MoveUtils.isValidMove(x, y+1, tile, game.getBoard())) {
+								makeMove(x, y+1, tile);
+								break tileLoop;
+							}
 						}
 					}
 				}

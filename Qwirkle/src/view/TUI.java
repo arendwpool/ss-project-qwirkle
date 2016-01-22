@@ -1,13 +1,9 @@
 package view;
 
-import java.io.IOException;
-import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
 import controllers.GameController;
-import models.Game;
-import models.Tile;
 
 
 public abstract class TUI implements Observer {

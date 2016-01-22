@@ -1,7 +1,5 @@
 package models;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Observable;
 
 import exceptions.FullGameException;
@@ -260,8 +258,6 @@ public class Game extends Observable{
 		MoveUtils.processMove(player, this);
 		TileUtils.setHand(player, pile);
 		finishedMove = true;
-		setChanged();
-		notifyObservers("moveFinished");
 	}
 	
 	/**

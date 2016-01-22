@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import controllers.GameController;
-import exceptions.InvalidMoveException;
-import exceptions.NoTilesLeftInPileException;
 import models.Game;
 import models.Player;
 import models.Tile;
-import util.MoveUtils;
 
 public class BoardTUI extends TUI{
 	public BoardTUI(GameController gc, Game game) {
@@ -19,20 +16,11 @@ public class BoardTUI extends TUI{
 	}
 
 	private Game game;
-	private String move;
-	private String swap;
-	private static final String[] BOARD_MENU = {"Als u aan de beurt ben kan u tegels ruilen of neerleggen. Dit gaat per tegel, aan het eind van uw beurt drukt u op: klaar.", "Een tegel neerleggen: ", "Een tegel ruilen", "Klaar"};
-	private static final String[] SET_TILE_MENU = {"Typ uw keuze in de vorm: [tegelnummer] [x] [y]", "Uw keuze:"};
-	private static final String[] SWAP_TILE_MENU = {"Typ uw keuze in de vorm: [tegelnummer] [tegelnummer] etc.", "Uw keuze"};
-	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg1 != null && arg1.equals("MadeMove")) {
 			gc.done((Player) arg0); 
-		} /*else if (arg1 != null && arg1.equals("moveFinished")) { 
-			gc.updateGame();
-		}*/
-		else {
+		} else {
 			game.getBoard().boardSize();
 			start();
 		}
@@ -40,6 +28,7 @@ public class BoardTUI extends TUI{
 	
 	public void start(){
 		renderBoard();
+		showPileSize();
 		showTiles();
 		showScore();
 	}
@@ -53,31 +42,6 @@ public class BoardTUI extends TUI{
 			System.out.println(player.getName() + ": " + player.getScore() + " ");
 		}
 		
-	}
-
-	public void askForInput(Player player){
-		if (player.equals(gc.getLocalPlayer())) {
-			while(true) {
-				renderMenu(BOARD_MENU);
-				int choice = determineOption();
-				if (choice == 1 && MoveUtils.hasTraded() == false) {
-					renderMenu(SET_TILE_MENU);
-					String move = determineString();
-					gc.determineMove(move, player);
-				} else if (choice == 1 && MoveUtils.hasTraded() == true) {
-					System.out.println("U heeft geruild, u mag nu geen tegel zetten");
-				} else if (choice == 2 && MoveUtils.madeMove() == false) {
-					renderMenu(SWAP_TILE_MENU);
-					String swap = determineString();
-					gc.determineSwap(swap, player);
-				} else if (choice == 2 && MoveUtils.madeMove() == true) {
-					System.out.println("U heeft een tegel neergelegd, u kan nu niet ruilen");
-				} else if (choice == 3) {
-					gc.done(player);
-					break;
-				}
-			}
-		}
 	}
 	
 	public void renderBoard(){
@@ -152,5 +116,9 @@ public class BoardTUI extends TUI{
 		} catch (NullPointerException e) {
 			System.out.println("U heeft geen tegels meer");
 		}
+	}
+	
+	public void showPileSize(){
+		System.out.println("Er zijn " + gc.getGame().getPile().getTiles().size() + " tegels in de zak.");
 	}
 }

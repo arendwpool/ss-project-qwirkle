@@ -127,7 +127,7 @@ public class Board {
 	 * @return getField(x, y).getColor() == "empty" && getField(x,y).getSymbol() == "empty";
 	 */
 	public boolean isEmptyField(int x, int y) {
-		return getField(x, y).getColor() == "empty" && getField(x, y).getSymbol() == "empty";
+		return getField(x, y).getColor().equals("empty") && getField(x, y).getSymbol().equals("empty");
 	}
 	
 	/**

@@ -13,7 +13,6 @@ import models.Player;
 import models.Tile;
 import view.BoardTUI;
 import view.StartTUI;
-import view.TUI;
 
 public class GameController {
 	private Game game;
@@ -30,8 +29,6 @@ public class GameController {
 		bui = new BoardTUI(this, game);
 		game.addObserver(ui);
 		game.addObserver(bui);
-		game.getPile().addObserver(ui);
-		game.getPile().addObserver(bui);
 	}
 	public static void main(String[] args){
 		GameController controller = new GameController();
@@ -106,21 +103,6 @@ public class GameController {
 				}
 		}
 		return (isValidInt == true && ints.length == 4);
-	}
-
-	
-	public void determineMove(String string, Player player) {
-		ArrayList<Tile> tiles = player.getHand();
-		String[] moveArray = string.split(SEPERATOR);
-		int tileNumber = Integer.parseInt(moveArray[0]) - 1;
-		Tile tile = tiles.get(tileNumber);		
-		int x = Integer.parseInt(moveArray[1])+90;
-		int y = Integer.parseInt(moveArray[2])+90;
-		try {
-			player.makeMove(x, y, tile);
-		} catch (InvalidMoveException e) {
-			System.out.println("Deze move mag niet");
-		}
 	}
 	
 	public void determineSwap(String string, Player player) {

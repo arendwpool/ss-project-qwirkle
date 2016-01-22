@@ -4,8 +4,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import controllers.GameController;
-import models.ComputerPlayer;
-import models.Player;
 
 public class StartTUI extends TUI implements Observer{
 	/**

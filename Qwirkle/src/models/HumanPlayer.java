@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import exceptions.FullGameException;
 import exceptions.InvalidMoveException;
-import util.MoveUtils;
 
 public class HumanPlayer extends Observable  implements Player {
 	/**
@@ -78,7 +77,7 @@ public class HumanPlayer extends Observable  implements Player {
 				notifyObservers("MadeMove");
 				break;
 			}
-			
+			//TODO vraag over in.close();
 		}
 	}
 	

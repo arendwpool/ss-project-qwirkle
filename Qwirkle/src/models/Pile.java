@@ -2,9 +2,8 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Observable;
 
-public class Pile extends Observable{
+public class Pile {
 	
 	
 	/**
@@ -54,8 +53,6 @@ public class Pile extends Observable{
 				tiles.add(new Tile(Tile.kleuren[color % NUMBER_COLORS], Tile.symbolen[symbol]));
 			}
 		}
-		setChanged();
-		notifyObservers("generated");
 		
 	}
 	/**
@@ -80,7 +77,5 @@ public class Pile extends Observable{
 	 */
 	public void removeTile(Tile tile) {
 		tiles.remove(tile);
-		setChanged();
-		notifyObservers("removed");
 	}
 }
