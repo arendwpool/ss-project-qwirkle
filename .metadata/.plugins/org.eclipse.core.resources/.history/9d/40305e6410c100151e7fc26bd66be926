@@ -191,8 +191,6 @@ public class Board {
 				} else {
 					break; 
 				}
-			} else {
-				break;
 			}
 		}
 		y = yOrig;
@@ -204,8 +202,6 @@ public class Board {
 				} else {
 					break; 
 				}
-			} else {
-				break;
 			}
 		}
 		return yAxis;

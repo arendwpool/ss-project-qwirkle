@@ -41,8 +41,8 @@ public class ComputerPlayer extends Observable implements Player {
 		} else {
 			tileLoop:
 			for(Tile tile: hand){
-				for(int x = 0; x < Board.DIM; x++){
-					for(int y = 0; y < Board.DIM; y++){
+				for(int x = 1; x < Board.DIM-1; x++){
+					for(int y = 1; y < Board.DIM-1; y++){
 						if (!game.getBoard().isEmptyField(x, y)) {
 							if(MoveUtils.isValidMove((x+1), (y), tile, game.getBoard())){
 								makeMove(x+1, y, tile);
