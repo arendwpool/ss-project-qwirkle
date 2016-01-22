@@ -25,7 +25,7 @@ public class GameController {
 	
 	public GameController(){
 		ui = new StartTUI(this);
-		game = new Game(new Board(), new Pile(), 2); // TODO veranderen
+		game = new Game(new Board(), new Pile(), 4); // TODO veranderen
 		bui = new BoardTUI(this, game);
 		game.addObserver(ui);
 		game.addObserver(bui);
@@ -45,10 +45,16 @@ public class GameController {
 	
 	public void start(){
 		ui.start();
-		createLocalPlayer(playerName);
+		//createLocalPlayer(playerName);
+		Player pc1 = new ComputerPlayer(game);
 		Player pc = new ComputerPlayer(game); // TODO weghalen later
+		Player pc2 = new ComputerPlayer(game);
+		Player pc3 = new ComputerPlayer(game);
 		((ComputerPlayer) pc).addObserver(bui);
-		((HumanPlayer) player).addObserver(bui);
+		((ComputerPlayer) pc1).addObserver(bui);
+		((ComputerPlayer) pc2).addObserver(bui);
+		((ComputerPlayer) pc3).addObserver(bui);
+		//((HumanPlayer) player).addObserver(bui);
 		game.start();
 		game.determineInitialPlayer();
 		bui.start();
@@ -59,6 +65,7 @@ public class GameController {
 		while (game.gameOver() == false) {
 			bui.showCurrentPlayer();
 			game.getCurrentPlayer().determineMove();
+			game.gameOver();
 			game.nextPlayer();
 		}
 	}

@@ -2,7 +2,6 @@ package controllers;
 
 import java.util.ArrayList;
 
-import exceptions.FullGameException;
 import exceptions.InvalidMoveException;
 import exceptions.NoTilesLeftInPileException;
 import models.Board;
@@ -14,7 +13,6 @@ import models.Player;
 import models.Tile;
 import view.BoardTUI;
 import view.StartTUI;
-import view.TUI;
 
 public class GameController {
 	private Game game;
@@ -31,8 +29,6 @@ public class GameController {
 		bui = new BoardTUI(this, game);
 		game.addObserver(ui);
 		game.addObserver(bui);
-		game.getPile().addObserver(ui);
-		game.getPile().addObserver(bui);
 	}
 	public static void main(String[] args){
 		GameController controller = new GameController();
@@ -49,32 +45,32 @@ public class GameController {
 	
 	public void start(){
 		ui.start();
-		createLocalPlayer(playerName);
+		//createLocalPlayer(playerName);
+		Player pc1 = new ComputerPlayer(game);
 		Player pc = new ComputerPlayer(game); // TODO weghalen later
+		((ComputerPlayer) pc).addObserver(bui);
+		((ComputerPlayer) pc1).addObserver(bui);
+		//((HumanPlayer) player).addObserver(bui);
 		game.start();
 		game.determineInitialPlayer();
 		bui.start();
-		while (game.gameOver() == false) {
-			updateGame();
-			done(game.getCurrentPlayer());
-		}
+		updateGame();
 	}
 
 	public void updateGame(){
-		if (game.getCurrentPlayer() instanceof ComputerPlayer) {
+		while (game.gameOver() == false) {
+			bui.showCurrentPlayer();
 			game.getCurrentPlayer().determineMove();
-		} else {
-			game.setFinishedMove(false);
-			bui.askForInput(game.getCurrentPlayer());
+			game.nextPlayer();
 		}
 	}
 	
 	public void done(Player player){
 		try {
 			game.finishMove(player);
-			game.nextPlayer();
 		} catch (InvalidMoveException e) {
-			System.out.println("er is iets verkeerd gegaan");
+			e.printStackTrace();
+			//System.out.println("er is iets verkeerd gegaan");
 		}
 	}
 	
@@ -109,21 +105,6 @@ public class GameController {
 				}
 		}
 		return (isValidInt == true && ints.length == 4);
-	}
-
-	
-	public void determineMove(String string, Player player) {
-		ArrayList<Tile> tiles = player.getHand();
-		String[] moveArray = string.split(SEPERATOR);
-		int tileNumber = Integer.parseInt(moveArray[0]) - 1;
-		Tile tile = tiles.get(tileNumber);		
-		int x = Integer.parseInt(moveArray[1])+90;
-		int y = Integer.parseInt(moveArray[2])+90;
-		try {
-			player.makeMove(x, y, tile);
-		} catch (InvalidMoveException e) {
-			System.out.println("Deze move mag niet");
-		}
 	}
 	
 	public void determineSwap(String string, Player player) {
