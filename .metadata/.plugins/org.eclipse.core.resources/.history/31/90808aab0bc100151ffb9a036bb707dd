@@ -19,6 +19,7 @@ public class Server extends Thread {
             System.out.println(USAGE);
             System.exit(0);
         }
+        
         Server server = new Server(Integer.parseInt(args[0]));
         server.run();
         

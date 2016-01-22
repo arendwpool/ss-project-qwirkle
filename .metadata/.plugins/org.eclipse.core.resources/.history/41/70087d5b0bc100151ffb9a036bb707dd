@@ -10,13 +10,16 @@ import java.net.Socket;
 import models.Game;
 import models.Player;
 
-public class ClientHandler implements Protocol {
+public class ClientHandler {
 	
 	private Server server;
     private Socket sock;
     private BufferedReader in;
     private BufferedWriter out;
     private String clientName;
+    private Game game;
+    private Player player;
+	
     /**
      * Constructs a ClientHandler object
      * Initialises both Data streams.
@@ -41,31 +44,7 @@ public class ClientHandler implements Protocol {
         
     }
     
-    /**
-     * This method takes care of sending messages from the Client.
-     * Every message that is received, is preprended with the name
-     * of the Client, and the new message is offered to the Server
-     * for broadcasting. If an IOException is thrown while reading
-     * the message, the method concludes that the socket connection is
-     * broken and shutdown() will be called. 
-     */
-    public void run() {
-    	String command = "";
-		while(command != null && !command.toLowerCase().equals("exit")){
-			try {
-    			command = in.readLine();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		try {
-			shutdown();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-    public void start(){
+    public void run(){
     	
     }
     

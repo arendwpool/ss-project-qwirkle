@@ -14,14 +14,8 @@ public class Server extends Thread {
     private boolean isTerminated = false;
     private List<ClientHandler> threads;
     
-    public static void main(String[] args) throws NumberFormatException, IOException {
-        if (args.length != 1) {
-            System.out.println(USAGE);
-            System.exit(0);
-        }
-        Server server = new Server(Integer.parseInt(args[0]));
-        server.run();
-        
+    public static void main(String[] args) throws IOException {
+    	Server server = new Server(port);
     }
     
     public Server(int portArg) throws IOException {
@@ -34,7 +28,7 @@ public class Server extends Thread {
 		}
     }
     
-    public void run() {
+    public void run() throws IOException {
         // TODO insert body
     	while(isTerminated == false){
     		try{
@@ -42,7 +36,7 @@ public class Server extends Thread {
     		addHandler(clientHandler);
     		clientHandler.announce();
     		clientHandler.start();
-    		} catch(IOException e){
+    		}catch(IOException e){
     			e.printStackTrace();
     		}
     	}
@@ -95,7 +89,7 @@ public class Server extends Thread {
     public void shutdown() {
 		System.out.println("Server shutting down.......");
 		try {
-			serverSocket.close();
+			sockey.close();
 		} catch (IOException e) {
 			System.exit(0);
 		}
