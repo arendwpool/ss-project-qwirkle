@@ -1,0 +1,32 @@
+package view;
+
+public class StartTUI extends TUI {
+	public void start(){
+		renderMenu(PRE_MENU);
+		int choice = determineOption();
+		if (choice == 1) {
+			createSpace();
+			renderMenu(NAME_MENU);
+			playerName = determineString();
+			gc.setPlayerName(playerName);
+			createSpace();
+			renderMenu(IP_MENU);
+			String ip = determineString();
+			while (!gc.isValidIP(ip)) {
+				System.out.println("Geen geldig ip adres...");
+				renderMenu(IP_MENU);
+				ip = determineString();
+				createSpace();
+			}
+			gc.setIP(ip);
+			renderMenu(MAIN_MENU);
+			choice = determineOption();
+			createSpace();
+			if (choice == 1) {
+				boardUI.start();
+			}
+		} else if (choice == 2) {
+			//TODO doe iets
+		}
+	}
+}

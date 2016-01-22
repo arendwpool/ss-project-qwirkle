@@ -2,7 +2,9 @@ package models;
 
 import java.util.ArrayList;
 
-public interface Player {
+import exceptions.InvalidMoveException;
+
+public interface Player  {
 	
 	public String getName();
 	
@@ -13,7 +15,7 @@ public interface Player {
 	 */
 	ArrayList<Tile> getHand();
 	
-	public void makeMove(int x, int y, Tile tile, Player player);
+	public void makeMove(int x, int y, Tile tile) throws InvalidMoveException;
 	
 	public int getScore();
 	

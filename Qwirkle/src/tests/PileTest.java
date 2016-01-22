@@ -11,20 +11,20 @@ public class PileTest {
 	
 	private Pile testPile;
 	
-	private String[] generatedTiles = {"roodcircel", "roodkruis", "roodruit", "roodvierkant", "roodster", "roodplus",
-			"oranjecircel", "oranjekruis", "oranjeruit", "oranjevierkant", "oranjester", "oranjeplus", "geelcircel", 
-			"geelkruis", "geelruit", "geelvierkant", "geelster", "geelplus", "groencircel", "groenkruis", "groenruit", 
-			"groenvierkant", "groenster", "groenplus", "blauwcircel", "blauwkruis", "blauwruit", "blauwvierkant", "blauwster",
-			"blauwplus", "paarscircel", "paarskruis", "paarsruit", "paarsvierkant", "paarsster", "paarsplus", "roodcircel", 
-			"roodkruis", "roodruit", "roodvierkant", "roodster", "roodplus", "oranjecircel", "oranjekruis", "oranjeruit", 
-			"oranjevierkant", "oranjester", "oranjeplus", "geelcircel", "geelkruis", "geelruit", "geelvierkant", "geelster", 
-			"geelplus", "groencircel", "groenkruis", "groenruit", "groenvierkant", "groenster", "groenplus", "blauwcircel", 
-			"blauwkruis", "blauwruit", "blauwvierkant", "blauwster", "blauwplus", "paarscircel", "paarskruis", "paarsruit",
-			"paarsvierkant", "paarsster", "paarsplus", "roodcircel", "roodkruis", "roodruit", "roodvierkant", "roodster", 
-			"roodplus", "oranjecircel", "oranjekruis", "oranjeruit", "oranjevierkant", "oranjester", "oranjeplus", "geelcircel", 
-			"geelkruis", "geelruit", "geelvierkant", "geelster", "geelplus", "groencircel", "groenkruis", "groenruit",
-			"groenvierkant", "groenster", "groenplus", "blauwcircel", "blauwkruis", "blauwruit", "blauwvierkant", 
-			"blauwster", "blauwplus", "paarscircel", "paarskruis", "paarsruit", "paarsvierkant", "paarsster", "paarsplus"};
+	private String[] generatedTiles = {"roodcirkel", "roodkruis", "roodruit", "roodvierkant", "roodster", "roodplus",
+			"oranjecirkel", "oranjekruis", "oranjeruit", "oranjevierkant", "oranjester", "oranjeplus", "geelcirkel", 
+			"geelkruis", "geelruit", "geelvierkant", "geelster", "geelplus", "groencirkel", "groenkruis", "groenruit", 
+			"groenvierkant", "groenster", "groenplus", "blauwcirkel", "blauwkruis", "blauwruit", "blauwvierkant", "blauwster",
+			"blauwplus", "paarscirkel", "paarskruis", "paarsruit", "paarsvierkant", "paarsster", "paarsplus", "roodcirkel", 
+			"roodkruis", "roodruit", "roodvierkant", "roodster", "roodplus", "oranjecirkel", "oranjekruis", "oranjeruit", 
+			"oranjevierkant", "oranjester", "oranjeplus", "geelcirkel", "geelkruis", "geelruit", "geelvierkant", "geelster", 
+			"geelplus", "groencirkel", "groenkruis", "groenruit", "groenvierkant", "groenster", "groenplus", "blauwcirkel", 
+			"blauwkruis", "blauwruit", "blauwvierkant", "blauwster", "blauwplus", "paarscirkel", "paarskruis", "paarsruit",
+			"paarsvierkant", "paarsster", "paarsplus", "roodcirkel", "roodkruis", "roodruit", "roodvierkant", "roodster", 
+			"roodplus", "oranjecirkel", "oranjekruis", "oranjeruit", "oranjevierkant", "oranjester", "oranjeplus", "geelcirkel", 
+			"geelkruis", "geelruit", "geelvierkant", "geelster", "geelplus", "groencirkel", "groenkruis", "groenruit",
+			"groenvierkant", "groenster", "groenplus", "blauwcirkel", "blauwkruis", "blauwruit", "blauwvierkant", 
+			"blauwster", "blauwplus", "paarscirkel", "paarskruis", "paarsruit", "paarsvierkant", "paarsster", "paarsplus"};
 	
 	@Before
 	public void setUp() throws Exception {

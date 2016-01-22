@@ -5,8 +5,18 @@ INDEX VERSION 1.127+C:\Users\Bob\Documents\ss-project-qwirkle\.metadata\.plugins
 4097853004.index
 2921179834.index
 287837708.index
+<<<<<<< HEAD
 1256513231.index
 3620173291.index
+=======
+4247270281.index
+1256513231.index
+4133831525.index
+71698844.index
+1482259783.index
+2142348700.index
+1853852832.index
+>>>>>>> grote_wanhopige_aanpassingen
 1642629014.index
 1984797805.index
 3425653186.index

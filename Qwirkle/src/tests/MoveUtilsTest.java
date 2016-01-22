@@ -1,5 +1,7 @@
 package tests;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,15 +30,17 @@ public class MoveUtilsTest {
 		testGame = new Game(new Board(), pile, 4);
 		testPlayer = new HumanPlayer("test", testGame);
 	}
-	@Test
 	
+	@Test
 	//TODO testen op traden van stenen die een speler niet heeft, en op een lege pile
+	//TODO oplossen: werkt niet
 	public void testReplaceTiles(){
 		ArrayList<Tile> tilesToTrade = new ArrayList<Tile>();
 		TileUtils.setHand(testPlayer, testGame.getPile());
 		tilesToTrade.add(testPlayer.getHand().get(0));
 		tilesToTrade.add(testPlayer.getHand().get(1));
 		tilesToTrade.add(testPlayer.getHand().get(2));
+		ArrayList<Tile> first = new ArrayList<Tile>(testPlayer.getHand());
 		for(Tile tile : testPlayer.getHand()){
 			System.out.println("first: " + tile.getColor()+tile.getSymbol());
 		}
@@ -51,8 +55,88 @@ public class MoveUtilsTest {
 		for(Tile tile : testPlayer.getHand()){
 			System.out.println("after: " + tile.getColor()+tile.getSymbol());
 		}
+		assertFalse(testPlayer.getHand().equals(first));
+	}
+
+	@Test
+	public void testIsValidMove(){
+		Board board = testGame.getBoard();
+		MoveUtils.setInitialMove(false);
+		board.setTile(90, 90, new Tile("groen", "cirkel"));
+		assertTrue("De gelegde tegel is groen", board.getField(90, 90).getColor().equals("groen"));
+		assertTrue("Deze move mag gelegd worden",MoveUtils.isValidMove(91, 90, new Tile("groen", "vierkant"), board));
+		assertFalse("Deze tegel zit aan geen tegel vast", MoveUtils.isValidMove(98, 85, new Tile("rood", "ruit"), board));
+		board.setTile(91, 90, new Tile("groen", "vierkant"));
+		assertFalse("Een rode ruit mag hier niet", MoveUtils.isValidMove(90, 89, new Tile("rood", "ruit"), board));
+		assertTrue("Een rode circel mag hier wel", MoveUtils.isValidMove(90, 89, new Tile("rood", "cirkel"), board));
+		board.reset();
+		board.setTile(90, 90, new Tile("groen", "plus"));
+		board.setTile(90, 91, new Tile("groen", "ruit"));
+		board.setTile(90, 92, new Tile("groen", "vierkant"));
+		board.setTile(90, 93, new Tile("groen", "ster"));
+		board.setTile(87, 89, new Tile("rood", "cirkel"));
+		board.setTile(89, 89, new Tile("blauw", "cirkel"));
+		board.setTile(88, 89, new Tile("oranje", "cirkel"));
+		assertTrue(MoveUtils.isValidMove(90, 89, new Tile("groen", "cirkel"), board));
+		assertFalse(MoveUtils.isValidMove(90,89, new Tile("groen", "ster"), board));
+		board.reset();
+		board.setTile(90, 90, new Tile("groen", "kruis"));
+		board.setTile(91, 90, new Tile("groen", "cikel"));
+		board.setTile(93, 90, new Tile("groen", "vierkant"));
+		board.setTile(94, 90, new Tile("groen", "ster"));
+		board.setTile(92, 89, new Tile("rood", "plus"));
+		board.setTile(92, 88, new Tile("blauw", "plus"));
+		board.setTile(92, 91, new Tile("oranje", "plus"));
+		assertTrue(MoveUtils.isValidMove(92, 90, new Tile("groen", "plus"), board));
 	}
 	
-	//TODO bobs testen toevoegen
+	@Test 
+	public void generateScore(){
+		Board board = testGame.getBoard();
+		board.reset();
+		board.setTile(90, 90, new Tile("groen", "plus"));
+		board.setTile(90, 91, new Tile("groen", "ruit"));
+		board.setTile(90, 92, new Tile("groen", "vierkant"));
+		board.setTile(90, 93, new Tile("groen", "ster"));
+		board.setTile(87, 89, new Tile("rood", "cirkel"));
+		board.setTile(89, 89, new Tile("blauw", "cirkel"));
+		board.setTile(88, 89, new Tile("oranje", "cirkel"));
+		Tile tile = new Tile("groen", "cirkel");
+		board.setTile(90, 89, tile);
+		MoveUtils.rememberMove(tile);
+		MoveUtils.generateScore(testPlayer, board);
+		assertEquals(9, testPlayer.getScore());
+		board.reset();
+		board.setTile(90, 91, new Tile("groen", "ruit"));
+		board.setTile(90, 92, new Tile("groen", "vierkant"));
+		board.setTile(90, 93, new Tile("groen", "ster"));
+		Tile tile1 = new Tile("oranje", "vierkant");
+		Tile tile2 = new Tile("oranje", "ster");
+		Tile tile3 = new Tile("oranje", "cirkel");
+		Tile tile4 = new Tile("oranje", "plus");
+		board.setTile(91, 95, tile4);
+		board.setTile(91, 92, tile1);
+		board.setTile(91, 93, tile2);
+		board.setTile(91, 94, tile3);
+		MoveUtils.rememberMove(tile1);
+		MoveUtils.rememberMove(tile2);
+		MoveUtils.rememberMove(tile3);
+		MoveUtils.rememberMove(tile4);
+		MoveUtils.generateScore(testPlayer, board);
+		assertEquals(8+9, testPlayer.getScore());
+		board.reset();
+		board.setTile(90, 90, new Tile("groen", "kruis"));
+		board.setTile(91, 90, new Tile("groen", "cikel"));
+		board.setTile(93, 90, new Tile("groen", "vierkant"));
+		board.setTile(94, 90, new Tile("groen", "ster"));
+		board.setTile(92, 89, new Tile("rood", "plus"));
+		board.setTile(92, 88, new Tile("blauw", "plus"));
+		board.setTile(92, 91, new Tile("oranje", "plus"));
+		Tile gp = new Tile("groen", "plus");
+		board.setTile(92, 90, gp);
+		MoveUtils.rememberMove(gp);
+		MoveUtils.generateScore(testPlayer, board);
+		assertEquals(9+8+9, testPlayer.getScore());
+	}
 
 }

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
+<<<<<<< HEAD
 <typeInfo handle="=Qwirkle/C:\/Program Files\/Java\/jre1.8.0_65\/lib\/rt.jar&lt;java.lang(Exception.class[Exception" modifiers="1" timestamp="1447683860129"/>
+=======
+<typeInfo handle="=Qwirkle/C:\/Program Files\/Java\/jre1.8.0_65\/lib\/rt.jar&lt;java.lang(Exception.class[Exception" modifiers="1" timestamp="1446469339351"/>
+<typeInfo handle="=Qwirkle/src&lt;view{TUI.java[TUI" modifiers="1025" timestamp="1453419180168"/>
+<typeInfo handle="=Qwirkle/src&lt;models{Player.java[Player" modifiers="513" timestamp="1453419180156"/>
+<typeInfo handle="=Qwirkle/C:\/Program Files\/Java\/jre1.8.0_65\/lib\/rt.jar&lt;java.lang.management(PlatformLoggingMXBean.class[PlatformLoggingMXBean" modifiers="1537" timestamp="1446469339351"/>
+>>>>>>> grote_wanhopige_aanpassingen
 </typeInfoHistroy>

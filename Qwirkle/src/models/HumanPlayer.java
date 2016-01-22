@@ -1,10 +1,13 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Scanner;
+
 import exceptions.FullGameException;
 import exceptions.InvalidMoveException;
 
-public class HumanPlayer implements Player {
+public class HumanPlayer extends Observable  implements Player {
 	/**
 	 * De naam van de betreffende speler.
 	 */
@@ -57,7 +60,25 @@ public class HumanPlayer implements Player {
 	 */
 	@Override
 	public void determineMove() {
-		// TODO Auto-generated method stub
+		Scanner in = new Scanner(System.in);
+		while(true) {
+			System.out.println("tegel leggen ............. 1");
+			System.out.println("Ruilen ................... 2");
+			System.out.println("klaar .................... 3");
+			String choice = in.nextLine();
+			if (choice.equals("1")) {
+				System.out.println("maak uw keuze: ");
+				String move = in.nextLine();
+				determineMove(move);
+			} else if (choice.equals("2")) {
+				//TODO swap
+			} else if (choice.equals("3")) {
+				setChanged();
+				notifyObservers("MadeMove");
+				break;
+			}
+			//TODO vraag over in.close();
+		}
 	}
 	
 	/**
@@ -75,14 +96,11 @@ public class HumanPlayer implements Player {
 	 * @param x
 	 * @param y
 	 * @param tile
+	 * @throws InvalidMoveException 
 	 */
 	@Override
-	public void makeMove(int x, int y, Tile tile, Player player) {
-		try {
-			game.makeMove(x, y, tile);
-		} catch (InvalidMoveException e) {
-			// TODO implementeren
-		}
+	public void makeMove(int x, int y, Tile tile) throws InvalidMoveException {
+		game.makeMove(x, y, tile, this);
 		
 	}
 
@@ -104,6 +122,20 @@ public class HumanPlayer implements Player {
 		score += points;
 	}
 
+	
+	public void determineMove(String string) {
+		String[] moveArray = string.split(" ");
+		int tileNumber = Integer.parseInt(moveArray[0]) - 1;
+		Tile tile = hand.get(tileNumber);		
+		int x = Integer.parseInt(moveArray[1])+90;
+		int y = Integer.parseInt(moveArray[2])+90;
+		try {
+			makeMove(x, y, tile);
+		} catch (InvalidMoveException e) {
+			System.out.println("Deze move mag niet");
+		}
+	}
+		
 
 
 }

@@ -1,0 +1,46 @@
+package models;
+
+import java.util.ArrayList;
+import java.util.Observable;
+
+import exceptions.InvalidMoveException;
+
+public abstract class AIPlayer extends Observable implements Player {
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void determineMove() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public ArrayList<Tile> getHand() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void makeMove(int x, int y, Tile tile) throws InvalidMoveException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int getScore() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void addScore(int points) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

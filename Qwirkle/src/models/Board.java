@@ -23,22 +23,22 @@ public class Board {
 	/**
 	 * geeft de minimale startview van x weer.
 	 */
-	public int viewOfMinX = 88;
+	public int viewOfMinX = 89;
 	
 	/**
 	 * geeft de maximale startview van x weer.
 	 */
-	public int viewOfMaxX = 92;
+	public int viewOfMaxX = 91;
 	
 	/**
 	 * geeft de minimale startview van y weer.
 	 */
-	public int viewOfMinY = 88;
+	public int viewOfMinY = 89;
 	
 	/**
 	 * geeft de maximale startview van y weer.
 	 */
-	public int viewOfMaxY = 92;
+	public int viewOfMaxY = 91;
 	
 	/**
 	 * geeft het midden punt van x weer.
@@ -65,9 +65,8 @@ public class Board {
 	 */
 	public Board deepCopy() {
 		Board board = new Board();
-		coordinaten = new Tile[DIM][DIM];
-		for (int x = 0; x < coordinaten.length; x++) {
-			for (int y = 0; y < coordinaten.length; y++) {
+		for (int x = 0; x < DIM; x++) {
+			for (int y = 0; y < DIM; y++) {
 				board.setTile(x, y, this.getField(x, y));
 			}
 		}
@@ -128,7 +127,7 @@ public class Board {
 	 * @return getField(x, y).getColor() == "empty" && getField(x,y).getSymbol() == "empty";
 	 */
 	public boolean isEmptyField(int x, int y) {
-		return getField(x, y).getColor() == "empty" && getField(x, y).getSymbol() == "empty";
+		return getField(x, y).getColor().equals("empty") && getField(x, y).getSymbol().equals("empty");
 	}
 	
 	/**
@@ -141,22 +140,28 @@ public class Board {
 		boolean rightIsEmpty = false;
 		int xOrig = x;
 		ArrayList<Tile> xAxis = new ArrayList<Tile>();
-		xAxis.add(getField(x, y));
+		if(!isEmptyField(x, y)){
+			xAxis.add(getField(x, y));
+		}
 		while (leftIsEmpty == false) {
-			x--;
-			if (isEmptyField(x, y) == false) {
-				xAxis.add(getField(x, y));
-			} else {
-				break; 
+			if (x != 0) {
+				x--;
+				if (isEmptyField(x, y) == false) {
+					xAxis.add(getField(x, y));
+				} else {
+					break; 
+				}
 			}
 		}
 		x = xOrig;
 		while (rightIsEmpty == false) {
-			x++;
-			if (isEmptyField(x, y) == false) {
-				xAxis.add(getField(x, y));
-			} else {
-				break; 
+			if (x != Board.DIM) {
+				x++;
+				if (isEmptyField(x, y) == false) {
+					xAxis.add(getField(x, y));
+				} else {
+					break; 
+				}
 			}
 		}
 		return xAxis;
@@ -171,22 +176,28 @@ public class Board {
 		boolean lowerIsEmpty = false;
 		int yOrig = y;
 		ArrayList<Tile> yAxis = new ArrayList<Tile>();
-		yAxis.add(getField(x, y));
+		if(!isEmptyField(x, y)){
+			yAxis.add(getField(x, y));
+		}
 		while (lowerIsEmpty == false) {
-			y--;
-			if (isEmptyField(x, y) == false) {
-				yAxis.add(getField(x, y));
-			} else {
-				break; 
+			if (y != 0) {
+				y--;
+				if (isEmptyField(x, y) == false) {
+					yAxis.add(getField(x, y));
+				} else {
+					break; 
+				}
 			}
 		}
 		y = yOrig;
 		while (upperIsEmpty == false) {
-			y++;
-			if (isEmptyField(x, y) == false) {
-				yAxis.add(getField(x, y));
-			} else {
-				break; 
+			if (y != Board.DIM) {
+				y++;
+				if (isEmptyField(x, y) == false) {
+					yAxis.add(getField(x, y));
+				} else {
+					break; 
+				}
 			}
 		}
 		return yAxis;
@@ -198,16 +209,28 @@ public class Board {
 	 * @param axis
 	 * @return contains;
 	 */
-	public boolean sharedLine(Tile tileToSet, ArrayList<Tile> axis) {
-		ArrayList<Tile> copy = new ArrayList<Tile>(MoveUtils.getLastMoves());
-		copy.add(tileToSet);
-		boolean contains = true;
-		for (Tile tile : copy) {
-			if (!axis.contains(tile)) {
-				contains = false;
+	public boolean validSharedLine(int x, int y, Tile tileToSet) {
+		boolean sameX = true;
+		boolean sameY = true;
+		boolean validSharedLine = false;
+		if (MoveUtils.getLastMoves().size()<1){
+			return true;
+		} else {
+			for (Tile tile : MoveUtils.getLastMoves()) {
+				if ((int) tile.getLocation().getX() != x) {
+					sameX = false;
+				}
+				if ((int) tile.getLocation().getY() != y) {
+					sameY = false;
+				}
 			}
+			if (sameX == true && sameY == false) {
+				validSharedLine = true;
+			} else if (sameX == false && sameY == true) {
+				validSharedLine = true;
+			}
+			return validSharedLine;
 		}
-		return contains;
 	}
 	
 	

@@ -1,8 +1,6 @@
 package util;
 
-import models.Board;
 import models.Game;
-import models.HumanPlayer;
 import models.Pile;
 import models.Player;
 import models.Tile;
@@ -41,7 +39,7 @@ public class TileUtils {
 	 * @param tileB
 	 */
 	public static boolean compareSymbol(Tile tileA, Tile tileB) {
-		return tileA.getSymbol() == tileB.getSymbol();
+		return tileA.getSymbol().equals(tileB.getSymbol());
 		
 	}
 	
@@ -51,7 +49,7 @@ public class TileUtils {
 	 * @param tileB
 	 */
 	public static boolean compareColor(Tile tileA, Tile tileB) {
-		return tileA.getColor() == tileB.getColor();
+		return tileA.getColor().equals(tileB.getColor());
 	}
 
 	
@@ -63,7 +61,7 @@ public class TileUtils {
 	public static boolean noTilesLeft(Game game) {
 		if (game.getPile().getTiles().size() == 0) {
 			boolean playerHasNoTiles = false;
-			for (Player player : game.getPlayers().keySet()) {
+			for (Player player : game.getPlayers()) {
 				if (player.getHand().size() == 0) {
 					playerHasNoTiles = true;
 				}
