@@ -107,6 +107,7 @@ public class MoveUtilsTest {
 		MoveUtils.generateScore(testPlayer, board);
 		assertEquals(9, testPlayer.getScore());
 		board.reset();
+		Player a = new HumanPlayer("asd", testGame);
 		board.setTile(90, 91, new Tile("groen", "ruit"));
 		board.setTile(90, 92, new Tile("groen", "vierkant"));
 		board.setTile(90, 93, new Tile("groen", "ster"));
@@ -122,9 +123,10 @@ public class MoveUtilsTest {
 		MoveUtils.rememberMove(tile2);
 		MoveUtils.rememberMove(tile3);
 		MoveUtils.rememberMove(tile4);
-		MoveUtils.generateScore(testPlayer, board);
-		assertEquals(8+9, testPlayer.getScore());
+		MoveUtils.generateScore(a, board);
+		assertEquals(8, a.getScore());
 		board.reset();
+		Player b = new HumanPlayer("asd", testGame);
 		board.setTile(90, 90, new Tile("groen", "kruis"));
 		board.setTile(91, 90, new Tile("groen", "cikel"));
 		board.setTile(93, 90, new Tile("groen", "vierkant"));
@@ -135,8 +137,33 @@ public class MoveUtilsTest {
 		Tile gp = new Tile("groen", "plus");
 		board.setTile(92, 90, gp);
 		MoveUtils.rememberMove(gp);
-		MoveUtils.generateScore(testPlayer, board);
-		assertEquals(9+8+9, testPlayer.getScore());
+		MoveUtils.generateScore(b, board);
+		assertEquals(9, b.getScore());
+		board.reset();
+		Player c = new HumanPlayer("asd", testGame);
+		board.setTile(90, 90, new Tile("groen", "kruis"));
+		board.setTile(91, 90, new Tile("groen", "cikel"));
+		board.setTile(92, 90, new Tile("groen", "vierkant"));
+		board.setTile(93, 90,  gp);
+		Tile gr = new Tile("groen", "ruit");
+		board.setTile(94, 90, gr);
+		MoveUtils.rememberMove(gr);
+		MoveUtils.rememberMove(gp);
+		MoveUtils.generateScore(c, board);
+		assertEquals(5, c.getScore());
+		board.reset();
+		Player d = new HumanPlayer("asd", testGame);
+		board.setTile(90, 90, new Tile("groen", "kruis"));
+		board.setTile(91, 90, new Tile("groen", "cikel"));
+		board.setTile(92, 90, new Tile("groen", "vierkant"));
+		board.setTile(93, 90, new Tile("groen", "ruit"));
+		board.setTile(94, 90, new Tile("groen", "plus"));
+		board.setTile(95, 91, new Tile("rood", "ster"));
+		Tile gs = new Tile("groen", "ster");
+		board.setTile(95, 90, gs);
+		MoveUtils.rememberMove(gs);
+		MoveUtils.generateScore(d, board);
+		assertEquals(14, d.getScore());
 	}
 
 }

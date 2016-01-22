@@ -80,12 +80,19 @@ public class MoveUtils {
 			ArrayList<Tile> commonY = new ArrayList<Tile>(column);
 			commonX = deleteCommon(commonX, getLastMoves());
 			commonY = deleteCommon(commonY, getLastMoves());
-			retainMultipleX = commonX.size() > 1;
-			retainMultipleY = commonY.size() > 1;
 			if (getLastMoves().size() == 1 && row.size() == 1 && column.size() == 1) {
 				score = 1;
 				break;
+			} else if (row.containsAll(lastSet) && isSingleOnXAxis(lastSet, board)) {
+				score = row.size();
+				break;
+			} else if (column.containsAll(lastSet) && isSingleOnYAxis(lastSet, board)) {
+				score = column.size();
+				System.out.println("y");
+				break;
 			}
+			retainMultipleX = commonX.size() > 1;
+			retainMultipleY = commonY.size() > 1;
 			if (retainMultipleX == false && retainMultipleY == false) {
 				score += column.size();
 				score += row.size();
@@ -100,8 +107,35 @@ public class MoveUtils {
 		} else if (retainMultipleY == true) {
 			score += column.size();
 		}
+		if (row.size() == 6 || column.size() == 6) { //TODO vraag: kan een bonus van 12?
+			score += 6;
+		}
 		clearLastMoves();
 		player.addScore(score);
+	}
+	
+	public static boolean isSingleOnXAxis(ArrayList<Tile> moves, Board board) {
+		boolean isSingleOnX = true;
+		for (Tile tile : moves) {
+			int x = (int) tile.getLocation().getX();
+			int y = (int) tile.getLocation().getY();
+			if (board.tilesOnYAxis(x, y).size() > 1) {
+				isSingleOnX = false;
+			}
+		}
+		return isSingleOnX;
+	}
+	
+	public static boolean isSingleOnYAxis(ArrayList<Tile> moves, Board board) {
+		boolean isSingleOnY = true;
+		for (Tile tile : moves) {
+			int x = (int) tile.getLocation().getX();
+			int y = (int) tile.getLocation().getY();
+			if (board.tilesOnXAxis(x, y).size() > 1) {
+				isSingleOnY = false;
+			}
+		}
+		return isSingleOnY;
 	}
 	
 	public static ArrayList<Tile> deleteCommon(ArrayList<Tile> listToKeep, ArrayList<Tile> listToRemove) {
