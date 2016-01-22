@@ -71,14 +71,6 @@ public class Pile {
 	public ArrayList<Tile> getTiles() {
 		return tiles;
 	}
-	
-	/**
-	 * Haalt een tegel met een bepaalde index uit de lijst met tiles.
-	 * @param index
-	 */
-	public void removeTile(int index) {
-		tiles.remove(index);
-	}
 	/**
 	 * Haalt een bepaalde tile uit de zak.
 	 * @param tile

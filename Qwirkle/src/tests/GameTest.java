@@ -6,6 +6,7 @@ import org.junit.Test;
 import exceptions.FullGameException;
 import exceptions.PlayerNotFoundException;
 import models.Board;
+import models.ComputerPlayer;
 import models.Game;
 import models.HumanPlayer;
 import models.Pile;
@@ -34,40 +35,12 @@ public class GameTest {
 	}
 	
 	@Test
-	public void testAddPlayer(){
-		try{
-			testGame.addPlayer(testPlayer);
-			testGame.addPlayer(new HumanPlayer("naam", testGame));//TODO parameter game weghalen)
-			testGame.addPlayer(new HumanPlayer("andere", testGame));
-			testGame.addPlayer(new HumanPlayer("test", testGame));
-		}catch(FullGameException e){
-			System.out.println("testAddPlayer vol");
-			assertTrue(1==2);
-		}
-		assertTrue("Er zijn nu 4 spelers", testGame.getPlayers().keySet().size() == 4);
-		try{
-			testGame.addPlayer(new HumanPlayer("error", testGame));
-		}catch(FullGameException e){
-			assertTrue("Er is een error", e != null);
-		}try{
-			testGame.addPlayer(new HumanPlayer("error", testGame));
-		}catch(FullGameException e){
-			assertTrue("Er is een error", e != null);
-		}
-	}
-	
-	@Test
 	public void testNextPlayer(){
-		try {
-			testGame.addPlayer(testPlayer);
-			testGame.addPlayer(new HumanPlayer("1", testGame));
-			testGame.addPlayer(new HumanPlayer("2", testGame));
-			testGame.addPlayer(new HumanPlayer("3", testGame));
-		} catch (FullGameException e) {
-			//Gebeurt niet in deze test
-			System.out.println("TestNextPlayer vol");
-		}
+		Player test2 = new HumanPlayer("2", testGame);
+		Player test3 = new HumanPlayer("2", testGame);
+		Player test4 = new HumanPlayer("2", testGame);
 		testGame.setCurrentPlayer(testPlayer);
+		System.out.println(testGame.getPlayers());
 		try{
 			assertTrue("De eerste speler heeft ID 1", testGame.getPlayerID(testGame.getCurrentPlayer()) == 1);
 			testGame.nextPlayer();
@@ -83,19 +56,37 @@ public class GameTest {
 		}catch(PlayerNotFoundException e){
 			assertTrue("Speler is gevonden", 1 == 2);
 		}
+		Game game = new Game(new Board(), new Pile(), 2);
+		Player test5 = new HumanPlayer("2", game);
+		Player test6 = new HumanPlayer("2", game);
+		game.setCurrentPlayer(test5);
+		try {
+			System.out.println(game.getPlayerID(game.getCurrentPlayer()));
+			assertTrue("De eerste speler heeft ID 2", testGame.getCurrentPlayer().equals(test5));
+			testGame.nextPlayer();
+			System.out.println(game.getPlayerID(game.getCurrentPlayer()));
+			assertTrue("De volgende speler heeft ID 1", testGame.getCurrentPlayer().equals(test6));
+			testGame.nextPlayer();
+			System.out.println(game.getPlayerID(game.getCurrentPlayer()));
+			assertTrue("De volgende speler heeft ID 2", testGame.getPlayerID(testGame.getCurrentPlayer()) == 2);
+			testGame.nextPlayer();
+			System.out.println(game.getPlayerID(game.getCurrentPlayer()));
+			assertTrue("De volgende speler heeft ID 1", testGame.getPlayerID(testGame.getCurrentPlayer()) == 1);
+		} catch (PlayerNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
 	public void testDetermineInitialPlayer(){
 		Player player1 = new HumanPlayer("1", testGame);
 		Player player2 = new HumanPlayer("2", testGame);
-		Player player3 = new HumanPlayer("3", testGame);
+		Player player3 = new ComputerPlayer(testGame);
 		TileUtils.setHand(player1, testGame.getPile());
 		TileUtils.setHand(player2, testGame.getPile());
 		TileUtils.setHand(player3, testGame.getPile());
 		TileUtils.setHand(testPlayer, testGame.getPile());
-		for(Player player : testGame.getPlayers().keySet()){
-			//TODO reparenen: om een of andere manier worden de tegels niet uit de pile verwijderd
+		for(Player player : testGame.getPlayers()){
 			for(Tile tile : player.getHand()){
 				System.out.println(player.getName() + ": " + tile.getColor()+tile.getSymbol());
 			}
