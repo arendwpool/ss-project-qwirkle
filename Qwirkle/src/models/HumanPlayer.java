@@ -62,21 +62,21 @@ public class HumanPlayer extends Observable  implements Player {
 	@Override
 	public void determineMove() {
 		Scanner in = new Scanner(System.in);
-		boolean move = true;
-		while(move == true) {
+		while(true) {
 			System.out.println("tegel leggen ............. 1");
 			System.out.println("Ruilen ................... 2");
 			System.out.println("klaar .................... 3");
-			if (in.nextLine().equals("1")) {
+			String choice = in.nextLine();
+			if (choice.equals("1")) {
 				System.out.println("maak uw keuze: ");
-				String choice = in.nextLine();
-				determineMove(choice);
-			} else if (in.equals("2")) {
+				String move = in.nextLine();
+				determineMove(move);
+			} else if (choice.equals("2")) {
 				//TODO swap
-			} else if (in.equals("3")) {
+			} else if (choice.equals("3")) {
 				setChanged();
 				notifyObservers("MadeMove");
-				move = false;
+				break;
 			}
 			
 		}

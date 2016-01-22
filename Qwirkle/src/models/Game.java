@@ -36,7 +36,7 @@ public class Game extends Observable{
 	 * Een hashmap van spelers die meedoen gemapt aan hun ID. Dit is een nummer die gebruikt
 	 * wordt om aan te geven welke speler aan de beurt is.
 	 */
-	private Map<Player, Integer> players;
+	private ArrayList<Player> players;
 	
 	/**
 	 * Het nieuwe bord dat bij dit spel hoort. Dit board wordt ook meegegeven in de parameters 
@@ -61,7 +61,7 @@ public class Game extends Observable{
 		this.noOfPlayers = noOfPlayers;
 		this.board = board;
 		this.pile = pile;
-		players = new HashMap<Player, Integer>();
+		players = new ArrayList<Player>();
 		finishedMove = false;
 	}
 	
@@ -93,7 +93,7 @@ public class Game extends Observable{
 		if (gameOver() == true) {
 			int score = 0;
 			Player withHighscore = null;
-			for (Player player : players.keySet()) {
+			for (Player player : players) {
 				if (player.getScore() > score) {
 					score = player.getScore();
 					withHighscore = player;
@@ -112,7 +112,7 @@ public class Game extends Observable{
 	public void start() {
 		reset();
 		pile.generateTiles();
-		for (Player player : players.keySet()) {
+		for (Player player : players) {
 			TileUtils.setHand(player, pile);
 		}
 	}
@@ -120,7 +120,7 @@ public class Game extends Observable{
 	private void reset() {
 		board.reset();
 		pile.getTiles().clear();
-		for (Player player : players.keySet()) {
+		for (Player player : players) {
 			player.getHand().clear();
 		}
 	}
@@ -141,8 +141,8 @@ public class Game extends Observable{
 	 * @throws FullGameException 
 	 */
 	public void addPlayer(Player player) throws FullGameException {
-		if (players.keySet().size() <= noOfPlayers) {
-			players.put(player, players.keySet().size()+1);
+		if (players.size() <= noOfPlayers) {
+			players.add(player);
 		} else {
 			throw new FullGameException();
 		}
@@ -160,7 +160,7 @@ public class Game extends Observable{
 	 * Geeft een Map terug van de spelers in het spel.
 	 * @return this.players
 	 */
-	public Map<Player, Integer> getPlayers() {
+	public ArrayList<Player> getPlayers() {
 		return players;
 	}
 	
@@ -178,13 +178,9 @@ public class Game extends Observable{
 	 * volgende speler. De speler met dit ID wordt dantoegewezen aan currentPlayer.
 	 */
 	public void nextPlayer() {
-		int current = players.get(currentPlayer) - 1;
-		int next = (current % noOfPlayers)+1;
-		for (Player player : players.keySet()) {
-			if (players.get(player) == next) {
-				currentPlayer = player;
-			}
-		}
+		int current = players.indexOf(currentPlayer);
+		int next = (current + 1) % noOfPlayers;
+		currentPlayer = players.get(next);
 	}
 	
 	/**
@@ -196,7 +192,7 @@ public class Game extends Observable{
 	public void determineInitialPlayer() {	
 		int longestRow = 0;
 		Player withLongestRow = null;
-		for (Player player : players.keySet()) {
+		for (Player player : players) {
 			ArrayList<Tile> hand = player.getHand();
 			for (int i = 0; i < player.getHand().size(); i++) {
 				ArrayList<Tile> colors = new ArrayList<Tile>();
@@ -263,7 +259,6 @@ public class Game extends Observable{
 	public void finishMove(Player player) throws InvalidMoveException{
 		MoveUtils.processMove(player, this);
 		TileUtils.setHand(player, pile);
-		//nextPlayer();
 		finishedMove = true;
 		setChanged();
 		notifyObservers("moveFinished");
@@ -286,8 +281,8 @@ public class Game extends Observable{
 	 * @throws PlayerNotFoundException
 	 */
 	public int getPlayerID(Player player) throws PlayerNotFoundException {
-		if (players.keySet().contains(player)) {
-			return players.get(player);
+		if (players.contains(player)) {
+			return players.indexOf(player) + 1;
 		} else {
 			throw new PlayerNotFoundException();
 		}

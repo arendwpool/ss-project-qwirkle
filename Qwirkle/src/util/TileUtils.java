@@ -63,7 +63,7 @@ public class TileUtils {
 	public static boolean noTilesLeft(Game game) {
 		if (game.getPile().getTiles().size() == 0) {
 			boolean playerHasNoTiles = false;
-			for (Player player : game.getPlayers().keySet()) {
+			for (Player player : game.getPlayers()) {
 				if (player.getHand().size() == 0) {
 					playerHasNoTiles = true;
 				}

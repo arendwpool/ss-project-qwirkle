@@ -39,21 +39,23 @@ public class ComputerPlayer extends Observable implements Player {
 		if (game.getBoard().isEmptyField(90, 90)) {
 			makeMove(90, 90, hand.get(0));
 		} else {
+			tileLoop:
 			for(Tile tile: hand){
-				for(int x = 0; x < Board.DIM; x++){
-					for(int y = 0; y < Board.DIM; y++){
+				for(int x = 1; x < Board.DIM-1; x++){
+					for(int y = 1; y < Board.DIM-1; y++){
 						if(MoveUtils.isValidMove(x, y, tile, game.getBoard())){
 							makeMove(x, y, tile);
-							System.out.println("PC heeft wat gedaan");
+							break tileLoop;
 						}
 					}
 				}
-				if(MoveUtils.madeMove() == false){
-					try {
-						MoveUtils.replaceTiles(hand, this, game.getPile());
-					} catch (NoTilesLeftInPileException | InvalidMoveException e) {
-						// TODO Auto-generated catch block
-					}
+			}
+			if(MoveUtils.madeMove() == false){
+				try {
+					MoveUtils.replaceTiles(hand, this, game.getPile());
+					signalController();
+				} catch (NoTilesLeftInPileException | InvalidMoveException e) {
+					// TODO Auto-generated catch block
 				}
 			}
 		}
