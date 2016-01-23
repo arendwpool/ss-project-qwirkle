@@ -65,7 +65,7 @@ public class StartTUI extends TUI implements Observer{
 						//TODO geef startsein
 						break;
 					} else if (choice == 2) {
-						//TODO
+						gc.setQuit(true);
 						break;
 					} else {
 						System.out.println("Voer een geldige optie in");
