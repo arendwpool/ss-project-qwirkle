@@ -56,10 +56,16 @@ public class GameTest {
 		}catch(PlayerNotFoundException e){
 			assertTrue("Speler is gevonden", 1 == 2);
 		}
+<<<<<<< HEAD
 
 		Game game = new Game(new Board(), new Pile());
 		Player test5 = new HumanPlayer("2", game);
 		Player test6 = new HumanPlayer("2", game);
+=======
+		Game game = new Game(new Board(), new Pile());
+		Player test5 = new HumanPlayer("5", game);
+		Player test6 = new HumanPlayer("6", game);
+>>>>>>> d9fbfb845836406132d74f40eec6a9a79ca9a51e
 		game.setCurrentPlayer(test5);
 		try {
 			System.out.println(game.getPlayerID(game.getCurrentPlayer()));

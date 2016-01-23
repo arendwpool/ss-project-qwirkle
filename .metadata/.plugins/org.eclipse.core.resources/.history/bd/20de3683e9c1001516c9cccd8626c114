@@ -18,8 +18,6 @@ public class ClientHandler implements Protocol {
     private BufferedReader in;
     private BufferedWriter out;
     private String clientName;
-    private Game game;
-    private Player player;
     /**
      * Constructs a ClientHandler object
      * Initialises both Data streams.
@@ -41,7 +39,7 @@ public class ClientHandler implements Protocol {
     public void announce() throws IOException {
         clientName = in.readLine();
         server.broadcast("[" + clientName + " has entered]");
-        //TODO ? iets klopt hier volgens mij niet.
+        
     }
     
     /**
@@ -68,21 +66,9 @@ public class ClientHandler implements Protocol {
 			e.printStackTrace();
 		}
     }
-      public Player getLocalPlayer(){
-		return player;
-	}
-    
-	public Game getGame(){
-		return game;
-	}
-	
-	public void setGame(Game game){
-		this.game = game;
-	}
-	
-	public void setPlayer(Player player){
-		this.player = player;
-	}
+    public void start(){
+    	
+    }
     
     /**
      * This method can be used to send a message over the socket
@@ -101,12 +87,8 @@ public class ClientHandler implements Protocol {
     	}
 	}
     public void broadcast(String Message){
-    	//TODO kan
+    	
     }
-    
-  
-	
-	
     
     /**
      * This ClientHandler signs off from the Server and subsequently

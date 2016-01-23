@@ -13,11 +13,8 @@ import java.util.Scanner;
 
 import controllers.GameController;
 import models.ComputerPlayer;
-import models.Game;
 import models.HumanPlayer;
 import models.Player;
-import view.BoardTUI;
-import view.StartTUI;
 
 import java.lang.Thread;
 
@@ -29,22 +26,16 @@ public class Client extends Thread {
 	private static final int AMOUNT_CHARACTERS = 75;
 	private String string = "";
 	private int clientID;
-	private StartTUI ui;
-	private BoardTUI bui;
 	private GameController gc;
 	private String clientName;
 	protected String playerName;
-	private Game game;
-	private Player player;
 	private Socket sock;
-	private Scanner scanner;
-	private boolean isHuman;
 	private BufferedReader in;
 	private BufferedWriter out;
 	Scanner uInput = new Scanner(System.in);
 	protected static final String[] NAME_MENU = {null, "Voer uw naam in:"};
 	
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args){
 		Client client = new Client();
 		client.start();
 	}
@@ -61,14 +52,10 @@ public class Client extends Thread {
 	}
 	
 	public Client() throws IOException {
-		ui = new StartTUI(gc);
-		bui = new BoardTUI(gc, game);
+		in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+		out = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
 		
 		
-	}
-	
-	public void createLocalPlayer(String name){
-		player = new HumanPlayer(name, game);
 	}
 	
 	public void run() {
@@ -92,10 +79,26 @@ public class Client extends Thread {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}*/
-		
+		renderMenu();
 		
 		
 	}
+	
+	public void renderMenu(String[] menuItems){
+		if(menuItems[0] != null && menuItems[0].contains("[naam]")){
+			menuItems[0] = menuItems[0].replace("[naam]", playerName);
+			System.out.println(menuItems[0]);
+		}
+		for(int i = 1; i < menuItems.length; i++){
+			System.out.println(menuItems[i] + dots(menuItems[i]) + i);
+		}
+		if(menuItems.equals(NAME_MENU)){
+			System.out.print("Typ uw naam en druk op enter: ");
+		}else{
+			System.out.print("\n" + "Voer uw keuze in:" + dots("Voer uw keuze in: ") + ".");
+		}
+	}
+	
 	
 	public void setClientID(){
 		//TODO implement dit via server

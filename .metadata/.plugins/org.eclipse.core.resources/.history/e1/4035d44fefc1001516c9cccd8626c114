@@ -61,6 +61,7 @@ public class Client extends Thread {
 	}
 	
 	public Client() throws IOException {
+
 		ui = new StartTUI(gc);
 		bui = new BoardTUI(gc, game);
 		

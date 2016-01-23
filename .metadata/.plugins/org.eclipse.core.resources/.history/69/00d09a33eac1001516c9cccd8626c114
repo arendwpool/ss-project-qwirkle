@@ -41,7 +41,7 @@ public class ClientHandler implements Protocol {
     public void announce() throws IOException {
         clientName = in.readLine();
         server.broadcast("[" + clientName + " has entered]");
-        //TODO ? iets klopt hier volgens mij niet.
+        
     }
     
     /**

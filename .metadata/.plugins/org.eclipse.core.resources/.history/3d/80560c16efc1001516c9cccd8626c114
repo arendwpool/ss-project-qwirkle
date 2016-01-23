@@ -61,6 +61,8 @@ public class Client extends Thread {
 	}
 	
 	public Client() throws IOException {
+		in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+		out = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
 		ui = new StartTUI(gc);
 		bui = new BoardTUI(gc, game);
 		

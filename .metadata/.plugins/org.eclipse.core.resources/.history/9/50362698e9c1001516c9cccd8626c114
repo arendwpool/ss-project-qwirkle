@@ -18,6 +18,7 @@ public class ClientHandler implements Protocol {
     private BufferedReader in;
     private BufferedWriter out;
     private String clientName;
+    private String playerName;
     private Game game;
     private Player player;
     /**
@@ -41,7 +42,7 @@ public class ClientHandler implements Protocol {
     public void announce() throws IOException {
         clientName = in.readLine();
         server.broadcast("[" + clientName + " has entered]");
-        //TODO ? iets klopt hier volgens mij niet.
+        
     }
     
     /**
@@ -101,7 +102,7 @@ public class ClientHandler implements Protocol {
     	}
 	}
     public void broadcast(String Message){
-    	//TODO kan
+    	
     }
     
   

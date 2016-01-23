@@ -77,9 +77,7 @@ public class Server extends Thread {
      * @param handler ClientHandler that will be removed
      */
     public void removeHandler(ClientHandler handler) {
-    	if (threads.contains(handler)) {
-            threads.remove(handler);
-        }
+        threads.remove(handler);	
     }
     
     /**
