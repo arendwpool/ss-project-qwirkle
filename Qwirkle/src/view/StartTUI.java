@@ -1,5 +1,6 @@
 package view;
 
+import java.util.InputMismatchException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -22,31 +23,70 @@ public class StartTUI extends TUI implements Observer{
 	}
 	
 	public void start(){
-		renderMenu(PRE_MENU);
-		int choice = determineOption();
-		if (choice == 1) {
-			createSpace();
-			renderMenu(NAME_MENU);
-			playerName = determineString();
-			gc.setPlayerName(playerName);
-			createSpace();
-			renderMenu(IP_MENU);
-			String ip = determineString();
-			while (!gc.isValidIP(ip)) {
-				System.out.println("Geen geldig ip adres...");
-				renderMenu(IP_MENU);
-				ip = determineString();
-				createSpace();
-			}
-			gc.setIP(ip);
-			renderMenu(MAIN_MENU);
-			choice = determineOption();
-			createSpace();
+		while (true) {
+			renderMenu(PRE_MENU);
+			int choice = determineOption();
 			if (choice == 1) {
-				//Doet niets, dit zorgt dat de controller door kan gaan
+				gc.isHuman(true);
+				createSpace();
+				renderMenu(NAME_MENU);
+				while (true) {
+					playerName = determineString();
+					if (playerName.length() > 2) {
+						gc.setPlayerName(playerName);
+						break;
+					} else {
+						System.out.println("Voer een naam in van minstens  3 karakters");
+					}
+				}
+				createSpace();
+				renderMenu(IP_MENU);
+				while (true) {
+					String ip = "";
+					try {
+						ip = determineString();
+						while (!gc.isValidIP(ip)) {
+							System.out.println("Geen geldig ip adres...");
+							renderMenu(IP_MENU);
+							ip = determineString();
+							createSpace();
+						}
+						gc.setIP(ip);
+						break;
+					} catch (NumberFormatException e) {
+						System.out.println("Voer een geldig ip adres in");
+					}
+				}	
+				while (true) {
+					renderMenu(MAIN_MENU);
+					choice = determineOption();
+					createSpace();
+					if (choice == 1) {
+						//TODO geef startsein
+						break;
+					} else if (choice == 2) {
+						//TODO
+						break;
+					} else {
+						System.out.println("Voer een geldige optie in");
+					}
+				}
+				break;
+			} else if (choice == 2) {
+				gc.isHuman(false);
+				renderMenu(IP_MENU);
+				String ip = determineString();
+				while (!gc.isValidIP(ip)) {
+					System.out.println("Geen geldig ip adres...");
+					renderMenu(IP_MENU);
+					ip = determineString();
+					createSpace();
+				}
+				gc.setIP(ip);
+				break;
+			} else {
+				System.out.println("Voer een geldige optie in.");
 			}
-		} else if (choice == 2) {
-			//TODO doe iets
 		}
 	}
 }

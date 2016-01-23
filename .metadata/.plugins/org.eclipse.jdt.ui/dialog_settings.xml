@@ -6,6 +6,7 @@
 	</section>
 	<section name="JavaElementSearchActions">
 	</section>
+<<<<<<< HEAD
 	<section name="RefactoringWizard.preview">
 		<item value="400" key="height"/>
 		<item value="600" key="width"/>
@@ -16,6 +17,8 @@
 		<item value="true" key="renameSubpackages"/>
 		<item value="false" key="updateTextualMatches"/>
 	</section>
+=======
+>>>>>>> cb745313ef268a1c9ae69f8091fb37eb45646390
 	<section name="quick_assist_proposal_size">
 	</section>
 </section>

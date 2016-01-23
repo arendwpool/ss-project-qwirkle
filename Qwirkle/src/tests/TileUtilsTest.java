@@ -20,7 +20,7 @@ public class TileUtilsTest {
 	@Before
 	public void setUp() throws Exception {
 		Pile pile = new Pile();
-		testGame = new Game(new Board(), pile, 4);
+		testGame = new Game(new Board(), pile);
 		testPlayer = new HumanPlayer("Test", testGame);
 		testPlayer2 = new HumanPlayer("Test2", testGame);
 	}

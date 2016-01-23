@@ -151,6 +151,8 @@ public class Board {
 				} else {
 					break; 
 				}
+			} else {
+				break;
 			}
 		}
 		x = xOrig;
@@ -162,6 +164,8 @@ public class Board {
 				} else {
 					break; 
 				}
+			} else {
+				break;
 			}
 		}
 		return xAxis;
@@ -187,6 +191,8 @@ public class Board {
 				} else {
 					break; 
 				}
+			} else {
+				break;
 			}
 		}
 		y = yOrig;
@@ -198,6 +204,8 @@ public class Board {
 				} else {
 					break; 
 				}
+			} else {
+				break;
 			}
 		}
 		return yAxis;
@@ -257,6 +265,20 @@ public class Board {
 		}
 	}
 	
+	public boolean sameAxis(ArrayList<Tile> list1, ArrayList<Tile> list2) {
+		boolean sameX = true;
+		boolean sameY = true;
+		for (Tile tile : list1) {
+			for (Tile tileToCompare : list2) {
+				if (tile.getLocation().getX() != tileToCompare.getLocation().getX()) {
+					sameX = false;
+				} else if (tile.getLocation().getY() != tileToCompare.getLocation().getY()) {
+					sameY = false;
+				}
+			}
+		}
+		return sameX || sameY;
+	}
 	//TODO Hoeveelheid stenen op het bord kunnen controleren checken
 
 

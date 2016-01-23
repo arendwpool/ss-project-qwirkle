@@ -30,7 +30,7 @@ public class GameTest {
 	@Before
 	public void setUp() throws Exception {
 		Pile pile = new Pile();
-		testGame = new Game(new Board(), pile, 4);
+		testGame = new Game(new Board(), pile);
 		testPlayer = new HumanPlayer("test", testGame);
 	}
 	
@@ -56,9 +56,15 @@ public class GameTest {
 		}catch(PlayerNotFoundException e){
 			assertTrue("Speler is gevonden", 1 == 2);
 		}
+<<<<<<< HEAD
 		Game game = new Game(new Board(), new Pile(), 2);
 		Player test5 = new HumanPlayer("5", game);
 		Player test6 = new HumanPlayer("6", game);
+=======
+		Game game = new Game(new Board(), new Pile());
+		Player test5 = new HumanPlayer("2", game);
+		Player test6 = new HumanPlayer("2", game);
+>>>>>>> cb745313ef268a1c9ae69f8091fb37eb45646390
 		game.setCurrentPlayer(test5);
 		try {
 			System.out.println(game.getPlayerID(game.getCurrentPlayer()));

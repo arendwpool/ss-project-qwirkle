@@ -1,0 +1,74 @@
+package view;
+
+import java.util.InputMismatchException;
+import java.util.Observable;
+import java.util.Observer;
+
+import controllers.GameController;
+
+public class StartTUI extends TUI implements Observer{
+	/**
+	 * De string op index 0 is altijd een beschrijving bij een menu
+	 */
+	private static final String[] PRE_MENU = {null, "Ik ben een Menselijke speler", "Ik ben een Computerspeler"};
+	private static final String[] MAIN_MENU = {"Hallo [naam]!", "Start", "Afsluiten"};
+	private static final String[] IP_MENU = {null, "Voer het gewenste ip adres in:"};
+	
+	public StartTUI(GameController gc) {
+		super(gc);
+	}
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+	}
+	
+	public void start(){
+		while (true) {
+			renderMenu(PRE_MENU);
+			int choice = determineOption();
+			if (choice == 1) {
+				while (true) {
+					gc.isHuman(true);
+					createSpace();
+					renderMenu(NAME_MENU);
+					playerName = determineString();
+					gc.setPlayerName(playerName);
+					createSpace();
+					renderMenu(IP_MENU);
+					String ip = determineString();
+					while (!gc.isValidIP(ip)) {
+						System.out.println("Geen geldig ip adres...");
+						renderMenu(IP_MENU);
+						ip = determineString();
+						createSpace();
+					}	
+					gc.setIP(ip);
+					renderMenu(MAIN_MENU);
+					choice = determineOption();
+					createSpace();
+					if (choice == 1) {
+						//TODO geef startsein
+						break;
+					} else if (choice == 2) {
+						//TODO
+						break;
+					}
+				} else if (choice == 2) {
+					gc.isHuman(false);
+					renderMenu(IP_MENU);
+					String ip = determineString();
+					while (!gc.isValidIP(ip)) {
+						System.out.println("Geen geldig ip adres...");
+						renderMenu(IP_MENU);
+						ip = determineString();
+						createSpace();
+					}
+					gc.setIP(ip);
+					break;
+				} else {
+					System.out.println("Voer een geldige optie in.");
+				}
+			}
+		}
+	}
+}
