@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="PileTest" project="Qwirkle" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="tests.PileTest" time="0.0">
+    <testcase name="testGenerateTiles" classname="tests.PileTest" time="0.0"/>
+    <testcase name="testTilesLeft" classname="tests.PileTest" time="0.0"/>
+    <testcase name="testShuffle" classname="tests.PileTest" time="0.0"/>
+  </testsuite>
+</testrun>

@@ -59,6 +59,9 @@ public class GameTest {
 		Game game = new Game(new Board(), new Pile());
 		Player test5 = new HumanPlayer("5", game);
 		Player test6 = new HumanPlayer("6", game);
+		Game game = new Game(new Board(), new Pile());
+		Player test5 = new HumanPlayer("2", game);
+		Player test6 = new HumanPlayer("2", game);
 		game.setCurrentPlayer(test5);
 		try {
 			System.out.println(game.getPlayerID(game.getCurrentPlayer()));
