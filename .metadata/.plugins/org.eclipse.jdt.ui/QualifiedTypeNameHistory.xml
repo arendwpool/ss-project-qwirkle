@@ -1,10 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-<<<<<<< HEAD
-<fullyQualifiedTypeName name="java.lang.Integer"/>
-<fullyQualifiedTypeName name="java.io.OutputStreamWriter"/>
-=======
-<fullyQualifiedTypeName name="models.ComputerPlayer"/>
-<fullyQualifiedTypeName name="java.util.InputMismatchException"/>
->>>>>>> cb745313ef268a1c9ae69f8091fb37eb45646390
-</qualifiedTypeNameHistroy>
+<qualifiedTypeNameHistroy/>
