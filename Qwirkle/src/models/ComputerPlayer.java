@@ -89,7 +89,7 @@ public class ComputerPlayer extends Observable implements Player {
 			game.makeMove(x, y, tile, this);
 			signalController();
 		} catch (InvalidMoveException e) {
-			// TODO implementeren
+			System.out.println("Er is iets fout gegaan met de computerspeler");
 		}
 	}
 
