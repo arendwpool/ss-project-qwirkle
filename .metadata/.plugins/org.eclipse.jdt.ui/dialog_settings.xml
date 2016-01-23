@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<section name="OptionalMessageDialog.hide.">
+	</section>
 	<section name="completion_proposal_size">
 	</section>
 	<section name="JavaElementSearchActions">
 	</section>
-<<<<<<< HEAD
-	<section name="NewClassWizardPage">
-		<item value="false" key="create_constructor"/>
-		<item value="true" key="create_unimplemented"/>
+	<section name="RefactoringWizard.preview">
+		<item value="400" key="height"/>
+		<item value="600" key="width"/>
 	</section>
-=======
->>>>>>> 1d1dbb27e3fa6abac00075fd3565cd38b0d92de9
+	<section name="org.eclipse.ltk.ui.refactoring.settings">
+		<item value="*" key="patterns"/>
+		<item value="false" key="updateQualifiedNames"/>
+		<item value="true" key="renameSubpackages"/>
+		<item value="false" key="updateTextualMatches"/>
+	</section>
 	<section name="quick_assist_proposal_size">
 	</section>
 </section>

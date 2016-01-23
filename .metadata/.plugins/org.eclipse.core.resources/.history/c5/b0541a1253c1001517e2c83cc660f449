@@ -1,0 +1,118 @@
+package server;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Scanner;
+import java.lang.Thread;
+
+
+public class Client extends Thread {
+	
+	private static final String USAGE
+    = "usage: Qwirkle.server.Client <name> <address> <port>";
+	private String string = "";
+	private String clientID;
+	private String clientName;
+	private Socket sock;
+	private BufferedReader in;
+	private BufferedWriter out;
+	Scanner inn = new Scanner(System.in);
+	
+	public static void main(String[] args) {
+		if (args.length != 3) {
+			System.out.println(USAGE);
+			System.exit(0);
+		}
+		
+		InetAddress host=null;
+		int port =0;
+
+		try {
+			host = InetAddress.getByName(args[1]);
+		} catch (UnknownHostException e) {
+			System.err.println("ERROR: no valid hostname!");
+			System.exit(0);
+		}
+
+		try {
+			port = Integer.parseInt(args[2]);
+		} catch (NumberFormatException e) {
+			System.err.println("ERROR: no valid portnummer!");
+			System.exit(0);
+		}
+
+		try {
+			Client client = new Client(args[0], host, port);
+			client.start();
+			
+			do{
+				String input = readString("");
+				client.sendCommand(input);
+			}while(true);
+			
+		} catch (IOException e) {
+			System.err.println("ERROR: couldn't construct a client object!");
+			System.exit(0);
+		}
+
+	}
+	
+	
+	public Client(String iD, InetAddress host, int port) throws IOException {
+		sock = new Socket(host, port);
+		this.clientID = iD;
+		
+	}
+	
+	public void run() throws IOException {
+		try {
+			String text = in.readLine();
+			while(text != null && !text.toLowerCase().equals("EXIT")){
+				System.out.println(text);
+				text = in.readLine();
+			}
+			if (text == "EXIT"){
+				shutdown();
+			}
+		} catch(NullPointerException e){
+			System.err.println("ERROR: NO INPUT");
+		
+		} catch(IOException e){
+			e.printStackTrace();
+		}
+		try{
+			shutdown();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public String getClientName(){
+		return clientName;
+	}
+	
+	public void sendCommand(String command){
+		System.out.println(command);
+	}
+	
+	
+	
+	public void shutdown() throws IOException{
+		System.out.print("Closing socket connection...");
+    	sock.close();
+		in.close();
+    	out.close();
+	}
+	
+	public static String readString(String tekst) {
+		
+	}
+
+}

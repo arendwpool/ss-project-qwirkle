@@ -62,9 +62,6 @@ public class GameTest {
 		game.setCurrentPlayer(test5);
 		try {
 			System.out.println(game.getPlayerID(game.getCurrentPlayer()));
-			assertTrue("De volgende speler heeft ID 1", game.getPlayerID(game.getCurrentPlayer()) == 1);
-			game.nextPlayer();
-			System.out.println(game.getPlayerID(game.getCurrentPlayer()));
 			assertTrue("De volgende speler heeft ID 2", game.getPlayerID(game.getCurrentPlayer()) == 2);
 			game.nextPlayer();
 			System.out.println(game.getPlayerID(game.getCurrentPlayer()));
@@ -72,6 +69,9 @@ public class GameTest {
 			game.nextPlayer();
 			System.out.println(game.getPlayerID(game.getCurrentPlayer()));
 			assertTrue("De volgende speler heeft ID 2", game.getPlayerID(game.getCurrentPlayer()) == 2);
+			game.nextPlayer();
+			System.out.println(game.getPlayerID(game.getCurrentPlayer()));
+			assertTrue("De volgende speler heeft ID 1", game.getPlayerID(game.getCurrentPlayer()) == 1);
 		} catch (PlayerNotFoundException e) {
 			e.printStackTrace();
 		}
