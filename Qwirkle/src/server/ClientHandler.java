@@ -11,7 +11,7 @@ import java.net.Socket;
 import models.Game;
 import models.Player;
 
-public class ClientHandler implements Protocol {
+public class ClientHandler extends Thread implements Protocol {
 	
 	private Server server;
     private Socket sock;

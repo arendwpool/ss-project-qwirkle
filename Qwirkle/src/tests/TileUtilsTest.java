@@ -40,6 +40,4 @@ public class TileUtilsTest {
 		assertFalse(testPlayer.getHand().equals(testPlayer2.getHand()));
 		
 	}
-	
-	//TODO bobs testen toevoegen
 }

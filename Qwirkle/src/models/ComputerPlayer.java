@@ -68,7 +68,7 @@ public class ComputerPlayer extends Observable implements Player {
 					MoveUtils.replaceTiles(toTrade, this, game.getPile());
 					signalController();
 				} catch (NoTilesLeftInPileException | InvalidMoveException e) {
-					// TODO Auto-generated catch block
+					System.out.println("Er zijn geen tegels meer in de zak.");
 				}
 			}
 		}
