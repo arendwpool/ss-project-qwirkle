@@ -4,8 +4,29 @@
 	</section>
 	<section name="completion_proposal_size">
 	</section>
+<<<<<<< HEAD
 	<section name="JavaElementSearchActions">
 	</section>
+=======
+<<<<<<< HEAD
+=======
+	<section name="JavaElementSearchActions">
+	</section>
+	<section name="FatJarPackageWizard">
+		<item value="C:\Users\Arend\Desktop\gametest.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="GameController - Qwirkle" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="C:\Users\Arend\Documents\$SSHome\Programmeer project\ss-project-qwirkle" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
+		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
+		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
+		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\Arend\Desktop\gametest.jar"/>
+		</list>
+		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
+			<item value=".xml"/>
+		</list>
+	</section>
+>>>>>>> 42._TUI_verbeteren
+>>>>>>> 3e72306259a8d18d834121fe20a265c5f77cf70e
 	<section name="quick_assist_proposal_size">
 	</section>
 </section>

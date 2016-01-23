@@ -15,10 +15,10 @@ public class BoardTUI extends TUI{
 	public BoardTUI(GameController gc, Game game) {
 		super(gc);
 		this.game = game;
-		// TODO Auto-generated constructor stub
 	}
 
 	private Game game;
+	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg1 != null && arg1.equals("MadeMove")) {
@@ -147,8 +147,7 @@ public class BoardTUI extends TUI{
 		try {
 			System.out.println("De winnaar is: " + gc.getGame().winner().getName() + " met id nummmer " + gc.getGame().getPlayerID(gc.getGame().winner()));
 		} catch (PlayerNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("er is een fout in het systeem opgetreden");
 		}
 	}
 }

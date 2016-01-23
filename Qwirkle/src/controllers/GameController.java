@@ -20,6 +20,8 @@ public class GameController {
 	private String ip; //TODO doorgeven aan server
 	private String playerName;
 	private boolean isHuman;
+	private boolean done;
+	private boolean quit;
 	
 	public GameController(){
 		game = new Game(new Board(), new Pile());
@@ -41,6 +43,10 @@ public class GameController {
 		return game.getCurrentPlayer();
 	}
 	
+	public void setQuit(boolean bl){
+		quit = bl;
+	}
+	
 	public void start(){
 		ui.start();
 		if (isHuman == true) {
@@ -54,14 +60,22 @@ public class GameController {
 		((ComputerPlayer) pc2).addObserver(bui);
 		game.start();
 		game.determineInitialPlayer();
-		bui.start();
-		updateGame();
+		if (quit == false) {
+			bui.start();
+			updateGame();
+		}
 	}
 
 	public void updateGame(){
 		while (game.gameOver() == false) {
 			bui.showCurrentPlayer();
-			game.getCurrentPlayer().determineMove();
+			while (true) {
+				game.getCurrentPlayer().determineMove();
+				if (done == true) {
+					break;
+				}
+			}
+			done = false;
 			game.gameOver();
 			game.nextPlayer();
 		}
@@ -71,9 +85,9 @@ public class GameController {
 	public void done(Player player){
 		try {
 			game.finishMove(player);
+			done = true;
 		} catch (InvalidMoveException e) {
 			System.out.println("U moet eerst een zet maken, of ruilen...");
-			
 		}
 	}
 	
