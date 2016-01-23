@@ -32,7 +32,7 @@ public class MoveUtils {
 	/**
 	 * Geeft aan of een speler een blokje heeft neergelegd.
 	 */
-	private static boolean madeMove = lastSet.size() > 0;
+	private static boolean madeMove = false;
 
 	/**
 	 * Verwijderd alle laatst gezette tegels van een speler.
@@ -43,6 +43,7 @@ public class MoveUtils {
 			generateScore(player, game.getBoard());
 			clearLastMoves();
 			hasTraded = false;
+			madeMove = false;
 		}else{
 			throw new InvalidMoveException();
 		}
@@ -67,8 +68,8 @@ public class MoveUtils {
 		Point point = null;
 		boolean retainMultipleX = false;
 		boolean retainMultipleY = false;
-		ArrayList<Tile> row = null;
-		ArrayList<Tile> column = null;
+		ArrayList<Tile> row = new ArrayList<Tile>();
+		ArrayList<Tile> column = new ArrayList<Tile>();
 		int score = 0;
 		for (Tile tile : getLastMoves()) {
 			point = tile.getLocation();
@@ -88,7 +89,6 @@ public class MoveUtils {
 				break;
 			} else if (column.containsAll(lastSet) && isSingleOnYAxis(lastSet, board)) {
 				score = column.size();
-				System.out.println("y");
 				break;
 			}
 			retainMultipleX = commonX.size() > 1;
@@ -269,12 +269,14 @@ public class MoveUtils {
 				game.getBoard().setTile(x, y, tile);
 				rememberMove(tile);
 				player.getHand().remove(tile);
+				madeMove = true;
 			} 
 		} else if(initialMove == true){
 			game.getBoard().setTile(90, 90, tile);
 			rememberMove(tile);
 			player.getHand().remove(tile);
 			initialMove = false;
+			madeMove = true;
 		} else {
 			throw new InvalidMoveException();
 		}

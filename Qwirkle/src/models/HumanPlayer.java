@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import exceptions.FullGameException;
 import exceptions.InvalidMoveException;
+import exceptions.NoTilesLeftInPileException;
 
 public class HumanPlayer extends Observable  implements Player {
 	/**
@@ -67,11 +68,13 @@ public class HumanPlayer extends Observable  implements Player {
 			System.out.println("klaar .................... 3");
 			String choice = in.nextLine();
 			if (choice.equals("1")) {
-				System.out.println("maak uw keuze: ");
+				System.out.println("Typ uw keuze in de vorm: [tegelnummer] [getal boven bord] [getal links van bord]");
 				String move = in.nextLine();
 				determineMove(move);
 			} else if (choice.equals("2")) {
-				//TODO swap
+				System.out.println("Typ uw keuze in de vorm: [tegelnummer] [tegelnummer] etc.");
+				String swap = in.nextLine();
+				determineSwap(swap);
 			} else if (choice.equals("3")) {
 				setChanged();
 				notifyObservers("MadeMove");
@@ -135,7 +138,23 @@ public class HumanPlayer extends Observable  implements Player {
 			System.out.println("Deze move mag niet");
 		}
 	}
-		
-
+	
+	public void determineSwap(String string) {
+		ArrayList<Tile> tiles = hand;
+		String[] swapArray = string.split(" ");
+		ArrayList<Tile> tilesToSwap = new ArrayList<Tile>();
+		for (int i = 0; i < swapArray.length; i++) {
+			int tileNumber = Integer.parseInt(swapArray[i]) - 1;
+			Tile tile = tiles.get(tileNumber);
+			tilesToSwap.add(tile);
+		}
+		try {
+			game.swapTiles(tilesToSwap, this);
+		} catch (NoTilesLeftInPileException e) {
+			System.out.println("Er zitten geen tegels meer in de zak");
+		} catch (InvalidMoveException e) {
+			System.out.println("U mag nu niet ruilen");
+		}		
+	}
 
 }

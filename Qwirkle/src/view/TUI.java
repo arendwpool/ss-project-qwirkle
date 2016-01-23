@@ -1,5 +1,6 @@
 package view;
 
+import java.util.InputMismatchException;
 import java.util.Observer;
 import java.util.Scanner;
 
@@ -9,7 +10,7 @@ import controllers.GameController;
 public abstract class TUI implements Observer {
 	
 	private static final int AMOUNT_CHARACTERS = 75;
-	private Scanner scanner = new Scanner(System.in);
+	private Scanner scanner;
 	boolean terminated = false;
 	protected GameController gc;
 	protected String playerName;
@@ -54,14 +55,25 @@ public abstract class TUI implements Observer {
 	}
 
 	public int determineOption(){
-		int in = scanner.nextInt();
+		int in = 0;
+		while (true) {
+			scanner = new Scanner(System.in);
+			try {
+				in = scanner.nextInt();
+				break;
+			} catch (InputMismatchException e) {
+				System.out.println("Voer een nummer in");
+			}
+		}
 		return in;
 	}
 	public String determineString(){
-		if(scanner.hasNextLine()){ //TODO vraag: waarom moet je bij ip 2x invoeren?
-			scanner.nextLine();
+		String string = "";
+		while (true) {
+			scanner = new Scanner(System.in);
+			string = scanner.nextLine();
+			break;
 		}
-		String string = scanner.nextLine();
 		return string;
 	}
 	

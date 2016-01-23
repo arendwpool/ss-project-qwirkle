@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import controllers.GameController;
+import exceptions.PlayerNotFoundException;
+import models.ComputerPlayer;
 import models.Game;
 import models.Player;
 import models.Tile;
 
 public class BoardTUI extends TUI{
+	
 	public BoardTUI(GameController gc, Game game) {
 		super(gc);
 		this.game = game;
@@ -34,12 +37,30 @@ public class BoardTUI extends TUI{
 	}
 	
 	public void showCurrentPlayer() {
-		System.out.println("De huidige speler is "+gc.getCurrentPlayer().getName());
+		if (gc.getCurrentPlayer() instanceof ComputerPlayer) {
+			try {
+				System.out.println("De huidige speler is "+gc.getCurrentPlayer().getName() + gc.getGame().getPlayerID(gc.getCurrentPlayer()));
+			} catch (PlayerNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("De huidige speler is "+gc.getCurrentPlayer().getName());
+		}
 	}
 
 	private void showScore() {
 		for (Player player : gc.getGame().getPlayers()) {
-			System.out.println(player.getName() + ": " + player.getScore() + " ");
+			if (gc.getCurrentPlayer() instanceof ComputerPlayer) {
+				try {
+					System.out.println(player.getName() + gc.getGame().getPlayerID(player)+": " + player.getScore());
+				} catch (PlayerNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				System.out.println(player.getName() + ": " + player.getScore());
+			}
 		}
 		
 	}
@@ -120,5 +141,14 @@ public class BoardTUI extends TUI{
 	
 	public void showPileSize(){
 		System.out.println("Er zijn " + gc.getGame().getPile().getTiles().size() + " tegels in de zak.");
+	}
+	
+	public void showEndGame() {
+		try {
+			System.out.println("De winnaar is: " + gc.getGame().winner().getName() + " met id nummmer " + gc.getGame().getPlayerID(gc.getGame().winner()));
+		} catch (PlayerNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

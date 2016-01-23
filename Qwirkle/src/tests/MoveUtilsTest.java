@@ -27,7 +27,7 @@ public class MoveUtilsTest {
 	@Before
 	public void setUp() throws Exception {
 		Pile pile = new Pile();
-		testGame = new Game(new Board(), pile, 4);
+		testGame = new Game(new Board(), pile);
 		testPlayer = new HumanPlayer("test", testGame);
 	}
 	

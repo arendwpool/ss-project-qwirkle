@@ -25,12 +25,6 @@ public class Game extends Observable{
 	private Player currentPlayer;
 	
 	/**
-	 * Geeft de hoeveelheid meespelende spelers mee, dit aantal wordt meegegeven bij het
-	 * maken van een nieuw spel instantie. 
-	 */
-	private int noOfPlayers;
-	
-	/**
 	 * Een hashmap van spelers die meedoen gemapt aan hun ID. Dit is een nummer die gebruikt
 	 * wordt om aan te geven welke speler aan de beurt is.
 	 */
@@ -55,8 +49,7 @@ public class Game extends Observable{
 	 * Deze Pile is een representatie van de zak met stenen in het spel. Er wordt ook een HashMap
 	 * geïnstantieerd die later wordt gebruikt om de players aan een ID te koppelen.
 	 */
-	public Game(Board board,Pile pile , int noOfPlayers) {
-		this.noOfPlayers = noOfPlayers;
+	public Game(Board board,Pile pile ) {
 		this.board = board;
 		this.pile = pile;
 		players = new ArrayList<Player>();
@@ -139,7 +132,7 @@ public class Game extends Observable{
 	 * @throws FullGameException 
 	 */
 	public void addPlayer(Player player) throws FullGameException {
-		if (players.size() <= noOfPlayers) {
+		if (players.size() <= 4) {
 			players.add(player);
 		} else {
 			throw new FullGameException();
@@ -177,7 +170,7 @@ public class Game extends Observable{
 	 */
 	public void nextPlayer() {
 		int current = players.indexOf(currentPlayer);
-		int next = (current + 1) % noOfPlayers;
+		int next = (current + 1) % players.size();
 		currentPlayer = players.get(next);
 	}
 	
