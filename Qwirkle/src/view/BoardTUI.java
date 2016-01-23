@@ -41,8 +41,7 @@ public class BoardTUI extends TUI{
 			try {
 				System.out.println("De huidige speler is "+gc.getCurrentPlayer().getName() + gc.getGame().getPlayerID(gc.getCurrentPlayer()));
 			} catch (PlayerNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Er is een fout opgetreden, de speler kan niet worden gevonden.");
 			}
 		} else {
 			System.out.println("De huidige speler is "+gc.getCurrentPlayer().getName());
@@ -55,8 +54,7 @@ public class BoardTUI extends TUI{
 				try {
 					System.out.println(player.getName() + gc.getGame().getPlayerID(player)+": " + player.getScore());
 				} catch (PlayerNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Er is een fout opgetreden, de speler kan niet worden gevonden.");
 				}
 			} else {
 				System.out.println(player.getName() + ": " + player.getScore());

@@ -1,0 +1,10 @@
+package network;
+import server.Protocol;
+
+public class Server {
+	private int port = Integer.parseInt(Protocol.PORT);
+	
+	public static void main(String[] args) {
+		
+	}
+}

@@ -1,0 +1,20 @@
+package network;
+import java.net.ServerSocket;
+
+import server.Protocol;
+
+public class Server {
+	private static final int port = Integer.parseInt(Protocol.PORT);
+	private List<ClientHandler> threads;
+	private ServerSocket serverSocket;
+	
+	//TODO weghalen: voor test
+	private String IP = "127.0.0.1";
+	
+	public static void main(String[] args) {
+		Server server = new Server(port);
+		server.run();
+	}
+	
+	
+}

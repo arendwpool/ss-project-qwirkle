@@ -254,7 +254,7 @@ public class Game extends Observable{
 	}
 	
 	/**
-	 * Met deze methode kan handmatig de currentPlayer worden toegewezen. TODO Deze methode is gemaakt 
+	 * Met deze methode kan handmatig de currentPlayer worden toegewezen.
 	 * voor de testklasse.
 	 * @param player
 	 */

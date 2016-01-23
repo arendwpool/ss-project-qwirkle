@@ -6,7 +6,7 @@ import java.util.Observer;
 
 import controllers.GameController;
 
-public class StartTUI extends TUI implements Observer{
+public class StartTUI extends TUI{
 	/**
 	 * De string op index 0 is altijd een beschrijving bij een menu
 	 */
@@ -19,7 +19,7 @@ public class StartTUI extends TUI implements Observer{
 	}
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
+		// Deze methode update niets
 	}
 	
 	public void start(){
@@ -32,7 +32,7 @@ public class StartTUI extends TUI implements Observer{
 				renderMenu(NAME_MENU);
 				while (true) {
 					playerName = determineString();
-					if (playerName.length() > 2) {
+					if (playerName.length() > 2 && playerName.length() < 13) {
 						gc.setPlayerName(playerName);
 						break;
 					} else {
