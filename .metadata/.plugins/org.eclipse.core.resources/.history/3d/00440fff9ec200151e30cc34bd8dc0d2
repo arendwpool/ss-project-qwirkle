@@ -17,9 +17,6 @@ import models.Tile;
  */
 public class BoardTUI extends TUI{
 	
-<<<<<<< HEAD
-	public BoardTUI(Game game) {
-=======
 	/**
 	 * Maakt een nieuwe instantie van het TUI.
 	 * @param gc
@@ -27,7 +24,6 @@ public class BoardTUI extends TUI{
 	 */
 	public BoardTUI(GameController gc, Game game) {
 		super(gc);
->>>>>>> 285381d397ef1ce751896f1ab39c978f5238cf9a
 		this.game = game;
 	}
 
@@ -181,16 +177,10 @@ public class BoardTUI extends TUI{
 		}
 	}
 	
-	/**
-	 * Weergeeft hoeveel tegels nog in de zak zitten.
-	 */
 	public void showPileSize(){
 		System.out.println("Er zijn " + gc.getGame().getPile().getTiles().size() + " tegels in de zak.");
 	}
 	
-	/**
-	 * Geeft aan het eind van een spel weer of de speler nog een spel wil spelen.
-	 */
 	public void showEndGame() {
 		try {
 			System.out.println("De winnaar is: " + gc.getGame().winner().getName() + " met id nummmer " + gc.getGame().getPlayerID(gc.getGame().winner()));

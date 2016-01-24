@@ -291,10 +291,6 @@ public class Game extends Observable{
 		return finishedMove;
 	}
 	
-	/**
-	 * Zet de bollean finishedMove op een gegeven waarde.
-	 * @param bl
-	 */
 	public void setFinishedMove(boolean bl) {
 		finishedMove = bl;
 	}

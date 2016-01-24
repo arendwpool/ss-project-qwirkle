@@ -125,18 +125,10 @@ public class ComputerPlayer extends Observable implements Player {
 		}
 	}
 
-	/**
-	 * Geeft aan de TUI aan dat er een move is gemaakt. Deze geeft dit weer door aan
-	 * de controller.
-	 */
 	public void signalController(){
 		setChanged();
 		notifyObservers("MadeMove");
 	}
-	
-	/**
-	 * Voegt een gegeven aantal punten aan de speler.
-	 */
 	@Override
 	public void addScore(int points) {
 		score += points;		

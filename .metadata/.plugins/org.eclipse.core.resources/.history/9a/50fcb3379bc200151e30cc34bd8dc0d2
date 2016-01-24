@@ -272,7 +272,7 @@ public class Board {
 	 * x of y coordinaat hebben.
 	 * @param list1
 	 * @param list2
-	 * @return sameX || sameY
+	 * @return
 	 */
 	public boolean sameAxis(ArrayList<Tile> list1, ArrayList<Tile> list2) {
 		boolean sameX = true;

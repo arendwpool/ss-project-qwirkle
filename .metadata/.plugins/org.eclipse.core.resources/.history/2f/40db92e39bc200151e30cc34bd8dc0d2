@@ -104,17 +104,11 @@ public class ComputerPlayer extends Observable implements Player {
 		return hand;
 	}
 
-	/**
-	 * Geeft de score van deze speler terug.
-	 */
 	@Override
 	public int getScore() {
 		return score;
 	}
 
-	/**
-	 * Zorgt dat de move aan het spel wordt doorgegeven, zodat deze hem kan verwerken.
-	 */
 	@Override
 	public void makeMove(int x, int y, Tile tile) {
 		try {
@@ -125,18 +119,10 @@ public class ComputerPlayer extends Observable implements Player {
 		}
 	}
 
-	/**
-	 * Geeft aan de TUI aan dat er een move is gemaakt. Deze geeft dit weer door aan
-	 * de controller.
-	 */
 	public void signalController(){
 		setChanged();
 		notifyObservers("MadeMove");
 	}
-	
-	/**
-	 * Voegt een gegeven aantal punten aan de speler.
-	 */
 	@Override
 	public void addScore(int points) {
 		score += points;		

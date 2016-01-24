@@ -133,10 +133,6 @@ public class ComputerPlayer extends Observable implements Player {
 		setChanged();
 		notifyObservers("MadeMove");
 	}
-	
-	/**
-	 * Voegt een gegeven aantal punten aan de speler.
-	 */
 	@Override
 	public void addScore(int points) {
 		score += points;		

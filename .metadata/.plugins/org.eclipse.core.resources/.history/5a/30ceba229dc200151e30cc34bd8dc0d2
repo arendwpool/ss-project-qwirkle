@@ -171,11 +171,6 @@ public class HumanPlayer extends Observable  implements Player {
 		}
 	}
 	
-	/**
-	 * Hetzelfde principe als determineMove. Deze geeft de vertaalde String door aan
-	 * game.SwapTiles
-	 * @param string
-	 */
 	public void determineSwap(String string) {
 		try {
 			ArrayList<Tile> tiles = hand;

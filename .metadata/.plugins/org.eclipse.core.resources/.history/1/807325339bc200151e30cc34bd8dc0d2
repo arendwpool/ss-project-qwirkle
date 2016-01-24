@@ -246,7 +246,7 @@ public class Board {
 	
 	
 	/**
-	 * bindt een coordinaat aan een tile.
+	 * bind een coordinaat aan een tile.
 	 * @param x
 	 * @param y
 	 * @param tile
@@ -267,13 +267,6 @@ public class Board {
 		}
 	}
 	
-	/**
-	 * Controlleerd van twee gegeven lijsten of de tegels in deze lijsten dezelfde
-	 * x of y coordinaat hebben.
-	 * @param list1
-	 * @param list2
-	 * @return sameX || sameY
-	 */
 	public boolean sameAxis(ArrayList<Tile> list1, ArrayList<Tile> list2) {
 		boolean sameX = true;
 		boolean sameY = true;

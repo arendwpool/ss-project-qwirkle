@@ -55,11 +55,6 @@ public class HumanPlayer extends Observable  implements Player {
 		return name;
 	}
 
-	/**
-	 * Vraagt aan de speler wat hij wil doen voor zijn beurt. De input geeft hij vervolgens
-	 * door aan determinMove als hij een tegel wilt leggen. Als de speler een tegel wil
-	 * ruilen geeft de methode dit door aan determineSwap.
-	 */
 	@Override
 	public void determineMove() {
 		Scanner in = new Scanner(System.in);
@@ -151,11 +146,7 @@ public class HumanPlayer extends Observable  implements Player {
 		score += points;
 	}
 
-	/**
-	 * Kijkt wat de speler als volgende zet wil doen. Hiervoor split hij een geven 
-	 * String bij elke spatie. Hij vertaalt deze input dan, en geeft dit door aan makeMove.
-	 * @param string
-	 */
+	
 	public void determineMove(String string) {
 		try {
 			String[] moveArray = string.split(" ");
@@ -171,11 +162,6 @@ public class HumanPlayer extends Observable  implements Player {
 		}
 	}
 	
-	/**
-	 * Hetzelfde principe als determineMove. Deze geeft de vertaalde String door aan
-	 * game.SwapTiles
-	 * @param string
-	 */
 	public void determineSwap(String string) {
 		try {
 			ArrayList<Tile> tiles = hand;

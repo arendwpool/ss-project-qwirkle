@@ -114,6 +114,12 @@ public class MoveUtils {
 		player.addScore(score);
 	}
 	
+	/**
+	 * Kijkt of alle tegels in een lijst wel in een rij zitten, maar niet in een kolom.
+	 * @param moves
+	 * @param board
+	 * @return isSingleOnX
+	 */
 	public static boolean isSingleOnXAxis(ArrayList<Tile> moves, Board board) {
 		boolean isSingleOnX = true;
 		for (Tile tile : moves) {
@@ -126,6 +132,12 @@ public class MoveUtils {
 		return isSingleOnX;
 	}
 	
+	/**
+	 * Doet hetzelfde als isSingleOnXAxis, maar dan voor tegels in een kolom.
+	 * @param moves
+	 * @param board
+	 * @return isSingleOnY
+	 */
 	public static boolean isSingleOnYAxis(ArrayList<Tile> moves, Board board) {
 		boolean isSingleOnY = true;
 		for (Tile tile : moves) {
@@ -145,9 +157,15 @@ public class MoveUtils {
 		return listToKeep;
 	}
 	/**
-	 * Controleert of de aangelegde stenen wel volgens de spelregels mogen.
+	 * Controleert of de aangelegde stenen wel volgens de spelregels mogen. Maakt hiervoor eerst een kopie
+	 * van een bord. Vervolgens legt deze methode de tegel neer in deze kopie om na te gaan of deze tegel
+	 * hier wel mag liggen. Een rij stenen kan niet groter zijn dan 6, dus als dit wel het geval is wordt
+	 * er meteen false teruggegeven. Een initialMove kan nooit false zijn, dus wordt er meteen true terug-
+	 * gegeven. Als een beurt niet initial is, maar de tegel is niet aangrenzend aan een andere tegel wordt
+	 * er ook false teruggegeven. Daarna wordt nagegaan of een tegel dezelfde kleur of symbool heeft als 
+	 * andere tegels in een rij of kolom. Als een tegel dezelfde kleur en symbool heeft wordt er ook direct
+	 * false teruggegeven.
 	 */
-	//TODO prints weghalen, deze zijn voor de test
 	public static boolean isValidMove(int x, int y, Tile tile, Board board) {
 		Board boardCopy = board.deepCopy();
 		if (boardCopy.isEmptyField(x, y) == false) {
@@ -258,7 +276,9 @@ public class MoveUtils {
 	}
 
 	/**
-	 * Moet de Move van de player verwerken.
+	 * Moet de Move van de player verwerken. Hiervoor wordt er eerst gekeken of een speler al heeft geruild
+	 * of dat een move initial is. Vervolgens wordt dit op een correcte wijze afgehandeld, en wordt de tegel
+	 * uit de hand van de speler verwijderd.
 	 * @param x
 	 * @param y
 	 * @param tile
