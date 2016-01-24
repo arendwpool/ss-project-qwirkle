@@ -10,8 +10,18 @@ import models.Game;
 import models.Player;
 import models.Tile;
 
+/**
+ * TUI die een bord weergeeft.
+ * @author Arend Pool en Bob Breemhaar
+ *
+ */
 public class BoardTUI extends TUI{
 	
+	/**
+	 * Maakt een nieuwe instantie van het TUI.
+	 * @param gc
+	 * @param game
+	 */
 	public BoardTUI(GameController gc, Game game) {
 		super(gc);
 		this.game = game;
@@ -19,6 +29,10 @@ public class BoardTUI extends TUI{
 
 	private Game game;
 	
+	/**
+	 * Het TUI functioneerd als een observer. Deze methode update het spel op een 
+	 * juiste wijze als een update is doorgegeven.
+	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg1 != null && arg1.equals("MadeMove")) {
@@ -29,6 +43,9 @@ public class BoardTUI extends TUI{
 		}
 	}
 	
+	/**
+	 * Start de TUI door de juiste objecten te weergeven. 	
+	 */
 	public void start(){
 		renderBoard();
 		showPileSize();
@@ -36,6 +53,9 @@ public class BoardTUI extends TUI{
 		showScore();
 	}
 	
+	/**
+	 * Weergeeft de speler die aan de beurt is.
+	 */
 	public void showCurrentPlayer() {
 		if (gc.getCurrentPlayer() instanceof ComputerPlayer) {
 			try {
@@ -48,6 +68,9 @@ public class BoardTUI extends TUI{
 		}
 	}
 
+	/**
+	 * Weergeeft de naam en score van elke speler in een spel.
+	 */
 	private void showScore() {
 		for (Player player : gc.getGame().getPlayers()) {
 			if (gc.getCurrentPlayer() instanceof ComputerPlayer) {
@@ -63,6 +86,9 @@ public class BoardTUI extends TUI{
 		
 	}
 	
+	/**
+	 * Creeert een vergrotend bord. Kijkt hiervoor naar de waarden die in Board.java worden berekend.
+	 */
 	public void renderBoard(){
 		for(int i = game.getBoard().viewOfMinX - 90; i <= game.getBoard().viewOfMaxX - 90; i++){
 			System.out.print("	"+i);
@@ -88,6 +114,11 @@ public class BoardTUI extends TUI{
 		}
 	}
 
+	/**
+	 * Geeft aan hoe een kleur wordt weergegeven op het bord.
+	 * @param color
+	 * @return representive
+	 */
 	public String colorRepresentive(String color){
 		String representive = "";
 		if(color.equals("groen")){
@@ -106,6 +137,11 @@ public class BoardTUI extends TUI{
 		return representive;
 	}
 	
+	/**
+	 * Geeft aan hoe een symbool wordt weergegeven op het bord.
+	 * @param symbol
+	 * @return representnive
+	 */
 	public String symbolRepresentive(String symbol){
 		String representive = "";
 		if(symbol.equals("cirkel")){
@@ -124,6 +160,10 @@ public class BoardTUI extends TUI{
 		return representive;
 	}
 	
+	/**
+	 * Laat de tegels zien die de lokale speler in zijn hand heeft. Zet hiervoor een nummer
+	 * zodat de speler kan kiezen met welke tegels hij zijn beurt wil maken.
+	 */
 	public void showTiles(){
 		try{
 			ArrayList<Tile> tiles = gc.getLocalPlayer().getHand();
@@ -137,10 +177,16 @@ public class BoardTUI extends TUI{
 		}
 	}
 	
+	/**
+	 * Weergeeft hoeveel tegels nog in de zak zitten.
+	 */
 	public void showPileSize(){
 		System.out.println("Er zijn " + gc.getGame().getPile().getTiles().size() + " tegels in de zak.");
 	}
 	
+	/**
+	 * Geeft aan het eind van een spel weer of de speler nog een spel wil spelen.
+	 */
 	public void showEndGame() {
 		try {
 			System.out.println("De winnaar is: " + gc.getGame().winner().getName() + " met id nummmer " + gc.getGame().getPlayerID(gc.getGame().winner()));

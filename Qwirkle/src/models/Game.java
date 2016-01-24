@@ -98,7 +98,9 @@ public class Game extends Observable{
 	
 	
 	/**
-	 * Start het spel.
+	 * Start het spel. Het spel zal hiervoor eerst schoongemaakt worden, vervolgens geeft
+	 * de methode aan de klasse Pile aan dat deze de tegels in een spel moet genereren.
+	 * Vervolgens worden tegels uitgedeeld aan alle meespelende spelers.
 	 */
 	public void start() {
 		reset();
@@ -108,6 +110,10 @@ public class Game extends Observable{
 		}
 	}
 	
+	/**
+	 * Reset het spel. MAakt hiervoor eerst het bord schoon. Ook maakt deze de Pile leeg.
+	 * Als laatst worden de handen van de spelers leeggemaakt.
+	 */
 	private void reset() {
 		board.reset();
 		pile.getTiles().clear();
@@ -117,7 +123,7 @@ public class Game extends Observable{
 	}
 	
 	/**
-	 * Geeft een volle pile van alle tegels in het spel.
+	 * Geeft een pile van alle tegels in het spel.
 	 * @return pile
 	 */
 	public Pile getPile() {
@@ -277,10 +283,18 @@ public class Game extends Observable{
 		}
 	}
 	
+	/**
+	 * Geeft de boolean finishedMove terug.
+	 * @return
+	 */
 	public boolean finishedMove(){
 		return finishedMove;
 	}
 	
+	/**
+	 * Zet de bollean finishedMove op een gegeven waarde.
+	 * @param bl
+	 */
 	public void setFinishedMove(boolean bl) {
 		finishedMove = bl;
 	}
