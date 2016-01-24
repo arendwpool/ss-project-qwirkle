@@ -1,0 +1,20 @@
+package network;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Server {
+	private String ip;
+	private int port;
+	private ArrayList<ClientHandler> clientHandlers;
+	
+	public Server() {
+		while (true) {
+			Scanner in = new Scanner(System.in);
+			System.out.println("Voer een poortnummer in, als u niets invoert zal de standaard poort gebruikt worden: ");
+			
+		}
+	}
+	
+	
+}

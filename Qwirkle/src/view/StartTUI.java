@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import controllers.GameController;
+import network.Client;
 
 public class StartTUI extends TUI{
 	/**
@@ -13,9 +14,10 @@ public class StartTUI extends TUI{
 	private static final String[] PRE_MENU = {null, "Ik ben een Menselijke speler", "Ik ben een Computerspeler"};
 	private static final String[] MAIN_MENU = {"Hallo [naam]!", "Start", "Afsluiten"};
 	private static final String[] IP_MENU = {null, "Voer het gewenste ip adres in:"};
+	private Client client;
 	
-	public StartTUI(GameController gc) {
-		super(gc);
+	public StartTUI(Client client) {
+		this.client = client;
 	}
 	@Override
 	public void update(Observable arg0, Object arg1) {
@@ -27,13 +29,13 @@ public class StartTUI extends TUI{
 			renderMenu(PRE_MENU);
 			int choice = determineOption();
 			if (choice == 1) {
-				gc.isHuman(true);
+				client.isHuman(true);
 				createSpace();
 				renderMenu(NAME_MENU);
 				while (true) {
 					playerName = determineString();
 					if (playerName.length() > 2 && playerName.length() < 13) {
-						gc.setPlayerName(playerName);
+						client.setPlayerName(playerName);
 						break;
 					} else {
 						System.out.println("Voer een naam in van minstens  3 karakters");
@@ -45,13 +47,13 @@ public class StartTUI extends TUI{
 					String ip = "";
 					try {
 						ip = determineString();
-						while (!gc.isValidIP(ip)) {
+						while (!client.isValidIP(ip)) {
 							System.out.println("Geen geldig ip adres...");
 							renderMenu(IP_MENU);
 							ip = determineString();
 							createSpace();
 						}
-						gc.setIP(ip);
+						client.setIP(ip);
 						break;
 					} catch (NumberFormatException e) {
 						System.out.println("Voer een geldig ip adres in");
@@ -65,7 +67,7 @@ public class StartTUI extends TUI{
 						//TODO geef startsein
 						break;
 					} else if (choice == 2) {
-						gc.setQuit(true);
+						client.setQuit(true);
 						break;
 					} else {
 						System.out.println("Voer een geldige optie in");
@@ -73,7 +75,7 @@ public class StartTUI extends TUI{
 				}
 				break;
 			} else if (choice == 2) {
-				gc.isHuman(false);
+				client.isHuman(false);
 				renderMenu(IP_MENU);
 				String ip = determineString();
 				while (!gc.isValidIP(ip)) {
@@ -82,7 +84,7 @@ public class StartTUI extends TUI{
 					ip = determineString();
 					createSpace();
 				}
-				gc.setIP(ip);
+				client.setIP(ip);
 				break;
 			} else {
 				System.out.println("Voer een geldige optie in.");

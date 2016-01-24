@@ -5,6 +5,7 @@ import java.util.Observer;
 import java.util.Scanner;
 
 import controllers.GameController;
+import network.Servershit;
 
 
 public abstract class TUI implements Observer {
@@ -17,8 +18,8 @@ public abstract class TUI implements Observer {
 	protected static final String[] NAME_MENU = {null, "Voer uw naam in:"};
 	
 	
-	public TUI(GameController gc){
-		this.gc = gc;
+	public TUI(){
+		
 	}
 	
 	public void start(){

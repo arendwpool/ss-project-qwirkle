@@ -10,6 +10,7 @@ import java.net.Socket;
 
 import models.Game;
 import models.Player;
+import protocol.Protocol;
 
 public class ClientHandler extends Thread implements Protocol {
 	

@@ -12,8 +12,7 @@ import models.Tile;
 
 public class BoardTUI extends TUI{
 	
-	public BoardTUI(GameController gc, Game game) {
-		super(gc);
+	public BoardTUI(Game game) {
 		this.game = game;
 	}
 

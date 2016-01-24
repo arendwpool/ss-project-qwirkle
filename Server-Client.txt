@@ -1,0 +1,19 @@
+server: 
+lobby
+maakt game aan en houdt regels bij
+stuurt een willekeurige naam terug
+bepaalt volgende speler
+geeft tegels
+voegt speler toe aan game
+geeft id aan speler (join antwoord)
+stuurt de naam/id naar client
+
+client:
+stuurt "ex" naar server
+stuur join
+stuur automatisch start als er 4 spelers zijn
+heeft de optie eerder start te sturen
+geeft gegevens van speler door aan de server
+tegels neerleggen
+tegels ruilen
+move afmaken

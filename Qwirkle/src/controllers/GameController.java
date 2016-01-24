@@ -17,23 +17,20 @@ public class GameController {
 	private StartTUI ui;
 	private BoardTUI bui;
 	private Player player;
-	private String ip; //TODO doorgeven aan server
 	private String playerName;
 	private boolean isHuman;
 	private boolean done;
 	private boolean quit;
 	
 	public GameController(){
-		game = new Game(new Board(), new Pile());
-		ui = new StartTUI(this);
-		bui = new BoardTUI(this, game);
+		/*game = new Game(new Board(), new Pile());
 		game.addObserver(ui);
-		game.addObserver(bui);
+		game.addObserver(bui);*/
 	}
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		GameController controller = new GameController();
 		controller.start();
-	}
+	}*/
 	
 	public BoardTUI getBoardTUI() {
 		return bui;
@@ -107,9 +104,6 @@ public class GameController {
 		return game;
 	}
 	
-	public void setIP(String ip){
-		this.ip = ip;
-	}
 	
 	public void setPlayerName(String name){
 		this.playerName = name;

@@ -1,0 +1,60 @@
+package network;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+import controllers.GameController;
+import view.BoardTUI;
+import view.StartTUI;
+import view.TUI;
+
+public class Client extends Thread{
+	
+	public static void main(String[] args) {
+		InetAddress addres;
+		Client client = null;
+		try {
+			addres = InetAddress.getByName("127.0.0.1");
+			client = new Client(addres, 1337); //TODO weghalen, voor test
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		client.run();
+		
+		
+	}
+
+	private Socket sock;
+	private BufferedReader in;
+	private BufferedWriter out;
+	private TUI ui;
+	private TUI bui;
+	private GameController gc;
+	private String ip;
+	private InetAddress host;
+	
+	
+	public Client() throws IOException {
+		gc = new GameController();
+		ui = new StartTUI(gc, this);
+	}
+	
+	public void run() {
+		ui.start();
+		host = InetAddress.getByName(ip);
+		sock = new Socket(host, 1337);
+		in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+		out = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
+	}
+	
+	public void setIP(String ip) {
+		this.ip = ip;
+	}
+}

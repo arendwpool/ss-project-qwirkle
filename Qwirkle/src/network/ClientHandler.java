@@ -7,46 +7,49 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-public class ClientHandler extends Thread {
-    private Server server;
+import models.Player;
+
+public class ClientHandler extends Thread{
+	private Server server;
     private BufferedReader in;
     private BufferedWriter out;
     private String clientName;
-
-    public ClientHandler(Server serverArg, Socket sockArg) throws IOException {
-        server = serverArg;
-        in = new BufferedReader(new InputStreamReader(sockArg.getInputStream()));
-        out = new BufferedWriter(new OutputStreamWriter(sockArg.getOutputStream()));
+    private Player player;
+    private boolean isHuman;
+    
+    public ClientHandler(Server server, Socket socket) throws IOException {
+    	this.server = server;
+    	in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
     }
-
-
+    
+    public void setPlayer(Player player){
+    	this.player = player;
+    }
+    
     public void run() {
-    	String text = "";
-		try {
-			while (text != null) {
-				
-				text = in.readLine();
-				if (!(text == null) && !text.equals("\n")) {
-					server.broadcast(clientName + ": " + text);
-				}
+    	while (true) {
+    		translateMessage();
+    		if (isHuman == true){
+    			server.broadcast("true");
+    		} else {
+    			server.broadcast("false");
+    		}
+    	}
+    }
+    
+    public void translateMessage() {
+    	try {
+			String msg = in.readLine();
+			if (msg.equals("humanplayer")) {
+				isHuman = true;
+			} else if (msg.equals("compupterplayer")) {
+				isHuman = false;
 			}
 		} catch (IOException e) {
-			shutdown();
-		}
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}    	
     }
-
-    public void sendMessage(String msg) {
-		try {
-			out.write(msg);
-			out.newLine();
-			out.flush();
-		} catch (IOException e) {
-			shutdown();
-		}
-    }
-
-    private void shutdown() {
-        server.removeHandler(this);
-        server.broadcast("[" + clientName + " has left]");
-    }
+    
 }

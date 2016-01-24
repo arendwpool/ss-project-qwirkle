@@ -9,114 +9,113 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import controllers.GameController;
+import models.ComputerPlayer;
+import models.HumanPlayer;
+import models.Player;
+import view.BoardTUI;
+import view.StartTUI;
+import view.TUI;
+
 public class Client extends Thread{
-	private static final String USAGE
-        = "usage: java week7.cmdchat.Client <name> <address> <port>";
 
-	public static void main(String[] args) {
-		
-		InetAddress host=null;
-		int port =1337;
-
-		try {
-			host = InetAddress.getByName("127.0.0.1");
-		} catch (UnknownHostException e) {
-			print("ERROR: no valid hostname!");
-			System.exit(0);
-		}
-
-		try {
-			Client client = new Client(host, port);
-			client.start();
-			
-			do{
-				String input = readString("");
-				client.sendMessage(input);
-			}while(true);
-			
-		} catch (IOException e) {
-			print("ERROR: couldn't construct a client object!");
-			System.exit(0);
-		}
-
-	}
-	
-	private String clientName;
 	private Socket sock;
 	private BufferedReader in;
 	private BufferedWriter out;
-
-	/**
-	 * Constructs a Client-object and tries to make a socket connection
-	 */
-	public Client(InetAddress host, int port)
-			throws IOException {
-		sock = new Socket(host, port);
-		in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-		out = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
+	private TUI ui;
+	private TUI bui;
+	private GameController gc;
+	private String ip;
+	private InetAddress host;
+	private boolean isHuman;
+	private boolean quit;
+	private Player player;
+	private String playerName;	
+	
+	public Client() throws IOException {
+		ui = new StartTUI(this);
+		gc = new GameController();
 	}
-
-	/**
-	 * Reads the messages in the socket connection. Each message will
-	 * be forwarded to the MessageUI
-	 */
+	
 	public void run() {
-		String text = "";
-		try {
-			while (text != null) {
-				
-				text = in.readLine();
-				if (!(text == null) && !text.equals("\n")) {
-					print(text);
+		ui.start();
+		if (quit == false) {
+			try {
+				host = InetAddress.getByName(ip);
+				sock = new Socket(host, 1337);
+				in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+				out = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (isHuman == true) {
+				try {
+					out.write("humanplayer");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				try {
+					out.write("computerplayer");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
-		} catch (IOException e) {
-			//
+			bui.start();
 		}
 	}
+	
+	public void setIP(String ip) {
+		this.ip = ip;
+	}
+	
+	public void setQuit(boolean bl){
+		quit = bl;
+	}
+	
+	public void isHuman(boolean bl) {
+		isHuman = bl;
+	}
 
-	/** send a message to a ClientHandler. */
-	public void sendMessage(String msg) {
-		try {
-			out.write(msg);
-			out.newLine();
-			out.flush();
-		} catch (IOException e) {
-			print("lostuh connectionuh");
+	public void setPlayerName(String name){
+		this.playerName = name;
+	}
+
+	public Player getLocalPlayer(){
+		return player;
+	}
+	
+	public boolean isValidIP(String ip){
+		ip = ip.replace(".", " ");
+		String[] ints = ip.split(" ");
+		boolean isValidInt = true;
+		for(String integer : ints){
+			int i = Integer.parseInt(integer);
+				if(i > 255){
+					isValidInt = false;
+				}
 		}
+		return (isValidInt == true && ints.length == 4);
+	}
+	
+	public static void main(String[] args) {
+		InetAddress addres;
+		Client client = null;
+		try {
+			addres = InetAddress.getByName("127.0.0.1");
+			client = new Client(); //TODO weghalen, voor test
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		client.run();
+		
 		
 	}
-
-	/** close the socket connection. */
-	public void shutdown() {
-		print("Closing socket connection...");
-		try {
-			sock.close();
-		} catch (IOException e) {
-			print("could not close socket");
-		}
-	}
-
-	/** returns the client name */
-	public String getClientName() {
-		return clientName;
-	}
-	
-	private static void print(String message){
-		System.out.println(message);
-	}
-	
-	public static String readString(String tekst) {
-		System.out.print(tekst);
-		String antw = null;
-		try {
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					System.in));
-			antw = in.readLine();
-		} catch (IOException e) {
-		}
-
-		return (antw == null) ? "" : antw;
-	}
 }
-
