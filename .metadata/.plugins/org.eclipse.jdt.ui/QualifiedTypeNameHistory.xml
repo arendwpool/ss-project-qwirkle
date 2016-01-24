@@ -17,9 +17,11 @@
 <fullyQualifiedTypeName name="view.StartTUI"/>
 <fullyQualifiedTypeName name="java.net.ServerSocket"/>
 <fullyQualifiedTypeName name="network.Client"/>
-<fullyQualifiedTypeName name="models.HumanPlayer"/>
 <fullyQualifiedTypeName name="models.ComputerPlayer"/>
-<fullyQualifiedTypeName name="models.Game"/>
 <fullyQualifiedTypeName name="java.net.Socket"/>
 <fullyQualifiedTypeName name="models.Player"/>
+<fullyQualifiedTypeName name="models.HumanPlayer"/>
+<fullyQualifiedTypeName name="models.Game"/>
+<fullyQualifiedTypeName name="models.Board"/>
+<fullyQualifiedTypeName name="models.Pile"/>
 </qualifiedTypeNameHistroy>

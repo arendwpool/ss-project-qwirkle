@@ -53,10 +53,10 @@ public class Client extends Thread{
 				e.printStackTrace();
 			}
 			try {
-				out.write("name " + playerName);
-				out.newLine();
-				out.flush();
-			} catch (IOException e1) {
+				out.write(playerName);
+			
+			out.newLine();
+			out.flush();} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
@@ -76,14 +76,6 @@ public class Client extends Thread{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
-			try {
-				out.write("start");
-				out.newLine();
-				out.flush();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 			bui.start();
 		}

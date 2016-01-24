@@ -6,10 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import exceptions.FullGameException;
-import models.Board;
 import models.Game;
-import models.Pile;
 import view.StartTUI;
 
 public class Server {
@@ -18,7 +15,6 @@ public class Server {
 	private StartTUI ui;
 	private ServerSocket serverSocket;
 	private int noOnlinePlayers;
-	private int playerId = 0;
 	
 	public Server() {
 		ui = new StartTUI(null);
@@ -58,22 +54,12 @@ public class Server {
 	} 
 	
 	public void determineCommand(String command){
-		if (command.equals("start")) {
-			Game game = new Game(new Board(), new Pile());
-			for (int i = playerId; i < playerId + 4; i++) {
-				try {
-					game.addPlayer(clientHandlers.get(i).getPlayer());
-				} catch (FullGameException e) {
-					System.out.println("Er zijn te veel spelers");
-				}
-			}
-		}
+		//TODO als start wordt aangeroepen een nieuw spel maken
 	}
 	
 	public void sendCommand(String msg) {
 		
 	}
-	
 	public void broadcast(String msg) {
 		System.out.print(msg);
 	}

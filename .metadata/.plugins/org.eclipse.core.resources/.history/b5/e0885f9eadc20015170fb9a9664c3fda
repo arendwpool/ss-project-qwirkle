@@ -64,7 +64,8 @@ public class Server {
 				try {
 					game.addPlayer(clientHandlers.get(i).getPlayer());
 				} catch (FullGameException e) {
-					System.out.println("Er zijn te veel spelers");
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		}

@@ -57,8 +57,6 @@ public class ClientHandler extends Thread{
 				if (isHuman = true) {
 					player = new HumanPlayer(msg, new Game(new Board(), new Pile()));
 				}
-			} else if (msg.equals("start")) {
-				sendMessage("start");
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -66,9 +64,6 @@ public class ClientHandler extends Thread{
 		}    	
     }
     
-    public void sendMessage(String msg){
-    	server.determineCommand(msg);
-    }
     public Player getPlayer(){
     	return player;
     }

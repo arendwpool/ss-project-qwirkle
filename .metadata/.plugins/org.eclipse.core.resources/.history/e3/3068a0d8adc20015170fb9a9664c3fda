@@ -77,14 +77,6 @@ public class Client extends Thread{
 					e.printStackTrace();
 				}
 			}
-			try {
-				out.write("start");
-				out.newLine();
-				out.flush();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			bui.start();
 		}
 	}

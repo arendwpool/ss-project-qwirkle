@@ -52,19 +52,9 @@ public class Client extends Thread{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			try {
-				out.write("name " + playerName);
-				out.newLine();
-				out.flush();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 			if (isHuman == true) {
 				try {
 					out.write("humanplayer");
-					out.newLine();
-					out.flush();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -76,14 +66,6 @@ public class Client extends Thread{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
-			try {
-				out.write("start");
-				out.newLine();
-				out.flush();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 			bui.start();
 		}

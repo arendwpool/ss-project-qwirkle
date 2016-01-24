@@ -2,8 +2,14 @@ server:
 lobby
 maakt game aan en houdt regels bij
 stuurt een willekeurige naam terug
+stuurt de namen terug als er is gestart (van mensen in de gam) of als er niet genoeg mensen zijn startDenied ("Er zijn meerdere mensen nodig")
 bepaalt volgende speler
+accepteert of denied een move, als valid: stuurt wie de tegel waar heeft gelegd
 geeft tegels
+verstuurt behaalde score
+stuurt of swap mag
+stuurt of game af is
+timeout exception
 voegt speler toe aan game
 geeft id aan speler (join antwoord)
 stuurt de naam/id naar client
@@ -13,6 +19,9 @@ stuurt "ex" naar server
 stuur join
 stuur automatisch start als er 4 spelers zijn
 heeft de optie eerder start te sturen
+stuurt elke move apart naar de server
+stuurt elke swap
+stuurt done als beurt af is
 geeft gegevens van speler door aan de server
 tegels neerleggen
 tegels ruilen
