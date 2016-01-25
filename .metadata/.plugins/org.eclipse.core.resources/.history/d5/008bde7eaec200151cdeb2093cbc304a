@@ -25,7 +25,6 @@ public class GameController {
 	private boolean isHuman;
 	private boolean done;
 	private boolean quit;
-	private String ip;
 	
 	/**
 	 * Constructor die een nieuw spel instantieerd, twee TUI's instantieerd en deze TUI's
@@ -36,15 +35,18 @@ public class GameController {
 		game.addObserver(ui);
 		game.addObserver(bui);*/
 	}
-	
+<<<<<<< HEAD
+	/*public static void main(String[] args){
+=======
 	/**
 	 * De main methode van het spel.
 	 * @param args
 	 */
 	public static void main(String[] args){
+>>>>>>> 285381d397ef1ce751896f1ab39c978f5238cf9a
 		GameController controller = new GameController();
 		controller.start();
-	}
+	}*/
 	
 	/**
 	 * Geeft het BoardTUI instantie terug.
@@ -165,6 +167,8 @@ public class GameController {
 		return game;
 	}
 	
+<<<<<<< HEAD
+=======
 	/**
 	 * Zet het ip-adres op een gegeven ip.
 	 * @param ip
@@ -172,6 +176,7 @@ public class GameController {
 	public void setIP(String ip){
 		this.ip = ip;
 	}
+>>>>>>> 285381d397ef1ce751896f1ab39c978f5238cf9a
 	
 	/**
 	 * Zet de naam van de lokale speler op een gegeven naam.

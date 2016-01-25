@@ -14,15 +14,15 @@ import view.StartTUI;
 
 public class Server {
 	private int port;
-	//private ArrayList<ClientHandler> clientHandlers;
+	private ArrayList<ClientHandler> clientHandlers;
 	private StartTUI ui;
 	private ServerSocket serverSocket;
 	private int noOnlinePlayers;
 	private int playerId = 0;
 	
 	public Server() {
-		//ui = new StartTUI(null);
-		//clientHandlers = new ArrayList< ClientHandler>();
+		ui = new StartTUI(null);
+		clientHandlers = new ArrayList< ClientHandler>();
 		while (true) {
 			Scanner in = new Scanner(System.in);
 			System.out.println("Voer een poortnummer in: ");
@@ -46,11 +46,11 @@ public class Server {
 		while (true) {
 			try {
 				Socket sock = serverSocket.accept();
-				//ClientHandler clientHandler = new ClientHandler(this, sock);
-				//clientHandlers.add(clientHandler);
+				ClientHandler clientHandler = new ClientHandler(this, sock);
+				clientHandlers.add(clientHandler);
 				System.out.println("Er is een nieuwe speler online");
 				noOnlinePlayers++;
-				//clientHandler.start();
+				clientHandler.start();
 			} catch (IOException e) {
 				System.out.println("Er kon geen nieuwe connectie worden gemaakt");
 			}
@@ -58,7 +58,16 @@ public class Server {
 	} 
 	
 	public void determineCommand(String command){
-		
+		if (command.equals("start")) {
+			Game game = new Game(new Board(), new Pile());
+			for (int i = playerId; i < playerId + 4; i++) {
+				try {
+					game.addPlayer(clientHandlers.get(i).getPlayer());
+				} catch (FullGameException e) {
+					System.out.println("Er zijn te veel spelers");
+				}
+			}
+		}
 	}
 	
 	public void sendCommand(String msg) {

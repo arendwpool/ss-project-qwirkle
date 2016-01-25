@@ -25,7 +25,6 @@ public class GameController {
 	private boolean isHuman;
 	private boolean done;
 	private boolean quit;
-	private String ip;
 	
 	/**
 	 * Constructor die een nieuw spel instantieerd, twee TUI's instantieerd en deze TUI's

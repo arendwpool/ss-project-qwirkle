@@ -50,7 +50,7 @@ public class Server {
 				//clientHandlers.add(clientHandler);
 				System.out.println("Er is een nieuwe speler online");
 				noOnlinePlayers++;
-				//clientHandler.start();
+				clientHandler.start();
 			} catch (IOException e) {
 				System.out.println("Er kon geen nieuwe connectie worden gemaakt");
 			}
