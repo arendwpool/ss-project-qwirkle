@@ -1,5 +1,10 @@
 package models;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -12,21 +17,29 @@ import protocol.Protocol;
 import view.StartTUI;
 import view.TUI;
 
-public class Client2 {	
+public class Client2 extends Thread{	
 	private TUI ui = new StartTUI();
 	private int currentQuestion = 0;
 	/**
 	 * De string op index 0 is altijd een beschrijving bij een menu
 	 */
 	private static final String[] PRE_MENU = {null, "Ik ben een Menselijke speler", "Ik ben een Computerspeler"};
-	private static final String[] MAIN_MENU = {"Hallo [naam]!", "Start", "Afsluiten"};
 	private static final String[] IP_MENU = {null, "Voer het gewenste ip adres in:"};
-	protected static final String[] NAME_MENU = {null, "Voer uw naam in:"};
+	private static final String[] NAME_MENU = {null, "Voer uw naam in:"};
+	private static final String[] PORT_MENU = {"Toets een gewenst portnummer in", "typ 0 voor de standaard poort: "};
 	private boolean isHuman = false;
 	private String ip;
 	private String playerName;
-	
+	private int port = 1337;
+	private BufferedReader in;
+	private BufferedWriter out;
 	private Socket socket;
+	private ClientPlayer localPlayer;
+	
+	public static void main(String[] arsg) {
+		Client2 client = new Client2();
+		client.startClient();
+	}
 	public void getServerMessage(String msg) {
 		String[] slicedMessage = msg.split(Protocol.MESSAGESEPERATOR);
 		switch(slicedMessage[0]) {
@@ -61,30 +74,23 @@ public class Client2 {
 		}
 	}
 	
-	public void start() {
+	public void startClient() {
 		while (currentQuestion != 4) {
 			askQuestions();
 		}
-		ui.renderMenu(MAIN_MENU);
-		
-		ui.renderMenu(IP_MENU);
-		while (true) {
-			String ip = "";
-			try {
-				ip = ui.determineString();
-				while (!isValidIP(ip)) {
-					ui.print("Geen geldig ip adres...");
-					ui.renderMenu(IP_MENU);
-					ip = ui.determineString();
-					ui.createSpace();
-				}
-				this.ip = ip;
-				break;
-			} catch (NumberFormatException e) {
-				ui.print("Voer een geldig ip adres in");
-			}
-		}	
-		
+		try {
+			socket = new Socket(ip, port);
+			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+			sendMessage("ex");
+			sendMessage("join");
+			//sendMessage("start");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		start();
 	}
 	
 	private void askQuestions() {
@@ -101,17 +107,21 @@ public class Client2 {
 				currentQuestion ++;
 			}
 			else { 
-				ui.print("Voer een naam in van minstens  3 karakters");
+				ui.print("Voer een naam in van minstens 3 karakters");
 			}
 		}
 		if (currentQuestion == 2) {
 			if (question3()) {
 				currentQuestion ++;
+			} else {
+				ui.print("Voer een geldig ip adres in");
 			}
 		}
 		if (currentQuestion == 3) {
 			if (question4()) {
 				currentQuestion ++;
+			} else {
+				ui.print("Voer een geldig poortnummer in.");
 			}
 		}
 	}
@@ -131,45 +141,73 @@ public class Client2 {
 		}
 	}
 	private boolean question2() {
-		ui.renderMenu(menuItems);
-		String playerName = ui.determineString();
+		ui.renderMenu(NAME_MENU);
+		String playerName;
+		playerName = ui.determineString();
 		if (playerName.length() > 2 && playerName.length() < 13) {
 			this.playerName = playerName;
 			return true;
 		}
+		
 		return false;
 		
 	}
 	private boolean question3() {
+		ui.renderMenu(IP_MENU);
 		String ip = "";
-		try {
-			ip = determineString();
-			while (!client.isValidIP(ip)) {
-				System.out.println("Geen geldig ip adres...");
-				renderMenu(IP_MENU);
-				ip = determineString();
-				createSpace();
-			}
-			client.setIP(ip);
-			break;
-		} catch (NumberFormatException e) {
-			System.out.println("Voer een geldig ip adres in");
-		}
+		ip = ui.determineString();
+		if (isValidIP(ip)) {
+		this.ip = ip;
+		return true;
+}
 		
+		return false;
 	}
 	private boolean question4() {
-		return true;
-		
+		ui.renderMenu(PORT_MENU);
+		int input = ui.determineInt();
+		if (input > 0) {
+			port = input;
+			return true;
+		} else if (input == 0) {
+			return true;
+		}
+		return false;
 	}
 	
 	public void run() {
+		String text = "";
+		try {
+			while (text != null) {
+				text = in.readLine();
+				if (text != null && !text.equals("\n")) {
+					System.out.println(text);
+				}
+				else {
+					ui.print("Foute input, probeer opnieuw.");
+				}
+			}
+		} catch (IOException e) {
+			//
+		}
 		
 	}
+	
+	public void sendMessage(String msg) {
+		try {
+			out.write(msg);
+			out.newLine();
+			out.flush();
+		} catch (IOException e) {
+			
+		}
+	}	
 
 	private void gameEnded(String[] nameScore) {
 		Map<String, Integer> score = new HashMap<String, Integer>();
 		for (int i = 1; i < nameScore.length; i += 2) {
 			score.put(nameScore[i], Integer.parseInt(nameScore[i + 1]));
+			//toon scores -> eindmenu...
 		}
 	}
 
@@ -177,6 +215,7 @@ public class Client2 {
 		Map<String, Integer> score = new HashMap<String, Integer>();
 		for (int i = 1; i < nameScore.length; i += 2) {
 			score.put(nameScore[i], Integer.parseInt(nameScore[i + 1]));
+			//toon scores
 		}
 	}
 
@@ -202,6 +241,12 @@ public class Client2 {
 	}
 
 	private void turn(String name) {
+		/*if (localPlayer.getName().equals(name)) {
+			String option = localPlayer.determineMove();
+			if (option ...) {
+				sendMessage("move ....");
+			}
+		}*/
 	}
 
 	private void receiveTile(String shape, String color) {
@@ -217,6 +262,7 @@ public class Client2 {
 		String[] names = new String[players.length - 1]; 
 		for (int i = 1; i < players.length; i++) {
 			names[i - 1] = players[i];
+			//toon lijst van spelers binnen het spel en start de game (client side)
 		}
 	}
 
@@ -226,8 +272,8 @@ public class Client2 {
 	 * @return isValidInt == true && ints.length == 4
 	 */
 	private static boolean isValidIP(String ip){
-		ip = ip.replace(".", " ");
-		String[] ints = ip.split(" ");
+		//ip = ip.replace(".", " ");
+		String[] ints = ip.split("\\.");
 		boolean isValidInt = true;
 		for(String integer : ints){
 			int i = Integer.parseInt(integer);
@@ -236,5 +282,13 @@ public class Client2 {
 				}
 		}
 		return (isValidInt == true && ints.length == 4);
+	}
+	
+	public void createLocalPlayer() {
+		if (isHuman == true) {
+			localPlayer = new HumanPlayer(playerName);
+		} else {
+			//localPlayer = new ComputerPlayer(playerName);
+		}
 	}
 }

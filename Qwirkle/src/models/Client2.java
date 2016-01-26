@@ -84,7 +84,7 @@ public class Client2 extends Thread{
 			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 			sendMessage("ex");
 			sendMessage("join");
-			//sendMessage("start");
+			sendMessage("start");
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -241,12 +241,12 @@ public class Client2 extends Thread{
 	}
 
 	private void turn(String name) {
-		if (localPlayer.getName().equals(name)) {
+		/*if (localPlayer.getName().equals(name)) {
 			String option = localPlayer.determineMove();
 			if (option ...) {
 				sendMessage("move ....");
 			}
-		}
+		}*/
 	}
 
 	private void receiveTile(String shape, String color) {
@@ -288,7 +288,7 @@ public class Client2 extends Thread{
 		if (isHuman == true) {
 			localPlayer = new HumanPlayer(playerName);
 		} else {
-			localPlayer = new ComputerPlayer(playerName);
+			//localPlayer = new ComputerPlayer(playerName);
 		}
 	}
 }

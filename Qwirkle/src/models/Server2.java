@@ -84,7 +84,7 @@ public class Server2 {
 	
 	private boolean checkIfNameExists(String name) {
 		for (ClientHandler2 ch : clients) {
-			if (ch.getPlayerName().equals(name)) {
+			if (ch.getPlayerName() != null && ch.getPlayerName().equals(name)) {
 				return false;
 			}
 		}
