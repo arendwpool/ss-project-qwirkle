@@ -1,0 +1,17 @@
+package models;
+
+import protocol.Protocol;
+
+public class Server2 {
+
+	public void getClientMessage(String msg) {
+		String[] slicedMessage = msg.split(Protocol.MESSAGESEPERATOR);
+		String command = slicedMessage[0];
+		if (command.equals(Protocol.CLIENT_CORE_JOIN)) joinGame();
+		else if (command.equals(Protocol.CLIENT_CORE_START)) startGame();
+	}
+	
+	public void start() {
+		
+	}
+}

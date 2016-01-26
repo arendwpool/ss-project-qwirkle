@@ -1,0 +1,120 @@
+package models;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import protocol.Protocol;
+
+public class Client2 {
+	private String name;
+	int score;
+	
+	public void getServerMessage(String msg) {
+		String[] slicedMessage = msg.split(Protocol.MESSAGESEPERATOR);
+		switch(slicedMessage[0]) {
+			case Protocol.SERVER_CORE_JOIN_ACCEPTED: joinAccepted(slicedMessage[1]);
+			break;
+			case Protocol.SERVER_CORE_START: starting(slicedMessage);
+			break;
+			case Protocol.SERVER_CORE_START_DENIED: startDenied();
+			break;
+			case Protocol.SERVER_CORE_TURN: turn(slicedMessage[1]);
+			break;
+			case Protocol.SERVER_CORE_SEND_TILE: receiveTile(slicedMessage[1], slicedMessage[2]);
+			break;
+			case Protocol.SERVER_CORE_DONE: done();
+			break;
+			case Protocol.SERVER_CORE_SWAP_ACCEPTED: swapAccepted();
+			break;
+			case Protocol.SERVER_CORE_SWAP_DENIED: swapDenied();
+			break;
+			case Protocol.SERVER_CORE_GAME_ENDED: gameEnded(slicedMessage);
+			break;
+			case Protocol.SERVER_CORE_EXCEPTION: exception(slicedMessage[2]);
+			break;
+			case Protocol.SERVER_CORE_MOVE_ACCEPTED: moveAccepted();
+			break;
+			case Protocol.SERVER_CORE_MOVE_DENIED: moveDenied();
+			break;
+			case Protocol.SERVER_CORE_MOVE_MADE: moveMade(slicedMessage[1], slicedMessage[2], slicedMessage[3], slicedMessage[4]);
+			break;
+			case Protocol.SERVER_CORE_SCORE: score(slicedMessage);
+			break;
+		}
+	}
+
+	private void score(String[] nameScore) {
+		Map<String, Integer> score = new HashMap<String, Integer>();
+		for (int i = 1; i < nameScore.length; i+=2) {
+			score.put(nameScore[i], Integer.parseInt(nameScore[i+1]));
+		}
+		score = Integer.parseInt(string2);
+		
+		
+	}
+
+	private void moveMade(String x, String y, String shape, String color) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void moveDenied() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void moveAccepted() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void exception(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void gameEnded(String nameWinner, String score) {
+		int scoreWinner = Integer.parseInt(score);		
+	}
+
+	private void swapDenied() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void swapAccepted() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void done() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void turn(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void receiveTile(String string, String string2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void startDenied() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void joinAccepted(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void starting(String[] slicedMessage) {
+		for (int i = 1; i < slicedMessage.length; i++) {
+			slicedMessage[i];
+		}		
+	}
+}

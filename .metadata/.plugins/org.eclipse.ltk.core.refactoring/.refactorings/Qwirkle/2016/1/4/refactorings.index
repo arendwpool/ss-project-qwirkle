@@ -1,0 +1,7 @@
+1453740482027	Extract method 'readPort'
+1453741516936	Delete element
+1453746887111	Rename method 'readInt'
+1453766433829	Rename method 'getTiles'
+1453766460609	Rename method 'getHand'
+1453766806292	Rename method 'hand'
+1453766839185	Rename method 'tiles'

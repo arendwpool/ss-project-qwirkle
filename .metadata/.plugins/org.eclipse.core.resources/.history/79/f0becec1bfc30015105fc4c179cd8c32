@@ -1,0 +1,64 @@
+package models;
+
+import java.util.ArrayList;
+import java.util.Map;
+
+import exceptions.InvalidMoveException;
+import util.TileUtils;
+
+public class Game2 {
+	private int id;
+	private ArrayList<Player2> players = new ArrayList<>();
+	private Pile pile;
+	
+	public Game2(int id) {
+		this.id = id;
+		
+		System.out.println("Game has started with id: " + id);
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void addPlayer(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ArrayList<ClientHandler2> getPlayers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Pile getPile() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void makeMove(String x, String y, Tile tile) throws InvalidMoveException{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void swapTile(Tile tile, String name) {
+		for (Player2 pl : players) {
+			if (pl.getName().equals(name)) {
+				pl.getHand().remove(tile);
+				pile.getTiles().add(tile);
+				pl.getHand().add(giveRandomTile(pile));
+			}
+		}
+	}
+	
+	public Tile giveRandomTile(Pile pile) {
+		pile.shuffle();
+		Tile tile = pile.getTiles().get(0);
+		return tile;
+	}
+
+	public void finishMove() {
+		// TODO Auto-generated method stub
+		
+	}
+}

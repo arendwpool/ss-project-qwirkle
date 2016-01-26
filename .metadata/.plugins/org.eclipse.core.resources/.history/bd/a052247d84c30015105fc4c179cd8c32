@@ -1,0 +1,20 @@
+package util;
+
+import java.util.Scanner;
+
+import view.StartTUI;
+
+public class NetworkUtils {
+
+
+	public static int getPort(StartTUI ui) {
+		Scanner scanner = new Scanner(System.in);
+		int input = ui.determineOption();
+		scanner.close();
+		if (input > 0) {
+			return input;
+		} else {
+			return 1337;
+		}
+	}
+}

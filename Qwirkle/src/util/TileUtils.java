@@ -3,6 +3,7 @@ package util;
 import models.Game;
 import models.Pile;
 import models.Player;
+import models.Player2;
 import models.Tile;
 
 public class TileUtils {
@@ -22,13 +23,14 @@ public class TileUtils {
 	 * 
 	 * Kijkt hoeveel tegels een gegeven speler in zijn hand heeft. Als dit minder dan 6 is worden er 
 	 * een aantal willekeurige tegels gegeven zodat de hand weer 6 tegels heeft.
-	 * @param player
+	 * @param pl
 	 */
-	public static void setHand(Player player, Pile pile) {
-		int noOfTilesToGive = Game.DEFAULT_HAND_SIZE - player.getHand().size();
+	public static void setHand(Player2 pl, Pile pile) {
+		int noOfTilesToGive = Game.DEFAULT_HAND_SIZE - pl.getHand().size();
 		for(int i = 0; i < noOfTilesToGive; i++){
 			Tile tile = giveRandomTile(pile);
-			player.getHand().add(tile);
+			pl.getHand().add(tile);
+			//stuur message naar client
 			pile.removeTile(tile);
 		}
 	}

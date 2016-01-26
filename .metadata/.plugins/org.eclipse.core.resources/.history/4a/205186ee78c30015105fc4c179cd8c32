@@ -1,0 +1,16 @@
+package models;
+
+import protocol.Protocol;
+
+public class Client2 {
+	private String name;
+	
+	public void getServerMessage(String msg) {
+		String[] slicedMessage = msg.split(Protocol.MESSAGESEPERATOR);
+		String command = slicedMessage[0];
+		if (command.equals(Protocol.CLIENT_CORE_JOIN)) joinAccepted();
+		else if (command.equals(Protocol.CLIENT_CORE_EXTENSION)) ex();
+	}
+	
+	
+}

@@ -7,8 +7,10 @@ import exceptions.InvalidMoveException;
 import exceptions.NoTilesLeftInPileException;
 import models.Board;
 import models.Game;
+import models.Game2;
 import models.Pile;
 import models.Player;
+import models.Player2;
 import models.Tile;
 
 public class MoveUtils {
@@ -38,7 +40,7 @@ public class MoveUtils {
 	 * Verwijderd alle laatst gezette tegels van een speler.
 	 * @throws InvalidMoveException 
 	 */
-	public static void processMove(Player player, Game game) throws InvalidMoveException {
+	public static void processMove(Player2 player, Game2 game) throws InvalidMoveException {
 		if(getLastMoves().size() != 0 || hasTraded == true){
 			generateScore(player, game.getBoard());
 			clearLastMoves();
@@ -64,7 +66,7 @@ public class MoveUtils {
 	 * score is berekend wordt deze aan de speler toegevoegd.
 	 * @param player
 	 */
-	public static void generateScore(Player player, Board board) {
+	public static void generateScore(Player2 player, Board board) {
 		Point point = null;
 		boolean retainMultipleX = false;
 		boolean retainMultipleY = false;
@@ -253,7 +255,7 @@ public class MoveUtils {
 	 * @throws NoTilesLeftInPileException
 	 * @throws InvalidMoveException 
 	 */
-	public static void replaceTiles(ArrayList<Tile> tilesToTrade, Player player, Pile pile) 
+	public static void replaceTiles(ArrayList<Tile> tilesToTrade, Player2 player, Pile pile) 
 			throws NoTilesLeftInPileException, InvalidMoveException {
 		if (madeMove == false && initialMove == false){
 			boolean containsAll = true;

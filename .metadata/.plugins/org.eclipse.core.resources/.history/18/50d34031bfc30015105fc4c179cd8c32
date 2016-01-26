@@ -1,0 +1,51 @@
+package models;
+
+import java.util.ArrayList;
+import java.util.Map;
+
+import exceptions.InvalidMoveException;
+
+public class Game2 {
+	private int id;
+	private ArrayList<Player2> players = new ArrayList<>();
+	
+	public Game2(int id) {
+		this.id = id;
+		
+		System.out.println("Game has started with id: " + id);
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void addPlayer(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ArrayList<ClientHandler2> getPlayers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Pile getPile() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void makeMove(String x, String y, Tile tile) throws InvalidMoveException{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void swapTile(Tile tile, ClientHandler2 client) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void finishMove() {
+		// TODO Auto-generated method stub
+		
+	}
+}

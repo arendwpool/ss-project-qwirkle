@@ -1,0 +1,60 @@
+package models;
+
+import protocol.Protocol;
+
+public class Server2 {
+
+	public void getClientMessage(String msg) {
+		String[] slicedMessage = msg.split(Protocol.MESSAGESEPERATOR);
+		switch(slicedMessage[0]) {
+		case Protocol.CLIENT_CORE_JOIN: join();
+		break;
+		case Protocol.CLIENT_CORE_START: start();
+		break;
+		case Protocol.CLIENT_CORE_EXTENSION: ex(slicedMessage);
+		break;
+		case Protocol.CLIENT_CORE_LOGIN: login(slicedMessage[1]);
+		break;
+		case Protocol.CLIENT_CORE_SWAP: swap(slicedMessage[1], slicedMessage[2]);
+		break;
+		case Protocol.CLIENT_CORE_DONE: done();
+		break;
+		case Protocol.CLIENT_CORE_MOVE: move(slicedMessage[1], slicedMessage[2], slicedMessage[3], slicedMessage[4]);
+		break;
+	}
+	
+	private void move(String string, String string2, String string3, String string4) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void done() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void swap(String string, String string2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void login(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void join() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void ex(String[] slicedMessage) {
+		for (int i = 1; i < slicedMessage.length; i++) {
+			slicedMessage[i];
+		}		
+	}
+
+	public void start() {
+		
+	}
+}

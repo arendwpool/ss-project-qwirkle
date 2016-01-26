@@ -1,0 +1,25 @@
+package models;
+
+public class Game2 {
+	private int id;
+	
+	public Game2(int id) {
+		this.id = id;
+		
+		System.out.println("Game has started with id: " + id);
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void addPlayer(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Object getPlayers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

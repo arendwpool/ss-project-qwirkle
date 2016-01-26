@@ -1,0 +1,178 @@
+package models;
+
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.InputMismatchException;
+import java.util.Map;
+import java.util.Scanner;
+
+import protocol.Protocol;
+import view.StartTUI;
+import view.TUI;
+
+public class Client2 {	
+	/**
+	 * De string op index 0 is altijd een beschrijving bij een menu
+	 */
+	private static final String[] PRE_MENU = {null, "Ik ben een Menselijke speler", "Ik ben een Computerspeler"};
+	private static final String[] MAIN_MENU = {"Hallo [naam]!", "Start", "Afsluiten"};
+	private static final String[] IP_MENU = {null, "Voer het gewenste ip adres in:"};
+	private boolean isHuman;
+	private String ip;
+	
+	private Socket socket;
+	public void getServerMessage(String msg) {
+		String[] slicedMessage = msg.split(Protocol.MESSAGESEPERATOR);
+		switch(slicedMessage[0]) {
+			case Protocol.SERVER_CORE_JOIN_ACCEPTED: joinAccepted(slicedMessage[1]);
+			break;
+			case Protocol.SERVER_CORE_START: starting(slicedMessage);
+			break;
+			case Protocol.SERVER_CORE_START_DENIED: startDenied();
+			break;
+			case Protocol.SERVER_CORE_TURN: turn(slicedMessage[1]);
+			break;
+			case Protocol.SERVER_CORE_SEND_TILE: receiveTile(slicedMessage[1], slicedMessage[2]);
+			break;
+			case Protocol.SERVER_CORE_DONE: done();
+			break;
+			case Protocol.SERVER_CORE_SWAP_ACCEPTED: swapAccepted();
+			break;
+			case Protocol.SERVER_CORE_SWAP_DENIED: swapDenied();
+			break;
+			case Protocol.SERVER_CORE_GAME_ENDED: gameEnded(slicedMessage);
+			break;
+			case Protocol.SERVER_CORE_EXCEPTION: exception(slicedMessage[2]);
+			break;
+			case Protocol.SERVER_CORE_MOVE_ACCEPTED: moveAccepted();
+			break;
+			case Protocol.SERVER_CORE_MOVE_DENIED: moveDenied();
+			break;
+			case Protocol.SERVER_CORE_MOVE_MADE: moveMade(slicedMessage[1], slicedMessage[2], slicedMessage[3], slicedMessage[4]);
+			break;
+			case Protocol.SERVER_CORE_SCORE: score(slicedMessage);
+			break;
+		}
+	}
+	
+	public void start() {
+		StartTUI ui = new StartTUI();
+		ui.renderMenu(PRE_MENU);
+		int choice = readInt();
+		if (choice == 1) {
+			isHuman = true;
+		}
+		ui.renderMenu(IP_MENU);
+		while (true) {
+			String ip = "";
+			try {
+				ip = ui.determineString();
+				while (!isValidIP(ip)) {
+					ui.print("Geen geldig ip adres...");
+					ui.renderMenu(IP_MENU);
+					ip = ui.determineString();
+					ui.createSpace();
+				}
+				this.ip = ip;
+				break;
+			} catch (NumberFormatException e) {
+				ui.print("Voer een geldig ip adres in");
+			}
+		}	
+		
+	}
+	
+	public void run() {
+		
+	}
+
+	private void gameEnded(String[] nameScore) {
+		Map<String, Integer> score = new HashMap<String, Integer>();
+		for (int i = 1; i < nameScore.length; i += 2) {
+			score.put(nameScore[i], Integer.parseInt(nameScore[i + 1]));
+		}
+	}
+
+	private void score(String[] nameScore) {
+		Map<String, Integer> score = new HashMap<String, Integer>();
+		for (int i = 1; i < nameScore.length; i += 2) {
+			score.put(nameScore[i], Integer.parseInt(nameScore[i + 1]));
+		}
+	}
+
+	private void moveMade(String x, String y, String shape, String color) {
+	}
+
+	private void moveDenied() {
+	}
+
+	private void moveAccepted() {
+	}
+
+	private void exception(String name) {
+	}
+
+	private void swapDenied() {
+	}
+
+	private void swapAccepted() {
+	}
+
+	private void done() {
+	}
+
+	private void turn(String name) {
+	}
+
+	private void receiveTile(String shape, String color) {
+	}
+
+	private void startDenied() {
+	}
+
+	private void joinAccepted(String name) {
+	}
+
+	private void starting(String[] players) {
+		String[] names = new String[players.length - 1]; 
+		for (int i = 1; i < players.length; i++) {
+			names[i - 1] = players[i];
+		}
+	}
+
+	/**
+	 * Controlleerd of een gegeven IP adres wel legitiem is.
+	 * @param ip
+	 * @return isValidInt == true && ints.length == 4
+	 */
+	private static boolean isValidIP(String ip){
+		ip = ip.replace(".", " ");
+		String[] ints = ip.split(" ");
+		boolean isValidInt = true;
+		for(String integer : ints){
+			int i = Integer.parseInt(integer);
+				if(i > 255){
+					isValidInt = false;
+				}
+		}
+		return (isValidInt == true && ints.length == 4);
+	}
+	
+	private int readInt() {
+		int input = 0;
+		Scanner scanner;
+		while (true) {
+			scanner = new Scanner(System.in);
+			try {
+				input = scanner.nextInt();
+				break;
+			} catch (InputMismatchException e) {
+				System.out.println("Voer een nummer in");
+			}
+		}
+		scanner.close();
+		return input;
+	}
+}

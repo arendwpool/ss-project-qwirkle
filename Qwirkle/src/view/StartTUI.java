@@ -3,8 +3,10 @@ package view;
 import java.util.InputMismatchException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Scanner;
 
 import controllers.GameController;
+import models.Client2;
 import network.Client;
 
 public class StartTUI extends TUI{
@@ -14,10 +16,9 @@ public class StartTUI extends TUI{
 	private static final String[] PRE_MENU = {null, "Ik ben een Menselijke speler", "Ik ben een Computerspeler"};
 	private static final String[] MAIN_MENU = {"Hallo [naam]!", "Start", "Afsluiten"};
 	private static final String[] IP_MENU = {null, "Voer het gewenste ip adres in:"};
-	private Client client;
+	private Client2 client;
 	
-	public StartTUI(Client client) {
-		this.client = client;
+	public StartTUI() {
 	}
 	@Override
 	public void update(Observable arg0, Object arg1) {

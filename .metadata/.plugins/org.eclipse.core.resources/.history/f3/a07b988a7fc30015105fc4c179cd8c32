@@ -1,0 +1,22 @@
+package models;
+
+public class Game2 {
+	public boolean gameOver() {
+	}
+	
+	public void start() {
+	}
+	
+	public void join(){
+		
+	}
+	
+	public void move(int x, int y, String symbol, String color) {
+	}
+	
+	public void done() {
+	}
+	
+	public void swapTiles(String symbol, String color) {
+	}
+}

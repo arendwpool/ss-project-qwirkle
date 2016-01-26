@@ -181,22 +181,6 @@ public class GameController {
 		this.playerName = name;
 	}
 
-	/**
-	 * Controlleerd of een gegeven IP adres wel legitiem is.
-	 * @param ip
-	 * @return isValidInt == true && ints.length == 4
-	 */
-	public boolean isValidIP(String ip){
-		ip = ip.replace(".", " ");
-		String[] ints = ip.split(" ");
-		boolean isValidInt = true;
-		for(String integer : ints){
-			int i = Integer.parseInt(integer);
-				if(i > 255){
-					isValidInt = false;
-				}
-		}
-		return (isValidInt == true && ints.length == 4);
-	}
+	
 	
 }

@@ -1,0 +1,20 @@
+package models;
+
+import protocol.Protocol;
+
+public class Client2 {
+	private String name;
+	
+	public void getServerMessage(String msg) {
+		String[] slicedMessage = msg.split(Protocol.MESSAGESEPERATOR);
+		switch(slicedMessage[0]) {
+			case Protocol.CLIENT_CORE_JOIN: joinAccepted();
+			break;
+			case Protocol.CLIENT_CORE_EXTENSION: ex();
+			break;
+			case Protocol.CLIENT_CORE_START: start();
+			break;
+			default: nothing();
+		}
+	}
+}
