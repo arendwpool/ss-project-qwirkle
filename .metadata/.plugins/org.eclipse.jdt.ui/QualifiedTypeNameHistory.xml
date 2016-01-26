@@ -3,7 +3,6 @@
 <fullyQualifiedTypeName name="server.Protocol"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="controllers.GameController"/>
-<fullyQualifiedTypeName name="view.BoardTUI"/>
 <fullyQualifiedTypeName name="network.Client"/>
 <fullyQualifiedTypeName name="models.ComputerPlayer"/>
 <fullyQualifiedTypeName name="models.Player"/>
@@ -11,12 +10,10 @@
 <fullyQualifiedTypeName name="models.Game"/>
 <fullyQualifiedTypeName name="models.Board"/>
 <fullyQualifiedTypeName name="models.Pile"/>
-<fullyQualifiedTypeName name="protocol.Protocol"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="java.net.ServerSocket"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="network.Server"/>
 <fullyQualifiedTypeName name="java.net.Socket"/>
 <fullyQualifiedTypeName name="java.io.BufferedWriter"/>
 <fullyQualifiedTypeName name="java.io.OutputStreamWriter"/>
@@ -31,8 +28,12 @@
 <fullyQualifiedTypeName name="exceptions.PlayerNotFoundException"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="util.TileUtils"/>
 <fullyQualifiedTypeName name="util.MoveUtils"/>
-<fullyQualifiedTypeName name="models.Game2"/>
 <fullyQualifiedTypeName name="models.Player2"/>
+<fullyQualifiedTypeName name="view.BoardTUI"/>
+<fullyQualifiedTypeName name="models.ClientHandler2"/>
+<fullyQualifiedTypeName name="protocol.Protocol"/>
+<fullyQualifiedTypeName name="util.TileUtils"/>
+<fullyQualifiedTypeName name="network.Server"/>
+<fullyQualifiedTypeName name="models.Game2"/>
 </qualifiedTypeNameHistroy>

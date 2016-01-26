@@ -57,16 +57,9 @@ public abstract class ClientPlayer  extends Observable{
 		score += points;
 	}
 	
-	public String determineMove() {
-		return null;
-		
-	}
-	public String determineSwap(String[] string) {
-		return null;
-	}
-	public String determineMove(String[] slicedOption) {
+	public void determineMove() {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 }
