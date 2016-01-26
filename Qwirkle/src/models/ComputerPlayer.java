@@ -13,7 +13,7 @@ import util.MoveUtils;
  * @author Arend Pool en Bob breemhaar
  *
  */
-public class ComputerPlayer extends Observable implements ClientPlayer {
+public class ComputerPlayer extends ClientPlayer {
 	private ArrayList<Tile> hand;
 	private String name;
 	private int score;
@@ -29,14 +29,7 @@ public class ComputerPlayer extends Observable implements ClientPlayer {
 	 * @param game
 	 */
 	public ComputerPlayer(String name) {
-		hand = new ArrayList<Tile>();
-		this.name = name;
-		score = 0;
-		try {
-			game.addPlayer(this);
-		} catch (FullGameException e) {
-			//TODO implement
-		}
+		super(name);
 	}
 	
 	/**

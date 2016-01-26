@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import controllers.GameController;
 import models.Client2;
-import network.Client;
 
 public class StartTUI extends TUI{
 	/**

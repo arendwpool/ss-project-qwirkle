@@ -5,14 +5,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.HashMap;
-import java.util.InputMismatchException;
 import java.util.Map;
-import java.util.Scanner;
-
 import protocol.Protocol;
 import view.StartTUI;
 import view.TUI;
@@ -35,6 +30,7 @@ public class Client2 extends Thread{
 	private BufferedWriter out;
 	private Socket socket;
 	private ClientPlayer localPlayer;
+	private Game game;
 	
 	public static void main(String[] arsg) {
 		Client2 client = new Client2();
@@ -84,7 +80,7 @@ public class Client2 extends Thread{
 			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 			sendMessage("ex");
 			sendMessage("join");
-			//sendMessage("start");
+			sendMessage("start");
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -220,49 +216,74 @@ public class Client2 extends Thread{
 	}
 
 	private void moveMade(String x, String y, String shape, String color) {
+		ui.print("Tegel " + shape + color + "is neergelegd op " + x + " " + y + ".");
 	}
 
 	private void moveDenied() {
+		ui.print("Deze move is niet geldig.");
 	}
 
 	private void moveAccepted() {
+		ui.print("De zet is succesvol.");
 	}
 
 	private void exception(String name) {
+		ui.print("De connectie is verloren...");
+		try {
+			in.close();
+			out.close();
+			socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void swapDenied() {
+		ui.print("U mag deze tegel niet ruilen");
 	}
 
 	private void swapAccepted() {
+		ui.print("De tegel is klaargemaakt om te ruilen.");
 	}
 
 	private void done() {
+		ui.print("De tegels zijn uitgedeeld.");
 	}
 
 	private void turn(String name) {
 		if (localPlayer.getName().equals(name)) {
 			String option = localPlayer.determineMove();
-			if (option ...) {
-				sendMessage("move ....");
+			String[] slicedOption = option.split(Protocol.MESSAGESEPERATOR);
+			if (slicedOption[0].equals("move")) {
+				sendMessage("move " + localPlayer.determineMove(slicedOption));
+			} else if (slicedOption[0].equals("swap")) {
+				sendMessage("swap " + localPlayer.determineSwap(slicedOption));
+			} else if (slicedOption[0].equals("done")) {
+				sendMessage("done");
 			}
 		}
 	}
 
 	private void receiveTile(String shape, String color) {
+		localPlayer.getHand().add(new Tile(color, shape));
+		System.out.print(shape+color);
 	}
 
 	private void startDenied() {
+		ui.print("er kan nog niet gestart worden");
 	}
 
 	private void joinAccepted(String name) {
+		ui.print("U staat nu in de wachtrij");
 	}
 
 	private void starting(String[] players) {
+		ui.print("Het spel wordt gestart met de volgende spelers: ");
 		String[] names = new String[players.length - 1]; 
 		for (int i = 1; i < players.length; i++) {
 			names[i - 1] = players[i];
-			//toon lijst van spelers binnen het spel en start de game (client side)
+			ui.print(players[i]);
 		}
 	}
 

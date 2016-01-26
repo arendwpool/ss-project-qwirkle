@@ -9,6 +9,7 @@ import java.util.Scanner;
 import exceptions.InvalidMoveException;
 import exceptions.PlayerNotFoundException;
 import protocol.Protocol;
+import util.TileUtils;
 import view.StartTUI;
 import view.TUI;
 
@@ -19,7 +20,7 @@ public class Server2 {
 	private ArrayList<Game2> games = new ArrayList<Game2>();
 	private ArrayList<ClientHandler2> joint = new ArrayList<ClientHandler2>();
 	private ArrayList<Tile> tilesToSwap = new ArrayList<>();
-	TUI ui = new StartTUI();
+	private TUI ui = new StartTUI();
 	
 
 	public void getClientMessage(String msg, ClientHandler2 client) {
@@ -83,9 +84,11 @@ public class Server2 {
 	}
 	
 	private boolean checkIfNameExists(String name) {
-		for (ClientHandler2 ch : clients) {
-			if (ch.getPlayerName().equals(name)) {
-				return false;
+		if (clients.size() > 1) {
+			for (ClientHandler2 ch : clients) {
+				if (ch.getPlayerName() != null && ch.getPlayerName().equals(name)) {
+					return false;
+				}
 			}
 		}
 		return true;
@@ -197,8 +200,11 @@ public class Server2 {
 				ui.print("" + size);
 				game.addPlayer(clients.get(0).getPlayerName());
 				clients.remove(0);
-				games.add(game);
 			}
+			for (Player2 pl : game.getPlayers()) {
+				TileUtils.setHand(pl, game.getPile(), getClientByPlayer(pl.getName()));
+			}
+			games.add(game);
 			game.start();
 		}
 		else {
