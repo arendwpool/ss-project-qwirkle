@@ -56,6 +56,4 @@ public class ClientHandler2 extends Thread {
 	public String getPlayerName() {
 		return this.playerName;
 	}
-	
-	
 }

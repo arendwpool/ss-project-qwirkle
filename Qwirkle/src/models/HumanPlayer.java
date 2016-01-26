@@ -8,60 +8,25 @@ import exceptions.FullGameException;
 import exceptions.InvalidMoveException;
 import exceptions.NoTilesLeftInPileException;
 
-public class HumanPlayer extends Observable  implements Player {
-	/**
-	 * De naam van de betreffende speler.
-	 */
-	private String name;
-	
-	/**
-	 * Koppelt de speler aan een spel.
-	 */
-	private Game game;
-	/**
-	 * De tegels die de betreffende speler heeft.
-	 */
-	private ArrayList<Tile> hand;
-	
-	/**
-	 * De score van de Speler.
-	 */
-	private int score = 0;
-	
+public class HumanPlayer extends ClientPlayer {
 	/**
 	 * construeert een nieuwe menselijke speler. Deze speler krijgt een hand met tiles mee.
 	 * Elke speler met een score van 0. Uiteindelijk wordt de speler aan het spel toegevoegd.
 	 * @param name
 	 * @param game
 	 */
-	public HumanPlayer(String name, Game game) {
-		hand = new ArrayList<Tile>();
-		this.name = name;
-		this.game = game;
-		score = 0;
-		try {
-			game.addPlayer(this);
-		} catch (FullGameException e) {
-			//TODO implement
-		}
+	public HumanPlayer(String name) {
+		super(name);
 	}
 	
-	/**
-	 *  geeft de naam van de speler.
-	 *  @return this.name
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
+	
 
 	/**
 	 * Vraagt aan de speler wat hij wil doen voor zijn beurt. De input geeft hij vervolgens
 	 * door aan determinMove als hij een tegel wilt leggen. Als de speler een tegel wil
 	 * ruilen geeft de methode dit door aan determineSwap.
 	 */
-	@Override
-	public void determineMove() {
+	public String determineMove() {
 		Scanner in = new Scanner(System.in);
 		outerloop:
 		while(true) {
@@ -109,47 +74,10 @@ public class HumanPlayer extends Observable  implements Player {
 			}
 		}
 	}
+
 	
-	/**
-	 * Geeft een set met de tegels die de betreffende speler in zijn "hand" heeft.
-	 * @return this.hand
-	 */
-	@Override
-	public ArrayList<Tile> getHand() {
-		return hand;
-	}
 
-	/**
-	 * laat de speler een Move maken. Hierbij wordt de x en y as,
-	 * de tile die de speler neer wilt leggen en de speler zelf gebruikt.
-	 * @param x
-	 * @param y
-	 * @param tile
-	 * @throws InvalidMoveException 
-	 */
-	@Override
-	public void makeMove(int x, int y, Tile tile) throws InvalidMoveException {
-		game.makeMove(x, y, tile, this);
-		
-	}
-
-	/**
-	 * Weergeeft de score van de speler.
-	 * @return this.score
-	 */
-	@Override
-	public int getScore() {
-		return score;
-	}
-
-	/**
-	 * Wijzigt de score van de speler door er punten aan toe te voegen.
-	 * @param points
-	 */
-	@Override
-	public void addScore(int points) {
-		score += points;
-	}
+	
 
 	/**
 	 * Kijkt wat de speler als volgende zet wil doen. Hiervoor split hij een geven 

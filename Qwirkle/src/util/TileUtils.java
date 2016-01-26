@@ -2,7 +2,7 @@ package util;
 
 import models.Game;
 import models.Pile;
-import models.Player;
+import models.ClientPlayer;
 import models.Player2;
 import models.Tile;
 
@@ -31,7 +31,7 @@ public class TileUtils {
 			Tile tile = giveRandomTile(pile);
 			pl.getHand().add(tile);
 			//stuur message naar client
-			pile.removeTile(tile);
+			pile.getTiles().remove(tile);
 		}
 	}
 	
@@ -63,7 +63,7 @@ public class TileUtils {
 	public static boolean noTilesLeft(Game game) {
 		if (game.getPile().getTiles().size() == 0) {
 			boolean playerHasNoTiles = false;
-			for (Player player : game.getPlayers()) {
+			for (ClientPlayer player : game.getPlayers()) {
 				if (player.getHand().size() == 0) {
 					playerHasNoTiles = true;
 				}

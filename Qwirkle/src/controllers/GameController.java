@@ -7,7 +7,7 @@ import models.ComputerPlayer;
 import models.Game;
 import models.HumanPlayer;
 import models.Pile;
-import models.Player;
+import models.ClientPlayer;
 import view.BoardTUI;
 import view.StartTUI;
 
@@ -20,7 +20,7 @@ public class GameController {
 	private Game game;
 	private StartTUI ui;
 	private BoardTUI bui;
-	private Player player;
+	private ClientPlayer player;
 	private String playerName;
 	private boolean isHuman;
 	private boolean done;
@@ -58,7 +58,7 @@ public class GameController {
 	 * Geeft aan welke speler de volgende zet mag maken.
 	 * @return game.getCurrentPlayer()
 	 */
-	public Player getCurrentPlayer(){
+	public ClientPlayer getCurrentPlayer(){
 		return game.getCurrentPlayer();
 	}
 	
@@ -85,10 +85,10 @@ public class GameController {
 		createLocalPlayer(playerName);
 		((HumanPlayer) player).addObserver(bui);
 		} else {
-			Player pc = new ComputerPlayer(game);
+			ClientPlayer pc = new ComputerPlayer(game);
 			((ComputerPlayer) pc).addObserver(bui);
 		}
-		Player pc2 = new ComputerPlayer(game); //Voor tests
+		ClientPlayer pc2 = new ComputerPlayer(game); //Voor tests
 		((ComputerPlayer) pc2).addObserver(bui);
 		game.start();
 		game.determineInitialPlayer();
@@ -126,7 +126,7 @@ public class GameController {
 	 * aan de speler gemaakt dat deze iets moet doen voordat hij door kan gaan.
 	 * @param player
 	 */
-	public void done(Player player){
+	public void done(ClientPlayer player){
 		try {
 			game.finishMove(player);
 			done = true;
@@ -154,7 +154,7 @@ public class GameController {
 	/*
 	 * Geeft de lokale speler terug.
 	 */
-	public Player getLocalPlayer(){
+	public ClientPlayer getLocalPlayer(){
 		return player;
 	}
 	

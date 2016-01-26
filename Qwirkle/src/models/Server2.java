@@ -118,18 +118,13 @@ public class Server2 {
 		Game2 game;
 		try {
 			game = getGameByPlayer(client.getPlayerName());
-			if (game.getPile().getTiles().contains(tile)) {
-				try {
-					game.makeMove(x, y, tile);
-					client.sendMessage(Protocol.SERVER_CORE_MOVE_ACCEPTED);
-					broadcast(Protocol.SERVER_CORE_MOVE_MADE + Protocol.MESSAGESEPERATOR + x + Protocol.MESSAGESEPERATOR + y + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color);
-				} catch (InvalidMoveException e) {
-					client.sendMessage(Protocol.SERVER_CORE_MOVE_DENIED);
-					ui.print("Bij spel " + game.getId() + " is een move geweigerd van speler " + client.getPlayerName() + " omdat de zet niet geldig is.");
-				}
-			} else {
+			try {
+				game.makeMove(x, y, tile, client.getPlayerName());
+				client.sendMessage(Protocol.SERVER_CORE_MOVE_ACCEPTED);
+				broadcastToAll(Protocol.SERVER_CORE_MOVE_MADE + Protocol.MESSAGESEPERATOR + x + Protocol.MESSAGESEPERATOR + y + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color);
+			} catch (InvalidMoveException e) {
 				client.sendMessage(Protocol.SERVER_CORE_MOVE_DENIED);
-				ui.print("Bij spel " + game.getId() + " is een move geweigerd van speler " + client.getPlayerName() + " omdat de tegel niet in de zak is.");
+				ui.print("Bij spel " + game.getId() + " is een move geweigerd van speler " + client.getPlayerName() + " omdat de zet niet geldig is.");
 			}
 		} catch (PlayerNotFoundException e1) {
 			client.sendMessage(Protocol.SERVER_CORE_MOVE_DENIED);
@@ -139,8 +134,8 @@ public class Server2 {
 	
 	private Game2 getGameByPlayer(String name) throws PlayerNotFoundException {
 		for (Game2 game : games) {
-			for (ClientHandler2 ch : game.getPlayers()) {
-				if (ch.getPlayerName().equals(name)) {
+			for (Player2 player: game.getPlayers()) {				
+				if (player.getName().equals(name)) {
 					return game;
 				}				
 			}
@@ -152,23 +147,25 @@ public class Server2 {
 		try {
 			Game2 game = getGameByPlayer(client.getPlayerName());
 			game.finishMove(client.getPlayerName());
-		} catch (PlayerNotFoundException e) {
+		} catch (PlayerNotFoundException | InvalidMoveException e) {
 			ui.print("Whoopi goldberg");
 		}
 	}
 
 	private void swap(String shape, String color, ClientHandler2 client) {
-		Tile tile = new Tile(color, shape);
-		tilesToSwap.add(tile);
 		Game2 game;
 		try {
 			game = getGameByPlayer(client.getPlayerName());
-			ArrayList<Tile> hand = game.getHandByPlayerName(client.getPlayerName());
-			if (hand.contains(tile)) {
-				game.swapTile(tile, client.getPlayerName());
+			if (game.tileInHand(shape, color, client.getPlayerName())) {
+				game.swapTile(shape, color, client.getPlayerName());
+			}
+			else {
+				broadcastToPlayer(Protocol.SERVER_CORE_SWAP_DENIED, client.getPlayerName());
 			}
 		} catch (PlayerNotFoundException e) {
 			ui.print("Whoopi goldberg");
+		} catch (InvalidMoveException e) {
+			//TODO broadcats naar speler
 		}
 	}
 
@@ -202,15 +199,41 @@ public class Server2 {
 				clients.remove(0);
 				games.add(game);
 			}
+			game.start();
 		}
 		else {
 			ui.print("Niet genoeg spelers in de wachtrij...");
 		}
 	}
 	
-	public void broadcast(String msg) {
+	public void broadcastToAll(String msg) {
 		for (ClientHandler2 ch : clients) {
 			ch.sendMessage(msg);
 		}
+	}
+	
+	public void broadcastToPlayersInGame(String msg, String name) {
+		Game2 game = null;
+		try {
+			game = getGameByPlayer(name);
+		} catch (PlayerNotFoundException e) {
+			e.printStackTrace();
+		}
+		for (Player2 player : game.getPlayers()) {
+			getClientByPlayer(player.getName()).sendMessage(msg);
+		}
+	}
+	
+	public void broadcastToPlayer(String msg, String name) {
+		getClientByPlayer(name).sendMessage(msg);
+	}
+	
+	public ClientHandler2 getClientByPlayer(String name) {
+		for (ClientHandler2 ch : clients) {
+			if (ch.getPlayerName().equals(name)) {
+				return ch;
+			}
+		}
+		return null;
 	}
 }

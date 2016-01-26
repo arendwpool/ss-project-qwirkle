@@ -9,7 +9,7 @@ import java.net.Socket;
 
 
 import models.Game;
-import models.Player;
+import models.ClientPlayer;
 import protocol.Protocol;
 
 public class ClientHandler extends Thread implements Protocol {
@@ -20,7 +20,7 @@ public class ClientHandler extends Thread implements Protocol {
     private BufferedWriter out;
     private String clientName;
     private Game game;
-    private Player player;
+    private ClientPlayer player;
     /**
      * Constructs a ClientHandler object
      * Initialises both Data streams.
@@ -69,7 +69,7 @@ public class ClientHandler extends Thread implements Protocol {
 			e.printStackTrace();
 		}
     }
-      public Player getLocalPlayer(){
+      public ClientPlayer getLocalPlayer(){
 		return player;
 	}
     
@@ -81,7 +81,7 @@ public class ClientHandler extends Thread implements Protocol {
 		this.game = game;
 	}
 	
-	public void setPlayer(Player player){
+	public void setPlayer(ClientPlayer player){
 		this.player = player;
 	}
     

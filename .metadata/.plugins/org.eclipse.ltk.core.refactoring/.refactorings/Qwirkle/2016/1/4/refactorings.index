@@ -5,3 +5,7 @@
 1453766460609	Rename method 'getHand'
 1453766806292	Rename method 'hand'
 1453766839185	Rename method 'tiles'
+1453798140371	Rename method 'broadcast'
+1453801004733	Delete element
+1453801498411	Delete element
+1453802328555	Rename type 'Player'

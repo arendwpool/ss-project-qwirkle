@@ -13,9 +13,9 @@ import util.MoveUtils;
  * @author Arend Pool en Bob breemhaar
  *
  */
-public class ComputerPlayer extends Observable implements Player {
+public class ComputerPlayer extends Observable implements ClientPlayer {
 	private ArrayList<Tile> hand;
-	private final String name = "Computer";
+	private String name;
 	private int score;
 	public boolean moveMade = false;
 	
@@ -28,9 +28,9 @@ public class ComputerPlayer extends Observable implements Player {
 	 * Constreerd een nieuwe speler.
 	 * @param game
 	 */
-	public ComputerPlayer(Game game) {
+	public ComputerPlayer(String name) {
 		hand = new ArrayList<Tile>();
-		this.game = game;
+		this.name = name;
 		score = 0;
 		try {
 			game.addPlayer(this);

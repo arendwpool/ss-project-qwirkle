@@ -9,7 +9,7 @@ import models.Board;
 import models.Game;
 import models.Game2;
 import models.Pile;
-import models.Player;
+import models.ClientPlayer;
 import models.Player2;
 import models.Tile;
 
@@ -66,7 +66,7 @@ public class MoveUtils {
 	 * score is berekend wordt deze aan de speler toegevoegd.
 	 * @param player
 	 */
-	public static void generateScore(Player2 player, Board board) {
+	public synchronized static void generateScore(Player2 player, Board board) {
 		Point point = null;
 		boolean retainMultipleX = false;
 		boolean retainMultipleY = false;
@@ -168,7 +168,7 @@ public class MoveUtils {
 	 * andere tegels in een rij of kolom. Als een tegel dezelfde kleur en symbool heeft wordt er ook direct
 	 * false teruggegeven.
 	 */
-	public static boolean isValidMove(int x, int y, Tile tile, Board board) {
+	public synchronized static boolean isValidMove(int x, int y, Tile tile, Board board) {
 		Board boardCopy = board.deepCopy();
 		if (boardCopy.isEmptyField(x, y) == false) {
 			return false;
@@ -285,7 +285,7 @@ public class MoveUtils {
 	 * @param y
 	 * @param tile
 	 */
-	public static void makeMove(int x, int y, Tile tile, Player player, Game game) throws InvalidMoveException {
+	public static void makeMove(int x, int y, Tile tile, ClientPlayer player, Game game) throws InvalidMoveException {
 		if (hasTraded == false && initialMove == false) {
 			if (isValidMove(x, y, tile, game.getBoard()) && game.getBoard().validSharedLine(x, y, tile)) {
 				game.getBoard().setTile(x, y, tile);

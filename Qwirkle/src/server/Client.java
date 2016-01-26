@@ -15,7 +15,7 @@ import controllers.GameController;
 import models.ComputerPlayer;
 import models.Game;
 import models.HumanPlayer;
-import models.Player;
+import models.ClientPlayer;
 import view.BoardTUI;
 import view.StartTUI;
 
@@ -35,7 +35,7 @@ public class Client extends Thread {
 	private String clientName;
 	protected String playerName;
 	private Game game;
-	private Player player;
+	private ClientPlayer player;
 	private Socket sock;
 	private Scanner scanner;
 	private boolean isHuman;
@@ -55,7 +55,7 @@ public class Client extends Thread {
 		createLocalPlayer(playerName);
 		((HumanPlayer) player).addObserver(bui);
 		} else {
-			Player pc = new ComputerPlayer(game);
+			ClientPlayer pc = new ComputerPlayer(game);
 			((ComputerPlayer) pc).addObserver(bui);
 		}
 	}

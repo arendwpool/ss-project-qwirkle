@@ -9,12 +9,12 @@ import models.Board;
 import models.Game;
 import models.HumanPlayer;
 import models.Pile;
-import models.Player;
+import models.ClientPlayer;
 import models.Tile;
 
 public class TileUtilsTest {
-	private Player testPlayer;
-	private Player testPlayer2;
+	private ClientPlayer testPlayer;
+	private ClientPlayer testPlayer2;
 	private Game testGame;
 
 	@Before

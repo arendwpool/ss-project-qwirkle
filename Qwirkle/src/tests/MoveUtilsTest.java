@@ -11,7 +11,7 @@ import models.Board;
 import models.Game;
 import models.HumanPlayer;
 import models.Pile;
-import models.Player;
+import models.ClientPlayer;
 import models.Tile;
 import util.MoveUtils;
 import util.TileUtils;
@@ -22,7 +22,7 @@ public class MoveUtilsTest {
 	 * Declareert een Spel om de tests mee te draaien.
 	 */
 	private Game testGame;
-	private Player testPlayer;
+	private ClientPlayer testPlayer;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -107,7 +107,7 @@ public class MoveUtilsTest {
 		MoveUtils.generateScore(testPlayer, board);
 		assertEquals(9, testPlayer.getScore());
 		board.reset();
-		Player a = new HumanPlayer("asd", testGame);
+		ClientPlayer a = new HumanPlayer("asd", testGame);
 		board.setTile(90, 91, new Tile("groen", "ruit"));
 		board.setTile(90, 92, new Tile("groen", "vierkant"));
 		board.setTile(90, 93, new Tile("groen", "ster"));
@@ -126,7 +126,7 @@ public class MoveUtilsTest {
 		MoveUtils.generateScore(a, board);
 		assertEquals(8, a.getScore());
 		board.reset();
-		Player b = new HumanPlayer("asd", testGame);
+		ClientPlayer b = new HumanPlayer("asd", testGame);
 		board.setTile(90, 90, new Tile("groen", "kruis"));
 		board.setTile(91, 90, new Tile("groen", "cikel"));
 		board.setTile(93, 90, new Tile("groen", "vierkant"));
@@ -140,7 +140,7 @@ public class MoveUtilsTest {
 		MoveUtils.generateScore(b, board);
 		assertEquals(9, b.getScore());
 		board.reset();
-		Player c = new HumanPlayer("asd", testGame);
+		ClientPlayer c = new HumanPlayer("asd", testGame);
 		board.setTile(90, 90, new Tile("groen", "kruis"));
 		board.setTile(91, 90, new Tile("groen", "cikel"));
 		board.setTile(92, 90, new Tile("groen", "vierkant"));
@@ -152,7 +152,7 @@ public class MoveUtilsTest {
 		MoveUtils.generateScore(c, board);
 		assertEquals(5, c.getScore());
 		board.reset();
-		Player d = new HumanPlayer("asd", testGame);
+		ClientPlayer d = new HumanPlayer("asd", testGame);
 		board.setTile(90, 90, new Tile("groen", "kruis"));
 		board.setTile(91, 90, new Tile("groen", "cikel"));
 		board.setTile(92, 90, new Tile("groen", "vierkant"));

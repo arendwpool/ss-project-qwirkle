@@ -1,0 +1,47 @@
+package models;
+
+import java.util.ArrayList;
+
+import exceptions.InvalidMoveException;
+
+public abstract class ClientPlayer  extends Obervable{
+	/**
+	 * De naam van de betreffende speler.
+	 */
+	private String name;
+	/**
+	 * De tegels die de betreffende speler heeft.
+	 */
+	private ArrayList<Tile> hand;
+	
+	/**
+	 * De score van de Speler.
+	 */
+	private int score = 0;
+	public ClientPlayer(String name) {
+		this.name = name;
+		hand = new ArrayList<Tile>();
+		score = 0;
+	}
+	/**
+	 *  geeft de naam van de speler.
+	 *  @return this.name
+	 */
+	public String getName() {
+		return name;
+	}
+	
+	public void determineMove();
+	
+	/**
+	 * Geef een set met de tegels die de betreffende speler heeft
+	 */
+	ArrayList<Tile> getHand();
+	
+	public void makeMove(int x, int y, Tile tile) throws InvalidMoveException;
+	
+	public int getScore();
+	
+	public void addScore(int points);
+
+}

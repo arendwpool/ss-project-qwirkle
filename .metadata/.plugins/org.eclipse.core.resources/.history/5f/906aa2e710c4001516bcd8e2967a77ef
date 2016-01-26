@@ -1,0 +1,34 @@
+package tests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import models.Client2;
+import models.Server2;
+
+public class NetworkTest {
+
+	@Before
+	public void setUp() throws Exception {
+		Server2 server = new Server2();
+		Client2 client1 = new Client2();
+		Client2 client2 = new Client2();
+		Client2 client3 = new Client2();
+		server.run();
+		System.out.print("server");
+		client1.start();
+		System.out.print("client1");
+		client2.start();
+		System.out.print("client2");
+		client3.start();
+		System.out.print("client3");
+	}
+
+	@Test
+	public void test() {
+		
+	}
+
+}

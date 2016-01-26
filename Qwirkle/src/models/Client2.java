@@ -34,6 +34,7 @@ public class Client2 extends Thread{
 	private BufferedReader in;
 	private BufferedWriter out;
 	private Socket socket;
+	private ClientPlayer localPlayer;
 	
 	public static void main(String[] arsg) {
 		Client2 client = new Client2();
@@ -78,12 +79,12 @@ public class Client2 extends Thread{
 			askQuestions();
 		}
 		try {
-			Socket socket = new Socket(ip, port);
+			socket = new Socket(ip, port);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 			sendMessage("ex");
 			sendMessage("join");
-			sendMessage("start");
+			//sendMessage("start");
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -175,23 +176,20 @@ public class Client2 extends Thread{
 	}
 	
 	public void run() {
-		ui.print("RUN! FORREST RUN!");
 		String text = "";
 		try {
 			while (text != null) {
-				
 				text = in.readLine();
 				if (text != null && !text.equals("\n")) {
 					System.out.println(text);
 				}
 				else {
-					ui.print("WHOA WHAT HAPPENED?!");
+					ui.print("Foute input, probeer opnieuw.");
 				}
 			}
 		} catch (IOException e) {
 			//
 		}
-		ui.print("RUN CLOSED!");
 		
 	}
 	
@@ -203,14 +201,13 @@ public class Client2 extends Thread{
 		} catch (IOException e) {
 			
 		}
-	}
-		
-	
+	}	
 
 	private void gameEnded(String[] nameScore) {
 		Map<String, Integer> score = new HashMap<String, Integer>();
 		for (int i = 1; i < nameScore.length; i += 2) {
 			score.put(nameScore[i], Integer.parseInt(nameScore[i + 1]));
+			//toon scores -> eindmenu...
 		}
 	}
 
@@ -218,6 +215,7 @@ public class Client2 extends Thread{
 		Map<String, Integer> score = new HashMap<String, Integer>();
 		for (int i = 1; i < nameScore.length; i += 2) {
 			score.put(nameScore[i], Integer.parseInt(nameScore[i + 1]));
+			//toon scores
 		}
 	}
 
@@ -243,6 +241,12 @@ public class Client2 extends Thread{
 	}
 
 	private void turn(String name) {
+		if (localPlayer.getName().equals(name)) {
+			String option = localPlayer.determineMove();
+			if (option ...) {
+				sendMessage("move ....");
+			}
+		}
 	}
 
 	private void receiveTile(String shape, String color) {
@@ -258,6 +262,7 @@ public class Client2 extends Thread{
 		String[] names = new String[players.length - 1]; 
 		for (int i = 1; i < players.length; i++) {
 			names[i - 1] = players[i];
+			//toon lijst van spelers binnen het spel en start de game (client side)
 		}
 	}
 
@@ -267,8 +272,8 @@ public class Client2 extends Thread{
 	 * @return isValidInt == true && ints.length == 4
 	 */
 	private static boolean isValidIP(String ip){
-		ip = ip.replace(".", " ");
-		String[] ints = ip.split(" ");
+		//ip = ip.replace(".", " ");
+		String[] ints = ip.split("\\.");
 		boolean isValidInt = true;
 		for(String integer : ints){
 			int i = Integer.parseInt(integer);
@@ -277,5 +282,13 @@ public class Client2 extends Thread{
 				}
 		}
 		return (isValidInt == true && ints.length == 4);
+	}
+	
+	public void createLocalPlayer() {
+		if (isHuman == true) {
+			localPlayer = new HumanPlayer(playerName);
+		} else {
+			localPlayer = new ComputerPlayer(playerName);
+		}
 	}
 }

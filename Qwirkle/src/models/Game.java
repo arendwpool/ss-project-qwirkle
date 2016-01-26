@@ -22,13 +22,13 @@ public class Game extends Observable{
 	/**
 	 * Geeft aan welke speler nu aan de beurt is.
 	 */
-	private Player currentPlayer;
+	private ClientPlayer currentPlayer;
 	
 	/**
 	 * Een hashmap van spelers die meedoen gemapt aan hun ID. Dit is een nummer die gebruikt
 	 * wordt om aan te geven welke speler aan de beurt is.
 	 */
-	private ArrayList<Player> players;
+	private ArrayList<ClientPlayer> players;
 	
 	/**
 	 * Het nieuwe bord dat bij dit spel hoort. Dit board wordt ook meegegeven in de parameters 
@@ -52,7 +52,7 @@ public class Game extends Observable{
 	public Game(Board board,Pile pile ) {
 		this.board = board;
 		this.pile = pile;
-		players = new ArrayList<Player>();
+		players = new ArrayList<ClientPlayer>();
 		finishedMove = false;
 	}
 	
@@ -80,11 +80,11 @@ public class Game extends Observable{
 	 * is de winnaar als het spel af is, en de meeste punten heeft.
 	 * @return Player withHighscore || null //TODO vraag
 	 */
-	public Player winner() {
+	public ClientPlayer winner() {
 		if (gameOver() == true) {
 			int score = 0;
-			Player withHighscore = null;
-			for (Player player : players) {
+			ClientPlayer withHighscore = null;
+			for (ClientPlayer player : players) {
 				if (player.getScore() > score) {
 					score = player.getScore();
 					withHighscore = player;
@@ -105,7 +105,7 @@ public class Game extends Observable{
 	public void start() {
 		reset();
 		pile.generateTiles();
-		for (Player player : players) {
+		for (ClientPlayer player : players) {
 			TileUtils.setHand(player, pile);
 		}
 	}
@@ -117,7 +117,7 @@ public class Game extends Observable{
 	private void reset() {
 		board.reset();
 		pile.getTiles().clear();
-		for (Player player : players) {
+		for (ClientPlayer player : players) {
 			player.getHand().clear();
 		}
 	}
@@ -137,7 +137,7 @@ public class Game extends Observable{
 	 * @param player
 	 * @throws FullGameException 
 	 */
-	public void addPlayer(Player player) throws FullGameException {
+	public void addPlayer(ClientPlayer player) throws FullGameException {
 		if (players.size() <= 4) {
 			players.add(player);
 		} else {
@@ -157,7 +157,7 @@ public class Game extends Observable{
 	 * Geeft een Map terug van de spelers in het spel.
 	 * @return this.players
 	 */
-	public ArrayList<Player> getPlayers() {
+	public ArrayList<ClientPlayer> getPlayers() {
 		return players;
 	}
 	
@@ -165,7 +165,7 @@ public class Game extends Observable{
 	 * Geeft de speler terug die nu aan de beurt is.
 	 * @return this.currentPlayer
 	 */
-	public Player getCurrentPlayer() {
+	public ClientPlayer getCurrentPlayer() {
 		return currentPlayer;
 	}
 	
@@ -188,8 +188,8 @@ public class Game extends Observable{
 	 */
 	public void determineInitialPlayer() {	
 		int longestRow = 0;
-		Player withLongestRow = null;
-		for (Player player : players) {
+		ClientPlayer withLongestRow = null;
+		for (ClientPlayer player : players) {
 			ArrayList<Tile> hand = player.getHand();
 			for (int i = 0; i < player.getHand().size(); i++) {
 				ArrayList<Tile> colors = new ArrayList<Tile>();
@@ -231,7 +231,7 @@ public class Game extends Observable{
 	 * @throws NoTilesLeftInPileException
 	 * @throws InvalidMoveException 
 	 */
-	public void swapTiles(ArrayList<Tile> tilesToTrade, Player player) throws NoTilesLeftInPileException, InvalidMoveException{
+	public void swapTiles(ArrayList<Tile> tilesToTrade, ClientPlayer player) throws NoTilesLeftInPileException, InvalidMoveException{
 		MoveUtils.replaceTiles(tilesToTrade, player, pile);
 		setChanged();
 		notifyObservers();
@@ -242,7 +242,7 @@ public class Game extends Observable{
 	 * @param y
 	 * @param tile
 	 */
-	public void makeMove(int x, int y, Tile tile, Player player) throws InvalidMoveException {
+	public void makeMove(int x, int y, Tile tile, ClientPlayer player) throws InvalidMoveException {
 		MoveUtils.makeMove(x, y, tile, player, this);
 		setChanged();
 		notifyObservers();
@@ -253,7 +253,7 @@ public class Game extends Observable{
 	 * @param player
 	 * @throws InvalidMoveException
 	 */
-	public void finishMove(Player player) throws InvalidMoveException{
+	public void finishMove(ClientPlayer player) throws InvalidMoveException{
 		MoveUtils.processMove(player, this);
 		TileUtils.setHand(player, pile);
 		finishedMove = true;
@@ -264,7 +264,7 @@ public class Game extends Observable{
 	 * voor de testklasse.
 	 * @param player
 	 */
-	public void setCurrentPlayer(Player player) {
+	public void setCurrentPlayer(ClientPlayer player) {
 		currentPlayer = player;
 	}
 	
@@ -275,7 +275,7 @@ public class Game extends Observable{
 	 * @return players.get(player)
 	 * @throws PlayerNotFoundException
 	 */
-	public int getPlayerID(Player player) throws PlayerNotFoundException {
+	public int getPlayerID(ClientPlayer player) throws PlayerNotFoundException {
 		if (players.contains(player)) {
 			return players.indexOf(player) + 1;
 		} else {
