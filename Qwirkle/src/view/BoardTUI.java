@@ -2,13 +2,12 @@ package view;
 
 import java.util.ArrayList;
 import java.util.Observable;
-
-import controllers.GameController;
 import exceptions.PlayerNotFoundException;
 import models.ComputerPlayer;
 import models.Game;
 import models.Player;
 import models.Tile;
+import network.Client;
 
 /**
  * TUI die een bord weergeeft.
@@ -16,22 +15,18 @@ import models.Tile;
  *
  */
 public class BoardTUI extends TUI{
-	
-<<<<<<< HEAD
-	public BoardTUI(Game game) {
-=======
 	/**
 	 * Maakt een nieuwe instantie van het TUI.
 	 * @param gc
 	 * @param game
 	 */
-	public BoardTUI(GameController gc, Game game) {
-		super(gc);
->>>>>>> 285381d397ef1ce751896f1ab39c978f5238cf9a
+	public BoardTUI(Game game, Client client) {
 		this.game = game;
+		this.client = client;
 	}
 
 	private Game game;
+	private Client client;
 	
 	/**
 	 * Het TUI functioneerd als een observer. Deze methode update het spel op een 
@@ -40,19 +35,18 @@ public class BoardTUI extends TUI{
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg1 != null && arg1.equals("MadeMove")) {
-			gc.done((Player) arg0); 
+			//gc.done((Player) arg0); 
 		} else {
 			game.getBoard().boardSize();
-			start();
+			update();
 		}
 	}
 	
 	/**
 	 * Start de TUI door de juiste objecten te weergeven. 	
 	 */
-	public void start(){
+	public void update(){
 		renderBoard();
-		showPileSize();
 		showTiles();
 		showScore();
 	}
@@ -61,14 +55,10 @@ public class BoardTUI extends TUI{
 	 * Weergeeft de speler die aan de beurt is.
 	 */
 	public void showCurrentPlayer() {
-		if (gc.getCurrentPlayer() instanceof ComputerPlayer) {
-			try {
-				System.out.println("De huidige speler is "+gc.getCurrentPlayer().getName() + gc.getGame().getPlayerID(gc.getCurrentPlayer()));
-			} catch (PlayerNotFoundException e) {
-				System.out.println("Er is een fout opgetreden, de speler kan niet worden gevonden.");
-			}
+		if (game.getCurrentPlayer() instanceof ComputerPlayer) {
+			System.out.println("De huidige speler is "+game.getCurrentPlayer().getName());
 		} else {
-			System.out.println("De huidige speler is "+gc.getCurrentPlayer().getName());
+			System.out.println("De huidige speler is "+game.getCurrentPlayer().getName());
 		}
 	}
 
@@ -76,13 +66,9 @@ public class BoardTUI extends TUI{
 	 * Weergeeft de naam en score van elke speler in een spel.
 	 */
 	private void showScore() {
-		for (Player player : gc.getGame().getPlayers()) {
-			if (gc.getCurrentPlayer() instanceof ComputerPlayer) {
-				try {
-					System.out.println(player.getName() + gc.getGame().getPlayerID(player)+": " + player.getScore());
-				} catch (PlayerNotFoundException e) {
-					System.out.println("Er is een fout opgetreden, de speler kan niet worden gevonden.");
-				}
+		for (Player player : game.getPlayers()) {
+			if (game.getCurrentPlayer() instanceof ComputerPlayer) {
+				System.out.println(player.getName()+": " + player.getScore());
 			} else {
 				System.out.println(player.getName() + ": " + player.getScore());
 			}
@@ -170,7 +156,7 @@ public class BoardTUI extends TUI{
 	 */
 	public void showTiles(){
 		try{
-			ArrayList<Tile> tiles = gc.getLocalPlayer().getHand();
+			ArrayList<Tile> tiles = client.getLocalPlayer().getHand();
 			System.out.println("Uw tegels: ");
 			for (int i = 1; i <= tiles.size(); i++) {
 				System.out.print(i + ": " + tiles.get(i-1).getColor()+tiles.get(i-1).getSymbol()+"  ");
@@ -185,17 +171,17 @@ public class BoardTUI extends TUI{
 	 * Weergeeft hoeveel tegels nog in de zak zitten.
 	 */
 	public void showPileSize(){
-		System.out.println("Er zijn " + gc.getGame().getPile().getTiles().size() + " tegels in de zak.");
+		System.out.println("Er zijn " + game.getPile().getTiles().size() + " tegels in de zak.");
 	}
 	
 	/**
 	 * Geeft aan het eind van een spel weer of de speler nog een spel wil spelen.
 	 */
 	public void showEndGame() {
-		try {
-			System.out.println("De winnaar is: " + gc.getGame().winner().getName() + " met id nummmer " + gc.getGame().getPlayerID(gc.getGame().winner()));
+		/*try {
+			System.out.println("De winnaar is: " + game.winner().getName());
 		} catch (PlayerNotFoundException e) {
 			System.out.println("er is een fout in het systeem opgetreden");
-		}
+		}*/
 	}
 }

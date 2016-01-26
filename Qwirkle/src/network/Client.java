@@ -5,15 +5,13 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.HashMap;
-import java.util.InputMismatchException;
 import java.util.Map;
-import java.util.Scanner;
 import models.Player;
 import models.ServerPlayer;
+import models.Tile;
+import util.TileUtils;
 import models.ComputerPlayer;
 import models.Game;
 import models.HumanPlayer;
@@ -30,7 +28,6 @@ public class Client extends Thread{
 	private static final String[] PRE_MENU = {null, "Ik ben een Menselijke speler", "Ik ben een Computerspeler"};
 	private static final String[] IP_MENU = {null, "Voer het gewenste ip adres in:"};
 	private static final String[] PORT_MENU = {"Toets een gewenst portnummer in", "typ 0 voor de standaard poort: "};
-	private static final String[] START_MENU = {null, "Start spel"};
 	private boolean isHuman = false;
 	private String ip;
 	private String playerName;
@@ -39,9 +36,9 @@ public class Client extends Thread{
 	private BufferedWriter out;
 	private Socket socket;
 	private Player localPlayer;
-	private boolean gameStarted = false;
 	private Game game;
 	private TUI bui;
+	private boolean gameStarted = false;
 	
 	public static void main(String[] arsg) {
 		Client client = new Client();
@@ -78,14 +75,17 @@ public class Client extends Thread{
 			break;
 			case Protocol.SERVER_CORE_SCORE: score(slicedMessage);
 			break;
-			case Protocol.SERVER_CORE_PLAYERS: sendPlayers();
+			case Protocol.SERVER_CORE_PLAYERS: sendPlayers(slicedMessage);
 		}
 	}
 	
-	private void sendPlayers() {
-		// TODO Auto-generated method stub
-		
+	private void sendPlayers(String[] slicedMessage) {
+		//TODO handig om te gebruiken?
+		for(int i = 1; i < slicedMessage.length; i++) {
+			ui.print(slicedMessage[i]);
+		}
 	}
+	
 	public void startClient() {
 		while (currentQuestion != 3) {
 			askQuestions();
@@ -229,6 +229,7 @@ public class Client extends Thread{
 	}
 
 	private void done() {
+		bui.update();
 	}
 
 	private void turn(String name) {
@@ -241,50 +242,55 @@ public class Client extends Thread{
 	}
 
 	private void receiveTile(String shape, String color) {
+		int symbol = Integer.parseInt(shape);
+		int colorInt = Integer.parseInt(color);
+		Tile tile = new Tile(TileUtils.intToColor(colorInt), TileUtils.intToSymbol(symbol));
+		for(Tile tileInPile : game.getPile().getTiles()) {
+			if (TileUtils.compareColor(tile, tileInPile) && TileUtils.compareSymbol(tile, tileInPile)) {
+				game.getPile().getTiles().remove(tileInPile);
+				break;
+			}
+		}
+		game.getPile().getTiles().remove(tile);
+		localPlayer.getHand().add(tile);
 	}
 
 	private void startDenied() {
+		ui.print("U kan nu nog niet starten, probeer opnieuw als er genoeg spelers zijn.");
+		joinAccepted(playerName);
 	}
 
 	private void joinAccepted(String name) {
-		ui.print("Uw naam is " + name + ". U zit nu in de wachtrij, selecteer start als er genoeg mensen zijn om mee te spelen: ");
-		playerName = name;
-		ui.renderMenu(START_MENU);
-		while (gameStarted == false) {
-			int input = ui.determineInt(); //TODO vraag of deze vroegtijdig geskipt kan worden
-			try {
-				getServerMessage(in.readLine());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (input == 1) {
+		if (gameStarted == false) {
+			ui.print("Uw naam is " + name + ". U zit nu in de wachtrij, druk op een willekeurige toets om te starten.");
+			playerName = name;
+			String input = ui.determineString(); //TODO vraag of deze vroegtijdig geskipt kan worden
+			if (input != null) {
 				sendMessage(Protocol.CLIENT_CORE_START);
 			} else {
 				ui.print("Voer 1 in om te starten...");
 			}
 		}
-			
 	}
 
+
 	private void starting(String[] players) {
+		gameStarted  = true;
 		ui.print("Spel wordt gestart met " + (players.length - 1) + " spelers.");
 		String[] names = new String[players.length - 1];
 		game = new Game(0);
-		for (String player : players) {
-			if (!player.equals(playerName)) {
-				game.addPlayer(new ServerPlayer(player));
+		for (int i = 1; i < players.length; i++) {
+			if (!players[i].equals(playerName)) {
+				game.addPlayer(new ServerPlayer(players[i]));
 			}
 		}
 		createLocalPlayer();
 		game.addPlayer(localPlayer);
-		gameStarted = true; //TODO is misschien niet meer nodig
 		for (int i = 1; i < players.length; i++) {
 			names[i - 1] = players[i];
 		}
 		game.start();
-		bui = new BoardTUI(game);
-		bui.start();
+		bui = new BoardTUI(game, this);
 	}
 
 	/**
@@ -311,4 +317,9 @@ public class Client extends Thread{
 			localPlayer = new ComputerPlayer(playerName);
 		}
 	}
+	
+	public Player getLocalPlayer() {
+		return localPlayer;
+	}
+	
 }

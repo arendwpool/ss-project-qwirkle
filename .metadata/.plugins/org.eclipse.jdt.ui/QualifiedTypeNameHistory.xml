@@ -3,11 +3,7 @@
 <fullyQualifiedTypeName name="server.Protocol"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="controllers.GameController"/>
-<fullyQualifiedTypeName name="network.Client"/>
-<fullyQualifiedTypeName name="models.ComputerPlayer"/>
 <fullyQualifiedTypeName name="models.Player"/>
-<fullyQualifiedTypeName name="models.HumanPlayer"/>
-<fullyQualifiedTypeName name="models.Game"/>
 <fullyQualifiedTypeName name="models.Board"/>
 <fullyQualifiedTypeName name="models.Pile"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
@@ -30,10 +26,19 @@
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="util.MoveUtils"/>
 <fullyQualifiedTypeName name="models.Player2"/>
-<fullyQualifiedTypeName name="view.BoardTUI"/>
 <fullyQualifiedTypeName name="models.ClientHandler2"/>
 <fullyQualifiedTypeName name="protocol.Protocol"/>
-<fullyQualifiedTypeName name="util.TileUtils"/>
-<fullyQualifiedTypeName name="network.Server"/>
 <fullyQualifiedTypeName name="models.Game2"/>
+<fullyQualifiedTypeName name="network.ClientHandler"/>
+<fullyQualifiedTypeName name="models.ComputerPlayer"/>
+<fullyQualifiedTypeName name="models.HumanPlayer"/>
+<fullyQualifiedTypeName name="models.ClientPlayer"/>
+<fullyQualifiedTypeName name="models.Game"/>
+<fullyQualifiedTypeName name="models.ServerPlayer"/>
+<fullyQualifiedTypeName name="view.BoardTUI"/>
+<fullyQualifiedTypeName name="network.Protocol"/>
+<fullyQualifiedTypeName name="util.TileUtils"/>
+<fullyQualifiedTypeName name="models.Tile"/>
+<fullyQualifiedTypeName name="network.Client"/>
+<fullyQualifiedTypeName name="network.Server"/>
 </qualifiedTypeNameHistroy>

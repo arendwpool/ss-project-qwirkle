@@ -27,6 +27,6 @@ public class StartTUI extends TUI{
 	 * een mens te willen zijn wordt er om zijn naam gevraagd. Als de speler aan het
 	 * eind heeft aangegeven te willen starten wordt deze TUI afgesloten.
 	 */
-	public void start(){
+	public void update(){
 	}
 }

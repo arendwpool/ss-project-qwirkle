@@ -12,6 +12,7 @@ import models.Player;
 import models.ServerPlayer;
 import models.Game;
 import models.Tile;
+import util.TileUtils;
 import view.StartTUI;
 import view.TUI;
 
@@ -28,14 +29,14 @@ public class Server {
 	public void getClientMessage(String msg, ClientHandler client) {
 		String[] slicedMessage = msg.split(Protocol.MESSAGESEPERATOR);
 		try {
-			ui.print(msg + " - " + client.getPlayerName() +" in game " + getGameByPlayer(client.getPlayerName()));
+			ui.print(msg + " - " + client.getPlayerName() +" in game " + getGameByPlayer(client.getPlayerName()).getId());
 		} catch (PlayerNotFoundException e) {
 			ui.print(msg + " - " + client.getPlayerName());
 		}
 		switch(slicedMessage[0]) {
 			case Protocol.CLIENT_CORE_JOIN: join(client);
 			break;
-			case Protocol.CLIENT_CORE_START: start();
+			case Protocol.CLIENT_CORE_START: start(client);
 			break;
 			case Protocol.CLIENT_CORE_EXTENSION: ex(slicedMessage);
 			break;
@@ -47,9 +48,25 @@ public class Server {
 			break;
 			case Protocol.CLIENT_CORE_MOVE: move(slicedMessage[1], slicedMessage[2], slicedMessage[3], slicedMessage[4], client);
 			break;
+			case Protocol.CLIENT_CORE_PLAYERS: getPlayers(client);
+			break;
 		}
 	}
 	
+	private void getPlayers(ClientHandler client) {
+		try {
+			Game game = getGameByPlayer(client.getPlayerName());
+			String msg = Protocol.SERVER_CORE_PLAYERS;
+			for (Player player : game.getPlayers()) {
+				msg += Protocol.MESSAGESEPERATOR + player.getName();
+			}
+			client.sendMessage(msg);
+		} catch (PlayerNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public void startServer() {
 		ui.print("Toets een gewenst portnummer in, typ 0 voor de standaard poort: ");
 		boolean portHasBeenSet = false;
@@ -192,7 +209,7 @@ public class Server {
 		ui.print("Deze server ondersteund geen extenties.");
 	}
 
-	public void start() {
+	public synchronized void start(ClientHandler client) {
 		if (joint.size() >= 2) {
 			int size = joint.size();
 			Game game = new Game(games.size()+1);
@@ -212,10 +229,15 @@ public class Server {
 			games.add(game);
 			String msg = Protocol.SERVER_CORE_START + players;
 			broadcastToPlayersInGame(msg, game);
+			for (Player player : game.getPlayers()) {
+				TileUtils.setHand(player, game.getPile(), this, game);
+			}
 			game.start();
+			broadcastToPlayersInGame(Protocol.SERVER_CORE_DONE, game);
 		}
 		else {
 			ui.print("Niet genoeg spelers in de wachtrij...");
+			client.sendMessage(Protocol.SERVER_CORE_START_DENIED);
 		}
 	}
 	

@@ -17,6 +17,11 @@ public class Game {
 	 */
 	private static boolean initialMove = true;
 	
+	/**
+	 * Geeft de grootte van een hand aan in normale omstandigheden.
+	 */
+	public static final int DEFAULT_HAND_SIZE = 6;
+	
 	public Game(int id) {
 		this.id = id;
 		pile = new Pile();
@@ -129,7 +134,7 @@ public class Game {
 	}
 
 	public void start() {
-		//determineInitialPlayer();
+		determineInitialPlayer();
 	}
 	
 	/**
