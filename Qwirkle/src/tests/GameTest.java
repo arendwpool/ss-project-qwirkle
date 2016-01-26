@@ -10,7 +10,7 @@ import models.ComputerPlayer;
 import models.Game;
 import models.HumanPlayer;
 import models.Pile;
-import models.ClientPlayer;
+import models.Player;
 import models.Tile;
 import util.TileUtils;
 
@@ -25,7 +25,7 @@ public class GameTest {
 	 * Declareert een Spel om de tests mee te draaien.
 	 */
 	private Game testGame;
-	private ClientPlayer testPlayer;
+	private Player testPlayer;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -36,9 +36,9 @@ public class GameTest {
 	
 	@Test
 	public void testNextPlayer(){
-		ClientPlayer test2 = new HumanPlayer("1", testGame);
-		ClientPlayer test3 = new HumanPlayer("2", testGame);
-		ClientPlayer test4 = new HumanPlayer("3", testGame);
+		Player test2 = new HumanPlayer("1", testGame);
+		Player test3 = new HumanPlayer("2", testGame);
+		Player test4 = new HumanPlayer("3", testGame);
 		testGame.setCurrentPlayer(testPlayer);
 		System.out.println(testGame.getPlayers());
 		try{
@@ -58,8 +58,8 @@ public class GameTest {
 		}
 
 		Game game = new Game(new Board(), new Pile());
-		ClientPlayer test5 = new HumanPlayer("2", game);
-		ClientPlayer test6 = new HumanPlayer("2", game);
+		Player test5 = new HumanPlayer("2", game);
+		Player test6 = new HumanPlayer("2", game);
 		game.setCurrentPlayer(test5);
 		try {
 			System.out.println(game.getPlayerID(game.getCurrentPlayer()));
@@ -80,20 +80,20 @@ public class GameTest {
 	
 	@Test
 	public void testDetermineInitialPlayer(){
-		ClientPlayer player1 = new HumanPlayer("1", testGame);
-		ClientPlayer player2 = new HumanPlayer("2", testGame);
-		ClientPlayer player3 = new ComputerPlayer(testGame);
+		Player player1 = new HumanPlayer("1", testGame);
+		Player player2 = new HumanPlayer("2", testGame);
+		Player player3 = new ComputerPlayer(testGame);
 		TileUtils.setHand(player1, testGame.getPile());
 		TileUtils.setHand(player2, testGame.getPile());
 		TileUtils.setHand(player3, testGame.getPile());
 		TileUtils.setHand(testPlayer, testGame.getPile());
-		for(ClientPlayer player : testGame.getPlayers()){
+		for(Player player : testGame.getPlayers()){
 			for(Tile tile : player.getHand()){
 				System.out.println(player.getName() + ": " + tile.getColor()+tile.getSymbol());
 			}
 		}
 		testGame.determineInitialPlayer();
-		ClientPlayer player = testGame.getCurrentPlayer();
+		Player player = testGame.getCurrentPlayer();
 		System.out.println(player.getName());
 		assertTrue(player != null);
 	

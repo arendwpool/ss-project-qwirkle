@@ -4,14 +4,12 @@ import java.util.InputMismatchException;
 import java.util.Observer;
 import java.util.Scanner;
 
-import controllers.GameController;
 
 
 public abstract class TUI implements Observer {
 	
 	private static final int AMOUNT_CHARACTERS = 75;
 	boolean terminated = false;
-	protected GameController gc;
 	protected String playerName;
 	protected static final String[] NAME_MENU = {null, "Voer uw naam in:"};
 	
