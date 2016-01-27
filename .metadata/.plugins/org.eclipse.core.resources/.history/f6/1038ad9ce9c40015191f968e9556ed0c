@@ -1,0 +1,9 @@
+package util;
+
+public class MoveUtils {
+
+	public static boolean isValidMove() {
+		//TODO overnemen van git
+		return false;
+	}
+}

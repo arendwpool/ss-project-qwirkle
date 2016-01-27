@@ -57,9 +57,14 @@ public abstract class Player  extends Observable{
 		score += points;
 	}
 	
-	public void determineMove() {
+	public String[] determineMove() {
+		return null;
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public String[] determineMove(String move) {
+		return null;
 	}
 
 }

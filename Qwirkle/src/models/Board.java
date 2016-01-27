@@ -2,6 +2,8 @@ package models;
 
 import java.util.ArrayList;
 
+import util.MoveUtils;
+
 /**
  *De klasse die een speelbord representeerd maakt met een naam en tegels.
  * @author Bob Breemhaar en Arend Pool.
@@ -221,7 +223,7 @@ public class Board {
 		boolean sameX = true;
 		boolean sameY = true;
 		boolean validSharedLine = false;
-		/*if (MoveUtils.getLastMoves().size()<1){
+		if (MoveUtils.getLastMoves().size()<1){
 			return true;
 		} else {
 			for (Tile tile : MoveUtils.getLastMoves()) {
@@ -238,8 +240,7 @@ public class Board {
 				validSharedLine = true;
 			}
 			return validSharedLine;
-		}*/
-		return false;
+		}
 	}
 	
 	

@@ -12,6 +12,7 @@ import models.Player;
 import models.ServerPlayer;
 import models.Game;
 import models.Tile;
+import util.MoveUtils;
 import util.TileUtils;
 import view.StartTUI;
 import view.TUI;
@@ -137,22 +138,24 @@ public class Server {
 	}
 	
 	private void move(String x, String y, String shape, String color, ClientHandler client){
-		Tile tile = new Tile(color, shape);
-		Game game;
+		int xInt = Integer.parseInt(x) + 90;
+		int yInt = Integer.parseInt(y) + 90;
+		int shapeInt = Integer.parseInt(shape);
+		int colorInt = Integer.parseInt(color);
+		Tile tile = new Tile(TileUtils.intToColor(colorInt), TileUtils.intToSymbol(shapeInt));
+		Game game =  null;
 		try {
 			game = getGameByPlayer(client.getPlayerName());
-			try {
-				game.makeMove(x, y, tile, client.getPlayerName());
-				client.sendMessage(Protocol.SERVER_CORE_MOVE_ACCEPTED);
-				broadcastToAll(Protocol.SERVER_CORE_MOVE_MADE + Protocol.MESSAGESEPERATOR + x + Protocol.MESSAGESEPERATOR + y + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color);
-			} catch (InvalidMoveException e) {
-				client.sendMessage(Protocol.SERVER_CORE_MOVE_DENIED);
-				ui.print("Bij spel " + game.getId() + " is een move geweigerd van speler " + client.getPlayerName() + " omdat de zet niet geldig is.");
-			}
+			game.makeMove(xInt, yInt, tile, client.getPlayerName());
+			client.sendMessage(Protocol.SERVER_CORE_MOVE_ACCEPTED);
+			broadcastToAll(Protocol.SERVER_CORE_MOVE_MADE + Protocol.MESSAGESEPERATOR + x + Protocol.MESSAGESEPERATOR + y + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color);
 		} catch (PlayerNotFoundException e1) {
 			client.sendMessage(Protocol.SERVER_CORE_MOVE_DENIED);
 			ui.print("Whoopi goldberg");
-		}		
+		} catch (InvalidMoveException e) {
+			client.sendMessage(Protocol.SERVER_CORE_MOVE_DENIED);
+			ui.print("Bij spel " + game.getId() + " is een move geweigerd van speler " + client.getPlayerName() + " omdat de zet niet geldig is.");
+		}
 	}
 	
 	private Game getGameByPlayer(String name) throws PlayerNotFoundException {
@@ -170,6 +173,15 @@ public class Server {
 		try {
 			Game game = getGameByPlayer(client.getPlayerName());
 			game.finishMove(client.getPlayerName());
+			TileUtils.setHand(game.getPlayerByClient(client.getPlayerName()), game.getPile(), this, game);
+			MoveUtils.generateScore(game.getPlayerByClient(client.getPlayerName()), game.getBoard());
+			String msgScore = Protocol.SERVER_CORE_SCORE;
+			for (Player player : game.getPlayers()) {
+				msgScore += (Protocol.MESSAGESEPERATOR + player.getName() + Protocol.MESSAGESEPERATOR + player.getScore());
+			}
+			broadcastToPlayersInGame(msgScore, game);
+			game.nextPlayer();
+			broadcastToPlayersInGame(Protocol.SERVER_CORE_TURN + Protocol.MESSAGESEPERATOR + game.getCurrentPlayer().getName() ,game);
 		} catch (PlayerNotFoundException | InvalidMoveException e) {
 			ui.print("Whoopi goldberg");
 		}
@@ -177,18 +189,23 @@ public class Server {
 
 	private void swap(String shape, String color, ClientHandler client) {
 		Game game;
+		int shapeInt = Integer.parseInt(shape);
+		int colorInt = Integer.parseInt(color);
 		try {
 			game = getGameByPlayer(client.getPlayerName());
-			if (game.tileInHand(shape, color, client.getPlayerName())) {
-				game.swapTile(shape, color, client.getPlayerName());
+			if (game.tileInHand(TileUtils.intToSymbol(shapeInt), TileUtils.intToColor(colorInt), client.getPlayerName()) == true) {
+				Tile toSwap = new Tile(TileUtils.intToColor(Integer.parseInt(color)), TileUtils.intToSymbol(Integer.parseInt(shape)));
+				game.getPile().getTiles().add(toSwap);
+				Player player = game.getPlayerByClient(client.getPlayerName());
+				player.getHand().remove(toSwap);
+				MoveUtils.getTilesToSwap().add(toSwap);
+				broadcastToPlayer(Protocol.SERVER_CORE_SWAP_ACCEPTED, client.getPlayerName());
 			}
 			else {
 				broadcastToPlayer(Protocol.SERVER_CORE_SWAP_DENIED, client.getPlayerName());
 			}
 		} catch (PlayerNotFoundException e) {
 			ui.print("Whoopi goldberg");
-		} catch (InvalidMoveException e) {
-			//TODO broadcats naar speler
 		}
 	}
 
@@ -233,7 +250,9 @@ public class Server {
 				TileUtils.setHand(player, game.getPile(), this, game);
 			}
 			game.start();
+			game.determineInitialPlayer();
 			broadcastToPlayersInGame(Protocol.SERVER_CORE_DONE, game);
+			broadcastToPlayersInGame(Protocol.SERVER_CORE_TURN + Protocol.MESSAGESEPERATOR + game.getCurrentPlayer().getName(), game);
 		}
 		else {
 			ui.print("Niet genoeg spelers in de wachtrij...");

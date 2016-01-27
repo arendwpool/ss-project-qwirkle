@@ -39,6 +39,7 @@ public class Client extends Thread{
 	private Game game;
 	private TUI bui;
 	private boolean gameStarted = false;
+	private Tile tileToBeSwapped;
 	
 	public static void main(String[] arsg) {
 		Client client = new Client();
@@ -203,17 +204,36 @@ public class Client extends Thread{
 	}
 
 	private void score(String[] nameScore) {
-		Map<String, Integer> score = new HashMap<String, Integer>();
 		for (int i = 1; i < nameScore.length; i += 2) {
-			score.put(nameScore[i], Integer.parseInt(nameScore[i + 1]));
-			//toon scores
+			Player player = game.getPlayerByClient(nameScore[i]);
+			player.addScore(Integer.parseInt(nameScore[i+1]));
 		}
+		bui.update();
 	}
 
 	private void moveMade(String x, String y, String shape, String color) {
+		int xInt = Integer.parseInt(x)+90;
+		int yInt = Integer.parseInt(y)+90;
+		int shapeInt = Integer.parseInt(shape);
+		int colorInt = Integer.parseInt(color);
+		Tile tile = new Tile(TileUtils.intToColor(colorInt), TileUtils.intToSymbol(shapeInt));
+		game.getBoard().setTile(xInt, yInt, tile);
+		ui.print("Er is een nieuwe tegel gelegd op x = " + x + " y = " + y);
+		for (Tile tileInHand : game.getCurrentPlayer().getHand()) {
+			if (TileUtils.compareColor(tile, tileInHand) == true && TileUtils.compareSymbol(tile, tileInHand) == true){
+				game.getCurrentPlayer().getHand().remove(tileInHand);
+				break;
+			}
+		}
+		
+		game.getBoard().boardSize();
+		bui.update();
+		turn(game.getCurrentPlayer().getName());
 	}
 
 	private void moveDenied() {
+		ui.print("Dit mag niet..."); 
+		turn(game.getCurrentPlayer().getName());
 	}
 
 	private void moveAccepted() {
@@ -223,9 +243,20 @@ public class Client extends Thread{
 	}
 
 	private void swapDenied() {
+		ui.print("Dit mag niet...");
+		turn(game.getCurrentPlayer().getName());
 	}
 
 	private void swapAccepted() {
+		ui.print("Uw tegel staat klaar om geruild te worden.");
+		for (Tile tileInHand : game.getCurrentPlayer().getHand()) {
+			if (TileUtils.compareColor(tileToBeSwapped, tileInHand) == true && TileUtils.compareSymbol(tileToBeSwapped, tileInHand) == true){
+				game.getCurrentPlayer().getHand().remove(tileInHand);
+				break;
+			}
+		}
+		bui.update();
+		turn(game.getCurrentPlayer().getName());
 	}
 
 	private void done() {
@@ -233,12 +264,26 @@ public class Client extends Thread{
 	}
 
 	private void turn(String name) {
-		/*if (localPlayer.getName().equals(name)) {
-			String option = localPlayer.determineMove();
-			if (option ...) {
-				sendMessage("move ....");
+		game.setCurrentPlayer(game.getPlayerByClient(name));
+		if (game.getCurrentPlayer().getName().equals(localPlayer.getName())) {
+			String[] move = localPlayer.determineMove();
+			if (!move[0].equals(Protocol.CLIENT_CORE_DONE)) {
+				if(move.length == 4) {
+					int x = Integer.parseInt(move[0]);
+					int y = Integer.parseInt(move[1]);
+					int shape = Integer.parseInt(move[2]);
+					int color = Integer.parseInt(move[3]);
+					sendMessage(Protocol.CLIENT_CORE_MOVE + Protocol.MESSAGESEPERATOR + x + Protocol.MESSAGESEPERATOR + y + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color);
+				} else if (move.length == 2) {
+					int shape = Integer.parseInt(move[0]);
+					int color = Integer.parseInt(move[1]);
+					tileToBeSwapped = new Tile(TileUtils.intToColor(color), TileUtils.intToSymbol(shape));
+					sendMessage(Protocol.CLIENT_CORE_SWAP + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color);
+				}
+			} else {
+				sendMessage(Protocol.CLIENT_CORE_DONE);
 			}
-		}*/
+		}
 	}
 
 	private void receiveTile(String shape, String color) {
@@ -264,6 +309,7 @@ public class Client extends Thread{
 		if (gameStarted == false) {
 			ui.print("Uw naam is " + name + ". U zit nu in de wachtrij, druk op een willekeurige toets om te starten.");
 			playerName = name;
+			createLocalPlayer();
 			String input = ui.determineString(); //TODO vraag of deze vroegtijdig geskipt kan worden
 			if (input != null) {
 				sendMessage(Protocol.CLIENT_CORE_START);
@@ -284,7 +330,6 @@ public class Client extends Thread{
 				game.addPlayer(new ServerPlayer(players[i]));
 			}
 		}
-		createLocalPlayer();
 		game.addPlayer(localPlayer);
 		for (int i = 1; i < players.length; i++) {
 			names[i - 1] = players[i];
