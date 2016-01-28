@@ -36,7 +36,7 @@ public class HumanPlayer extends Player {
 							if (move.equals("")) {
 								break;
 							}
-							if (move.length() > 4 && move.length() < 8 && swapped == false) {
+							if (move.length() == 5 && swapped == false) {
 								madeMove = true;
 								System.out.println(determineMove(move));
 								return determineMove(move);
@@ -89,7 +89,7 @@ public class HumanPlayer extends Player {
 	 */
 	public String[] determineMove(String move) {
 		String[] slicedMove = move.split(Protocol.MESSAGESEPERATOR);
-		System.out.println(slicedMove.length);
+		System.out.println(slicedMove);
 		int x = Integer.parseInt(slicedMove[1]);
 		int y = Integer.parseInt(slicedMove[2]);
 		String[] tile = determineTile(slicedMove[0]);

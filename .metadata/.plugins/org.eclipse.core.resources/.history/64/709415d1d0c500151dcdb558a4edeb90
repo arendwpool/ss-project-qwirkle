@@ -12,6 +12,7 @@ import models.Player;
 import models.ServerPlayer;
 import models.Game;
 import models.Tile;
+import util.MoveUtils;
 import util.TileUtils;
 import view.StartTUI;
 import view.TUI;

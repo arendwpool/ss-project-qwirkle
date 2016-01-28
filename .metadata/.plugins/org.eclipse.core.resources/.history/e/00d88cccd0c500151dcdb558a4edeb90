@@ -9,6 +9,7 @@ import java.net.Socket;
 import models.Player;
 import models.ServerPlayer;
 import models.Tile;
+import util.MoveUtils;
 import util.TileUtils;
 import models.ComputerPlayer;
 import models.Game;
@@ -292,7 +293,6 @@ public class Client extends Thread{
 			String[] move = null;
 			if (localPlayer instanceof HumanPlayer) {
 				move = localPlayer.determineMove();
-				ui.print(move.toString());
 			} else {
 				move = ((ComputerPlayer)localPlayer).determineMove(game);
 			}

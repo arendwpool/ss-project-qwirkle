@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import exceptions.PlayerNotFoundException;
 import models.ComputerPlayer;
 import models.Game;
 import models.Player;

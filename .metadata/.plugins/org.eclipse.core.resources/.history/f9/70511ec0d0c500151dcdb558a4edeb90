@@ -1,6 +1,9 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Observable;
+
+import exceptions.InvalidMoveException;
 import util.TileUtils;
 
 public abstract class Player{

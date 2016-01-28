@@ -12,6 +12,7 @@ public class Game {
 	private Board board;
 	private MoveUtils move = new MoveUtils();
 	private Player currentPlayer;
+	private boolean initialMove = true;
 	
 	/**
 	 * Geeft de grootte van een hand aan in normale omstandigheden.

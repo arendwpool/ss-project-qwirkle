@@ -2,6 +2,8 @@ package models;
 
 import java.util.ArrayList;
 
+import util.MoveUtils;
+
 /**
  *De klasse die een speelbord representeerd maakt met een naam en tegels.
  * @author Bob Breemhaar en Arend Pool.

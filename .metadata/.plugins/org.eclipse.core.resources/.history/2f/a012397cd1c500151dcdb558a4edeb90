@@ -292,7 +292,6 @@ public class Client extends Thread{
 			String[] move = null;
 			if (localPlayer instanceof HumanPlayer) {
 				move = localPlayer.determineMove();
-				ui.print(move.toString());
 			} else {
 				move = ((ComputerPlayer)localPlayer).determineMove(game);
 			}
