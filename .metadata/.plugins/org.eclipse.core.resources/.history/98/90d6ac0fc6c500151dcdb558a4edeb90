@@ -27,8 +27,8 @@ public class Client extends Thread{
 	private static final String[] PRE_MENU = {null, "Ik ben een Menselijke speler", "Ik ben een Computerspeler"};
 	private static final String[] IP_MENU = {null, "Voer het gewenste ip adres in:"};
 	private static final String[] PORT_MENU = {"Toets een gewenst portnummer in", "typ 0 voor de standaard poort: "};
-	private static final String[] END_MENU = {"Het spel is afgelopen, toets 1 om nog een keer, elke andere toets om te stoppen", "Ik wil weer in de wachtrij"};
-	private boolean terminated = false;
+	private static final String[] END_MENU = {"Het spel is afgelopen", "Ik wil weer in de wachtrij", "Ik wil stoppen"};
+	private boolean gameOver = false;
 	private boolean isHuman = false;
 	private String ip;
 	private String playerName;
@@ -173,21 +173,10 @@ public class Client extends Thread{
 		return false;
 	}
 	
-	private boolean question4() {
-		ui.renderMenu(END_MENU);
-		int input = ui.determineInt();
-		if (input == 1) {
-			return true;
-		} else {
-			terminated = true;
-			return false;
-		}
-	}
-	
 	public void run() {
 		String text = "";
 		try {
-			while (terminated == false) {
+			while (gameOver == false) {
 				text = in.readLine();
 				if (text != null && !text.equals("\n")) {
 					getServerMessage(text);
@@ -217,9 +206,8 @@ public class Client extends Thread{
 			ui.print(nameScore[i]+ " heeft een eindscore van " + nameScore[i+1]) ;
 		}
 		ui.print("De winnaar is: " + game.winner().getName());
-		boolean bl =question4();
-		if (bl == true)
-			sendMessage(Protocol.CLIENT_CORE_JOIN);		
+		ui.renderMenu(END_MENU);
+		gameOver = true;
 	}
 
 	private void score(String[] nameScore) {
@@ -296,7 +284,7 @@ public class Client extends Thread{
 			} else {
 				move = ((ComputerPlayer)localPlayer).determineMove(game);
 			}
-			if (move != null && !move[0].equals(Protocol.CLIENT_CORE_DONE)) {
+			if (move[0] != null && !move[0].equals(Protocol.CLIENT_CORE_DONE)) {
 				if(move.length == 4) {
 					int x = Integer.parseInt(move[0]);
 					int y = Integer.parseInt(move[1]);

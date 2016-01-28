@@ -42,7 +42,8 @@ public class Game {
 	}
 
 	public void makeMove(int x, int y, Tile tile, String name) throws InvalidMoveException{
-			MoveUtils.makeMove(x, y, tile, this, name);		
+		MoveUtils.makeMove(x, y, tile, this, name);
+		
 	}
 	
 	public Player getPlayerByClient(String name) {

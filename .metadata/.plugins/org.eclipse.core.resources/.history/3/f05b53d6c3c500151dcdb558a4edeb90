@@ -80,7 +80,7 @@ public class Server {
 				portHasBeenSet = true;
 			} catch (IOException e) {
 				ui.print("Het ingevoerde nummer is ongeldig, probeer opnieuw of typ 0 voor de standaard poort: ");
-				port = 1337; //TODO loop error oplossen
+				port = 1337;
 			}
 		}
 	}
@@ -183,16 +183,15 @@ public class Server {
 			for (Player player : game.getPlayers()) {
 				msgScore += (Protocol.MESSAGESEPERATOR + player.getName() + Protocol.MESSAGESEPERATOR + player.getScore());
 			}
+			broadcastToPlayersInGame(Protocol.SERVER_CORE_SCORE + msgScore, game);
+			game.getPile().getTiles().addAll(MoveUtils.getTilesToSwap());
+			MoveUtils.getTilesToSwap().clear();
+			game.nextPlayer();
+			broadcastToPlayersInGame(Protocol.SERVER_CORE_TURN + Protocol.MESSAGESEPERATOR + game.getCurrentPlayer().getName() ,game);
 			if(game.gameOver() == true) {
 				broadcastToPlayersInGame(Protocol.SERVER_CORE_GAME_ENDED + msgScore, game);
-				games.remove(game);
-			} else {
-				broadcastToPlayersInGame(Protocol.SERVER_CORE_SCORE + msgScore, game);
-				game.getPile().getTiles().addAll(MoveUtils.getTilesToSwap());
-				MoveUtils.getTilesToSwap().clear();
-				game.nextPlayer();
-				broadcastToPlayersInGame(Protocol.SERVER_CORE_TURN + Protocol.MESSAGESEPERATOR + game.getCurrentPlayer().getName() ,game);
 			}
+			ui.print("Er zijn in game " + game.getId() + "nog "+ Integer.toString(game.getPile().getTiles().size()) + " tegels in de zak.");
 		} catch (PlayerNotFoundException e) {
 			ui.print("Whoopi goldberg");
 		}
@@ -208,12 +207,7 @@ public class Server {
 				Tile toSwap = new Tile(TileUtils.intToColor(Integer.parseInt(color)), TileUtils.intToSymbol(Integer.parseInt(shape)));
 				game.getPile().getTiles().add(toSwap);
 				Player player = game.getPlayerByClient(client.getPlayerName());
-				for (Tile tileInHand : player.getHand()) {
-					if (TileUtils.compareColor(toSwap, tileInHand) == true && TileUtils.compareSymbol(toSwap, tileInHand) == true){
-						player.getHand().remove(tileInHand);
-						break;
-					}
-				}
+				player.getHand().remove(toSwap);
 				MoveUtils.getTilesToSwap().add(toSwap);
 				broadcastToPlayer(Protocol.SERVER_CORE_SWAP_ACCEPTED, client.getPlayerName());
 			}

@@ -302,7 +302,11 @@ public class Client extends Thread{
 					int y = Integer.parseInt(move[1]);
 					int shape = Integer.parseInt(move[2]);
 					int color = Integer.parseInt(move[3]);
-					sendMessage(Protocol.CLIENT_CORE_MOVE + Protocol.MESSAGESEPERATOR + x + Protocol.MESSAGESEPERATOR + y + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color);
+					if (game.initialMove == false) {
+						sendMessage(Protocol.CLIENT_CORE_MOVE + Protocol.MESSAGESEPERATOR + x + Protocol.MESSAGESEPERATOR + y + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color);
+					} else {
+						sendMessage(Protocol.CLIENT_CORE_MOVE + Protocol.MESSAGESEPERATOR + 0 + Protocol.MESSAGESEPERATOR + 0 + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color);
+					}
 				} else if (move.length == 2) {
 					int shape = Integer.parseInt(move[0]);
 					int color = Integer.parseInt(move[1]);

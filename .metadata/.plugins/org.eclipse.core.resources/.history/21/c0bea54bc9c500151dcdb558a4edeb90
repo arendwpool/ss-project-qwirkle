@@ -148,7 +148,17 @@ public class Server {
 			game.makeMove(xInt, yInt, tile, client.getPlayerName());
 			client.sendMessage(Protocol.SERVER_CORE_MOVE_ACCEPTED);
 			wait(100);
-			broadcastToPlayersInGame(Protocol.SERVER_CORE_MOVE_MADE + Protocol.MESSAGESEPERATOR + x + Protocol.MESSAGESEPERATOR + y + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color, game);
+			if (game.initialMove == false){
+				game.makeMove(xInt, yInt, tile, client.getPlayerName());
+				client.sendMessage(Protocol.SERVER_CORE_MOVE_ACCEPTED);
+				wait(100);
+				broadcastToPlayersInGame(Protocol.SERVER_CORE_MOVE_MADE + Protocol.MESSAGESEPERATOR + x + Protocol.MESSAGESEPERATOR + y + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color, game);
+			} else {
+				game.makeMove(0, 0, tile, client.getPlayerName());
+				client.sendMessage(Protocol.SERVER_CORE_MOVE_ACCEPTED);
+				wait(100);
+				broadcastToPlayersInGame(Protocol.SERVER_CORE_MOVE_MADE + Protocol.MESSAGESEPERATOR + 0 + Protocol.MESSAGESEPERATOR + 0 + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color, game);
+			}
 		} catch (PlayerNotFoundException e1) {
 			client.sendMessage(Protocol.SERVER_CORE_MOVE_DENIED);
 			ui.print("Whoopi goldberg");
