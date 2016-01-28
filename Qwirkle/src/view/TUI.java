@@ -1,7 +1,5 @@
 package view;
 
-import java.util.InputMismatchException;
-import java.util.Observer;
 import java.util.Scanner;
 
 

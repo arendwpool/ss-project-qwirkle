@@ -237,11 +237,12 @@ public class Client extends Thread{
 	}	
 
 	private void gameEnded(String[] nameScore) {
+		gameStarted = false;
 		for (int i = 1; i < nameScore.length; i += 2) {
 			ui.print(nameScore[i]+ " heeft een eindscore van " + nameScore[i+1]) ;
 		}
 		ui.print("De winnaar is: " + game.winner().getName());
-		boolean bl =question5();
+		boolean bl = question5();
 		if (bl == true)
 			sendMessage(Protocol.CLIENT_CORE_JOIN);		
 	}
@@ -391,10 +392,10 @@ public class Client extends Thread{
 
 
 	private void starting(String[] players) {
+		game = new Game(0);
 		gameStarted  = true;
 		ui.print("Spel wordt gestart met " + (players.length - 1) + " spelers.");
 		String[] names = new String[players.length - 1];
-		game = new Game(0);
 		for (int i = 1; i < players.length; i++) {
 			if (!players[i].equals(playerName)) {
 				game.addPlayer(new ServerPlayer(players[i]));

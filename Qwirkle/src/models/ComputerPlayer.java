@@ -60,6 +60,11 @@ public class ComputerPlayer extends Player {
 				}
 			}
 		}
+		if (getHand().size() > 0) {
+			Tile tile = getHand().get(0);
+			String[] swap = {Integer.toString(TileUtils.symbolToInt(tile.getSymbol())), Integer.toString(TileUtils.colorToInt(tile.getColor()))};
+			return swap;
+		}
 		return null;
 	}	
 }

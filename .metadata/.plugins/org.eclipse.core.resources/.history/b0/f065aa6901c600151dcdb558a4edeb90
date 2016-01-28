@@ -1,0 +1,26 @@
+package network;
+
+import java.util.Scanner;
+
+public class ReadServerInput extends Thread {
+	private Server server;
+	Scanner scanner;
+
+	public ReadServerInput(Server server) {
+		this.server = server;
+	}
+	
+	public void run() {
+			scanner = new Scanner(System.in);
+		while(true) {
+			String input = "";
+			while (scanner.hasNextLine())
+			 input = scanner.nextLine();
+			if (input.equals("shutdown")) {
+				server.shutDown();
+			}
+			if(!input.equals(""))
+			System.out.println(input);
+		}
+	}
+}

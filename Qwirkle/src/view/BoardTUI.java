@@ -1,7 +1,6 @@
 package view;
 
 import java.util.ArrayList;
-import java.util.Observable;
 import models.ComputerPlayer;
 import models.Game;
 import models.Player;
