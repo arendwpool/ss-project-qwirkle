@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
 import models.Player;
 import models.ServerPlayer;
 import models.Tile;
@@ -28,6 +26,8 @@ public class Client extends Thread{
 	private static final String[] PRE_MENU = {null, "Ik ben een Menselijke speler", "Ik ben een Computerspeler"};
 	private static final String[] IP_MENU = {null, "Voer het gewenste ip adres in:"};
 	private static final String[] PORT_MENU = {"Toets een gewenst portnummer in", "typ 0 voor de standaard poort: "};
+	private static final String[] END_MENU = {"Het spel is afgelopen, toets 1 om nog een keer, elke andere toets om te stoppen", "Ik wil weer in de wachtrij"};
+	private boolean terminated = false;
 	private boolean isHuman = false;
 	private String ip;
 	private String playerName;
@@ -39,12 +39,13 @@ public class Client extends Thread{
 	private Game game;
 	private TUI bui;
 	private boolean gameStarted = false;
+	private Tile tileToBeSwapped;
 	
 	public static void main(String[] arsg) {
 		Client client = new Client();
 		client.startClient();
 	}
-	public void getServerMessage(String msg) {
+	public synchronized void getServerMessage(String msg) {
 		String[] slicedMessage = msg.split(Protocol.MESSAGESEPERATOR);
 		switch(slicedMessage[0]) {
 			case Protocol.SERVER_CORE_JOIN_ACCEPTED: joinAccepted(slicedMessage[1]);
@@ -79,6 +80,11 @@ public class Client extends Thread{
 		}
 	}
 	
+	private void moveAccepted() {
+		if (localPlayer instanceof ComputerPlayer)
+		sendMessage(Protocol.CLIENT_CORE_DONE);
+		
+	}
 	private void sendPlayers(String[] slicedMessage) {
 		//TODO handig om te gebruiken?
 		for(int i = 1; i < slicedMessage.length; i++) {
@@ -166,10 +172,21 @@ public class Client extends Thread{
 		return false;
 	}
 	
+	private boolean question4() {
+		ui.renderMenu(END_MENU);
+		int input = ui.determineInt();
+		if (input == 1) {
+			return true;
+		} else {
+			terminated = true;
+			return false;
+		}
+	}
+	
 	public void run() {
 		String text = "";
 		try {
-			while (text != null) {
+			while (terminated == false) {
 				text = in.readLine();
 				if (text != null && !text.equals("\n")) {
 					getServerMessage(text);
@@ -179,7 +196,7 @@ public class Client extends Thread{
 				}
 			}
 		} catch (IOException e) {
-			//
+			//TODO implement
 		}
 		
 	}
@@ -195,37 +212,74 @@ public class Client extends Thread{
 	}	
 
 	private void gameEnded(String[] nameScore) {
-		Map<String, Integer> score = new HashMap<String, Integer>();
 		for (int i = 1; i < nameScore.length; i += 2) {
-			score.put(nameScore[i], Integer.parseInt(nameScore[i + 1]));
-			//toon scores -> eindmenu...
+			ui.print(nameScore[i]+ " heeft een eindscore van " + nameScore[i+1]) ;
 		}
+		ui.print("De winnaar is: " + game.winner().getName());
+		boolean bl =question4();
+		if (bl == true)
+			sendMessage(Protocol.CLIENT_CORE_JOIN);		
 	}
 
 	private void score(String[] nameScore) {
-		Map<String, Integer> score = new HashMap<String, Integer>();
 		for (int i = 1; i < nameScore.length; i += 2) {
-			score.put(nameScore[i], Integer.parseInt(nameScore[i + 1]));
-			//toon scores
+			Player player = game.getPlayerByClient(nameScore[i]);
+			player.setScore(Integer.parseInt(nameScore[i+1]));
 		}
+		bui.update();
 	}
 
 	private void moveMade(String x, String y, String shape, String color) {
+		game.getMoves().setInitialMove(false);
+		int xInt = Integer.parseInt(x)+90;
+		int yInt = Integer.parseInt(y)+90;
+		int shapeInt = Integer.parseInt(shape);
+		int colorInt = Integer.parseInt(color);
+		Tile tile = new Tile(TileUtils.intToColor(colorInt), TileUtils.intToSymbol(shapeInt));
+		game.getBoard().setTile(xInt, yInt, tile);
+		ui.print("Er is een nieuwe tegel gelegd op x = " + x + " y = " + y);
+		for (Tile tileInHand : game.getCurrentPlayer().getHand()) {
+			if (TileUtils.compareColor(tile, tileInHand) == true && TileUtils.compareSymbol(tile, tileInHand) == true){
+				game.getCurrentPlayer().getHand().remove(tileInHand);
+				break;
+			}
+		}
+		game.getBoard().boardSize();
+		bui.update();
+		if (game.getCurrentPlayer() instanceof HumanPlayer) {
+			turn(game.getCurrentPlayer().getName());
+		}
+		
 	}
 
 	private void moveDenied() {
-	}
-
-	private void moveAccepted() {
+		ui.print("Dit mag niet..."); 
+		if (localPlayer instanceof ComputerPlayer) {
+			sendMessage(Protocol.CLIENT_CORE_DONE);
+		} else {
+			turn(game.getCurrentPlayer().getName());
+		}
+		bui.update();
 	}
 
 	private void exception(String name) {
 	}
 
 	private void swapDenied() {
+		ui.print("Dit mag niet...");
+		turn(game.getCurrentPlayer().getName());
 	}
 
 	private void swapAccepted() {
+		ui.print("Uw tegel staat klaar om geruild te worden.");
+		for (Tile tileInHand : game.getCurrentPlayer().getHand()) {
+			if (TileUtils.compareColor(tileToBeSwapped, tileInHand) == true && TileUtils.compareSymbol(tileToBeSwapped, tileInHand) == true){
+				game.getCurrentPlayer().getHand().remove(tileInHand);
+				break;
+			}
+		}
+		bui.update();
+		turn(game.getCurrentPlayer().getName());
 	}
 
 	private void done() {
@@ -233,25 +287,38 @@ public class Client extends Thread{
 	}
 
 	private void turn(String name) {
-		/*if (localPlayer.getName().equals(name)) {
-			String option = localPlayer.determineMove();
-			if (option ...) {
-				sendMessage("move ....");
+		game.setCurrentPlayer(game.getPlayerByClient(name));
+		if (name.equals(localPlayer.getName())) {
+			String[] move = null;
+			if (localPlayer instanceof HumanPlayer) {
+				move = localPlayer.determineMove();
+				ui.print(move.toString());
+			} else {
+				move = ((ComputerPlayer)localPlayer).determineMove(game);
 			}
-		}*/
+			if (move != null && !move[0].equals(Protocol.CLIENT_CORE_DONE)) {
+				if(move.length == 4) {
+					int x = Integer.parseInt(move[0]);
+					int y = Integer.parseInt(move[1]);
+					int shape = Integer.parseInt(move[2]);
+					int color = Integer.parseInt(move[3]);
+					sendMessage(Protocol.CLIENT_CORE_MOVE + Protocol.MESSAGESEPERATOR + x + Protocol.MESSAGESEPERATOR + y + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color);
+				} else if (move.length == 2) {
+					int shape = Integer.parseInt(move[0]);
+					int color = Integer.parseInt(move[1]);
+					tileToBeSwapped = new Tile(TileUtils.intToColor(color), TileUtils.intToSymbol(shape));
+					sendMessage(Protocol.CLIENT_CORE_SWAP + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color);
+				}
+			} else {
+				sendMessage(Protocol.CLIENT_CORE_DONE);
+			}
+		}
 	}
 
 	private void receiveTile(String shape, String color) {
 		int symbol = Integer.parseInt(shape);
 		int colorInt = Integer.parseInt(color);
 		Tile tile = new Tile(TileUtils.intToColor(colorInt), TileUtils.intToSymbol(symbol));
-		for(Tile tileInPile : game.getPile().getTiles()) {
-			if (TileUtils.compareColor(tile, tileInPile) && TileUtils.compareSymbol(tile, tileInPile)) {
-				game.getPile().getTiles().remove(tileInPile);
-				break;
-			}
-		}
-		game.getPile().getTiles().remove(tile);
 		localPlayer.getHand().add(tile);
 	}
 
@@ -264,6 +331,7 @@ public class Client extends Thread{
 		if (gameStarted == false) {
 			ui.print("Uw naam is " + name + ". U zit nu in de wachtrij, druk op een willekeurige toets om te starten.");
 			playerName = name;
+			createLocalPlayer();
 			String input = ui.determineString(); //TODO vraag of deze vroegtijdig geskipt kan worden
 			if (input != null) {
 				sendMessage(Protocol.CLIENT_CORE_START);
@@ -284,7 +352,6 @@ public class Client extends Thread{
 				game.addPlayer(new ServerPlayer(players[i]));
 			}
 		}
-		createLocalPlayer();
 		game.addPlayer(localPlayer);
 		for (int i = 1; i < players.length; i++) {
 			names[i - 1] = players[i];

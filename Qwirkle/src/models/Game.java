@@ -2,20 +2,16 @@ package models;
 
 import java.util.ArrayList;
 import exceptions.InvalidMoveException;
+import util.MoveUtils;
+import util.TileUtils;
 
 public class Game {
 	private int id;
 	private ArrayList<Player> players = new ArrayList<>();
 	private Pile pile;
 	private Board board;
-	private ArrayList<Tile> tilesToSwap = new ArrayList<>();
-	private ArrayList<Tile> lastSet = new ArrayList<>();
+	private MoveUtils move = new MoveUtils();
 	private Player currentPlayer;
-	
-	/**
-	 * Bepaalt of het de eerste move van het spel iets of niet.
-	 */
-	private static boolean initialMove = true;
 	
 	/**
 	 * Geeft de grootte van een hand aan in normale omstandigheden.
@@ -45,25 +41,8 @@ public class Game {
 		return pile;
 	}
 
-	public void makeMove(String xString, String yString, Tile tile, String name) throws InvalidMoveException{
-		int x = Integer.parseInt(xString);
-		int y = Integer.parseInt(xString);
-		Player player = getPlayerByClient(name);
-		if (tilesToSwap.size() == 0) {
-			//if (MoveUtils.isValidMove(x, y, tile, board) && board.validSharedLine(x, y, tile)) {
-				board.setTile(x, y, tile);
-				lastSet.add(tile);
-				player.getHand().remove(tile);
-			//} 
-		} else if(initialMove == true){
-			board.setTile(90, 90, tile);
-			lastSet.add(tile);
-			player.getHand().remove(tile);
-			initialMove = false;
-		} else {
-			throw new InvalidMoveException();
-		}
-		
+	public void makeMove(int x, int y, Tile tile, String name) throws InvalidMoveException{
+			move.makeMove(x, y, tile, this, name);		
 	}
 	
 	public Player getPlayerByClient(String name) {
@@ -78,37 +57,59 @@ public class Game {
 	public boolean tileInHand(String shape, String color, String name) {
 		Tile newTile = new Tile(color, shape);
 		Player pl = getPlayerByClient(name);
-		if (pl.getHand().contains(newTile)) {
-			return true;
+		for (Tile tile : pl.getHand()) {
+			if (TileUtils.compareColor(newTile, tile) == true && TileUtils.compareSymbol(newTile, tile) == true) {
+				return true;
+			}
 		}
 		return false;
 	}
 	
 	public void swapTile(String shape, String color, String name) throws InvalidMoveException {
-		if (lastSet.size() == 0 && initialMove == false && pile.getTiles().size() > 0) { 
-			Tile newTile = new Tile(color, shape);
-			tilesToSwap.add(newTile);
-			Player pl = getPlayerByClient(name);
-			pl.getHand().remove(newTile);
-		} else {
-			throw new InvalidMoveException();
-		}
+		move.swapTile(shape, color, name, this);
 	}
+	
 
 	public Tile giveRandomTile(Pile pile) {
 		pile.shuffle();
 		Tile tile = pile.getTiles().get(0);
 		return tile;
 	}
-
-	public void finishMove(String name) throws InvalidMoveException {
-		if(lastSet.size() > 0 ){
-			//MoveUtils.generateScore(getPlayerByClient(name), board);
-			lastSet.clear();
-		} else if (tilesToSwap.size() > 0) {
-			pile.getTiles().addAll(tilesToSwap);
-			//TileUtils.setHand(getPlayerByClient(name), pile);
+	
+	/**
+	 * Controleert of het spel een winnaar heeft, hiervoor kijkt hij of winner() een
+	 * player terug geeft, of een object dat null is.
+	 * @return winner() != null
+	 */
+	public boolean hasWinner() {
+		return winner() != null;
+	}
+	
+	/**
+	 * Geeft aan of het spel over is. Dit is het geval als een speler zijn laatste tegel
+	 * heeft neergelegd en de Pile leeg is.
+	 * @return noTilesLeft();
+	 */
+	/*@pure*/
+	public boolean gameOver() {
+		return TileUtils.noTilesLeft(this);
+	}
+	
+	/**
+	 * Geeft aan welke speler winnaar is, geeft null als er nog geen winnaar is. Een speler
+	 * is de winnaar als het spel af is, en de meeste punten heeft.
+	 * @return Player withHighscore || null //TODO vraag
+	 */
+	public Player winner() {
+		int score = 0;
+		Player withHighscore = null;
+		for (Player player : players) {
+			if (player.getScore() > score) {
+				score = player.getScore();
+				withHighscore = player;
+			}
 		}
+		return withHighscore;
 	}
 	
 	public ArrayList<Tile> getHandByPlayerName(String name) {
@@ -179,5 +180,17 @@ public class Game {
 			}
 		}
 		currentPlayer = withLongestRow;
+	}
+	
+	/**
+	 * Met deze methode kan handmatig de currentPlayer worden toegewezen.
+	 * @param player
+	 */
+	public void setCurrentPlayer(Player player) {
+		currentPlayer = player;
+	}
+	
+	public MoveUtils getMoves(){
+		return move;
 	}
 }

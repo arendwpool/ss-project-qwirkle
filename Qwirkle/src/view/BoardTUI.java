@@ -2,7 +2,6 @@ package view;
 
 import java.util.ArrayList;
 import java.util.Observable;
-import exceptions.PlayerNotFoundException;
 import models.ComputerPlayer;
 import models.Game;
 import models.Player;
@@ -67,13 +66,12 @@ public class BoardTUI extends TUI{
 	 */
 	private void showScore() {
 		for (Player player : game.getPlayers()) {
-			if (game.getCurrentPlayer() instanceof ComputerPlayer) {
-				System.out.println(player.getName()+": " + player.getScore());
+			if (player.getName().equals(client.getLocalPlayer().getName())){
+				System.out.println("U: " + player.getScore());
 			} else {
-				System.out.println(player.getName() + ": " + player.getScore());
+				System.out.println(player.getName()+": " + player.getScore());
 			}
 		}
-		
 	}
 	
 	/**

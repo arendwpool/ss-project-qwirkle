@@ -1,7 +1,5 @@
 package models;
 
-import java.util.ArrayList;
-
 public class ServerPlayer extends Player {
 	/**
 	 * construeert een nieuwe menselijke speler. Deze speler krijgt een hand met tiles mee.

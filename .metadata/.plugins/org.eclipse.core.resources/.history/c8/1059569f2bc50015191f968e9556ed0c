@@ -1,0 +1,12 @@
+package util;
+
+import models.Board;
+import models.Tile;
+
+public class MoveUtils {
+
+	public static boolean isValidMove(int x, int y, Tile tile, Board board) {
+		//TODO overnemen van git
+		return true;
+	}
+}

@@ -22,11 +22,10 @@ public class Server {
 	private ArrayList<ClientHandler> clients = new ArrayList<ClientHandler>();
 	private ArrayList<Game> games = new ArrayList<Game>();
 	private ArrayList<ClientHandler> joint = new ArrayList<ClientHandler>();
-	private ArrayList<Tile> tilesToSwap = new ArrayList<Tile>();
 	TUI ui = new StartTUI();
 	
 
-	public void getClientMessage(String msg, ClientHandler client) {
+	public synchronized void getClientMessage(String msg, ClientHandler client) {
 		String[] slicedMessage = msg.split(Protocol.MESSAGESEPERATOR);
 		try {
 			ui.print(msg + " - " + client.getPlayerName() +" in game " + getGameByPlayer(client.getPlayerName()).getId());
@@ -53,7 +52,7 @@ public class Server {
 		}
 	}
 	
-	private void getPlayers(ClientHandler client) {
+	private synchronized void getPlayers(ClientHandler client) {
 		try {
 			Game game = getGameByPlayer(client.getPlayerName());
 			String msg = Protocol.SERVER_CORE_PLAYERS;
@@ -80,7 +79,7 @@ public class Server {
 				portHasBeenSet = true;
 			} catch (IOException e) {
 				ui.print("Het ingevoerde nummer is ongeldig, probeer opnieuw of typ 0 voor de standaard poort: ");
-				port = 1337;
+				port = 1337; //TODO loop error oplossen
 			}
 		}
 	}
@@ -105,7 +104,7 @@ public class Server {
 		}
 	}
 	
-	private boolean checkIfNameExists(String name) {
+	private synchronized boolean checkIfNameExists(String name) {
 		for (ClientHandler ch : clients) {
 			if (ch.getPlayerName() != null && ch.getPlayerName().equals(name)) {
 				return false;
@@ -114,12 +113,12 @@ public class Server {
 		return true;
 	}
 
-	public static void main(String[] args) {
+	public synchronized static void main(String[] args) {
 		Server server = new Server();
 		server.run();
 	}
 	
-	private int readInt() {
+	private synchronized int readInt() {
 		int input = 0;
 		Scanner scanner = new Scanner(System.in);
 		while (true) {
@@ -136,26 +135,32 @@ public class Server {
 		return input;
 	}
 	
-	private void move(String x, String y, String shape, String color, ClientHandler client){
-		Tile tile = new Tile(color, shape);
-		Game game;
+	private synchronized void move(String x, String y, String shape, String color, ClientHandler client){
+		int xInt = Integer.parseInt(x) + 90;
+		int yInt = Integer.parseInt(y) + 90;
+		int shapeInt = Integer.parseInt(shape);
+		int colorInt = Integer.parseInt(color);
+		Tile tile = new Tile(TileUtils.intToColor(colorInt), TileUtils.intToSymbol(shapeInt));
+		Game game =  null;
 		try {
 			game = getGameByPlayer(client.getPlayerName());
-			try {
-				game.makeMove(x, y, tile, client.getPlayerName());
-				client.sendMessage(Protocol.SERVER_CORE_MOVE_ACCEPTED);
-				broadcastToAll(Protocol.SERVER_CORE_MOVE_MADE + Protocol.MESSAGESEPERATOR + x + Protocol.MESSAGESEPERATOR + y + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color);
-			} catch (InvalidMoveException e) {
-				client.sendMessage(Protocol.SERVER_CORE_MOVE_DENIED);
-				ui.print("Bij spel " + game.getId() + " is een move geweigerd van speler " + client.getPlayerName() + " omdat de zet niet geldig is.");
-			}
+			game.makeMove(xInt, yInt, tile, client.getPlayerName());
+			client.sendMessage(Protocol.SERVER_CORE_MOVE_ACCEPTED);
+			wait(100);
+			broadcastToPlayersInGame(Protocol.SERVER_CORE_MOVE_MADE + Protocol.MESSAGESEPERATOR + x + Protocol.MESSAGESEPERATOR + y + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color, game);
 		} catch (PlayerNotFoundException e1) {
 			client.sendMessage(Protocol.SERVER_CORE_MOVE_DENIED);
 			ui.print("Whoopi goldberg");
-		}		
+		} catch (InvalidMoveException e) {
+			client.sendMessage(Protocol.SERVER_CORE_MOVE_DENIED);
+			ui.print("Bij spel " + game.getId() + " is een move geweigerd van speler " + client.getPlayerName() + " omdat de zet niet geldig is.");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	private Game getGameByPlayer(String name) throws PlayerNotFoundException {
+	private synchronized Game getGameByPlayer(String name) throws PlayerNotFoundException {
 		for (Game game : games) {
 			for (Player player: game.getPlayers()) {				
 				if (player.getName().equals(name)) {
@@ -166,37 +171,64 @@ public class Server {
 		throw new PlayerNotFoundException();
 	}
 
-	private void done(ClientHandler client) {
+	private synchronized void done(ClientHandler client) {
 		try {
 			Game game = getGameByPlayer(client.getPlayerName());
-			game.finishMove(client.getPlayerName());
-		} catch (PlayerNotFoundException | InvalidMoveException e) {
+			if (game.getPile().getTiles().size() !=0) {
+				TileUtils.setHand(game.getPlayerByClient(client.getPlayerName()), game.getPile(), this, game);
+			}
+			game.getMoves().generateScore(game.getPlayerByClient(client.getPlayerName()), game.getBoard());
+			String msgScore = "";
+			for (Player player : game.getPlayers()) {
+				msgScore += (Protocol.MESSAGESEPERATOR + player.getName() + Protocol.MESSAGESEPERATOR + player.getScore());
+			}
+			if(game.gameOver() == true) {
+				broadcastToPlayersInGame(Protocol.SERVER_CORE_GAME_ENDED + msgScore, game);
+				games.remove(game);
+			} else {
+				broadcastToPlayersInGame(Protocol.SERVER_CORE_SCORE + msgScore, game);
+				game.getPile().getTiles().addAll(game.getMoves().getTilesToSwap());
+				game.getMoves().getTilesToSwap().clear();
+				game.nextPlayer();
+				broadcastToPlayersInGame(Protocol.SERVER_CORE_TURN + Protocol.MESSAGESEPERATOR + game.getCurrentPlayer().getName() ,game);
+			}
+		} catch (PlayerNotFoundException e) {
 			ui.print("Whoopi goldberg");
 		}
 	}
 
-	private void swap(String shape, String color, ClientHandler client) {
+	private synchronized void swap(String shape, String color, ClientHandler client) {
 		Game game;
+		int shapeInt = Integer.parseInt(shape);
+		int colorInt = Integer.parseInt(color);
 		try {
 			game = getGameByPlayer(client.getPlayerName());
-			if (game.tileInHand(shape, color, client.getPlayerName())) {
-				game.swapTile(shape, color, client.getPlayerName());
+			if (game.tileInHand(TileUtils.intToSymbol(shapeInt), TileUtils.intToColor(colorInt), client.getPlayerName()) == true) {
+				Tile toSwap = new Tile(TileUtils.intToColor(Integer.parseInt(color)), TileUtils.intToSymbol(Integer.parseInt(shape)));
+				game.getPile().getTiles().add(toSwap);
+				Player player = game.getPlayerByClient(client.getPlayerName());
+				for (Tile tileInHand : player.getHand()) {
+					if (TileUtils.compareColor(toSwap, tileInHand) == true && TileUtils.compareSymbol(toSwap, tileInHand) == true){
+						player.getHand().remove(tileInHand);
+						break;
+					}
+				}
+				game.getMoves().getTilesToSwap().add(toSwap);
+				broadcastToPlayer(Protocol.SERVER_CORE_SWAP_ACCEPTED, client.getPlayerName());
 			}
 			else {
 				broadcastToPlayer(Protocol.SERVER_CORE_SWAP_DENIED, client.getPlayerName());
 			}
 		} catch (PlayerNotFoundException e) {
 			ui.print("Whoopi goldberg");
-		} catch (InvalidMoveException e) {
-			//TODO broadcats naar speler
 		}
 	}
 
-	private void login(String name) {
+	private synchronized void login(String name) {
 		ui.print("Deze server ondersteund geen login.");
 	}
 
-	private void join(ClientHandler client) {
+	private synchronized void join(ClientHandler client) {
 		joint.add(client);
 		ui.print(client.getPlayerName() + " is gejoined, nu in de lobby: ");
 		for (ClientHandler player : joint) {
@@ -205,7 +237,7 @@ public class Server {
 		client.sendMessage(Protocol.SERVER_CORE_JOIN_ACCEPTED + Protocol.MESSAGESEPERATOR + client.getPlayerName());
 	}
 
-	private void ex(String[] extensions) {
+	private synchronized void ex(String[] extensions) {
 		ui.print("Deze server ondersteund geen extenties.");
 	}
 
@@ -233,7 +265,9 @@ public class Server {
 				TileUtils.setHand(player, game.getPile(), this, game);
 			}
 			game.start();
+			game.determineInitialPlayer();
 			broadcastToPlayersInGame(Protocol.SERVER_CORE_DONE, game);
+			broadcastToPlayersInGame(Protocol.SERVER_CORE_TURN + Protocol.MESSAGESEPERATOR + game.getCurrentPlayer().getName(), game);
 		}
 		else {
 			ui.print("Niet genoeg spelers in de wachtrij...");
@@ -241,13 +275,13 @@ public class Server {
 		}
 	}
 	
-	public void broadcastToAll(String msg) {
+	public synchronized void broadcastToAll(String msg) {
 		for (ClientHandler ch : clients) {
 			ch.sendMessage(msg);
 		}
 	}
 	
-	public void broadcastToPlayersInGame(String msg, String name) {
+	public synchronized void broadcastToPlayersInGame(String msg, String name) {
 		Game game = null;
 		try {
 			game = getGameByPlayer(name);
@@ -259,17 +293,17 @@ public class Server {
 		}
 	}
 	
-	public void broadcastToPlayersInGame(String msg, Game game) {
+	public synchronized void broadcastToPlayersInGame(String msg, Game game) {
 		for (Player player : game.getPlayers()) {
 			getClientByPlayer(player.getName()).sendMessage(msg);
 		}
 	}
 	
-	public void broadcastToPlayer(String msg, String name) {
+	public synchronized void broadcastToPlayer(String msg, String name) {
 		getClientByPlayer(name).sendMessage(msg);
 	}
 	
-	public ClientHandler getClientByPlayer(String name) {
+	public synchronized ClientHandler getClientByPlayer(String name) {
 		for (ClientHandler ch : clients) {
 			if (ch.getPlayerName().equals(name)) {
 				return ch;

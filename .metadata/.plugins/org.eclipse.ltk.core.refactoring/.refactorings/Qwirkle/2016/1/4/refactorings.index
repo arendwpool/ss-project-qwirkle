@@ -15,3 +15,5 @@
 1453817496044	Rename package 'protocol'
 1453827336413	Rename type 'ClientPlayer'
 1453846718115	Rename method 'start'
+1453893969879	Delete element
+1453989016813	Rename field 'gameOver'

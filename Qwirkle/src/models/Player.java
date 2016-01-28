@@ -1,11 +1,9 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.Observable;
+import util.TileUtils;
 
-import exceptions.InvalidMoveException;
-
-public abstract class Player  extends Observable{
+public abstract class Player{
 	/**
 	 * De naam van de betreffende speler.
 	 */
@@ -49,6 +47,10 @@ public abstract class Player  extends Observable{
 		return score;
 	}
 	
+	public int setScore(int score) {
+		return this.score = score;
+	}
+	
 	/**
 	 * Wijzigt de score van de speler door er punten aan toe te voegen.
 	 * @param points
@@ -57,9 +59,21 @@ public abstract class Player  extends Observable{
 		score += points;
 	}
 	
-	public void determineMove() {
+	public String[] determineMove() {
+		return null;
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public String[] determineMove(String move) {
+		return null;
+	}
+
+	public String[] determineTile(String tileNumber) {
+		int tileNo = Integer.parseInt(tileNumber) - 1;
+		Tile tile = getHand().get(tileNo);
+		String[] toReturn = {Integer.toString(TileUtils.symbolToInt(tile.getSymbol())), Integer.toString(TileUtils.colorToInt(tile.getColor()))};
+		return toReturn;
 	}
 
 }
