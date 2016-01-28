@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="ASCII"?>
+<<<<<<< HEAD
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_IkVXkMX0EeWQw-d4TK0FYw" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_IkVXkcX0EeWQw-d4TK0FYw" bindingContexts="_IkWCRsX0EeWQw-d4TK0FYw">
   <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Protocol.java&quot; tooltip=&quot;Qwirkle/src/network/Protocol.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/network/Protocol.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ComputerPlayer.java&quot; tooltip=&quot;Qwirkle/src/models/ComputerPlayer.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/ComputerPlayer.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;TUI.java&quot; tooltip=&quot;Qwirkle/src/view/TUI.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/view/TUI.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;BoardTUI.java&quot; tooltip=&quot;Qwirkle/src/view/BoardTUI.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/view/BoardTUI.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;StartTUI.java&quot; tooltip=&quot;Qwirkle/src/view/StartTUI.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/view/StartTUI.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ServerPlayer.java&quot; tooltip=&quot;Qwirkle/src/models/ServerPlayer.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/ServerPlayer.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;MoveUtils.java&quot; tooltip=&quot;Qwirkle/src/util/MoveUtils.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/util/MoveUtils.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Client.java&quot; tooltip=&quot;Qwirkle/src/network/Client.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/network/Client.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Server.java&quot; tooltip=&quot;Qwirkle/src/network/Server.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/network/Server.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;TileUtils.java&quot; tooltip=&quot;Qwirkle/src/util/TileUtils.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/util/TileUtils.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Player.java&quot; tooltip=&quot;Qwirkle/src/models/Player.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Player.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Board.java&quot; tooltip=&quot;Qwirkle/src/models/Board.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Board.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ClientHandler.java&quot; tooltip=&quot;Qwirkle/src/network/ClientHandler.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/network/ClientHandler.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;HumanPlayer.java&quot; tooltip=&quot;Qwirkle/src/models/HumanPlayer.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/HumanPlayer.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Tile.java&quot; tooltip=&quot;Qwirkle/src/models/Tile.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Tile.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <tags>ModelMigrationProcessor.001</tags>
   <children xsi:type="basic:TrimmedWindow" xmi:id="_IkVXkcX0EeWQw-d4TK0FYw" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_IkVXksX0EeWQw-d4TK0FYw" label="%trimmedwindow.label.eclipseSDK" x="250" y="27" width="974" height="1040">
+=======
+<<<<<<< HEAD
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_pYxwsMQVEeWv9K9iMgj1MA" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_pYxwscQVEeWv9K9iMgj1MA" bindingContexts="_pYzAAcQVEeWv9K9iMgj1MA">
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;TUI.java&quot; tooltip=&quot;Qwirkle/src/view/TUI.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/view/TUI.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Server.java&quot; tooltip=&quot;Qwirkle/src/network/Server.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/network/Server.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ClientHandler.java&quot; tooltip=&quot;Qwirkle/src/network/ClientHandler.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/network/ClientHandler.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;MoveUtilsTest.java&quot; tooltip=&quot;Qwirkle/src/tests/MoveUtilsTest.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/tests/MoveUtilsTest.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;GameTest.java&quot; tooltip=&quot;Qwirkle/src/tests/GameTest.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/tests/GameTest.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Game2Test.java&quot; tooltip=&quot;Qwirkle/src/tests/Game2Test.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/tests/Game2Test.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;PileTest.java&quot; tooltip=&quot;Qwirkle/src/tests/PileTest.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/tests/PileTest.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;TileUtilsTest.java&quot; tooltip=&quot;Qwirkle/src/tests/TileUtilsTest.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/tests/TileUtilsTest.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Game.java&quot; tooltip=&quot;Qwirkle/src/models/Game.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Game.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Board.java&quot; tooltip=&quot;Qwirkle/src/models/Board.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Board.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;TileUtils.java&quot; tooltip=&quot;Qwirkle/src/util/TileUtils.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/util/TileUtils.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Tile.java&quot; tooltip=&quot;Qwirkle/src/models/Tile.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Tile.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Client.java&quot; tooltip=&quot;Qwirkle/src/network/Client.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/network/Client.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Pile.java&quot; tooltip=&quot;Qwirkle/src/models/Pile.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Pile.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ServerPlayer.java&quot; tooltip=&quot;Qwirkle/src/models/ServerPlayer.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/ServerPlayer.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
+  <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
+  <tags>ModelMigrationProcessor.001</tags>
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_pYxwscQVEeWv9K9iMgj1MA" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_pYxwssQVEeWv9K9iMgj1MA" label="%trimmedwindow.label.eclipseSDK" x="0" y="0" width="974" height="780">
+=======
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="__4LtUMXTEeWQw-d4TK0FYw" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="__4LtUcXTEeWQw-d4TK0FYw" bindingContexts="__4MWf8XTEeWQw-d4TK0FYw">
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ServerPlayer.java&quot; tooltip=&quot;Qwirkle/src/models/ServerPlayer.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/ServerPlayer.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;MoveUtils.java&quot; tooltip=&quot;Qwirkle/src/util/MoveUtils.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/util/MoveUtils.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Client.java&quot; tooltip=&quot;Qwirkle/src/network/Client.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/network/Client.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Server.java&quot; tooltip=&quot;Qwirkle/src/network/Server.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/network/Server.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;TileUtils.java&quot; tooltip=&quot;Qwirkle/src/util/TileUtils.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/util/TileUtils.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Player.java&quot; tooltip=&quot;Qwirkle/src/models/Player.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Player.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ComputerPlayer.java&quot; tooltip=&quot;Qwirkle/src/models/ComputerPlayer.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/ComputerPlayer.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Board.java&quot; tooltip=&quot;Qwirkle/src/models/Board.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Board.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ClientHandler.java&quot; tooltip=&quot;Qwirkle/src/network/ClientHandler.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/network/ClientHandler.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;HumanPlayer.java&quot; tooltip=&quot;Qwirkle/src/models/HumanPlayer.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/HumanPlayer.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Tile.java&quot; tooltip=&quot;Qwirkle/src/models/Tile.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Tile.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.jdt.ui.ClassFileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.ClassFileEditor&quot; name=&quot;Object.class&quot; tooltip=&quot;java.lang.Object&quot;>&#xD;&#xA;&lt;persistable org.eclipse.jdt.ui.ClassFileIdentifier=&quot;=Qwirkle/C:\/Program Files\/Java\/jre1.8.0_65\/lib\/rt.jar&amp;lt;java.lang(Object.class&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;BoardTUI.java&quot; tooltip=&quot;Qwirkle/src/view/BoardTUI.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/view/BoardTUI.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;TUI.java&quot; tooltip=&quot;Qwirkle/src/view/TUI.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/view/TUI.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Game.java&quot; tooltip=&quot;Qwirkle/src/models/Game.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Qwirkle/src/models/Game.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
+  <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
+  <tags>ModelMigrationProcessor.001</tags>
+  <children xsi:type="basic:TrimmedWindow" xmi:id="__4LtUcXTEeWQw-d4TK0FYw" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="__4LtUsXTEeWQw-d4TK0FYw" label="%trimmedwindow.label.eclipseSDK" x="-7" y="0" width="974" height="1047">
+>>>>>>> 0b219b28f51e38b82bfe0d0b899a0917a3c31985
+>>>>>>> 3cbaa8cce85f5c9bd5b62b837fa015be10ceca82
     <persistedState key="coolBarVisible" value="true"/>
     <persistedState key="perspectiveBarVisible" value="true"/>
     <persistedState key="isRestored" value="true"/>
@@ -52,9 +68,21 @@
           <tags>persp.showIn:org.eclipse.ui.navigator.ProjectExplorer</tags>
           <tags>persp.viewSC:org.eclipse.pde.runtime.LogView</tags>
           <tags>persp.perspSC:org.eclipse.wst.xml.ui.perspective</tags>
+<<<<<<< HEAD
           <children xsi:type="basic:PartSashContainer" xmi:id="_IkVXlcX0EeWQw-d4TK0FYw" selectedElement="_IkVXoMX0EeWQw-d4TK0FYw" horizontal="true">
             <children xsi:type="basic:PartSashContainer" xmi:id="_IkVXlsX0EeWQw-d4TK0FYw" containerData="2173" selectedElement="_IkVXm8X0EeWQw-d4TK0FYw">
               <children xsi:type="basic:PartStack" xmi:id="_IkVXl8X0EeWQw-d4TK0FYw" elementId="topLeft" containerData="5000" selectedElement="_IkVXmMX0EeWQw-d4TK0FYw">
+=======
+<<<<<<< HEAD
+          <children xsi:type="basic:PartSashContainer" xmi:id="_pYxwtcQVEeWv9K9iMgj1MA" selectedElement="_pYyXwcQVEeWv9K9iMgj1MA" horizontal="true">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_pYxwtsQVEeWv9K9iMgj1MA" containerData="2532" selectedElement="_pYxwt8QVEeWv9K9iMgj1MA">
+              <children xsi:type="basic:PartStack" xmi:id="_pYxwt8QVEeWv9K9iMgj1MA" elementId="topLeft" containerData="5000" selectedElement="_pYxwuMQVEeWv9K9iMgj1MA">
+=======
+          <children xsi:type="basic:PartSashContainer" xmi:id="__4LtVcXTEeWQw-d4TK0FYw" selectedElement="__4LtYMXTEeWQw-d4TK0FYw" horizontal="true">
+            <children xsi:type="basic:PartSashContainer" xmi:id="__4LtVsXTEeWQw-d4TK0FYw" containerData="2173" selectedElement="__4LtW8XTEeWQw-d4TK0FYw">
+              <children xsi:type="basic:PartStack" xmi:id="__4LtV8XTEeWQw-d4TK0FYw" elementId="topLeft" containerData="5000" selectedElement="__4LtWMXTEeWQw-d4TK0FYw">
+>>>>>>> 0b219b28f51e38b82bfe0d0b899a0917a3c31985
+>>>>>>> 3cbaa8cce85f5c9bd5b62b837fa015be10ceca82
                 <tags>org.eclipse.e4.primaryNavigationStack</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_IkVXmMX0EeWQw-d4TK0FYw" elementId="org.eclipse.ui.navigator.ProjectExplorer" ref="_IkVZ1MX0EeWQw-d4TK0FYw"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_IkVXmcX0EeWQw-d4TK0FYw" elementId="org.eclipse.ui.views.BookmarkView" toBeRendered="false" ref="_IkV-58X0EeWQw-d4TK0FYw"/>
@@ -148,8 +176,18 @@
       <tags>View</tags>
       <tags>categoryTag:Help</tags>
     </sharedElements>
+<<<<<<< HEAD
     <sharedElements xsi:type="advanced:Area" xmi:id="_IkVY-sX0EeWQw-d4TK0FYw" elementId="org.eclipse.ui.editorss" selectedElement="_IkVY-8X0EeWQw-d4TK0FYw">
       <children xsi:type="basic:PartStack" xmi:id="_IkVY-8X0EeWQw-d4TK0FYw" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_IkVZAMX0EeWQw-d4TK0FYw">
+=======
+<<<<<<< HEAD
+    <sharedElements xsi:type="advanced:Area" xmi:id="_pYyY88QVEeWv9K9iMgj1MA" elementId="org.eclipse.ui.editorss" selectedElement="_pYyY9MQVEeWv9K9iMgj1MA">
+      <children xsi:type="basic:PartStack" xmi:id="_pYyY9MQVEeWv9K9iMgj1MA" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_dAaJIMUCEeW4MYKvC70lRA">
+=======
+    <sharedElements xsi:type="advanced:Area" xmi:id="__4LuusXTEeWQw-d4TK0FYw" elementId="org.eclipse.ui.editorss" selectedElement="__4Luu8XTEeWQw-d4TK0FYw">
+      <children xsi:type="basic:PartStack" xmi:id="__4Luu8XTEeWQw-d4TK0FYw" elementId="org.eclipse.e4.primaryDataStack" selectedElement="__4LveMXTEeWQw-d4TK0FYw">
+>>>>>>> 0b219b28f51e38b82bfe0d0b899a0917a3c31985
+>>>>>>> 3cbaa8cce85f5c9bd5b62b837fa015be10ceca82
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
         <tags>noFocus</tags>
@@ -175,8 +213,48 @@
             <tags>popup:#OverviewRulerContext</tags>
           </menus>
         </children>
+<<<<<<< HEAD
         <children xsi:type="basic:Part" xmi:id="_IkVZAMX0EeWQw-d4TK0FYw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Client.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
           <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Client.java&quot; partName=&quot;Client.java&quot; title=&quot;Client.java&quot; tooltip=&quot;Qwirkle/src/network/Client.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/network/Client.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;6474&quot; selectionTopPixel=&quot;3791&quot;/>&#xD;&#xA;&lt;/editor>"/>
+=======
+<<<<<<< HEAD
+        <children xsi:type="basic:Part" xmi:id="_WRJ8kMQ2EeWbJLgHzKr07w" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Game.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Game.java&quot; partName=&quot;Game.java&quot; title=&quot;Game.java&quot; tooltip=&quot;Qwirkle/src/models/Game.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/models/Game.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;1257&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_ZgQ84MQ2EeWbJLgHzKr07w" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Pile.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Pile.java&quot; partName=&quot;Pile.java&quot; title=&quot;Pile.java&quot; tooltip=&quot;Qwirkle/src/models/Pile.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/models/Pile.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_cIGh0MQ2EeWbJLgHzKr07w" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Player.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Player.java&quot; partName=&quot;Player.java&quot; title=&quot;Player.java&quot; tooltip=&quot;Qwirkle/src/models/Player.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/models/Player.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;450&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_e_2yEMQ2EeWbJLgHzKr07w" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="HumanPlayer.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;HumanPlayer.java&quot; partName=&quot;HumanPlayer.java&quot; title=&quot;HumanPlayer.java&quot; tooltip=&quot;Qwirkle/src/models/HumanPlayer.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/models/HumanPlayer.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;114&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_jtV04MQ2EeWbJLgHzKr07w" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="ComputerPlayer.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ComputerPlayer.java&quot; partName=&quot;ComputerPlayer.java&quot; title=&quot;ComputerPlayer.java&quot; tooltip=&quot;Qwirkle/src/models/ComputerPlayer.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/models/ComputerPlayer.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;120&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_pA9DkMQ2EeWbJLgHzKr07w" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Tile.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Tile.java&quot; partName=&quot;Tile.java&quot; title=&quot;Tile.java&quot; tooltip=&quot;Qwirkle/src/models/Tile.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/models/Tile.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;5&quot; selectionOffset=&quot;470&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+=======
+        <children xsi:type="basic:Part" xmi:id="__4LuwMXTEeWQw-d4TK0FYw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Client.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Client.java&quot; partName=&quot;Client.java&quot; title=&quot;Client.java&quot; tooltip=&quot;Qwirkle/src/network/Client.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/network/Client.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;8208&quot; selectionTopPixel=&quot;4726&quot;/>&#xD;&#xA;&lt;/editor>"/>
+>>>>>>> 0b219b28f51e38b82bfe0d0b899a0917a3c31985
+>>>>>>> 3cbaa8cce85f5c9bd5b62b837fa015be10ceca82
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
@@ -197,8 +275,17 @@
             <tags>popup:#OverviewRulerContext</tags>
           </menus>
         </children>
+<<<<<<< HEAD
         <children xsi:type="basic:Part" xmi:id="_IkVZUsX0EeWQw-d4TK0FYw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Board.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+=======
+<<<<<<< HEAD
+        <children xsi:type="basic:Part" xmi:id="_u1VdAMQ2EeWbJLgHzKr07w" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Server.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Server.java&quot; partName=&quot;Server.java&quot; title=&quot;Server.java&quot; tooltip=&quot;Qwirkle/src/network/Server.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/network/Server.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+=======
+        <children xsi:type="basic:Part" xmi:id="__4LvEsXTEeWQw-d4TK0FYw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Board.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+>>>>>>> 3cbaa8cce85f5c9bd5b62b837fa015be10ceca82
           <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Board.java&quot; partName=&quot;Board.java&quot; title=&quot;Board.java&quot; tooltip=&quot;Qwirkle/src/models/Board.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/models/Board.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;46&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+>>>>>>> 0b219b28f51e38b82bfe0d0b899a0917a3c31985
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
@@ -219,8 +306,20 @@
             <tags>popup:#OverviewRulerContext</tags>
           </menus>
         </children>
+<<<<<<< HEAD
         <children xsi:type="basic:Part" xmi:id="_IkVZVsX0EeWQw-d4TK0FYw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="BoardTUI.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
           <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;BoardTUI.java&quot; partName=&quot;BoardTUI.java&quot; title=&quot;BoardTUI.java&quot; tooltip=&quot;Qwirkle/src/view/BoardTUI.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/view/BoardTUI.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;4455&quot; selectionTopPixel=&quot;430&quot;/>&#xD;&#xA;&lt;/editor>"/>
+=======
+<<<<<<< HEAD
+        <children xsi:type="basic:Part" xmi:id="_wXw5EMQ2EeWbJLgHzKr07w" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Client.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Client.java&quot; partName=&quot;Client.java&quot; title=&quot;Client.java&quot; tooltip=&quot;Qwirkle/src/network/Client.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/network/Client.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>removeOnHide</tags>
+=======
+        <children xsi:type="basic:Part" xmi:id="__4LvFsXTEeWQw-d4TK0FYw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="BoardTUI.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;BoardTUI.java&quot; partName=&quot;BoardTUI.java&quot; title=&quot;BoardTUI.java&quot; tooltip=&quot;Qwirkle/src/view/BoardTUI.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/view/BoardTUI.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;74&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+>>>>>>> 3cbaa8cce85f5c9bd5b62b837fa015be10ceca82
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
@@ -240,6 +339,7 @@
             <tags>menuContribution:popup</tags>
             <tags>popup:#OverviewRulerContext</tags>
           </menus>
+>>>>>>> 0b219b28f51e38b82bfe0d0b899a0917a3c31985
         </children>
         <children xsi:type="basic:Part" xmi:id="_IkVZWsX0EeWQw-d4TK0FYw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="MoveUtils.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
           <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;MoveUtils.java&quot; partName=&quot;MoveUtils.java&quot; title=&quot;MoveUtils.java&quot; tooltip=&quot;Qwirkle/src/util/MoveUtils.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/util/MoveUtils.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;5807&quot; selectionTopPixel=&quot;2601&quot;/>&#xD;&#xA;&lt;/editor>"/>
@@ -285,8 +385,17 @@
             <tags>popup:#OverviewRulerContext</tags>
           </menus>
         </children>
+<<<<<<< HEAD
         <children xsi:type="basic:Part" xmi:id="_IkVZsMX0EeWQw-d4TK0FYw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Player.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+=======
+<<<<<<< HEAD
+        <children xsi:type="basic:Part" xmi:id="_M87tQMQ4EeWbJLgHzKr07w" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="ClientHandler.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ClientHandler.java&quot; partName=&quot;ClientHandler.java&quot; title=&quot;ClientHandler.java&quot; tooltip=&quot;Qwirkle/src/network/ClientHandler.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/network/ClientHandler.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+=======
+        <children xsi:type="basic:Part" xmi:id="__4LvcMXTEeWQw-d4TK0FYw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Player.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+>>>>>>> 3cbaa8cce85f5c9bd5b62b837fa015be10ceca82
           <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Player.java&quot; partName=&quot;Player.java&quot; title=&quot;Player.java&quot; tooltip=&quot;Qwirkle/src/models/Player.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/models/Player.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;46&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+>>>>>>> 0b219b28f51e38b82bfe0d0b899a0917a3c31985
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
@@ -329,8 +438,18 @@
             <tags>popup:#OverviewRulerContext</tags>
           </menus>
         </children>
+<<<<<<< HEAD
         <children xsi:type="basic:Part" xmi:id="_IkVZuMX0EeWQw-d4TK0FYw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="HumanPlayer.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
           <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;HumanPlayer.java&quot; partName=&quot;HumanPlayer.java&quot; title=&quot;HumanPlayer.java&quot; tooltip=&quot;Qwirkle/src/models/HumanPlayer.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/models/HumanPlayer.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;2548&quot; selectionTopPixel=&quot;714&quot;/>&#xD;&#xA;&lt;/editor>"/>
+=======
+<<<<<<< HEAD
+        <children xsi:type="basic:Part" xmi:id="_zvCC8MROEeWLv_aLeZcMNg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="TUI.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;TUI.java&quot; partName=&quot;TUI.java&quot; title=&quot;TUI.java&quot; tooltip=&quot;Qwirkle/src/view/TUI.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/view/TUI.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;489&quot;/>&#xD;&#xA;&lt;/editor>"/>
+=======
+        <children xsi:type="basic:Part" xmi:id="__4LveMXTEeWQw-d4TK0FYw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="HumanPlayer.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;HumanPlayer.java&quot; partName=&quot;HumanPlayer.java&quot; title=&quot;HumanPlayer.java&quot; tooltip=&quot;Qwirkle/src/models/HumanPlayer.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/models/HumanPlayer.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;2924&quot; selectionTopPixel=&quot;170&quot;/>&#xD;&#xA;&lt;/editor>"/>
+>>>>>>> 0b219b28f51e38b82bfe0d0b899a0917a3c31985
+>>>>>>> 3cbaa8cce85f5c9bd5b62b837fa015be10ceca82
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
@@ -351,8 +470,17 @@
             <tags>popup:#OverviewRulerContext</tags>
           </menus>
         </children>
+<<<<<<< HEAD
         <children xsi:type="basic:Part" xmi:id="_IkVZvMX0EeWQw-d4TK0FYw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="ClientHandler.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+=======
+<<<<<<< HEAD
+        <children xsi:type="basic:Part" xmi:id="_llLsAMRREeWLv_aLeZcMNg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Board.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Board.java&quot; partName=&quot;Board.java&quot; title=&quot;Board.java&quot; tooltip=&quot;Qwirkle/src/models/Board.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/models/Board.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;1029&quot;/>&#xD;&#xA;&lt;/editor>"/>
+=======
+        <children xsi:type="basic:Part" xmi:id="__4LvfMXTEeWQw-d4TK0FYw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="ClientHandler.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+>>>>>>> 3cbaa8cce85f5c9bd5b62b837fa015be10ceca82
           <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ClientHandler.java&quot; partName=&quot;ClientHandler.java&quot; title=&quot;ClientHandler.java&quot; tooltip=&quot;Qwirkle/src/network/ClientHandler.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/network/ClientHandler.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;41&quot; selectionOffset=&quot;902&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+>>>>>>> 0b219b28f51e38b82bfe0d0b899a0917a3c31985
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
@@ -482,6 +610,38 @@
             <tags>menuContribution:popup</tags>
             <tags>popup:#OverviewRulerContext</tags>
           </menus>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_GFBygMUCEeW4MYKvC70lRA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="TileUtilsTest.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;TileUtilsTest.java&quot; partName=&quot;TileUtilsTest.java&quot; title=&quot;TileUtilsTest.java&quot; tooltip=&quot;Qwirkle/src/tests/TileUtilsTest.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/tests/TileUtilsTest.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;222&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_dAaJIMUCEeW4MYKvC70lRA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="PileTest.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;PileTest.java&quot; partName=&quot;PileTest.java&quot; title=&quot;PileTest.java&quot; tooltip=&quot;Qwirkle/src/tests/PileTest.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/tests/PileTest.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;477&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>removeOnHide</tags>
+          <tags>active</tags>
+          <tags>activeOnClose</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_gxEP8MUFEeW4MYKvC70lRA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Game2Test.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Game2Test.java&quot; partName=&quot;Game2Test.java&quot; title=&quot;Game2Test.java&quot; tooltip=&quot;Qwirkle/src/tests/Game2Test.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/tests/Game2Test.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_hXsyIMUFEeW4MYKvC70lRA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="GameTest.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;GameTest.java&quot; partName=&quot;GameTest.java&quot; title=&quot;GameTest.java&quot; tooltip=&quot;Qwirkle/src/tests/GameTest.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/tests/GameTest.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;972&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_j74mIMUFEeW4MYKvC70lRA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="MoveUtilsTest.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;MoveUtilsTest.java&quot; partName=&quot;MoveUtilsTest.java&quot; title=&quot;MoveUtilsTest.java&quot; tooltip=&quot;Qwirkle/src/tests/MoveUtilsTest.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Qwirkle/src/tests/MoveUtilsTest.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>removeOnHide</tags>
         </children>
       </children>
     </sharedElements>
@@ -880,7 +1040,14 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_IkWAN8X0EeWQw-d4TK0FYw" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
+<<<<<<< HEAD
         <children xsi:type="menu:DirectToolItem" xmi:id="_IkWAOMX0EeWQw-d4TK0FYw" elementId="new.group">
+=======
+<<<<<<< HEAD
+        <children xsi:type="menu:HandledToolItem" xmi:id="_64KLEMT5EeW4MYKvC70lRA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_pYzpicQVEeWv9K9iMgj1MA"/>
+=======
+        <children xsi:type="menu:DirectToolItem" xmi:id="__4MUccXTEeWQw-d4TK0FYw" elementId="new.group">
+>>>>>>> 3cbaa8cce85f5c9bd5b62b837fa015be10ceca82
           <tags>Opaque</tags>
         </children>
         <children xsi:type="menu:DirectToolItem" xmi:id="_IkWAOcX0EeWQw-d4TK0FYw" elementId="newWizardDropDown">
@@ -917,6 +1084,7 @@
         <children xsi:type="menu:DirectToolItem" xmi:id="_IkWARMX0EeWQw-d4TK0FYw" elementId="org.eclipse.wb.core.wizards.actions.NewDesignerTypeDropDownAction">
           <tags>Opaque</tags>
         </children>
+>>>>>>> 0b219b28f51e38b82bfe0d0b899a0917a3c31985
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_IkWARcX0EeWQw-d4TK0FYw" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -1010,6 +1178,10 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_IkWAj8X0EeWQw-d4TK0FYw" elementId="org.eclipse.jdt.ui.CompilationUnitEditor" visible="false">
         <tags>Draggable</tags>
+<<<<<<< HEAD
+        <children xsi:type="menu:HandledToolItem" xmi:id="_64QRsMT5EeW4MYKvC70lRA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_pYznicQVEeWv9K9iMgj1MA"/>
+=======
+>>>>>>> 0b219b28f51e38b82bfe0d0b899a0917a3c31985
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_IkWAkMX0EeWQw-d4TK0FYw" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -1076,7 +1248,15 @@
       <children xsi:type="menu:ToolBar" xmi:id="_IkWApsX0EeWQw-d4TK0FYw" visible="false">
         <tags>Draggable</tags>
       </children>
+<<<<<<< HEAD
       <children xsi:type="menu:ToolBar" xmi:id="_IkWAp8X0EeWQw-d4TK0FYw" visible="false">
+=======
+<<<<<<< HEAD
+      <children xsi:type="menu:ToolBar" xmi:id="_YmQ4IMRJEeWLv_aLeZcMNg" visible="false">
+=======
+      <children xsi:type="menu:ToolBar" xmi:id="__4MU4MXTEeWQw-d4TK0FYw" visible="false">
+>>>>>>> 0b219b28f51e38b82bfe0d0b899a0917a3c31985
+>>>>>>> 3cbaa8cce85f5c9bd5b62b837fa015be10ceca82
         <tags>Draggable</tags>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_IkWAqMX0EeWQw-d4TK0FYw" visible="false">
