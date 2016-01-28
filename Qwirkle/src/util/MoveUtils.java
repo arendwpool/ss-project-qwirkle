@@ -20,7 +20,7 @@ public class MoveUtils {
 	/**
 	 * Bepaalt of het de eerste move van het spel iets of niet.
 	 */
-	private static boolean initialMove = true;
+	public static boolean initialMove = true;
 	
 	/**
 	 * Geef een set met de tegels die de betreffende speler heeft neergelegd.
@@ -256,7 +256,12 @@ public class MoveUtils {
 			if (isValidMove(x, y, tile, game.getBoard()) == true && game.getBoard().validSharedLine(x, y, tile) == true) {
 				game.getBoard().setTile(x, y, tile);
 				rememberMove(tile);
-				game.getPlayerByClient(name).getHand().remove(tile);
+				for (Tile tileInHand : game.getCurrentPlayer().getHand()) {
+					if (TileUtils.compareColor(tile, tileInHand) == true && TileUtils.compareSymbol(tile, tileInHand) == true){
+						game.getCurrentPlayer().getHand().remove(tileInHand);
+						break;
+					}
+				}
 				madeMove = true;
 			} else {
 				throw new InvalidMoveException();
@@ -264,7 +269,12 @@ public class MoveUtils {
 		} else if(initialMove == true){
 			game.getBoard().setTile(90, 90, tile);
 			rememberMove(tile);
-			game.getPlayerByClient(name).getHand().remove(tile);
+			for (Tile tileInHand : game.getCurrentPlayer().getHand()) {
+				if (TileUtils.compareColor(tile, tileInHand) == true && TileUtils.compareSymbol(tile, tileInHand) == true){
+					game.getCurrentPlayer().getHand().remove(tileInHand);
+					break;
+				}
+			}
 			initialMove = false;
 			madeMove = true;
 		} else {

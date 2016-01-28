@@ -6,11 +6,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
 import models.Player;
 import models.ServerPlayer;
 import models.Tile;
+import util.MoveUtils;
 import util.TileUtils;
 import models.ComputerPlayer;
 import models.Game;
@@ -45,7 +44,7 @@ public class Client extends Thread{
 		Client client = new Client();
 		client.startClient();
 	}
-	public void getServerMessage(String msg) {
+	public synchronized void getServerMessage(String msg) {
 		String[] slicedMessage = msg.split(Protocol.MESSAGESEPERATOR);
 		switch(slicedMessage[0]) {
 			case Protocol.SERVER_CORE_JOIN_ACCEPTED: joinAccepted(slicedMessage[1]);
@@ -80,6 +79,11 @@ public class Client extends Thread{
 		}
 	}
 	
+	private void moveAccepted() {
+		if (localPlayer instanceof ComputerPlayer)
+		sendMessage(Protocol.CLIENT_CORE_DONE);
+		
+	}
 	private void sendPlayers(String[] slicedMessage) {
 		//TODO handig om te gebruiken?
 		for(int i = 1; i < slicedMessage.length; i++) {
@@ -180,7 +184,7 @@ public class Client extends Thread{
 				}
 			}
 		} catch (IOException e) {
-			//
+			//TODO implement
 		}
 		
 	}
@@ -196,22 +200,22 @@ public class Client extends Thread{
 	}	
 
 	private void gameEnded(String[] nameScore) {
-		Map<String, Integer> score = new HashMap<String, Integer>();
 		for (int i = 1; i < nameScore.length; i += 2) {
-			score.put(nameScore[i], Integer.parseInt(nameScore[i + 1]));
-			//toon scores -> eindmenu...
+			ui.print(nameScore[i]+ " heeft een eindscore van " + nameScore[i+1]) ;
 		}
+		ui.print("De winnaar is: " + game.winner().getName());
 	}
 
 	private void score(String[] nameScore) {
 		for (int i = 1; i < nameScore.length; i += 2) {
 			Player player = game.getPlayerByClient(nameScore[i]);
-			player.addScore(Integer.parseInt(nameScore[i+1]));
+			player.setScore(Integer.parseInt(nameScore[i+1]));
 		}
 		bui.update();
 	}
 
 	private void moveMade(String x, String y, String shape, String color) {
+		MoveUtils.setInitialMove(false);
 		int xInt = Integer.parseInt(x)+90;
 		int yInt = Integer.parseInt(y)+90;
 		int shapeInt = Integer.parseInt(shape);
@@ -225,18 +229,22 @@ public class Client extends Thread{
 				break;
 			}
 		}
-		
 		game.getBoard().boardSize();
 		bui.update();
-		turn(game.getCurrentPlayer().getName());
+		if (game.getCurrentPlayer() instanceof HumanPlayer) {
+			turn(game.getCurrentPlayer().getName());
+		}
+		
 	}
 
 	private void moveDenied() {
 		ui.print("Dit mag niet..."); 
-		turn(game.getCurrentPlayer().getName());
-	}
-
-	private void moveAccepted() {
+		if (localPlayer instanceof ComputerPlayer) {
+			sendMessage(Protocol.CLIENT_CORE_DONE);
+		} else {
+			turn(game.getCurrentPlayer().getName());
+		}
+		bui.update();
 	}
 
 	private void exception(String name) {
@@ -265,9 +273,14 @@ public class Client extends Thread{
 
 	private void turn(String name) {
 		game.setCurrentPlayer(game.getPlayerByClient(name));
-		if (game.getCurrentPlayer().getName().equals(localPlayer.getName())) {
-			String[] move = localPlayer.determineMove();
-			if (!move[0].equals(Protocol.CLIENT_CORE_DONE)) {
+		if (name.equals(localPlayer.getName())) {
+			String[] move = null;
+			if (localPlayer instanceof HumanPlayer) {
+				move = localPlayer.determineMove();
+			} else {
+				move = ((ComputerPlayer)localPlayer).determineMove(game);
+			}
+			if (move[0] != null && !move[0].equals(Protocol.CLIENT_CORE_DONE)) {
 				if(move.length == 4) {
 					int x = Integer.parseInt(move[0]);
 					int y = Integer.parseInt(move[1]);
@@ -290,13 +303,6 @@ public class Client extends Thread{
 		int symbol = Integer.parseInt(shape);
 		int colorInt = Integer.parseInt(color);
 		Tile tile = new Tile(TileUtils.intToColor(colorInt), TileUtils.intToSymbol(symbol));
-		for(Tile tileInPile : game.getPile().getTiles()) {
-			if (TileUtils.compareColor(tile, tileInPile) && TileUtils.compareSymbol(tile, tileInPile)) {
-				game.getPile().getTiles().remove(tileInPile);
-				break;
-			}
-		}
-		game.getPile().getTiles().remove(tile);
 		localPlayer.getHand().add(tile);
 	}
 

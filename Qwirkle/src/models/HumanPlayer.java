@@ -97,11 +97,5 @@ public class HumanPlayer extends Player {
 		return toReturn;
 	}
 	
-	public String[] determineTile(String tileNumber) {
-		int tileNo = Integer.parseInt(tileNumber) - 1;
-		Tile tile = getHand().get(tileNo);
-		String[] toReturn = {Integer.toString(TileUtils.symbolToInt(tile.getSymbol())), Integer.toString(TileUtils.colorToInt(tile.getColor()))};
-		return toReturn;
-	}
 	
 }

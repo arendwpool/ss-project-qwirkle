@@ -75,15 +75,41 @@ public class Game {
 		Tile tile = pile.getTiles().get(0);
 		return tile;
 	}
-
-	public void finishMove(String name) throws InvalidMoveException {
-	/*	if(lastSet.size() > 0 ){
-			//MoveUtils.generateScore(getPlayerByClient(name), board);
-			lastSet.clear();
-		} else if (tilesToSwap.size() > 0) {
-			pile.getTiles().addAll(tilesToSwap);
-			//TileUtils.setHand(getPlayerByClient(name), pile);
-		}*/
+	
+	/**
+	 * Controleert of het spel een winnaar heeft, hiervoor kijkt hij of winner() een
+	 * player terug geeft, of een object dat null is.
+	 * @return winner() != null
+	 */
+	public boolean hasWinner() {
+		return winner() != null;
+	}
+	
+	/**
+	 * Geeft aan of het spel over is. Dit is het geval als een speler zijn laatste tegel
+	 * heeft neergelegd en de Pile leeg is.
+	 * @return noTilesLeft();
+	 */
+	/*@pure*/
+	public boolean gameOver() {
+		return TileUtils.noTilesLeft(this);
+	}
+	
+	/**
+	 * Geeft aan welke speler winnaar is, geeft null als er nog geen winnaar is. Een speler
+	 * is de winnaar als het spel af is, en de meeste punten heeft.
+	 * @return Player withHighscore || null //TODO vraag
+	 */
+	public Player winner() {
+		int score = 0;
+		Player withHighscore = null;
+		for (Player player : players) {
+			if (player.getScore() > score) {
+				score = player.getScore();
+				withHighscore = player;
+			}
+		}
+		return withHighscore;
 	}
 	
 	public ArrayList<Tile> getHandByPlayerName(String name) {
