@@ -214,7 +214,7 @@ public class Server {
 						break;
 					}
 				}
-				game.getMoves().getTilesToSwap().add(toSwap);
+				MoveUtils.getTilesToSwap().add(toSwap);
 				broadcastToPlayer(Protocol.SERVER_CORE_SWAP_ACCEPTED, client.getPlayerName());
 			}
 			else {

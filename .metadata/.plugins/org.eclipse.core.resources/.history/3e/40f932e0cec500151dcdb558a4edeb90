@@ -178,7 +178,7 @@ public class Server {
 			if (game.getPile().getTiles().size() !=0) {
 				TileUtils.setHand(game.getPlayerByClient(client.getPlayerName()), game.getPile(), this, game);
 			}
-			game.getMoves().generateScore(game.getPlayerByClient(client.getPlayerName()), game.getBoard());
+			MoveUtils.generateScore(game.getPlayerByClient(client.getPlayerName()), game.getBoard());
 			String msgScore = "";
 			for (Player player : game.getPlayers()) {
 				msgScore += (Protocol.MESSAGESEPERATOR + player.getName() + Protocol.MESSAGESEPERATOR + player.getScore());
@@ -214,7 +214,7 @@ public class Server {
 						break;
 					}
 				}
-				game.getMoves().getTilesToSwap().add(toSwap);
+				MoveUtils.getTilesToSwap().add(toSwap);
 				broadcastToPlayer(Protocol.SERVER_CORE_SWAP_ACCEPTED, client.getPlayerName());
 			}
 			else {

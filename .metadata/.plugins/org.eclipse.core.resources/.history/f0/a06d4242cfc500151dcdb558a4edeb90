@@ -165,7 +165,7 @@ public class MoveUtils {
 	 * andere tegels in een rij of kolom. Als een tegel dezelfde kleur en symbool heeft wordt er ook direct
 	 * false teruggegeven.
 	 */
-	public static boolean isValidMove(int x, int y, Tile tile, Board board) {
+	public boolean isValidMove(int x, int y, Tile tile, Board board) {
 		Board boardCopy = board.deepCopy();
 		if (boardCopy.isEmptyField(x, y) == false) {
 			return false;

@@ -14,7 +14,7 @@ public class MoveUtils {
 	/**
 	 * Geeft aan of een speler heeft geruilt in de plaats van een zet maken.
 	 */
-	private boolean hasTraded = false;
+	private static boolean hasTraded = false;
 	
 	
 	/**
@@ -25,19 +25,19 @@ public class MoveUtils {
 	/**
 	 * Geef een set met de tegels die de betreffende speler heeft neergelegd.
 	 */
-	private ArrayList<Tile> lastSet = new ArrayList<Tile>();
+	private static ArrayList<Tile> lastSet = new ArrayList<Tile>();
 	
-	private ArrayList<Tile> tilesToSwap = new ArrayList<Tile>();
+	private static ArrayList<Tile> tilesToSwap = new ArrayList<Tile>();
 	/**
 	 * Geeft aan of een speler een blokje heeft neergelegd.
 	 */
-	private boolean madeMove = false;
+	private static boolean madeMove = false;
 
 	/**
 	 * Verwijderd alle laatst gezette tegels van een speler.
 	 * @throws InvalidMoveException 
 	 */
-	public void processMove(Player player, Game game) throws InvalidMoveException {
+	public static void processMove(Player player, Game game) throws InvalidMoveException {
 		if(getLastMoves().size() != 0 || hasTraded == true){
 			generateScore(player, game.getBoard());
 			clearLastMoves();
@@ -48,7 +48,7 @@ public class MoveUtils {
 		}
 	}
 
-	public void setInitialMove(boolean bl){
+	public static void setInitialMove(boolean bl){
 		initialMove = bl;
 	}
 	
@@ -63,7 +63,7 @@ public class MoveUtils {
 	 * score is berekend wordt deze aan de speler toegevoegd.
 	 * @param player
 	 */
-	public void generateScore(Player player, Board board) {
+	public synchronized static void generateScore(Player player, Board board) {
 		Point point = null;
 		boolean retainMultipleX = false;
 		boolean retainMultipleY = false;
@@ -119,7 +119,7 @@ public class MoveUtils {
 	 * @param board
 	 * @return isSingleOnX
 	 */
-	public boolean isSingleOnXAxis(ArrayList<Tile> moves, Board board) {
+	public static boolean isSingleOnXAxis(ArrayList<Tile> moves, Board board) {
 		boolean isSingleOnX = true;
 		for (Tile tile : moves) {
 			int x = (int) tile.getLocation().getX();
@@ -137,7 +137,7 @@ public class MoveUtils {
 	 * @param board
 	 * @return isSingleOnY
 	 */
-	public boolean isSingleOnYAxis(ArrayList<Tile> moves, Board board) {
+	public static boolean isSingleOnYAxis(ArrayList<Tile> moves, Board board) {
 		boolean isSingleOnY = true;
 		for (Tile tile : moves) {
 			int x = (int) tile.getLocation().getX();
@@ -149,7 +149,7 @@ public class MoveUtils {
 		return isSingleOnY;
 	}
 	
-	public ArrayList<Tile> deleteCommon(ArrayList<Tile> listToKeep, ArrayList<Tile> listToRemove) {
+	public static ArrayList<Tile> deleteCommon(ArrayList<Tile> listToKeep, ArrayList<Tile> listToRemove) {
 		ArrayList<Tile> copy = new ArrayList<Tile>(listToKeep);
 		copy.removeAll(listToRemove);
 		listToKeep.removeAll(copy);
@@ -165,7 +165,7 @@ public class MoveUtils {
 	 * andere tegels in een rij of kolom. Als een tegel dezelfde kleur en symbool heeft wordt er ook direct
 	 * false teruggegeven.
 	 */
-	public static boolean isValidMove(int x, int y, Tile tile, Board board) {
+	public synchronized static boolean isValidMove(int x, int y, Tile tile, Board board) {
 		Board boardCopy = board.deepCopy();
 		if (boardCopy.isEmptyField(x, y) == false) {
 			return false;
@@ -220,7 +220,7 @@ public class MoveUtils {
 	 * Onthoud de laatste move die een speler gedaan heeft.
 	 * @param tile
 	 */
-	public void rememberMove(Tile tile) {
+	public static void rememberMove(Tile tile) {
 		lastSet.add(tile);
 	}
 
@@ -228,18 +228,18 @@ public class MoveUtils {
 	/**
 	 * leegt de set met de laaste moves van de speler.
 	 */
-	public void clearLastMoves() {
+	public static void clearLastMoves() {
 		lastSet.clear();
 	}
 	/**
 	 * Weergeeft de lijst met de laastse moves.
 	 * @return lastSet
 	 */
-	public ArrayList<Tile> getLastMoves() {
+	public static ArrayList<Tile> getLastMoves() {
 		return lastSet;
 	}
 	
-	public void setTraded(boolean bl) {
+	public static void setTraded(boolean bl) {
 		hasTraded = bl;
 	}
 
@@ -251,9 +251,9 @@ public class MoveUtils {
 	 * @param y
 	 * @param tile
 	 */
-	public void makeMove(int x, int y, Tile tile, Game game, String name) throws InvalidMoveException{
+	public static void makeMove(int x, int y, Tile tile, Game game, String name) throws InvalidMoveException{
 		if (hasTraded == false && initialMove == false) {
-			if (isValidMove(x, y, tile, game.getBoard()) == true && validSharedLine(x, y, tile) == true) {
+			if (isValidMove(x, y, tile, game.getBoard()) == true && game.getBoard().validSharedLine(x, y, tile) == true) {
 				game.getBoard().setTile(x, y, tile);
 				rememberMove(tile);
 				for (Tile tileInHand : game.getCurrentPlayer().getHand()) {
@@ -283,7 +283,7 @@ public class MoveUtils {
 		
 	}
 	
-	public void swapTile(String shape, String color, String name, Game game) throws InvalidMoveException{
+	public static void swapTile(String shape, String color, String name, Game game) throws InvalidMoveException{
 		if (lastSet.size() == 0 && initialMove == false && game.getPile().getTiles().size() > 0) { 
 			Tile newTile = new Tile(color, shape);
 			tilesToSwap.add(newTile);
@@ -294,47 +294,15 @@ public class MoveUtils {
 		}
 	}
 
-	public ArrayList<Tile> getTilesToSwap(){
+	public static ArrayList<Tile> getTilesToSwap(){
 		return tilesToSwap;
 	}
 	
-	public boolean madeMove(){
+	public static boolean madeMove(){
 		return madeMove;
 	}
 	
-	public boolean hasTraded(){
+	public static boolean hasTraded(){
 		return hasTraded;
 	}
-	
-	/**
-	 * Deze methode kijkt of alle aangelegde steenjes dezelfde x of y coordinaten hebben.
-	 * @param tileToSet
-	 * @param axis
-	 * @return contains;
-	 */
-	public boolean validSharedLine(int x, int y, Tile tileToSet) {
-		boolean sameX = true;
-		boolean sameY = true;
-		boolean validSharedLine = false;
-		if (getLastMoves().size()<1){
-			return true;
-		} else {
-			for (Tile tile : getLastMoves()) {
-				if ((int) tile.getLocation().getX() != x) {
-					sameX = false;
-				}
-				if ((int) tile.getLocation().getY() != y) {
-					sameY = false;
-				}
-			}
-			if (sameX == true && sameY == false) {
-				validSharedLine = true;
-			} else if (sameX == false && sameY == true) {
-				validSharedLine = true;
-			}
-			return validSharedLine;
-		}
-	}
-	
-	
 }

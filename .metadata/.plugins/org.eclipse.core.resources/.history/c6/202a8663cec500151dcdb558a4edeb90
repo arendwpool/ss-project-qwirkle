@@ -213,7 +213,37 @@ public class Board {
 		return yAxis;
 	}
 	
-
+	/**
+	 * Deze methode kijkt of alle aangelegde steenjes dezelfde x of y coordinaten hebben.
+	 * @param tileToSet
+	 * @param axis
+	 * @return contains;
+	 */
+	public boolean validSharedLine(int x, int y, Tile tileToSet) {
+		boolean sameX = true;
+		boolean sameY = true;
+		boolean validSharedLine = false;
+		if (MoveUtils.getLastMoves().size()<1){
+			return true;
+		} else {
+			for (Tile tile : MoveUtils.getLastMoves()) {
+				if ((int) tile.getLocation().getX() != x) {
+					sameX = false;
+				}
+				if ((int) tile.getLocation().getY() != y) {
+					sameY = false;
+				}
+			}
+			if (sameX == true && sameY == false) {
+				validSharedLine = true;
+			} else if (sameX == false && sameY == true) {
+				validSharedLine = true;
+			}
+			return validSharedLine;
+		}
+	}
+	
+	
 	
 	/**
 	 * bindt een coordinaat aan een tile.

@@ -231,7 +231,7 @@ public class Client extends Thread{
 	}
 
 	private void moveMade(String x, String y, String shape, String color) {
-		game.getMoves().setInitialMove(false);
+		MoveUtils.setInitialMove(false);
 		int xInt = Integer.parseInt(x)+90;
 		int yInt = Integer.parseInt(y)+90;
 		int shapeInt = Integer.parseInt(shape);

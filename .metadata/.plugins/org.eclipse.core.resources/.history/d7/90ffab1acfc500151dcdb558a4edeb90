@@ -50,6 +50,9 @@ public class ComputerPlayer extends Player {
 				}
 			}
 		}
+		/*if(MoveUtils.madeMove() == false){
+			return determineTile(Integer.toString(1));
+		}*/
 		return null;
 	}	
 }

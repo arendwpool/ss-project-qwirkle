@@ -43,7 +43,7 @@ public class Game {
 	}
 
 	public void makeMove(int x, int y, Tile tile, String name) throws InvalidMoveException{
-			move.makeMove(x, y, tile, this, name);		
+			MoveUtils.makeMove(x, y, tile, this, name);		
 	}
 	
 	public Player getPlayerByClient(String name) {
@@ -67,7 +67,7 @@ public class Game {
 	}
 	
 	public void swapTile(String shape, String color, String name) throws InvalidMoveException {
-		move.swapTile(shape, color, name, this);
+		MoveUtils.swapTile(shape, color, name, this);
 	}
 	
 
@@ -189,9 +189,5 @@ public class Game {
 	 */
 	public void setCurrentPlayer(Player player) {
 		currentPlayer = player;
-	}
-	
-	public MoveUtils getMoves(){
-		return move;
 	}
 }

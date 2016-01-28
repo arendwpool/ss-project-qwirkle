@@ -20,7 +20,7 @@ public class MoveUtils {
 	/**
 	 * Bepaalt of het de eerste move van het spel iets of niet.
 	 */
-	public static boolean initialMove = true;
+	public boolean initialMove = true;
 	
 	/**
 	 * Geef een set met de tegels die de betreffende speler heeft neergelegd.
@@ -165,7 +165,7 @@ public class MoveUtils {
 	 * andere tegels in een rij of kolom. Als een tegel dezelfde kleur en symbool heeft wordt er ook direct
 	 * false teruggegeven.
 	 */
-	public static boolean isValidMove(int x, int y, Tile tile, Board board) {
+	public boolean isValidMove(int x, int y, Tile tile, Board board) {
 		Board boardCopy = board.deepCopy();
 		if (boardCopy.isEmptyField(x, y) == false) {
 			return false;
