@@ -4,24 +4,21 @@ import java.util.InputMismatchException;
 import java.util.Observer;
 import java.util.Scanner;
 
-import controllers.GameController;
 
 
-public abstract class TUI implements Observer {
+public abstract class TUI{
 	
 	private static final int AMOUNT_CHARACTERS = 75;
-	private Scanner scanner;
 	boolean terminated = false;
-	protected GameController gc;
 	protected String playerName;
 	protected static final String[] NAME_MENU = {null, "Voer uw naam in:"};
 	
 	
-	public TUI(GameController gc){
-		this.gc = gc;
+	public TUI(){
+		
 	}
 	
-	public void start(){
+	public void update(){
 		
 	}
 	
@@ -54,31 +51,23 @@ public abstract class TUI implements Observer {
 		return dots;
 	}
 
-	public int determineOption(){
-		int in = 0;
-		while (true) {
-			scanner = new Scanner(System.in);
-			try {
-				in = scanner.nextInt();
-				break;
-			} catch (InputMismatchException e) {
-				System.out.println("Voer een nummer in");
-			}
-		}
-		return in;
+	public int determineInt() {
+		Scanner scanner = new Scanner(System.in);
+		int input = Integer.parseInt(scanner.nextLine());
+		return input;
 	}
+	
 	public String determineString(){
-		String string = "";
-		while (true) {
-			scanner = new Scanner(System.in);
-			string = scanner.nextLine();
-			break;
-		}
-		return string;
+		Scanner scanner = new Scanner(System.in);
+		String input = scanner.nextLine();
+		return input;
 	}
 	
 	public void createSpace(){
 		System.out.print("\n \n");
 	}
-		
+	
+	public void print(String msg){
+		System.out.println(msg);
+	} 
 }

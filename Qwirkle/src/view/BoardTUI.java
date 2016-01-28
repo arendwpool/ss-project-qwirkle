@@ -2,67 +2,68 @@ package view;
 
 import java.util.ArrayList;
 import java.util.Observable;
-
-import controllers.GameController;
-import exceptions.PlayerNotFoundException;
 import models.ComputerPlayer;
 import models.Game;
 import models.Player;
 import models.Tile;
+import network.Client;
 
+/**
+ * TUI die een bord weergeeft.
+ * @author Arend Pool en Bob Breemhaar
+ *
+ */
 public class BoardTUI extends TUI{
-	
-	public BoardTUI(GameController gc, Game game) {
-		super(gc);
+	/**
+	 * Maakt een nieuwe instantie van het TUI.
+	 * @param gc
+	 * @param game
+	 */
+	public BoardTUI(Game game, Client client) {
 		this.game = game;
+		this.client = client;
 	}
 
 	private Game game;
+	private Client client;
 	
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		if (arg1 != null && arg1.equals("MadeMove")) {
-			gc.done((Player) arg0); 
-		} else {
-			game.getBoard().boardSize();
-			start();
-		}
-	}
 	
-	public void start(){
+	/**
+	 * Start de TUI door de juiste objecten te weergeven. 	
+	 */
+	public void update(){
 		renderBoard();
-		showPileSize();
 		showTiles();
 		showScore();
 	}
 	
+	/**
+	 * Weergeeft de speler die aan de beurt is.
+	 */
 	public void showCurrentPlayer() {
-		if (gc.getCurrentPlayer() instanceof ComputerPlayer) {
-			try {
-				System.out.println("De huidige speler is "+gc.getCurrentPlayer().getName() + gc.getGame().getPlayerID(gc.getCurrentPlayer()));
-			} catch (PlayerNotFoundException e) {
-				System.out.println("Er is een fout opgetreden, de speler kan niet worden gevonden.");
-			}
+		if (game.getCurrentPlayer() instanceof ComputerPlayer) {
+			System.out.println("De huidige speler is "+game.getCurrentPlayer().getName());
 		} else {
-			System.out.println("De huidige speler is "+gc.getCurrentPlayer().getName());
+			System.out.println("De huidige speler is "+game.getCurrentPlayer().getName());
 		}
 	}
 
+	/**
+	 * Weergeeft de naam en score van elke speler in een spel.
+	 */
 	private void showScore() {
-		for (Player player : gc.getGame().getPlayers()) {
-			if (gc.getCurrentPlayer() instanceof ComputerPlayer) {
-				try {
-					System.out.println(player.getName() + gc.getGame().getPlayerID(player)+": " + player.getScore());
-				} catch (PlayerNotFoundException e) {
-					System.out.println("Er is een fout opgetreden, de speler kan niet worden gevonden.");
-				}
+		for (Player player : game.getPlayers()) {
+			if (player.getName().equals(client.getLocalPlayer().getName())){
+				System.out.println("U: " + player.getScore());
 			} else {
-				System.out.println(player.getName() + ": " + player.getScore());
+				System.out.println(player.getName()+": " + player.getScore());
 			}
 		}
-		
 	}
 	
+	/**
+	 * Creeert een vergrotend bord. Kijkt hiervoor naar de waarden die in Board.java worden berekend.
+	 */
 	public void renderBoard(){
 		for(int i = game.getBoard().viewOfMinX - 90; i <= game.getBoard().viewOfMaxX - 90; i++){
 			System.out.print("	"+i);
@@ -88,6 +89,11 @@ public class BoardTUI extends TUI{
 		}
 	}
 
+	/**
+	 * Geeft aan hoe een kleur wordt weergegeven op het bord.
+	 * @param color
+	 * @return representive
+	 */
 	public String colorRepresentive(String color){
 		String representive = "";
 		if(color.equals("groen")){
@@ -106,6 +112,11 @@ public class BoardTUI extends TUI{
 		return representive;
 	}
 	
+	/**
+	 * Geeft aan hoe een symbool wordt weergegeven op het bord.
+	 * @param symbol
+	 * @return representnive
+	 */
 	public String symbolRepresentive(String symbol){
 		String representive = "";
 		if(symbol.equals("cirkel")){
@@ -124,9 +135,13 @@ public class BoardTUI extends TUI{
 		return representive;
 	}
 	
+	/**
+	 * Laat de tegels zien die de lokale speler in zijn hand heeft. Zet hiervoor een nummer
+	 * zodat de speler kan kiezen met welke tegels hij zijn beurt wil maken.
+	 */
 	public void showTiles(){
 		try{
-			ArrayList<Tile> tiles = gc.getLocalPlayer().getHand();
+			ArrayList<Tile> tiles = client.getLocalPlayer().getHand();
 			System.out.println("Uw tegels: ");
 			for (int i = 1; i <= tiles.size(); i++) {
 				System.out.print(i + ": " + tiles.get(i-1).getColor()+tiles.get(i-1).getSymbol()+"  ");
@@ -137,15 +152,10 @@ public class BoardTUI extends TUI{
 		}
 	}
 	
+	/**
+	 * Weergeeft hoeveel tegels nog in de zak zitten.
+	 */
 	public void showPileSize(){
-		System.out.println("Er zijn " + gc.getGame().getPile().getTiles().size() + " tegels in de zak.");
-	}
-	
-	public void showEndGame() {
-		try {
-			System.out.println("De winnaar is: " + gc.getGame().winner().getName() + " met id nummmer " + gc.getGame().getPlayerID(gc.getGame().winner()));
-		} catch (PlayerNotFoundException e) {
-			System.out.println("er is een fout in het systeem opgetreden");
-		}
+		System.out.println("Er zijn " + game.getPile().getTiles().size() + " tegels in de zak.");
 	}
 }

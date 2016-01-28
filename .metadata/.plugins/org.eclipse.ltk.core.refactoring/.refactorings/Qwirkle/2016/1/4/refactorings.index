@@ -1,0 +1,20 @@
+1453740482027	Extract method 'readPort'
+1453741516936	Delete element
+1453746887111	Rename method 'readInt'
+1453766433829	Rename method 'getTiles'
+1453766460609	Rename method 'getHand'
+1453766806292	Rename method 'hand'
+1453766839185	Rename method 'tiles'
+1453798140371	Rename method 'broadcast'
+1453801004733	Delete element
+1453801498411	Delete element
+1453802328555	Rename type 'Player'
+1453808749765	Delete element
+1453808754011	Delete element
+1453808757050	Delete element
+1453817496044	Rename package 'protocol'
+1453827336413	Rename type 'ClientPlayer'
+1453846718115	Rename method 'start'
+1453893969879	Delete element
+1453989016813	Rename field 'gameOver'
+1453999314345	Rename method 'question4'

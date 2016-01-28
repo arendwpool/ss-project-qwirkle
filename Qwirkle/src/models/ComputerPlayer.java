@@ -1,105 +1,65 @@
 package models;
-
-import java.util.ArrayList;
-import java.util.Observable;
-
-import exceptions.FullGameException;
-import exceptions.InvalidMoveException;
-import exceptions.NoTilesLeftInPileException;
 import util.MoveUtils;
+import util.TileUtils;
 
-public class ComputerPlayer extends Observable implements Player {
-	private ArrayList<Tile> hand;
-	private final String name = "Computer";
-	private int score;
-	public boolean moveMade = false;
+/**
+ * Maakt een speler met enige vorm van kunstmatige intelligentie
+ * @author Arend Pool en Bob breemhaar
+ *
+ */
+public class ComputerPlayer extends Player {
+	private int thinkingTime;
+	public ComputerPlayer(String name, int thinkingTime) {
+		super(name);
+		this.thinkingTime = thinkingTime;
+	}
 	
 	/**
-	 * Koppelt de speler aan een spel.
+	 * Bepaald de volgende zet van de Computer. Hiervoor controlleert de computer eerst
+	 * of het vakje in het midden leeg is, hier moet namelijk altijd de eerste tegel liggen.
+	 * Vervolgens kijkt de methode van elk vak of deze leeg is. Als deze niet leeg is 
+	 * controlleerd de methode of om deze tegel heen een tegel kan liggen die er mag liggen
+	 * volgens de spelregels. Als dit kan legt de computer hier de tegel neer. Anders kijkt
+	 * de Computer of een andere tegel wel ergens kan liggen. Als de Computer geen tegels
+	 * heeft die ergens kan liggen zal deze een tegel ruilen.
+	 * @return 
 	 */
-	private Game game;
-	
-	public ComputerPlayer(Game game) {
-		hand = new ArrayList<Tile>();
-		this.game = game;
-		score = 0;
+	public String[] determineMove(Game game) {
 		try {
-			game.addPlayer(this);
-		} catch (FullGameException e) {
-			//TODO implement
+			synchronized(this){
+				wait(thinkingTime);
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
-	@Override
-	public void determineMove() {
-		if (game.getBoard().isEmptyField(90, 90)) {
-			makeMove(90, 90, hand.get(0));
+		if (MoveUtils.initialMove == true) {
+			String[] tile = determineTile(Integer.toString(1));
+			String[] move = {Integer.toString(0), Integer.toString(0), tile[0], tile[1]};
+			return move;
 		} else {
-			tileLoop:
-			for(Tile tile: hand){
+			for(Tile tile: getHand()){
 				for(int x = 0; x < Board.DIM; x++){
 					for(int y = 0; y < Board.DIM; y++){
 						if (!game.getBoard().isEmptyField(x, y)) {
-							if(MoveUtils.isValidMove((x+1), (y), tile, game.getBoard())){
-								makeMove(x+1, y, tile);
-								break tileLoop;
+							if(MoveUtils.isValidMove(x+1, y, tile, game.getBoard())){
+								String[] move = {Integer.toString(x-89), Integer.toString(y-90), Integer.toString(TileUtils.symbolToInt(tile.getSymbol())), Integer.toString(TileUtils.colorToInt(tile.getColor()))};
+								return move;
 							} else if (MoveUtils.isValidMove(x-1, y, tile, game.getBoard())) {
-								makeMove(x-1, y, tile);
-								break tileLoop;
+								String[] move = {Integer.toString(x-91), Integer.toString(y-90), Integer.toString(TileUtils.symbolToInt(tile.getSymbol())), Integer.toString(TileUtils.colorToInt(tile.getColor()))};
+								return move;
 							} else if (MoveUtils.isValidMove(x, y-1, tile, game.getBoard())) {
-								makeMove(x, y-1, tile);
-								break tileLoop;
+								String[] move = {Integer.toString(x-90), Integer.toString(y-91), Integer.toString(TileUtils.symbolToInt(tile.getSymbol())), Integer.toString(TileUtils.colorToInt(tile.getColor()))};
+								return move;
 							} else if (MoveUtils.isValidMove(x, y+1, tile, game.getBoard())) {
-								makeMove(x, y+1, tile);
-								break tileLoop;
+								String[] move = {Integer.toString(x-90), Integer.toString(y-89), Integer.toString(TileUtils.symbolToInt(tile.getSymbol())), Integer.toString(TileUtils.colorToInt(tile.getColor()))};
+								return move;
 							}
 						}
 					}
 				}
 			}
-			if(MoveUtils.madeMove() == false){
-				try {
-					ArrayList<Tile> toTrade = new ArrayList<Tile>();
-					toTrade.add(hand.get(1));
-					MoveUtils.replaceTiles(toTrade, this, game.getPile());
-					signalController();
-				} catch (NoTilesLeftInPileException | InvalidMoveException e) {
-					System.out.println("Er zijn geen tegels meer in de zak.");
-				}
-			}
 		}
+		return null;
 	}	
-	@Override
-	public ArrayList<Tile> getHand() {
-		return hand;
-	}
-
-	@Override
-	public int getScore() {
-		return score;
-	}
-
-	@Override
-	public void makeMove(int x, int y, Tile tile) {
-		try {
-			game.makeMove(x, y, tile, this);
-			signalController();
-		} catch (InvalidMoveException e) {
-			System.out.println("Er is iets fout gegaan met de computerspeler");
-		}
-	}
-
-	public void signalController(){
-		setChanged();
-		notifyObservers("MadeMove");
-	}
-	@Override
-	public void addScore(int points) {
-		score += points;		
-	}
-
 }

@@ -1,0 +1,66 @@
+package models;
+
+import java.util.ArrayList;
+import java.util.Observable;
+
+import exceptions.FullGameException;
+import exceptions.InvalidMoveException;
+import exceptions.NoTilesLeftInPileException;
+import util.MoveUtils;
+
+/**
+ * Maakt een speler met enige vorm van kunstmatige intelligentie
+ * @author Arend Pool en Bob breemhaar
+ *
+ */
+public class ComputerPlayer extends Player {
+	public ComputerPlayer(String name) {
+		super(name);
+	}
+	
+	/**
+	 * Bepaald de volgende zet van de Computer. Hiervoor controlleerd de computer eerst
+	 * of het vakje in het midden leeg is, hier moet namelijk altijd de eerste tegel liggen.
+	 * Vervolgens kijkt de methode van elk vak of deze leeg is. Als deze niet leeg is 
+	 * controlleerd de methode of om deze tegel heen een tegel kan liggen die er mag liggen
+	 * volgens de spelregels. Als dit kan legt de computer hier de tegel neer. Anders kijkt
+	 * de Computer of een andere tegel wel ergens kan liggen. Als de Computer geen tegels
+	 * heeft die ergens kan liggen zal deze een tegel ruilen.
+	 * @return 
+	 */
+	public String[] determineMove(Game game) {
+		if (game.getBoard().isEmptyField(90, 90)) {
+			String[] tile = determineTile(Integer.toString(1));
+			String[] move = {Integer.toString(90), Integer.toString(90), tile[0], tile[1]};
+			return move;
+		} else {
+			for(Tile tile: hand){
+				for(int x = 0; x < Board.DIM; x++){
+					for(int y = 0; y < Board.DIM; y++){
+						if (!game.getBoard().isEmptyField(x, y)) {
+							if(MoveUtils.isValidMove((x+1), (y), tile, game.getBoard())){
+								makeMove(x+1, y, tile);
+							} else if (MoveUtils.isValidMove(x-1, y, tile, game.getBoard())) {
+								makeMove(x-1, y, tile);
+							} else if (MoveUtils.isValidMove(x, y-1, tile, game.getBoard())) {
+								makeMove(x, y-1, tile);
+							} else if (MoveUtils.isValidMove(x, y+1, tile, game.getBoard())) {
+								makeMove(x, y+1, tile);
+							}
+						}
+					}
+				}
+			}
+			if(MoveUtils.madeMove() == false){
+				try {
+					ArrayList<Tile> toTrade = new ArrayList<Tile>();
+					toTrade.add(hand.get(1));
+					MoveUtils.replaceTiles(toTrade, this, game.getPile());
+					signalController();
+				} catch (NoTilesLeftInPileException | InvalidMoveException e) {
+					System.out.println("Er zijn geen tegels meer in de zak.");
+				}
+			}
+		}
+	}	
+}

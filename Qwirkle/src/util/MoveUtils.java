@@ -4,10 +4,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import exceptions.InvalidMoveException;
-import exceptions.NoTilesLeftInPileException;
 import models.Board;
 import models.Game;
-import models.Pile;
 import models.Player;
 import models.Tile;
 
@@ -16,29 +14,30 @@ public class MoveUtils {
 	/**
 	 * Geeft aan of een speler heeft geruilt in de plaats van een zet maken.
 	 */
-	private static boolean hasTraded = false;
+	private boolean hasTraded = false;
 	
 	
 	/**
 	 * Bepaalt of het de eerste move van het spel iets of niet.
 	 */
-	private static boolean initialMove = true;
+	public static boolean initialMove = true;
 	
 	/**
 	 * Geef een set met de tegels die de betreffende speler heeft neergelegd.
 	 */
-	private static ArrayList<Tile> lastSet = new ArrayList<Tile>();
+	private ArrayList<Tile> lastSet = new ArrayList<Tile>();
 	
+	private ArrayList<Tile> tilesToSwap = new ArrayList<Tile>();
 	/**
 	 * Geeft aan of een speler een blokje heeft neergelegd.
 	 */
-	private static boolean madeMove = false;
+	private boolean madeMove = false;
 
 	/**
 	 * Verwijderd alle laatst gezette tegels van een speler.
 	 * @throws InvalidMoveException 
 	 */
-	public static void processMove(Player player, Game game) throws InvalidMoveException {
+	public void processMove(Player player, Game game) throws InvalidMoveException {
 		if(getLastMoves().size() != 0 || hasTraded == true){
 			generateScore(player, game.getBoard());
 			clearLastMoves();
@@ -49,7 +48,7 @@ public class MoveUtils {
 		}
 	}
 
-	public static void setInitialMove(boolean bl){
+	public void setInitialMove(boolean bl){
 		initialMove = bl;
 	}
 	
@@ -64,7 +63,7 @@ public class MoveUtils {
 	 * score is berekend wordt deze aan de speler toegevoegd.
 	 * @param player
 	 */
-	public static void generateScore(Player player, Board board) {
+	public void generateScore(Player player, Board board) {
 		Point point = null;
 		boolean retainMultipleX = false;
 		boolean retainMultipleY = false;
@@ -114,7 +113,13 @@ public class MoveUtils {
 		player.addScore(score);
 	}
 	
-	public static boolean isSingleOnXAxis(ArrayList<Tile> moves, Board board) {
+	/**
+	 * Kijkt of alle tegels in een lijst wel in een rij zitten, maar niet in een kolom.
+	 * @param moves
+	 * @param board
+	 * @return isSingleOnX
+	 */
+	public boolean isSingleOnXAxis(ArrayList<Tile> moves, Board board) {
 		boolean isSingleOnX = true;
 		for (Tile tile : moves) {
 			int x = (int) tile.getLocation().getX();
@@ -126,7 +131,13 @@ public class MoveUtils {
 		return isSingleOnX;
 	}
 	
-	public static boolean isSingleOnYAxis(ArrayList<Tile> moves, Board board) {
+	/**
+	 * Doet hetzelfde als isSingleOnXAxis, maar dan voor tegels in een kolom.
+	 * @param moves
+	 * @param board
+	 * @return isSingleOnY
+	 */
+	public boolean isSingleOnYAxis(ArrayList<Tile> moves, Board board) {
 		boolean isSingleOnY = true;
 		for (Tile tile : moves) {
 			int x = (int) tile.getLocation().getX();
@@ -138,16 +149,22 @@ public class MoveUtils {
 		return isSingleOnY;
 	}
 	
-	public static ArrayList<Tile> deleteCommon(ArrayList<Tile> listToKeep, ArrayList<Tile> listToRemove) {
+	public ArrayList<Tile> deleteCommon(ArrayList<Tile> listToKeep, ArrayList<Tile> listToRemove) {
 		ArrayList<Tile> copy = new ArrayList<Tile>(listToKeep);
 		copy.removeAll(listToRemove);
 		listToKeep.removeAll(copy);
 		return listToKeep;
 	}
 	/**
-	 * Controleert of de aangelegde stenen wel volgens de spelregels mogen.
+	 * Controleert of de aangelegde stenen wel volgens de spelregels mogen. Maakt hiervoor eerst een kopie
+	 * van een bord. Vervolgens legt deze methode de tegel neer in deze kopie om na te gaan of deze tegel
+	 * hier wel mag liggen. Een rij stenen kan niet groter zijn dan 6, dus als dit wel het geval is wordt
+	 * er meteen false teruggegeven. Een initialMove kan nooit false zijn, dus wordt er meteen true terug-
+	 * gegeven. Als een beurt niet initial is, maar de tegel is niet aangrenzend aan een andere tegel wordt
+	 * er ook false teruggegeven. Daarna wordt nagegaan of een tegel dezelfde kleur of symbool heeft als 
+	 * andere tegels in een rij of kolom. Als een tegel dezelfde kleur en symbool heeft wordt er ook direct
+	 * false teruggegeven.
 	 */
-	//TODO prints weghalen, deze zijn voor de test
 	public static boolean isValidMove(int x, int y, Tile tile, Board board) {
 		Board boardCopy = board.deepCopy();
 		if (boardCopy.isEmptyField(x, y) == false) {
@@ -203,7 +220,7 @@ public class MoveUtils {
 	 * Onthoud de laatste move die een speler gedaan heeft.
 	 * @param tile
 	 */
-	public static void rememberMove(Tile tile) {
+	public void rememberMove(Tile tile) {
 		lastSet.add(tile);
 	}
 
@@ -211,82 +228,113 @@ public class MoveUtils {
 	/**
 	 * leegt de set met de laaste moves van de speler.
 	 */
-	public static void clearLastMoves() {
+	public void clearLastMoves() {
 		lastSet.clear();
 	}
 	/**
 	 * Weergeeft de lijst met de laastse moves.
 	 * @return lastSet
 	 */
-	public static ArrayList<Tile> getLastMoves() {
+	public ArrayList<Tile> getLastMoves() {
 		return lastSet;
 	}
 	
-	/**
-	 * Krijgt een lijst met de tegels die geruilt moeten worden. Hiervoor wordt eerst gekeken of de 
-	 * tegels die geruild moeten worden wel in de hand van de betreffende speler zijn. Daarna wordt 
-	 * er gekeken of de Pile wel genoeg stenen heeft om te ruilen. Als er aan deze twee voorwaarden 
-	 * zijn voldaan worden de tegel om te ruilen terug in de Pile gedaan. Vervolgens worden er de 
-	 * tegels uit de hand verwijderd van de player. Daarna wordt de methode setHand() aangeroepen 
-	 * om de hand weer aan te vullen. Als er niet genoeg tegels zijn wordt er een exceptie gegooit.
-	 * Als de speler een zet heeft gedaan wordt er ook een exceptie gegooit.
-	 * @param tilesToTrade
-	 * @param player
-	 * @throws NoTilesLeftInPileException
-	 * @throws InvalidMoveException 
-	 */
-	public static void replaceTiles(ArrayList<Tile> tilesToTrade, Player player, Pile pile) 
-			throws NoTilesLeftInPileException, InvalidMoveException {
-		if (madeMove == false && initialMove == false){
-			boolean containsAll = true;
-			hasTraded = true;
-			for (Tile tile : tilesToTrade) {
-				if (!player.getHand().contains(tile)) {
-					containsAll = false;
-				}
-			}
-			if (tilesToTrade.size() <= pile.getTiles().size() && containsAll == true) {
-				pile.getTiles().addAll(tilesToTrade);
-				player.getHand().removeAll(tilesToTrade);
-				TileUtils.setHand(player, pile);
-			} else {
-				throw new NoTilesLeftInPileException();
-			}
-		} else {
-			throw new InvalidMoveException();
-		}
+	public void setTraded(boolean bl) {
+		hasTraded = bl;
 	}
 
 	/**
-	 * Moet de Move van de player verwerken.
+	 * Moet de Move van de player verwerken. Hiervoor wordt er eerst gekeken of een speler al heeft geruild
+	 * of dat een move initial is. Vervolgens wordt dit op een correcte wijze afgehandeld, en wordt de tegel
+	 * uit de hand van de speler verwijderd.
 	 * @param x
 	 * @param y
 	 * @param tile
 	 */
-	public static void makeMove(int x, int y, Tile tile, Player player, Game game) throws InvalidMoveException {
+	public void makeMove(int x, int y, Tile tile, Game game, String name) throws InvalidMoveException{
 		if (hasTraded == false && initialMove == false) {
-			if (isValidMove(x, y, tile, game.getBoard()) && game.getBoard().validSharedLine(x, y, tile)) {
+			if (isValidMove(x, y, tile, game.getBoard()) == true && validSharedLine(x, y, tile) == true) {
 				game.getBoard().setTile(x, y, tile);
 				rememberMove(tile);
-				player.getHand().remove(tile);
+				for (Tile tileInHand : game.getCurrentPlayer().getHand()) {
+					if (TileUtils.compareColor(tile, tileInHand) == true && TileUtils.compareSymbol(tile, tileInHand) == true){
+						game.getCurrentPlayer().getHand().remove(tileInHand);
+						break;
+					}
+				}
 				madeMove = true;
-			} 
+			} else {
+				throw new InvalidMoveException();
+			}
 		} else if(initialMove == true){
 			game.getBoard().setTile(90, 90, tile);
 			rememberMove(tile);
-			player.getHand().remove(tile);
+			for (Tile tileInHand : game.getCurrentPlayer().getHand()) {
+				if (TileUtils.compareColor(tile, tileInHand) == true && TileUtils.compareSymbol(tile, tileInHand) == true){
+					game.getCurrentPlayer().getHand().remove(tileInHand);
+					break;
+				}
+			}
 			initialMove = false;
 			madeMove = true;
 		} else {
 			throw new InvalidMoveException();
 		}
+		
 	}
 	
-	public static boolean madeMove(){
+	public void swapTile(String shape, String color, String name, Game game) throws InvalidMoveException{
+		if (lastSet.size() == 0 && initialMove == false && game.getPile().getTiles().size() > 0) { 
+			Tile newTile = new Tile(color, shape);
+			tilesToSwap.add(newTile);
+			Player pl = game.getPlayerByClient(name);
+			pl.getHand().remove(newTile);
+		} else {
+			throw new InvalidMoveException();
+		}
+	}
+
+	public ArrayList<Tile> getTilesToSwap(){
+		return tilesToSwap;
+	}
+	
+	public boolean madeMove(){
 		return madeMove;
 	}
 	
-	public static boolean hasTraded(){
+	public boolean hasTraded(){
 		return hasTraded;
 	}
+	
+	/**
+	 * Deze methode kijkt of alle aangelegde steenjes dezelfde x of y coordinaten hebben.
+	 * @param tileToSet
+	 * @param axis
+	 * @return contains;
+	 */
+	public boolean validSharedLine(int x, int y, Tile tileToSet) {
+		boolean sameX = true;
+		boolean sameY = true;
+		boolean validSharedLine = false;
+		if (getLastMoves().size()<1){
+			return true;
+		} else {
+			for (Tile tile : getLastMoves()) {
+				if ((int) tile.getLocation().getX() != x) {
+					sameX = false;
+				}
+				if ((int) tile.getLocation().getY() != y) {
+					sameY = false;
+				}
+			}
+			if (sameX == true && sameY == false) {
+				validSharedLine = true;
+			} else if (sameX == false && sameY == true) {
+				validSharedLine = true;
+			}
+			return validSharedLine;
+		}
+	}
+	
+	
 }

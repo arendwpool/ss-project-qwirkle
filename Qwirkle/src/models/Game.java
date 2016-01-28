@@ -1,59 +1,79 @@
 package models;
-import java.util.ArrayList;
-import java.util.Observable;
 
-import exceptions.FullGameException;
+import java.util.ArrayList;
 import exceptions.InvalidMoveException;
-import exceptions.NoTilesLeftInPileException;
-import exceptions.PlayerNotFoundException;
 import util.MoveUtils;
 import util.TileUtils;
 
-/**
- * Klasse die het de regels van het spel implementeert.
- * @author Bob Breemhaar en Arend Pool
- *
- */
-public class Game extends Observable{
+public class Game {
+	private int id;
+	private ArrayList<Player> players = new ArrayList<>();
+	private Pile pile;
+	private Board board;
+	private MoveUtils move = new MoveUtils();
+	private Player currentPlayer;
+	
 	/**
 	 * Geeft de grootte van een hand aan in normale omstandigheden.
 	 */
 	public static final int DEFAULT_HAND_SIZE = 6;
-	/**
-	 * Geeft aan welke speler nu aan de beurt is.
-	 */
-	private Player currentPlayer;
 	
-	/**
-	 * Een hashmap van spelers die meedoen gemapt aan hun ID. Dit is een nummer die gebruikt
-	 * wordt om aan te geven welke speler aan de beurt is.
-	 */
-	private ArrayList<Player> players;
+	public Game(int id) {
+		this.id = id;
+		pile = new Pile();
+		board = new Board();
+		System.out.println("Game has started with id: " + id);
+	}
 	
-	/**
-	 * Het nieuwe bord dat bij dit spel hoort. Dit board wordt ook meegegeven in de parameters 
-	 * van de constructor
-	 */
-	private Board board;
+	public int getId() {
+		return id;
+	}
+
+	public void addPlayer(Player player) {
+		players.add(player);
+	}
+
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+	public Pile getPile() {
+		return pile;
+	}
+
+	public void makeMove(int x, int y, Tile tile, String name) throws InvalidMoveException{
+			move.makeMove(x, y, tile, this, name);		
+	}
 	
-	/**
-	 * De nieuwe pile die bij het spel hoort.
-	 */
-	private Pile pile;
+	public Player getPlayerByClient(String name) {
+		for (Player pl : players) {
+			if (pl.getName().equals(name)) {
+				return pl;
+			}
+		}
+		return null;
+	}
 	
-	private boolean finishedMove;
+	public boolean tileInHand(String shape, String color, String name) {
+		Tile newTile = new Tile(color, shape);
+		Player pl = getPlayerByClient(name);
+		for (Tile tile : pl.getHand()) {
+			if (TileUtils.compareColor(newTile, tile) == true && TileUtils.compareSymbol(newTile, tile) == true) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
-	/**
-	 * Contrueert  een nieuw spel. Hierbij worden het board element en het aantal spelers opgeslagen
-	 * in de lokale variabelen. Er wordt in de constructor ook een nieuwe Pile instantie gemaakt.
-	 * Deze Pile is een representatie van de zak met stenen in het spel. Er wordt ook een HashMap
-	 * geïnstantieerd die later wordt gebruikt om de players aan een ID te koppelen.
-	 */
-	public Game(Board board,Pile pile ) {
-		this.board = board;
-		this.pile = pile;
-		players = new ArrayList<Player>();
-		finishedMove = false;
+	public void swapTile(String shape, String color, String name) throws InvalidMoveException {
+		move.swapTile(shape, color, name, this);
+	}
+	
+
+	public Tile giveRandomTile(Pile pile) {
+		pile.shuffle();
+		Tile tile = pile.getTiles().get(0);
+		return tile;
 	}
 	
 	/**
@@ -81,78 +101,29 @@ public class Game extends Observable{
 	 * @return Player withHighscore || null //TODO vraag
 	 */
 	public Player winner() {
-		if (gameOver() == true) {
-			int score = 0;
-			Player withHighscore = null;
-			for (Player player : players) {
-				if (player.getScore() > score) {
-					score = player.getScore();
-					withHighscore = player;
-				}
+		int score = 0;
+		Player withHighscore = null;
+		for (Player player : players) {
+			if (player.getScore() > score) {
+				score = player.getScore();
+				withHighscore = player;
 			}
-			return withHighscore;
-		} else {
-			return null;
 		}
+		return withHighscore;
 	}
 	
-	
-	/**
-	 * Start het spel.
-	 */
-	public void start() {
-		reset();
-		pile.generateTiles();
-		for (Player player : players) {
-			TileUtils.setHand(player, pile);
-		}
+	public ArrayList<Tile> getHandByPlayerName(String name) {
+		return getPlayerByClient(name).getHand();
 	}
 	
-	private void reset() {
-		board.reset();
-		pile.getTiles().clear();
-		for (Player player : players) {
-			player.getHand().clear();
-		}
-	}
-	
-	/**
-	 * Geeft een volle pile van alle tegels in het spel.
-	 * @return pile
-	 */
-	public Pile getPile() {
-		return pile;
-	}
-	
-	/**
-	 * Voegt een gegeven speler toe aan een spel. Dit kan totdat de hoeveelheid spelers in het spel 
-	 * gelijk is aan het aantal spelers meegegeven in de constructor. Als het spel vol is wordt er 
-	 * een exceptie gegooit.
-	 * @param player
-	 * @throws FullGameException 
-	 */
-	public void addPlayer(Player player) throws FullGameException {
-		if (players.size() <= 4) {
-			players.add(player);
-		} else {
-			throw new FullGameException();
-		}
-	}
-	
-	/**
-	 * Geeft het bord instantie van dit spel.
-	 * @return
-	 */
 	public Board getBoard() {
 		return board;
 	}
 	
-	/**
-	 * Geeft een Map terug van de spelers in het spel.
-	 * @return this.players
-	 */
-	public ArrayList<Player> getPlayers() {
-		return players;
+	public void nextPlayer() {
+		int current = players.indexOf(currentPlayer);
+		int next = (current + 1) % players.size();
+		currentPlayer = players.get(next);
 	}
 	
 	/**
@@ -162,16 +133,9 @@ public class Game extends Observable{
 	public Player getCurrentPlayer() {
 		return currentPlayer;
 	}
-	
-	/**
-	 * Zet de lokale variabele currentPlayer naar de speler die de volgende beurt krijgt. Hiervoor 
-	 * wordt eerst door middel van het ID van de huidige speler berekend wat de ID is van de 
-	 * volgende speler. De speler met dit ID wordt dantoegewezen aan currentPlayer.
-	 */
-	public void nextPlayer() {
-		int current = players.indexOf(currentPlayer);
-		int next = (current + 1) % players.size();
-		currentPlayer = players.get(next);
+
+	public void start() {
+		determineInitialPlayer();
 	}
 	
 	/**
@@ -219,69 +183,14 @@ public class Game extends Observable{
 	}
 	
 	/**
-	 * Geeft de speler de mogelijkheid om tegels te verwisselen
-	 * @param tilesToTrade
-	 * @param player
-	 * @throws NoTilesLeftInPileException
-	 * @throws InvalidMoveException 
-	 */
-	public void swapTiles(ArrayList<Tile> tilesToTrade, Player player) throws NoTilesLeftInPileException, InvalidMoveException{
-		MoveUtils.replaceTiles(tilesToTrade, player, pile);
-		setChanged();
-		notifyObservers();
-	}
-	/**
-	 * Moet de Move van de player verwerken.
-	 * @param x
-	 * @param y
-	 * @param tile
-	 */
-	public void makeMove(int x, int y, Tile tile, Player player) throws InvalidMoveException {
-		MoveUtils.makeMove(x, y, tile, player, this);
-		setChanged();
-		notifyObservers();
-	}
-	
-	/**
-	 * Geeft aan dat de speler klaar is met zijn beurt.
-	 * @param player
-	 * @throws InvalidMoveException
-	 */
-	public void finishMove(Player player) throws InvalidMoveException{
-		MoveUtils.processMove(player, this);
-		TileUtils.setHand(player, pile);
-		finishedMove = true;
-	}
-	
-	/**
 	 * Met deze methode kan handmatig de currentPlayer worden toegewezen.
-	 * voor de testklasse.
 	 * @param player
 	 */
 	public void setCurrentPlayer(Player player) {
 		currentPlayer = player;
 	}
 	
-	/**
-	 * Deze geeft het ID nummer terug van een gegeven speler. Als een speler niet gevonden kan 
-	 * worden gooit de methode een exception.
-	 * @param player
-	 * @return players.get(player)
-	 * @throws PlayerNotFoundException
-	 */
-	public int getPlayerID(Player player) throws PlayerNotFoundException {
-		if (players.contains(player)) {
-			return players.indexOf(player) + 1;
-		} else {
-			throw new PlayerNotFoundException();
-		}
-	}
-	
-	public boolean finishedMove(){
-		return finishedMove;
-	}
-	
-	public void setFinishedMove(boolean bl) {
-		finishedMove = bl;
+	public MoveUtils getMoves(){
+		return move;
 	}
 }

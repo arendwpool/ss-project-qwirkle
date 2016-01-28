@@ -2,8 +2,6 @@ package models;
 
 import java.util.ArrayList;
 
-import util.MoveUtils;
-
 /**
  *De klasse die een speelbord representeerd maakt met een naam en tegels.
  * @author Bob Breemhaar en Arend Pool.
@@ -51,7 +49,7 @@ public class Board {
 	public int startPointY = 90;
 
 	/**
-	 * Construeert een bord voor een spel. de coordinaten worden aan
+	 * Construeert een bord voor een spel en reset dit bord.
 	 */
 	public Board() {	
 		coordinaten = new Tile[DIM][DIM];
@@ -74,7 +72,7 @@ public class Board {
 	}
 	
 	/**
-	 * De klasse controlleert de laagste en hoogste x en y as en maakt daarbij
+	 * De methode controlleert de laagste en hoogste x en y as en maakt daarbij
 	 * de nieuwe coordinaten van de grote van het bord.
 	 */
 	
@@ -115,7 +113,7 @@ public class Board {
 	
 	
 	/**
-	 * returns de inhoud verwezen door het paar (x,y) .
+	 * Geeft de tegel terug die op een gegeven x en y ligt.
 	 */
 	public Tile getField(int x, int y) {
 		return coordinaten[x][y];
@@ -131,10 +129,12 @@ public class Board {
 	}
 	
 	/**
-	 * Deze Arraylist is gemaakt om alle aanliggende tegels te onthouden.
+	 * Geeft alle tegels op een rij weer op een gegeven x en y coordinaat. Hiervoor kijkt de
+	 * methode eerst of er links een tegel ligt. Als dit het geval wordt deze in een lijst 
+	 * gezet. Als er links geen tegel meer ligt weet de methode dat het einde van de rij links
+	 * is bereikt. Het zal hierna het zelfde proces doen aan de rechterkant.
 	 * @return xAxis;
 	 */
-	//TODO eventueel code verbeteren door de hoeveelheid duplicaatcode te verminderen
 	public ArrayList<Tile> tilesOnXAxis(int x, int y) {
 		boolean leftIsEmpty = false;
 		boolean rightIsEmpty = false;
@@ -172,7 +172,7 @@ public class Board {
 	}
 	
 	/**
-	 * Deze Arraylist is gemaakt om alle aanliggende tegels te onthouden.
+	 * Doet hetzelfde als tilesOnXAxis, alleen voor een kolom.
 	 * @return yAxis;
 	 */
 	public ArrayList<Tile> tilesOnYAxis(int x, int y){
@@ -211,40 +211,10 @@ public class Board {
 		return yAxis;
 	}
 	
-	/**
-	 * Deze klasse kijkt of alle aangelegde steenjes dezelfde x of y coordinaten hebben.
-	 * @param tileToSet
-	 * @param axis
-	 * @return contains;
-	 */
-	public boolean validSharedLine(int x, int y, Tile tileToSet) {
-		boolean sameX = true;
-		boolean sameY = true;
-		boolean validSharedLine = false;
-		if (MoveUtils.getLastMoves().size()<1){
-			return true;
-		} else {
-			for (Tile tile : MoveUtils.getLastMoves()) {
-				if ((int) tile.getLocation().getX() != x) {
-					sameX = false;
-				}
-				if ((int) tile.getLocation().getY() != y) {
-					sameY = false;
-				}
-			}
-			if (sameX == true && sameY == false) {
-				validSharedLine = true;
-			} else if (sameX == false && sameY == true) {
-				validSharedLine = true;
-			}
-			return validSharedLine;
-		}
-	}
-	
-	
+
 	
 	/**
-	 * bind een coordinaat aan een tile.
+	 * bindt een coordinaat aan een tile.
 	 * @param x
 	 * @param y
 	 * @param tile
@@ -265,6 +235,13 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * Controlleerd van twee gegeven lijsten of de tegels in deze lijsten dezelfde
+	 * x of y coordinaat hebben.
+	 * @param list1
+	 * @param list2
+	 * @return sameX || sameY
+	 */
 	public boolean sameAxis(ArrayList<Tile> list1, ArrayList<Tile> list2) {
 		boolean sameX = true;
 		boolean sameY = true;

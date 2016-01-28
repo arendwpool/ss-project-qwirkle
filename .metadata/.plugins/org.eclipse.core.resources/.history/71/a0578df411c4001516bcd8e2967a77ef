@@ -1,0 +1,122 @@
+package models;
+
+import java.util.ArrayList;
+import exceptions.InvalidMoveException;
+import util.MoveUtils;
+import util.TileUtils;
+
+public class Game2 {
+	private int id;
+	private ArrayList<Player2> players = new ArrayList<>();
+	private Pile pile;
+	private Board board;
+	private ArrayList<Tile> tilesToSwap = new ArrayList<>();
+	private ArrayList<Tile> lastSet = new ArrayList<>();
+	/**
+	 * Bepaalt of het de eerste move van het spel iets of niet.
+	 */
+	private static boolean initialMove = true;
+	
+	public Game2(int id) {
+		this.id = id;
+		pile = new Pile();
+		board = new Board();
+		System.out.println("Game has started with id: " + id);
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void addPlayer(String name) {
+		players.add(new Player2(name));
+	}
+
+	public ArrayList<Player2> getPlayers() {
+		return players;
+	}
+
+	public Pile getPile() {
+		return pile;
+	}
+
+	public void makeMove(String xString, String yString, Tile tile, String name) throws InvalidMoveException{
+		int x = Integer.parseInt(xString);
+		int y = Integer.parseInt(xString);
+		Player2 player = getPlayerByClient(name);
+		if (tilesToSwap.size() == 0) {
+			if (MoveUtils.isValidMove(x, y, tile, board) && board.validSharedLine(x, y, tile)) {
+				board.setTile(x, y, tile);
+				lastSet.add(tile);
+				player.getHand().remove(tile);
+			} 
+		} else if(initialMove == true){
+			board.setTile(90, 90, tile);
+			lastSet.add(tile);
+			player.getHand().remove(tile);
+			initialMove = false;
+		} else {
+			throw new InvalidMoveException();
+		}
+		
+	}
+	
+	public Player2 getPlayerByClient(String name) {
+		for (Player2 pl : players) {
+			if (pl.getName().equals(name)) {
+				return pl;
+			}
+		}
+		return null;
+	}
+	
+	public boolean tileInHand(String shape, String color, String name) {
+		Tile newTile = new Tile(color, shape);
+		Player2 pl = getPlayerByClient(name);
+		if (pl.getHand().contains(newTile)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void swapTile(String shape, String color, String name) throws InvalidMoveException {
+		if (lastSet.size() == 0 && initialMove == false && pile.getTiles().size() > 0) { 
+			Tile newTile = new Tile(color, shape);
+			tilesToSwap.add(newTile);
+			Player2 pl = getPlayerByClient(name);
+			pl.getHand().remove(newTile);
+		} else {
+			throw new InvalidMoveException();
+		}
+	}
+
+	public Tile giveRandomTile(Pile pile) {
+		pile.shuffle();
+		Tile tile = pile.getTiles().get(0);
+		return tile;
+	}
+
+	public void finishMove(String name) throws InvalidMoveException {
+		if(lastSet.size() > 0 ){
+			MoveUtils.generateScore(getPlayerByClient(name), board);
+			lastSet.clear();
+		} else if (tilesToSwap.size() > 0) {
+			pile.getTiles().addAll(tilesToSwap);
+			TileUtils.setHand(getPlayerByClient(name), pile);
+		}
+	}
+	
+	public ArrayList<Tile> getHandByPlayerName(String name) {
+		return getPlayerByClient(name).getHand();
+	}
+	
+	public Board getBoard() {
+		return board;
+	}
+	
+	public void nextPlayer() {
+		int current = players.indexOf(currentPlayer);
+		int next = (current + 1) % players.size();
+		currentPlayer = players.get(next);
+	}
+}

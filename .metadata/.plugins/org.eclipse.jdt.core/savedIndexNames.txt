@@ -1,6 +1,34 @@
 INDEX VERSION 1.127+C:\Users\Bob\Documents\ss-project-qwirkle\.metadata\.plugins\org.eclipse.jdt.core
+<<<<<<< HEAD
 4282262597.index
 2689061861.index
+=======
+322690031.index
+<<<<<<< HEAD
+2689061861.index
+4133831525.index
+4097853004.index
+2921179834.index
+287837708.index
+1256513231.index
+3620173291.index
+1642629014.index
+1984797805.index
+168168922.index
+3425653186.index
+2142348700.index
+4282262597.index
+4135478709.index
+4247270281.index
+3150109421.index
+71698844.index
+3604818565.index
+2410559617.index
+=======
+1984797805.index
+3604818565.index
+2921179834.index
+>>>>>>> 93c0261878c9c38d0bb5f31bc3cd7c4427200462
 2410559617.index
 168168922.index
 71698844.index
@@ -10,6 +38,7 @@ INDEX VERSION 1.127+C:\Users\Bob\Documents\ss-project-qwirkle\.metadata\.plugins
 1508714259.index
 3425653186.index
 4247270281.index
+<<<<<<< HEAD
 287837708.index
 2921179834.index
 1256513231.index
@@ -17,6 +46,15 @@ INDEX VERSION 1.127+C:\Users\Bob\Documents\ss-project-qwirkle\.metadata\.plugins
 4133831525.index
 3620173291.index
 1984797805.index
+=======
+1256513231.index
+4133831525.index
+71698844.index
+1482259783.index
+2142348700.index
+1853852832.index
+>>>>>>> 93c0261878c9c38d0bb5f31bc3cd7c4427200462
 1642629014.index
 3604818565.index
 4097853004.index
+>>>>>>> 0b219b28f51e38b82bfe0d0b899a0917a3c31985

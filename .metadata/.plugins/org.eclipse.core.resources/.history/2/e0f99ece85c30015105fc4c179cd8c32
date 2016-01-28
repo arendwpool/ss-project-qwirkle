@@ -1,0 +1,38 @@
+package util;
+
+import java.util.Scanner;
+
+import view.StartTUI;
+
+public class NetworkUtils {
+
+
+	public static int getPort(StartTUI ui) {
+		Scanner scanner = new Scanner(System.in);
+		int input = ui.determineOption();
+		scanner.close();
+		if (input > 0) {
+			return input;
+		} else {
+			return 1337;
+		}
+	}
+	
+	/**
+	 * Controlleerd of een gegeven IP adres wel legitiem is.
+	 * @param ip
+	 * @return isValidInt == true && ints.length == 4
+	 */
+	public static boolean isValidIP(String ip){
+		ip = ip.replace(".", " ");
+		String[] ints = ip.split(" ");
+		boolean isValidInt = true;
+		for(String integer : ints){
+			int i = Integer.parseInt(integer);
+				if(i > 255){
+					isValidInt = false;
+				}
+		}
+		return (isValidInt == true && ints.length == 4);
+	}
+}

@@ -1,0 +1,18 @@
+package models;
+
+import java.net.Socket;
+
+public class ClientHandler2 {
+	
+	private Server2 server;
+	private Socket client;
+    private BufferedReader in;
+    private BufferedWriter out;
+	
+	public ClientHandler2(Server2 server, Socket client){
+		this.server = server;
+		this.client = client;
+		in = new BufferedReader(new InputStreamReader(sockArg.getInputStream()));
+        out = new BufferedWriter(new OutputStreamWriter(sockArg.getOutputStream())); 	
+	}
+}

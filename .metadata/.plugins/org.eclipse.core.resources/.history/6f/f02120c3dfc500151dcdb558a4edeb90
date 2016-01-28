@@ -1,0 +1,17 @@
+package view;
+
+public class StartTUI extends TUI{
+	
+	public StartTUI() {
+	}
+	
+	/**
+	 * Start de TUI. Deze TUI achterhaalt de nodige gegevens van een lokal speler
+	 * en geeft dit door aan de controller. Er wordt eerst gevraagd of een speler
+	 * een menselijke speler wil zijn, of een computer. Als de speler heeft aangegeven
+	 * een mens te willen zijn wordt er om zijn naam gevraagd. Als de speler aan het
+	 * eind heeft aangegeven te willen starten wordt deze TUI afgesloten.
+	 */
+	public void update(){
+	}
+}

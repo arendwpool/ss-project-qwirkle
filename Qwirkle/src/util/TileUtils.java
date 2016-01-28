@@ -4,6 +4,8 @@ import models.Game;
 import models.Pile;
 import models.Player;
 import models.Tile;
+import network.Protocol;
+import network.Server;
 
 public class TileUtils {
 	/**
@@ -22,14 +24,16 @@ public class TileUtils {
 	 * 
 	 * Kijkt hoeveel tegels een gegeven speler in zijn hand heeft. Als dit minder dan 6 is worden er 
 	 * een aantal willekeurige tegels gegeven zodat de hand weer 6 tegels heeft.
-	 * @param player
+	 * @param pl
+	 * @param server 
 	 */
-	public static void setHand(Player player, Pile pile) {
-		int noOfTilesToGive = Game.DEFAULT_HAND_SIZE - player.getHand().size();
+	public static void setHand(Player pl, Pile pile, Server server, Game game) {
+		int noOfTilesToGive = Game.DEFAULT_HAND_SIZE - pl.getHand().size();
 		for(int i = 0; i < noOfTilesToGive; i++){
 			Tile tile = giveRandomTile(pile);
-			player.getHand().add(tile);
-			pile.removeTile(tile);
+			pl.getHand().add(tile);
+			server.broadcastToPlayer(Protocol.SERVER_CORE_SEND_TILE + Protocol.MESSAGESEPERATOR + symbolToInt(tile.getSymbol()) + Protocol.MESSAGESEPERATOR + colorToInt(tile.getColor()), pl.getName());
+			pile.getTiles().remove(tile);
 		}
 	}
 	
@@ -70,5 +74,31 @@ public class TileUtils {
 		} else {
 			return false;
 		}
+	}
+	
+	public static int colorToInt(String color) {
+		for (int i = 0; i < Tile.kleuren.length; i++) {
+			if (Tile.kleuren[i].equals(color)) {
+				return i + 1;
+			}
+		}
+		return 0;
+	}
+	
+	public static String intToColor(int integer) {
+		return Tile.kleuren[integer-1];
+	}
+	
+	public static int symbolToInt(String symbol) {
+		for (int i = 0; i < Tile.symbolen.length; i++) {
+			if (Tile.symbolen[i].equals(symbol)) {
+				return i + 1;
+			}
+		}
+		return 0;
+	}
+	
+	public static String intToSymbol(int integer) {
+		return Tile.symbolen[integer-1];
 	}
 }
