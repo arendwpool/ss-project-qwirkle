@@ -8,8 +8,10 @@ import util.TileUtils;
  *
  */
 public class ComputerPlayer extends Player {
-	public ComputerPlayer(String name) {
+	private int thinkingTime;
+	public ComputerPlayer(String name, int thinkingTime) {
 		super(name);
+		this.thinkingTime = thinkingTime;
 	}
 	
 	/**
@@ -23,6 +25,14 @@ public class ComputerPlayer extends Player {
 	 * @return 
 	 */
 	public String[] determineMove(Game game) {
+		try {
+			synchronized(this){
+				wait(thinkingTime);
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (MoveUtils.initialMove == true) {
 			String[] tile = determineTile(Integer.toString(1));
 			String[] move = {Integer.toString(0), Integer.toString(0), tile[0], tile[1]};

@@ -27,19 +27,6 @@ public class BoardTUI extends TUI{
 	private Game game;
 	private Client client;
 	
-	/**
-	 * Het TUI functioneerd als een observer. Deze methode update het spel op een 
-	 * juiste wijze als een update is doorgegeven.
-	 */
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		if (arg1 != null && arg1.equals("MadeMove")) {
-			//gc.done((Player) arg0); 
-		} else {
-			game.getBoard().boardSize();
-			update();
-		}
-	}
 	
 	/**
 	 * Start de TUI door de juiste objecten te weergeven. 	
@@ -170,16 +157,5 @@ public class BoardTUI extends TUI{
 	 */
 	public void showPileSize(){
 		System.out.println("Er zijn " + game.getPile().getTiles().size() + " tegels in de zak.");
-	}
-	
-	/**
-	 * Geeft aan het eind van een spel weer of de speler nog een spel wil spelen.
-	 */
-	public void showEndGame() {
-		/*try {
-			System.out.println("De winnaar is: " + game.winner().getName());
-		} catch (PlayerNotFoundException e) {
-			System.out.println("er is een fout in het systeem opgetreden");
-		}*/
 	}
 }

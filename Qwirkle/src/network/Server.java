@@ -49,9 +49,37 @@ public class Server {
 			break;
 			case Protocol.CLIENT_CORE_PLAYERS: getPlayers(client);
 			break;
+			case Protocol.SERVER_CORE_EXIT: exit(client);
 		}
 	}
 	
+	private void exit(ClientHandler client) {
+		Game game = null;
+		try {
+			game = getGameByPlayer(client.getPlayerName());
+		} catch (PlayerNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		if (game.getPlayers().size() > 2) {
+			Player player = game.getPlayerByClient(client.getPlayerName());
+			game.getPile().getTiles().addAll(player.getHand());
+			game.getPlayers().remove(game.getPlayerByClient(player.getName()));
+			broadcastToPlayersInGame(Protocol.SERVER_CORE_DISCONNECT + Protocol.MESSAGESEPERATOR + client.getPlayerName(), game);
+			if (game.getCurrentPlayer().getName().equals(player.getName())) {
+				game.nextPlayer();
+				broadcastToPlayersInGame(Protocol.SERVER_CORE_TURN + Protocol.MESSAGESEPERATOR + game.getCurrentPlayer().getName() ,game);
+			}
+		} else {
+			String msgScore = "";
+			for (Player player : game.getPlayers()) {
+				msgScore += (Protocol.MESSAGESEPERATOR + player.getName() + Protocol.MESSAGESEPERATOR + player.getScore());
+			}
+			broadcastToPlayersInGame(Protocol.SERVER_CORE_GAME_ENDED + msgScore, game);
+			games.remove(game);
+		}
+	}
+
 	private synchronized void getPlayers(ClientHandler client) {
 		try {
 			Game game = getGameByPlayer(client.getPlayerName());
@@ -146,7 +174,6 @@ public class Server {
 			game = getGameByPlayer(client.getPlayerName());
 			game.makeMove(xInt, yInt, tile, client.getPlayerName());
 			client.sendMessage(Protocol.SERVER_CORE_MOVE_ACCEPTED);
-			wait(100);
 			broadcastToPlayersInGame(Protocol.SERVER_CORE_MOVE_MADE + Protocol.MESSAGESEPERATOR + x + Protocol.MESSAGESEPERATOR + y + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color, game);
 		} catch (PlayerNotFoundException e1) {
 			client.sendMessage(Protocol.SERVER_CORE_MOVE_DENIED);
@@ -154,9 +181,6 @@ public class Server {
 		} catch (InvalidMoveException e) {
 			client.sendMessage(Protocol.SERVER_CORE_MOVE_DENIED);
 			ui.print("Bij spel " + game.getId() + " is een move geweigerd van speler " + client.getPlayerName() + " omdat de zet niet geldig is.");
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 	

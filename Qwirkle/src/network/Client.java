@@ -25,6 +25,7 @@ public class Client extends Thread{
 	 */
 	private static final String[] PRE_MENU = {null, "Ik ben een Menselijke speler", "Ik ben een Computerspeler"};
 	private static final String[] IP_MENU = {null, "Voer het gewenste ip adres in:"};
+	private static final String[] THINKING_TIME_MENU = {null, "Voer de denktijd van de computer in (in tienden van seconden):"};
 	private static final String[] PORT_MENU = {"Toets een gewenst portnummer in", "typ 0 voor de standaard poort: "};
 	private static final String[] END_MENU = {"Het spel is afgelopen, toets 1 om nog een keer, elke andere toets om te stoppen", "Ik wil weer in de wachtrij"};
 	private boolean terminated = false;
@@ -40,6 +41,7 @@ public class Client extends Thread{
 	private TUI bui;
 	private boolean gameStarted = false;
 	private Tile tileToBeSwapped;
+	private int thinkingTime;
 	
 	public static void main(String[] arsg) {
 		Client client = new Client();
@@ -77,9 +79,15 @@ public class Client extends Thread{
 			case Protocol.SERVER_CORE_SCORE: score(slicedMessage);
 			break;
 			case Protocol.SERVER_CORE_PLAYERS: sendPlayers(slicedMessage);
+			break;
+			case Protocol.SERVER_CORE_DISCONNECT: exit(slicedMessage[1]);
+			break;
 		}
 	}
 	
+	private void exit(String string) {
+		game.getPlayers().remove(game.getPlayerByClient(string));
+	}
 	private void moveAccepted() {
 		if (localPlayer instanceof ComputerPlayer)
 		sendMessage(Protocol.CLIENT_CORE_DONE);
@@ -132,6 +140,11 @@ public class Client extends Thread{
 				ui.print("Voer een geldig poortnummer in.");
 			}
 		}
+		if (currentQuestion == 3 && isHuman == false) {
+			if (question4() == false) {
+				ui.print("Voer een geldig nummer in");
+			}
+		}
 		
 	}
 	
@@ -173,6 +186,18 @@ public class Client extends Thread{
 	}
 	
 	private boolean question4() {
+		ui.renderMenu(THINKING_TIME_MENU);
+		int input = ui.determineInt();
+		if (input >= 0) {
+			thinkingTime = input*100;
+			return true;
+		} else if (input < 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean question5() {
 		ui.renderMenu(END_MENU);
 		int input = ui.determineInt();
 		if (input == 1) {
@@ -216,7 +241,7 @@ public class Client extends Thread{
 			ui.print(nameScore[i]+ " heeft een eindscore van " + nameScore[i+1]) ;
 		}
 		ui.print("De winnaar is: " + game.winner().getName());
-		boolean bl =question4();
+		boolean bl =question5();
 		if (bl == true)
 			sendMessage(Protocol.CLIENT_CORE_JOIN);		
 	}
@@ -292,7 +317,6 @@ public class Client extends Thread{
 			String[] move = null;
 			if (localPlayer instanceof HumanPlayer) {
 				move = localPlayer.determineMove();
-				ui.print(move.toString());
 			} else {
 				move = ((ComputerPlayer)localPlayer).determineMove(game);
 			}
@@ -308,6 +332,30 @@ public class Client extends Thread{
 					int color = Integer.parseInt(move[1]);
 					tileToBeSwapped = new Tile(TileUtils.intToColor(color), TileUtils.intToSymbol(shape));
 					sendMessage(Protocol.CLIENT_CORE_SWAP + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color);
+				} else if (move[0].equals("hint")) {
+					ComputerPlayer playerForHint = new ComputerPlayer("forHint", 1);
+					for (Tile tile : localPlayer.getHand()) {
+						playerForHint.getHand().add(tile);
+					}
+					try {
+						String[] hint = playerForHint.determineMove(game);
+						String color = TileUtils.intToColor(Integer.parseInt(hint[3]));
+						String shape = TileUtils.intToSymbol(Integer.parseInt(hint[2]));
+						ui.print("U kan " + color+shape + " neerleggen op x = " + hint[0] + " en y = " + hint[1]);
+					} catch (NullPointerException e) {
+						ui.print("Er is nu geen geldige move, ruil één of meer tegels");
+					}
+					turn(game.getCurrentPlayer().getName());
+				} else if (move[0].equals("quit")) {
+					sendMessage(Protocol.SERVER_CORE_EXIT);
+					try {
+						out.close();
+						in.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					terminated = true;
 				}
 			} else {
 				sendMessage(Protocol.CLIENT_CORE_DONE);
@@ -381,7 +429,7 @@ public class Client extends Thread{
 		if (isHuman == true) {
 			localPlayer = new HumanPlayer(playerName);
 		} else {
-			localPlayer = new ComputerPlayer(playerName);
+			localPlayer = new ComputerPlayer(playerName, thinkingTime);
 		}
 	}
 	

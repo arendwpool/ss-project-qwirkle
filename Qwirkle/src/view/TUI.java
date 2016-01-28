@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 
 
-public abstract class TUI implements Observer {
+public abstract class TUI{
 	
 	private static final int AMOUNT_CHARACTERS = 75;
 	boolean terminated = false;
