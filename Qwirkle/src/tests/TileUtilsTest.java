@@ -25,7 +25,7 @@ public class TileUtilsTest {
 	}
 	
 	@Test
-	public void testGiveRandomTile(){
+	public void testGiveRandomTile() {
 		Tile tile = TileUtils.giveRandomTile(testGame.getPile());
 		assertTrue(tile != null);
 	}

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import util.TileUtils;
 
 /**
- * Abstractie van een speler
+ * Abstractie van een speler.
  * @author Arend Pool en Bob Breemhaar
  *
  */
-public abstract class Player{
+public abstract class Player {
 	/**
 	 * De naam van de betreffende speler.
 	 */
@@ -94,7 +94,8 @@ public abstract class Player{
 	public String[] determineTile(String tileNumber) {
 		int tileNo = Integer.parseInt(tileNumber) - 1;
 		Tile tile = getHand().get(tileNo);
-		String[] toReturn = {Integer.toString(TileUtils.symbolToInt(tile.getSymbol())), Integer.toString(TileUtils.colorToInt(tile.getColor()))};
+		String[] toReturn = {Integer.toString(TileUtils.symbolToInt(tile.getSymbol())), 
+							Integer.toString(TileUtils.colorToInt(tile.getColor()))};
 		return toReturn;
 	}
 

@@ -27,7 +27,7 @@ public class GameTest {
 	}
 	
 	@Test
-	public void testNextPlayer(){
+	public void testNextPlayer() {
 		Player test2 = new HumanPlayer("1");
 		Player test3 = new HumanPlayer("2");
 		Player test4 = new HumanPlayer("3");
@@ -36,15 +36,20 @@ public class GameTest {
 		testGame.addPlayer(test3);
 		testGame.addPlayer(test4);
 		testGame.setCurrentPlayer(testPlayer);
-		assertTrue("De eerste speler is \"test\".", testGame.getCurrentPlayer().getName().equals(testPlayer.getName()));
+		assertTrue("De eerste speler is \"test\".", testGame.getCurrentPlayer().getName().equals(
+							testPlayer.getName()));
 		testGame.nextPlayer();
-		assertTrue("De eerste speler is \"2\".", testGame.getCurrentPlayer().getName().equals(test2.getName()));
+		assertTrue("De eerste speler is \"2\".", testGame.getCurrentPlayer().getName().equals(
+							test2.getName()));
 		testGame.nextPlayer();
-		assertTrue("De eerste speler is \"3\".", testGame.getCurrentPlayer().getName().equals(test3.getName()));
+		assertTrue("De eerste speler is \"3\".", testGame.getCurrentPlayer().getName().equals(
+							test3.getName()));
 		testGame.nextPlayer();
-		assertTrue("De eerste speler is \"4\".", testGame.getCurrentPlayer().getName().equals(test4.getName()));
+		assertTrue("De eerste speler is \"4\".", testGame.getCurrentPlayer().getName().equals(
+							test4.getName()));
 		testGame.nextPlayer();
-		assertTrue("De eerste speler is \"test\" (tweede keer).", testGame.getCurrentPlayer().getName().equals(testPlayer.getName()));
+		assertTrue("De eerste speler is \"test\" (tweede keer).", testGame.getCurrentPlayer().
+							getName().equals(testPlayer.getName()));
 
 		Game game = new Game(0);
 		Player test5 = new HumanPlayer("5");
@@ -52,10 +57,13 @@ public class GameTest {
 		game.addPlayer(test5);
 		game.addPlayer(test6);
 		game.setCurrentPlayer(test5);
-		assertTrue("De eerste speler is \"5\".", game.getCurrentPlayer().getName().equals(test5.getName()));
+		assertTrue("De eerste speler is \"5\".", game.getCurrentPlayer().
+							getName().equals(test5.getName()));
 		game.nextPlayer();
-		assertTrue("De eerste speler is \"6\".", game.getCurrentPlayer().getName().equals(test6.getName()));
+		assertTrue("De eerste speler is \"6\".", game.getCurrentPlayer().
+							getName().equals(test6.getName()));
 		game.nextPlayer();
-		assertTrue("De eerste speler is \"5\".", game.getCurrentPlayer().getName().equals(test5.getName()));
+		assertTrue("De eerste speler is \"5\".", game.getCurrentPlayer().
+							getName().equals(test5.getName()));
 	}
 }

@@ -42,7 +42,7 @@ public class ClientHandler extends Thread {
      * @param server
      * @param client
      */
-	public ClientHandler(Server server, Socket client){
+	public ClientHandler(Server server, Socket client) {
 		this.server = server;
 		try {
 			in = new BufferedReader(new InputStreamReader(client.getInputStream()));
@@ -67,7 +67,8 @@ public class ClientHandler extends Thread {
 				}
 			}
 		} catch (IOException e) {
-			System.out.println("Er is iets fout gegaan bij het lezen van de commandos in de clienthandler.");
+			System.out.println("Er is iets fout gegaan bij het lezen " +
+							"van de commandos in de clienthandler.");
 			server.deleteClient(this);
 			Game game = null;
 			try {
@@ -77,12 +78,12 @@ public class ClientHandler extends Thread {
 			}
 			try {
 				for (Player player : game.getPlayers()) {
-					if (!player.getName().equals(playerName))
+					if (!player.getName().equals(playerName)) {
 						server.broadcastToPlayer(Protocol.SERVER_CORE_GAME_ENDED, player.getName());
-					System.out.println("spel asfas");
-					server.getGames().remove(game);
+						server.getGames().remove(game);
+					}
 				}
-			}catch (NullPointerException e1) {
+			} catch (NullPointerException e1) {
 				//Doe niets, het spel is blijkbaar al gestopt, of is nooit gestart.
 			}
 		}
@@ -107,10 +108,10 @@ public class ClientHandler extends Thread {
 				System.out.println("Het betreffende spel kan niet gevonden worden");
 			}
 			for (Player player : game.getPlayers()) {
-				if (!player.getName().equals(playerName))
-				server.broadcastToPlayer(Protocol.SERVER_CORE_GAME_ENDED, player.getName());
-				System.out.println("spel asfas");
-				server.getGames().remove(game);
+				if (!player.getName().equals(playerName)) {
+					server.broadcastToPlayer(Protocol.SERVER_CORE_GAME_ENDED, player.getName());
+					server.getGames().remove(game);
+				}
 			}
 		}
 	}

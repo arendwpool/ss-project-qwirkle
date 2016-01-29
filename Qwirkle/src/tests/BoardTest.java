@@ -17,7 +17,7 @@ public class BoardTest {
 	}
 	
 	@Test
-	public void testGetField(){
+	public void testGetField() {
 		Tile tile = new Tile("groen", "circel");
 		testBoard.setTile(90, 90, tile);
 		testBoard.getField(90, 90);
@@ -25,7 +25,7 @@ public class BoardTest {
 	}
 	
 	@Test
-	public void testIsEmptyField(){
+	public void testIsEmptyField() {
 		Tile tile = new Tile("groen", "circel");
 		assertTrue(testBoard.isEmptyField(90, 90) == true);
 		testBoard.setTile(90, 90, tile);
@@ -33,7 +33,7 @@ public class BoardTest {
 	}
 	
 	@Test
-	public void testTilesOnXAxis(){
+	public void testTilesOnXAxis() {
 		ArrayList<Tile> controleLijst;
 		Tile tile1 = new Tile("groen", "cirkel");
 		Tile tile2 = new Tile("groen", "ruit");
@@ -60,7 +60,7 @@ public class BoardTest {
 	}
 	
 	@Test
-	public void testTilesOnYAxis(){
+	public void testTilesOnYAxis() {
 		ArrayList<Tile> controleLijst;
 		Tile tile1 = new Tile("groen", "cirkel");
 		Tile tile2 = new Tile("groen", "ruit");
