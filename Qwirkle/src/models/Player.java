@@ -74,7 +74,6 @@ public abstract class Player{
 	 */
 	public String[] determineMove() {
 		return null;
-		// TODO Auto-generated method stub
 		
 	}
 	

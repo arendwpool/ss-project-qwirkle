@@ -59,7 +59,6 @@ public class HumanPlayer extends Player {
 							}
 							if (move.length() > 4 && move.length() < 8 && swapped == false) {
 								madeMove = true;
-								System.out.println(determineMove(move));
 								return determineMove(move);
 							} else {
 								if(swapped == false)

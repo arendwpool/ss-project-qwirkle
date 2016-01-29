@@ -162,7 +162,7 @@ public class Game {
 	/**
 	 * Geeft aan welke speler winnaar is, geeft null als er nog geen winnaar is. Een speler
 	 * is de winnaar als het spel af is, en de meeste punten heeft.
-	 * @return Player withHighscore || null //TODO vraag
+	 * @return Player withHighscore || null
 	 */
 	public Player winner() {
 		int score = 0;

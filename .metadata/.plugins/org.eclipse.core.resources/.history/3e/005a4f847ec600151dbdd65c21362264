@@ -1,0 +1,96 @@
+package tests;
+
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+import exceptions.FullGameException;
+import exceptions.PlayerNotFoundException;
+import models.Board;
+import models.ComputerPlayer;
+import models.Game;
+import models.HumanPlayer;
+import models.Pile;
+import models.Player;
+import models.Tile;
+import util.TileUtils;
+
+/**
+ * 
+ * @author Bob Breemhaar en Arend Pool
+ *
+ */
+public class GameTest {
+
+	/**
+	 * Declareert een Spel om de tests mee te draaien.
+	 */
+	private Game testGame;
+	private Player testPlayer;
+	
+	@Before
+	public void setUp() throws Exception {
+		testGame = new Game(0);
+		testPlayer = new HumanPlayer("test");
+	}
+	
+	@Test
+	public void testNextPlayer(){
+		Player test2 = new HumanPlayer("1");
+		Player test3 = new HumanPlayer("2");
+		Player test4 = new HumanPlayer("3");
+		testGame.addPlayer(testPlayer);
+		testGame.addPlayer(test2);
+		testGame.addPlayer(test3);
+		testGame.addPlayer(test4);
+		testGame.setCurrentPlayer(testPlayer);
+		System.out.println(testGame.getCurrentPlayer().getName().equals(testPlayer.getName()));
+		assertTrue("De eerste speler is \"test\".", testGame.getCurrentPlayer().getName().equals(testPlayer.getName()));
+		testGame.nextPlayer();
+		assertTrue("De eerste speler is \"test\".", testGame.getCurrentPlayer().getName().equals(test2.getName()));
+		testGame.nextPlayer();
+		assertTrue("De eerste speler is \"test\".", testGame.getCurrentPlayer().getName().equals(testPlayer.getName()));
+		testGame.nextPlayer();
+		assertTrue("De eerste speler is \"test\".", testGame.getCurrentPlayer().getName().equals(testPlayer.getName()));
+		testGame.nextPlayer();
+		assertTrue("De eerste speler is \"test\".", testGame.getCurrentPlayer().getName().equals(testPlayer.getName()));
+		testGame.nextPlayer();
+		assertTrue("De eerste speler is \"test\" (tweede keer).", testGame.getCurrentPlayer().getName().equals(testPlayer.getName()));
+
+		Game game = new Game(0);
+		Player test5 = new HumanPlayer("5");
+		Player test6 = new HumanPlayer("6");
+		game.setCurrentPlayer(test5);
+		System.out.println(game.getCurrentPlayer().getName().equals(testPlayer.getName()));
+		assertTrue("De volgende speler heeft ID 1", game.getCurrentPlayer().getName().equals(testPlayer.getName()));
+		game.nextPlayer();
+		System.out.println(testGame.getCurrentPlayer().getName().equals(testPlayer.getName()));
+		assertTrue("De volgende speler heeft ID 2", testGame.getCurrentPlayer().getName().equals(testPlayer.getName()));
+		game.nextPlayer();
+		System.out.println(testGame.getCurrentPlayer().getName().equals(testPlayer.getName()));
+		assertTrue("De volgende speler heeft ID 1", testGame.getCurrentPlayer().getName().equals(testPlayer.getName()));
+		game.nextPlayer();
+		System.out.println(testGame.getCurrentPlayer().getName().equals(testPlayer.getName()));
+		assertTrue("De volgende speler heeft ID 2", testGame.getCurrentPlayer().getName().equals(testPlayer.getName()));
+	}
+	
+	//TODO oplossen
+	@Test
+	public void testDetermineInitialPlayer(){
+		Player player1 = new HumanPlayer("1");
+		Player player2 = new HumanPlayer("2");
+		Player player3 = new ComputerPlayer("3", 1);
+		TileUtils.setHand(player1, testGame.getPile());
+		TileUtils.setHand(player2, testGame.getPile());
+		TileUtils.setHand(player3, testGame.getPile());
+		TileUtils.setHand(testPlayer, testGame.getPile());
+		for(Player player : testGame.getPlayers()){
+			for(Tile tile : player.getHand()){
+				System.out.println(player.getName() + ": " + tile.getColor()+tile.getSymbol());
+			}
+		}
+		testGame.determineInitialPlayer();
+		Player player = testGame.getCurrentPlayer();
+		System.out.println(player.getName());
+		assertTrue(player != null);
+	}
+}

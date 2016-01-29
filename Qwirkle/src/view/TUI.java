@@ -54,7 +54,12 @@ public abstract class TUI{
 	 */
 	public int determineInt() {
 		Scanner scanner = new Scanner(System.in);
-		int input = Integer.parseInt(scanner.nextLine());
+		int input = 0;
+		try {
+			input = Integer.parseInt(scanner.nextLine());
+		} catch (NumberFormatException e) {
+			print("Voer een getal in...");
+		}
 		return input;
 	}
 	

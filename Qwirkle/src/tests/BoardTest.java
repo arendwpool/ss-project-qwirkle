@@ -1,14 +1,10 @@
 package tests;
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import models.Board;
 import models.Tile;
-import util.MoveUtils;
 
 public class BoardTest {
 	
@@ -90,25 +86,4 @@ public class BoardTest {
 		assertTrue(controleLijst.size() == 4);
 	}
 	
-	@Test
-	public void testValidSharedLine(){
-		Tile tile1 = new Tile("groen", "cirkel");
-		Tile tile2 = new Tile("groen", "ruit");
-		Tile tile3 = new Tile("groen", "vierkant");
-		Tile tile4 = new Tile("groen", "ster");
-		Tile tile5 = new Tile("rood", "ruit");
-		Tile tile6 = new Tile("geel", "ruit");
-		Tile tile7 = new Tile("groen", "plus");
-		testBoard.setTile(90, 90, tile1);
-		testBoard.setTile(89, 90, tile2);
-		testBoard.setTile(88, 90, tile3);
-		testBoard.setTile(87, 90, tile4);
-		assertTrue(testBoard.validSharedLine(89, 91, tile5));
-		testBoard.setTile(89, 91, tile5);
-		MoveUtils.rememberMove(tile5);
-		assertTrue(testBoard.validSharedLine(89, 89, tile6));
-		testBoard.setTile(89, 89, tile6);
-		MoveUtils.rememberMove(tile6);
-		assertFalse(testBoard.validSharedLine(86, 90, tile7));
-	}
 }

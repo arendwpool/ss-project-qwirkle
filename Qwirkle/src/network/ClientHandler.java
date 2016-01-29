@@ -7,6 +7,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
+import exceptions.PlayerNotFoundException;
+import models.Game;
+import models.Player;
+
 /**
  * Deze klasse managet de verbinding tussen client en server.
  * @author Arend Pool en Bob Breemhaar
@@ -44,8 +48,7 @@ public class ClientHandler extends Thread {
 			in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Er kon geen verbinding worden gemaakt.");
 		} 	
 	}
 	
@@ -58,14 +61,30 @@ public class ClientHandler extends Thread {
     	String text = "";
 		try {
 			while (text != null) {
-				
 				text = in.readLine();
 				if (!(text == null) && !text.equals("\n")) {
 					server.getClientMessage(text, this);
 				}
 			}
 		} catch (IOException e) {
-			
+			System.out.println("Er is iets fout gegaan bij het lezen van de commandos in de clienthandler.");
+			server.deleteClient(this);
+			Game game = null;
+			try {
+				game = server.getGameByPlayer(playerName);
+			} catch (PlayerNotFoundException e1) {
+				System.out.println("Het betreffende spel kan niet gevonden worden");
+			}
+			try {
+				for (Player player : game.getPlayers()) {
+					if (!player.getName().equals(playerName))
+						server.broadcastToPlayer(Protocol.SERVER_CORE_GAME_ENDED, player.getName());
+					System.out.println("spel asfas");
+					server.getGames().remove(game);
+				}
+			}catch (NullPointerException e1) {
+				//Doe niets, het spel is blijkbaar al gestopt, of is nooit gestart.
+			}
 		}
     }
 	
@@ -79,6 +98,20 @@ public class ClientHandler extends Thread {
 			out.newLine();
 			out.flush();
 		} catch (IOException e) {
+			System.out.println("Het versturen van het commando is fout gegaan.");
+			server.deleteClient(this);
+			Game game = null;
+			try {
+				game = server.getGameByPlayer(playerName);
+			} catch (PlayerNotFoundException e1) {
+				System.out.println("Het betreffende spel kan niet gevonden worden");
+			}
+			for (Player player : game.getPlayers()) {
+				if (!player.getName().equals(playerName))
+				server.broadcastToPlayer(Protocol.SERVER_CORE_GAME_ENDED, player.getName());
+				System.out.println("spel asfas");
+				server.getGames().remove(game);
+			}
 		}
 	}
 	
@@ -96,5 +129,14 @@ public class ClientHandler extends Thread {
 	 */
 	public String getPlayerName() {
 		return this.playerName;
+	}
+	
+	public void shutDown() {
+		try {
+			out.close();
+			in.close();
+		} catch (IOException e) {
+			System.out.println("Clienthandler kon niet schoon worden afgesloten.");
+		}
 	}
 }
