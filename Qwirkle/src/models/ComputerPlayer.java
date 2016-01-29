@@ -3,7 +3,7 @@ import util.MoveUtils;
 import util.TileUtils;
 
 /**
- * Maakt een speler met enige vorm van kunstmatige intelligentie
+ * Maakt een speler met enige vorm van kunstmatige intelligentie.
  * @author Arend Pool en Bob breemhaar
  *
  */
@@ -14,7 +14,7 @@ public class ComputerPlayer extends Player {
 	private int thinkingTime;
 	
 	/**
-	 * Maakt een nieuwe speler aan met een gegeven naam en denktijd
+	 * Maakt een nieuwe speler aan met een gegeven naam en denktijd.
 	 * @param name
 	 * @param thinkingTime
 	 */
@@ -35,7 +35,7 @@ public class ComputerPlayer extends Player {
 	 */
 	public String[] determineMove(Game game) {
 		try {
-			synchronized(this){
+			synchronized (this) {
 				wait(thinkingTime);
 			}
 		} catch (InterruptedException e) {
@@ -46,21 +46,29 @@ public class ComputerPlayer extends Player {
 			String[] move = {Integer.toString(0), Integer.toString(0), tile[0], tile[1]};
 			return move;
 		} else {
-			for(Tile tile: getHand()){
-				for(int x = 0; x < Board.DIM; x++){
-					for(int y = 0; y < Board.DIM; y++){
+			for (Tile tile: getHand()) {
+				for (int x = 0; x < Board.DIM; x++) {
+					for (int y = 0; y < Board.DIM; y++) {
 						if (!game.getBoard().isEmptyField(x, y)) {
-							if(MoveUtils.isValidMove(x+1, y, tile, game.getBoard())){
-								String[] move = {Integer.toString(x-89), Integer.toString(y-90), Integer.toString(TileUtils.symbolToInt(tile.getSymbol())), Integer.toString(TileUtils.colorToInt(tile.getColor()))};
+							if (MoveUtils.isValidMove(x + 1, y, tile, game.getBoard())) {
+								String[] move = {Integer.toString(x - 89), Integer.toString(y - 90),
+										Integer.toString(TileUtils.symbolToInt(tile.getSymbol())),
+										Integer.toString(TileUtils.colorToInt(tile.getColor()))};
 								return move;
-							} else if (MoveUtils.isValidMove(x-1, y, tile, game.getBoard())) {
-								String[] move = {Integer.toString(x-91), Integer.toString(y-90), Integer.toString(TileUtils.symbolToInt(tile.getSymbol())), Integer.toString(TileUtils.colorToInt(tile.getColor()))};
+							} else if (MoveUtils.isValidMove(x - 1, y, tile, game.getBoard())) {
+								String[] move = {Integer.toString(x - 91), Integer.toString(y - 90),
+										Integer.toString(TileUtils.symbolToInt(tile.getSymbol())),
+										Integer.toString(TileUtils.colorToInt(tile.getColor()))};
 								return move;
-							} else if (MoveUtils.isValidMove(x, y-1, tile, game.getBoard())) {
-								String[] move = {Integer.toString(x-90), Integer.toString(y-91), Integer.toString(TileUtils.symbolToInt(tile.getSymbol())), Integer.toString(TileUtils.colorToInt(tile.getColor()))};
+							} else if (MoveUtils.isValidMove(x, y - 1, tile, game.getBoard())) {
+								String[] move = {Integer.toString(x - 90), Integer.toString(y - 91),
+										Integer.toString(TileUtils.symbolToInt(tile.getSymbol())),
+										Integer.toString(TileUtils.colorToInt(tile.getColor()))};
 								return move;
-							} else if (MoveUtils.isValidMove(x, y+1, tile, game.getBoard())) {
-								String[] move = {Integer.toString(x-90), Integer.toString(y-89), Integer.toString(TileUtils.symbolToInt(tile.getSymbol())), Integer.toString(TileUtils.colorToInt(tile.getColor()))};
+							} else if (MoveUtils.isValidMove(x, y + 1, tile, game.getBoard())) {
+								String[] move = {Integer.toString(x - 90), Integer.toString(y - 89),
+										Integer.toString(TileUtils.symbolToInt(tile.getSymbol())),
+										Integer.toString(TileUtils.colorToInt(tile.getColor()))};
 								return move;
 							}
 						}
@@ -70,7 +78,8 @@ public class ComputerPlayer extends Player {
 		}
 		if (getHand().size() > 0) {
 			Tile tile = getHand().get(0);
-			String[] swap = {Integer.toString(TileUtils.symbolToInt(tile.getSymbol())), Integer.toString(TileUtils.colorToInt(tile.getColor()))};
+			String[] swap = {Integer.toString(TileUtils.symbolToInt(tile.getSymbol())),
+					Integer.toString(TileUtils.colorToInt(tile.getColor()))};
 			return swap;
 		}
 		return null;

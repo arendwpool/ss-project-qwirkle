@@ -40,7 +40,7 @@ public class HumanPlayer extends Player {
 	 */
 	public String[] determineMove() {
 		in = new Scanner(System.in);
-		while(true) {
+		while (true) {
 			while (true) {
 				System.out.println("tegel leggen ............. 1");
 				System.out.println("Ruilen ................... 2");
@@ -49,7 +49,8 @@ public class HumanPlayer extends Player {
 				System.out.println("Spel verlaten............. 5");
 				String choice = in.nextLine();
 				if (choice.equals("1")) {
-					System.out.println("Typ uw keuze in de vorm: [tegelnummer] [getal boven bord] [getal links van bord]");
+					System.out.println("Typ uw keuze in de vorm: "
+									+ "[tegelnummer] [getal boven bord] [getal links van bord]");
 					System.out.println("Typ niets in en druk op enter als u terug wil gaan.");
 					while (true) {
 						try {
@@ -61,8 +62,9 @@ public class HumanPlayer extends Player {
 								madeMove = true;
 								return determineMove(move);
 							} else {
-								if(swapped == false)
-								break;
+								if (swapped == false) {
+									break;
+								}
 							}
 						} catch (NumberFormatException e) {
 							System.out.println("Invoer is niet geldig");
@@ -93,7 +95,7 @@ public class HumanPlayer extends Player {
 							System.out.println("Invoer is niet geldig");
 						}
 					}
-				} else if (choice.equals("3")){
+				} else if (choice.equals("3")) {
 					String[] hint = {"hint"};
 					return hint;
 				} else if (choice.equals("4")) {

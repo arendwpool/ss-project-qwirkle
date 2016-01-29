@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+org.eclipse.jdt.core.builder.resourceCopyExclusionFilter=*.ucls
 org.eclipse.jdt.core.classpathVariable.OPENJML_PLUGIN=C\:/Users/Arend/Documents/$SSHome/eclipse/configuration/org.eclipse.osgi/498/0/.cp
 org.eclipse.jdt.core.classpathVariable.OPENJML_RUNTIME_LIBRARY=C\:/Users/Arend/Documents/$SSHome/eclipse/configuration/org.eclipse.osgi/498/0/.cp/jmlruntime.jar
 org.eclipse.jdt.core.codeComplete.visibilityCheck=enabled
