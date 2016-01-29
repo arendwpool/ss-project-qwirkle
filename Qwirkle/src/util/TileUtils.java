@@ -76,6 +76,11 @@ public class TileUtils {
 		}
 	}
 	
+	/**
+	 * Berekent de integer die de server en client begrijpen van een gegeven kleur.
+	 * @param color
+	 * @return i + 1 || 0
+	 */
 	public static int colorToInt(String color) {
 		for (int i = 0; i < Tile.kleuren.length; i++) {
 			if (Tile.kleuren[i].equals(color)) {
@@ -84,11 +89,20 @@ public class TileUtils {
 		}
 		return 0;
 	}
-	
+	/**
+	 * Geeft de String terug van een gegeven integer.
+	 * @param integer
+	 * @return Tile.kleuren[integer-1]
+	 */
 	public static String intToColor(int integer) {
 		return Tile.kleuren[integer-1];
 	}
 	
+	/**
+	 * Berekent de integer die de server en client begrijpen van een gegeven symbool.
+	 * @param symbol
+	 * @return i + 1 || 0
+	 */
 	public static int symbolToInt(String symbol) {
 		for (int i = 0; i < Tile.symbolen.length; i++) {
 			if (Tile.symbolen[i].equals(symbol)) {
@@ -98,6 +112,11 @@ public class TileUtils {
 		return 0;
 	}
 	
+	/**
+	 * Geeft de String terug van een gegeven integer.
+	 * @param integer
+	 * @return Tile.symbolen[integer-1]
+	 */
 	public static String intToSymbol(int integer) {
 		return Tile.symbolen[integer-1];
 	}

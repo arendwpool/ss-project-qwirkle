@@ -1,0 +1,22 @@
+package network;
+
+import view.StartTUI;
+import view.TUI;
+
+public class ReadServerInput extends Thread {
+	private Server server;
+	private TUI ui = new StartTUI();
+
+	public ReadServerInput(Server server) {
+		this.server = server;
+	}
+	
+	public void run() {
+		while(true) {
+			int input = ui.determineInt();
+			/*if (input.equals("shutdown")) {
+				server.shutDown();
+			}*/
+		}
+	}
+}

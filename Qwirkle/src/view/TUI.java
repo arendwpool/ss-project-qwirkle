@@ -1,47 +1,44 @@
 package view;
 
-import java.util.InputMismatchException;
-import java.util.Observer;
 import java.util.Scanner;
 
-
-
+/**
+ * Maakt handige methoden voor input en weergaven beschikbaar.
+ * @author Arend Pool en Bob Breemhaar
+ *
+ */
 public abstract class TUI{
-	
-	private static final int AMOUNT_CHARACTERS = 75;
-	boolean terminated = false;
-	protected String playerName;
-	protected static final String[] NAME_MENU = {null, "Voer uw naam in:"};
-	
+	/**
+	 * Lengte van een regel van een menu-item.
+	 */
+	private static final int AMOUNT_CHARACTERS = 75;	
 	
 	public TUI(){
 		
 	}
 	
-	public void update(){
+	public void update() {
 		
 	}
 	
 	/**
-	 * 
+	 * Weergeeft een menu van gegeven menu-items.
 	 * @param noMenuItems
-	 * @param menuItems(op index 0 altijd een uitleg bij een menu! zonder uitleg null houden!
+	 * @param menuItems
 	 */
 	public void renderMenu(String[] menuItems){
-		if(menuItems[0] != null && menuItems[0].contains("[naam]")){
-			menuItems[0] = menuItems[0].replace("[naam]", playerName);
-			System.out.println(menuItems[0]);
-		}
 		for(int i = 1; i < menuItems.length; i++){
 			System.out.println(menuItems[i] + dots(menuItems[i]) + i);
 		}
-		if(menuItems.equals(NAME_MENU)){
-			System.out.print("Typ uw naam en druk op enter: ");
-		}else{
-			System.out.print("\n" + "Voer uw keuze in:" + dots("Voer uw keuze in: ") + ".");
-		}
+		System.out.print("\n" + "Voer uw keuze in:" + dots("Voer uw keuze in: ") + ".");
 	}
 	
+	/**
+	 * Berekent het aantal punten dat weergegeven moet worden om de regels
+	 * dezelfde lengte te geven.
+	 * @param string
+	 * @return dots
+	 */
 	public String dots(String string){
 		int stringLength = string.toCharArray().length;
 		String dots = "";
@@ -51,22 +48,37 @@ public abstract class TUI{
 		return dots;
 	}
 
+	/**
+	 * Geeft de integer van een input terug
+	 * @return input
+	 */
 	public int determineInt() {
 		Scanner scanner = new Scanner(System.in);
 		int input = Integer.parseInt(scanner.nextLine());
 		return input;
 	}
 	
+	/**
+	 * Geeft de String van een input terug.
+	 * @return input
+	 */
 	public String determineString(){
 		Scanner scanner = new Scanner(System.in);
 		String input = scanner.nextLine();
 		return input;
 	}
 	
+	/**
+	 * Zet een paar enters neer om ruimte te creëeren.
+	 */
 	public void createSpace(){
 		System.out.print("\n \n");
 	}
 	
+	/**
+	 * Zet een bericht neer in de console.
+	 * @param msg
+	 */
 	public void print(String msg){
 		System.out.println(msg);
 	} 

@@ -1,0 +1,8 @@
+package network;
+
+public class ReadServerInput extends Thread {
+
+	public ReadServerInput(Server server) {
+		
+	}
+}

@@ -1,0 +1,26 @@
+package network;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import view.StartTUI;
+import view.TUI;
+
+public class ReadServerInput extends Thread {
+	private Server server;
+	private TUI ui = new StartTUI();
+
+	public ReadServerInput(Server server) {
+		this.server = server;
+	}
+	
+	public void run() {
+		while(true) {
+			String input = ui.determineString();
+			if (input.equals("shutdown")) {
+				server.shutDown();
+			}
+		}
+	}
+}

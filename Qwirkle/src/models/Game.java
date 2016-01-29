@@ -6,11 +6,34 @@ import util.MoveUtils;
 import util.TileUtils;
 
 public class Game {
+	/**
+	 * Het meegegeven id van het spel.
+	 */
 	private int id;
+	
+	/**
+	 * Alle spelers binnen het spel.
+	 */
 	private ArrayList<Player> players = new ArrayList<>();
+	
+	/**
+	 * De zak met tegels van het spel.
+	 */
 	private Pile pile;
+	
+	/**
+	 * Het bord van het spel.
+	 */
 	private Board board;
+	
+	/**
+	 * Instantieerd de tools voor het verwerken van een gemaakte zet.
+	 */
 	private MoveUtils move = new MoveUtils();
+	
+	/**
+	 * Geeft aan welke speler de huidige beurt heeft.
+	 */
 	private Player currentPlayer;
 	
 	/**
@@ -18,6 +41,10 @@ public class Game {
 	 */
 	public static final int DEFAULT_HAND_SIZE = 6;
 	
+	/**
+	 * Maakt het spel door een id op te slaan, en een nieuw bord- en zakobject te maken.
+	 * @param id
+	 */
 	public Game(int id) {
 		this.id = id;
 		pile = new Pile();
@@ -25,26 +52,55 @@ public class Game {
 		System.out.println("Game has started with id: " + id);
 	}
 	
+	/**
+	 * Geeft het idnummer van dit spel terug
+	 * @return id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Voegt een speler toe aan de lijst van meespelende mensen.
+	 * @param player
+	 */
 	public void addPlayer(Player player) {
 		players.add(player);
 	}
 
+	/**
+	 * Geeft de lijst van meespelende spelers terug;
+	 * @return players
+	 */
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
 
+	/**
+	 * Geeft de zak met stenen terug.
+	 * @return pile
+	 */
 	public Pile getPile() {
 		return pile;
 	}
 
+	/**
+	 * Verwerkt een zet van een speler. Propageert een InvalidMoveException.
+	 * @param x
+	 * @param y
+	 * @param tile
+	 * @param name
+	 * @throws InvalidMoveException
+	 */
 	public void makeMove(int x, int y, Tile tile, String name) throws InvalidMoveException{
 			move.makeMove(x, y, tile, this, name);		
 	}
 	
+	/**
+	 * Geeft de speler terug van een gegeven clientnaam.
+	 * @param name
+	 * @return
+	 */
 	public Player getPlayerByClient(String name) {
 		for (Player pl : players) {
 			if (pl.getName().equals(name)) {
@@ -54,6 +110,13 @@ public class Game {
 		return null;
 	}
 	
+	/**
+	 * Controlleerd of een gegeven speler een gegeven tegel in de hand heeft.
+	 * @param shape
+	 * @param color
+	 * @param name
+	 * @return
+	 */
 	public boolean tileInHand(String shape, String color, String name) {
 		Tile newTile = new Tile(color, shape);
 		Player pl = getPlayerByClient(name);
@@ -65,11 +128,12 @@ public class Game {
 		return false;
 	}
 	
-	public void swapTile(String shape, String color, String name) throws InvalidMoveException {
-		move.swapTile(shape, color, name, this);
-	}
-	
 
+	/**
+	 * Geeft een willekeurige tegel uit de zak.
+	 * @param pile
+	 * @return tile
+	 */
 	public Tile giveRandomTile(Pile pile) {
 		pile.shuffle();
 		Tile tile = pile.getTiles().get(0);
@@ -112,14 +176,17 @@ public class Game {
 		return withHighscore;
 	}
 	
-	public ArrayList<Tile> getHandByPlayerName(String name) {
-		return getPlayerByClient(name).getHand();
-	}
-	
+	/**
+	 * Geeft het bordobject van dit spel terug.
+	 * @return board
+	 */
 	public Board getBoard() {
 		return board;
 	}
 	
+	/**
+	 * Berekend de speler die de volgende beurt krijgt.
+	 */
 	public void nextPlayer() {
 		int current = players.indexOf(currentPlayer);
 		int next = (current + 1) % players.size();
@@ -134,6 +201,9 @@ public class Game {
 		return currentPlayer;
 	}
 
+	/**
+	 * Start het spel.
+	 */
 	public void start() {
 		determineInitialPlayer();
 	}
@@ -190,6 +260,10 @@ public class Game {
 		currentPlayer = player;
 	}
 	
+	/**
+	 * Geeft de MoveUtils klasse terug die door dit spel gebruikt wordt.
+	 * @return move
+	 */
 	public MoveUtils getMoves(){
 		return move;
 	}

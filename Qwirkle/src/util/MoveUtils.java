@@ -48,6 +48,10 @@ public class MoveUtils {
 		}
 	}
 
+	/**
+	 * Ze de initialMove boolean op een gegeven waarde.
+	 * @param bl
+	 */
 	public void setInitialMove(boolean bl){
 		initialMove = bl;
 	}
@@ -149,12 +153,19 @@ public class MoveUtils {
 		return isSingleOnY;
 	}
 	
+	/**
+	 * Verwijderd tegels die twee gegeven lijsten gezamelijk hebben.
+	 * @param listToKeep
+	 * @param listToRemove
+	 * @return listToKeep
+	 */
 	public ArrayList<Tile> deleteCommon(ArrayList<Tile> listToKeep, ArrayList<Tile> listToRemove) {
 		ArrayList<Tile> copy = new ArrayList<Tile>(listToKeep);
 		copy.removeAll(listToRemove);
 		listToKeep.removeAll(copy);
 		return listToKeep;
 	}
+	
 	/**
 	 * Controleert of de aangelegde stenen wel volgens de spelregels mogen. Maakt hiervoor eerst een kopie
 	 * van een bord. Vervolgens legt deze methode de tegel neer in deze kopie om na te gaan of deze tegel
@@ -239,6 +250,11 @@ public class MoveUtils {
 		return lastSet;
 	}
 	
+	/**
+	 * Zet de boolean die aangeeft of een speler een tegelruil heeft gedaan
+	 * op een gegeven waarde.
+	 * @param bl
+	 */
 	public void setTraded(boolean bl) {
 		hasTraded = bl;
 	}
@@ -282,26 +298,28 @@ public class MoveUtils {
 		}
 		
 	}
-	
-	public void swapTile(String shape, String color, String name, Game game) throws InvalidMoveException{
-		if (lastSet.size() == 0 && initialMove == false && game.getPile().getTiles().size() > 0) { 
-			Tile newTile = new Tile(color, shape);
-			tilesToSwap.add(newTile);
-			Player pl = game.getPlayerByClient(name);
-			pl.getHand().remove(newTile);
-		} else {
-			throw new InvalidMoveException();
-		}
-	}
 
+	/**
+	 * Geeft de opgeslagen tegels die geruilt moeten worden terug.s
+	 * @return tilesToSwap
+	 */
 	public ArrayList<Tile> getTilesToSwap(){
 		return tilesToSwap;
 	}
 	
+	/**
+	 * Zet de boolean die aangeeft of een speler al een zet heeft gedaan op een gegeven
+	 * waarde.
+	 * @return
+	 */
 	public boolean madeMove(){
 		return madeMove;
 	}
 	
+	/**
+	 * Geeft aan of een speler heeft geruild.
+	 * @return hasTraded
+	 */
 	public boolean hasTraded(){
 		return hasTraded;
 	}

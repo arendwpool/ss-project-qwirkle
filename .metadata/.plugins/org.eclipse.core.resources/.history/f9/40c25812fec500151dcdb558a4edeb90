@@ -1,0 +1,9 @@
+package network;
+
+public class ReadServerInput extends Thread {
+	private Server server;
+
+	public ReadServerInput(Server server) {
+		this.server = server;
+	}
+}

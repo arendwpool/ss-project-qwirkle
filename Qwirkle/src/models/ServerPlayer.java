@@ -1,9 +1,15 @@
 package models;
 
+/**
+ * Dit is een subklasse van de abstracte klasse Player. Deze klasse maakt
+ * een speler die voor de online aspecten is bedoelt. Deze slaat alleen informatie
+ * op, meer hoeft de server of client niet te weten.
+ * @author Arend Pool en Bob Breemhaar
+ *
+ */
 public class ServerPlayer extends Player {
 	/**
-	 * construeert een nieuwe menselijke speler. Deze speler krijgt een hand met tiles mee.
-	 * Elke speler met een score van 0. Uiteindelijk wordt de speler aan het spel toegevoegd.
+	 * Construeert een Serverspeler met een gegeven naam
 	 * @param name
 	 * @param game
 	 */
