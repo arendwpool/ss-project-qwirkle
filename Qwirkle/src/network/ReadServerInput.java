@@ -1,7 +1,11 @@
 package network;
 
 import java.util.Scanner;
-
+/**
+ * Werkt niet. Bedoeld om de server met een gegeven commando af te sluiten
+ * @author Arend
+ *
+ */
 public class ReadServerInput extends Thread {
 	private Server server;
 	Scanner scanner;

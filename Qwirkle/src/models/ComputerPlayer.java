@@ -8,7 +8,16 @@ import util.TileUtils;
  *
  */
 public class ComputerPlayer extends Player {
+	/**
+	 * Geeft de denktijd van de computer aan.
+	 */
 	private int thinkingTime;
+	
+	/**
+	 * Maakt een nieuwe speler aan met een gegeven naam en denktijd
+	 * @param name
+	 * @param thinkingTime
+	 */
 	public ComputerPlayer(String name, int thinkingTime) {
 		super(name);
 		this.thinkingTime = thinkingTime;

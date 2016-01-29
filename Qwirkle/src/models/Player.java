@@ -3,6 +3,11 @@ package models;
 import java.util.ArrayList;
 import util.TileUtils;
 
+/**
+ * Abstractie van een speler
+ * @author Arend Pool en Bob Breemhaar
+ *
+ */
 public abstract class Player{
 	/**
 	 * De naam van de betreffende speler.
@@ -47,8 +52,12 @@ public abstract class Player{
 		return score;
 	}
 	
-	public int setScore(int score) {
-		return this.score = score;
+	/**
+	 * Zet de score van een speler op een gegeven waarde.
+	 * @param score
+	 */
+	public void setScore(int score) {
+		this.score = score;
 	}
 	
 	/**
@@ -59,16 +68,30 @@ public abstract class Player{
 		score += points;
 	}
 	
+	/**
+	 * Bepaalt wat de volgende zet wordt van de speler.
+	 * @return null
+	 */
 	public String[] determineMove() {
 		return null;
 		// TODO Auto-generated method stub
 		
 	}
 	
+	/**
+	 * Vertaalt een gegeven zet naar integers die zowel de server als client begrijpen.
+	 * @param move
+	 * @return
+	 */
 	public String[] determineMove(String move) {
 		return null;
 	}
 
+	/**
+	 * Bepaalt van een gegeven integer welke tegel daarbij hoort.
+	 * @param tileNumber
+	 * @return toReturn
+	 */
 	public String[] determineTile(String tileNumber) {
 		int tileNo = Integer.parseInt(tileNumber) - 1;
 		Tile tile = getHand().get(tileNo);

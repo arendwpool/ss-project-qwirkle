@@ -4,11 +4,31 @@ import java.util.Scanner;
 
 import network.Protocol;
 
+/**
+ * Maakt een speler die bestuurd wordt door een mens.
+ * @author Arend Pool en Bob Breemhaar
+ *
+ */
 public class HumanPlayer extends Player {
-
+	/**
+	 * Geeft aan of de speler een zet heeft gedaan.
+	 */
 	private boolean madeMove = false;
+	
+	/**
+	 * Geeft aan of de speler heeft geruilt.
+	 */
 	private boolean swapped = false;
+	
+	/**
+	 * De scanner die de input van de speler leest.
+	 */
 	private Scanner in;
+	
+	/**
+	 * Maakt een speler met een gegeven naam.
+	 * @param name
+	 */
 	public HumanPlayer(String name) {
 		super(name);
 	}

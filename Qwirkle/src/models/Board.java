@@ -256,7 +256,6 @@ public class Board {
 		}
 		return sameX || sameY;
 	}
-	//TODO Hoeveelheid stenen op het bord kunnen controleren checken
 
 
 }
