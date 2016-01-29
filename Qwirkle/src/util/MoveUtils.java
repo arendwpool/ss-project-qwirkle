@@ -38,12 +38,12 @@ public class MoveUtils {
 	 * @throws InvalidMoveException 
 	 */
 	public void processMove(Player player, Game game) throws InvalidMoveException {
-		if(getLastMoves().size() != 0 || hasTraded == true){
+		if (getLastMoves().size() != 0 || hasTraded == true) {
 			generateScore(player, game.getBoard());
 			clearLastMoves();
 			hasTraded = false;
 			madeMove = false;
-		}else{
+		} else {
 			throw new InvalidMoveException();
 		}
 	}
@@ -52,7 +52,7 @@ public class MoveUtils {
 	 * Ze de initialMove boolean op een gegeven waarde.
 	 * @param bl
 	 */
-	public void setInitialMove(boolean bl){
+	public void setInitialMove(boolean bl) {
 		initialMove = bl;
 	}
 	
@@ -167,13 +167,14 @@ public class MoveUtils {
 	}
 	
 	/**
-	 * Controleert of de aangelegde stenen wel volgens de spelregels mogen. Maakt hiervoor eerst een kopie
-	 * van een bord. Vervolgens legt deze methode de tegel neer in deze kopie om na te gaan of deze tegel
-	 * hier wel mag liggen. Een rij stenen kan niet groter zijn dan 6, dus als dit wel het geval is wordt
-	 * er meteen false teruggegeven. Een initialMove kan nooit false zijn, dus wordt er meteen true terug-
-	 * gegeven. Als een beurt niet initial is, maar de tegel is niet aangrenzend aan een andere tegel wordt
-	 * er ook false teruggegeven. Daarna wordt nagegaan of een tegel dezelfde kleur of symbool heeft als 
-	 * andere tegels in een rij of kolom. Als een tegel dezelfde kleur en symbool heeft wordt er ook direct
+	 * Controleert of de aangelegde stenen wel volgens de spelregels mogen. Maakt hiervoor eerst 
+	 * een kopie van een bord. Vervolgens legt deze methode de tegel neer in deze kopie om na te
+	 * gaan of deze tegel hier wel mag liggen. Een rij stenen kan niet groter zijn dan 6, dus als
+	 * dit wel het geval is wordt er meteen false teruggegeven. Een initialMove kan nooit false
+	 * zijn, dus wordt er meteen true teruggegeven. Als een beurt niet initial is, maar de tegel
+	 * is niet aangrenzend aan een andere tegel wordt er ook false teruggegeven. Daarna wordt
+	 * nagegaan of een tegel dezelfde kleur of symbool heeft als andere tegels in een rij of kolom.
+	 * Als een tegel dezelfde kleur en symbool heeft wordt er ook direct
 	 * false teruggegeven.
 	 */
 	public static boolean isValidMove(int x, int y, Tile tile, Board board) {
@@ -191,30 +192,34 @@ public class MoveUtils {
 			} else if (initialMove == false && xAxis.size() == 1 && yAxis.size() == 1) {
 				return false;
 			} else {
-				if(xAxis.size()>1){
+				if (xAxis.size() > 1) {
 					for (Tile tileToCompare : xAxis) {
 						for (Tile tileToCompareWith : xAxis) {
-							if (!tileToCompare.equals(tileToCompareWith)){
-								if (TileUtils.compareColor(tileToCompareWith, tileToCompare) == true &&
-												TileUtils.compareSymbol(tileToCompareWith, tileToCompare) == true) {
+							if (!tileToCompare.equals(tileToCompareWith)) {
+								if (TileUtils.compareColor(tileToCompareWith, tileToCompare) == 
+													true && TileUtils.compareSymbol(
+													tileToCompareWith, tileToCompare) == true) {
 									return false;
-								} else if (!TileUtils.compareColor(tileToCompareWith, tileToCompare) == true 
-												&& !TileUtils.compareSymbol(tileToCompareWith, tileToCompare) == true) {
+								} else if (!TileUtils.compareColor(tileToCompareWith,
+												tileToCompare) == true && !TileUtils.compareSymbol(
+												tileToCompareWith, tileToCompare) == true) {
 									return false;
 								}
 							}
 						}
 					}
 				}
-				if(yAxis.size() > 1) {
+				if (yAxis.size() > 1) {
 					for (Tile tileToCompare : yAxis) {
 						for (Tile tileToCompareWith : yAxis) {
-							if(!tileToCompare.equals(tileToCompareWith)){
-								if (TileUtils.compareColor(tileToCompareWith, tileToCompare) == true &&
-												TileUtils.compareSymbol(tileToCompareWith, tileToCompare) == true) {
+							if (!tileToCompare.equals(tileToCompareWith)) {
+								if (TileUtils.compareColor(tileToCompareWith,
+												tileToCompare) == true && TileUtils.compareSymbol(
+												tileToCompareWith, tileToCompare) == true) {
 									return false;
-								} else if (TileUtils.compareColor(tileToCompareWith, tileToCompare) == false 
-												&& TileUtils.compareSymbol(tileToCompareWith, tileToCompare) == false) {
+								} else if (TileUtils.compareColor(tileToCompareWith, 
+												tileToCompare) == false && TileUtils.compareSymbol(
+												tileToCompareWith, tileToCompare) == false) {
 									return false;
 								}
 							}
@@ -260,20 +265,23 @@ public class MoveUtils {
 	}
 
 	/**
-	 * Moet de Move van de player verwerken. Hiervoor wordt er eerst gekeken of een speler al heeft geruild
-	 * of dat een move initial is. Vervolgens wordt dit op een correcte wijze afgehandeld, en wordt de tegel
-	 * uit de hand van de speler verwijderd.
+	 * Moet de Move van de player verwerken. Hiervoor wordt er eerst gekeken of een speler al heeft
+	 * geruild of dat een move initial is. Vervolgens wordt dit op een correcte wijze afgehandeld,
+	 * en wordt de tegel uit de hand van de speler verwijderd.
 	 * @param x
 	 * @param y
 	 * @param tile
 	 */
-	public void makeMove(int x, int y, Tile tile, Game game, String name) throws InvalidMoveException{
+	public void makeMove(int x, int y, Tile tile, Game game, String name)
+						throws InvalidMoveException {
 		if (hasTraded == false && initialMove == false) {
-			if (isValidMove(x, y, tile, game.getBoard()) == true && validSharedLine(x, y, tile) == true) {
+			if (isValidMove(x, y, tile, game.getBoard()) == true && 
+							validSharedLine(x, y, tile) == true) {
 				game.getBoard().setTile(x, y, tile);
 				rememberMove(tile);
 				for (Tile tileInHand : game.getCurrentPlayer().getHand()) {
-					if (TileUtils.compareColor(tile, tileInHand) == true && TileUtils.compareSymbol(tile, tileInHand) == true){
+					if (TileUtils.compareColor(tile, tileInHand) == true && 
+										TileUtils.compareSymbol(tile, tileInHand) == true) {
 						game.getCurrentPlayer().getHand().remove(tileInHand);
 						break;
 					}
@@ -282,11 +290,12 @@ public class MoveUtils {
 			} else {
 				throw new InvalidMoveException();
 			}
-		} else if(initialMove == true){
+		} else if (initialMove == true) {
 			game.getBoard().setTile(90, 90, tile);
 			rememberMove(tile);
 			for (Tile tileInHand : game.getCurrentPlayer().getHand()) {
-				if (TileUtils.compareColor(tile, tileInHand) == true && TileUtils.compareSymbol(tile, tileInHand) == true){
+				if (TileUtils.compareColor(tile, tileInHand) == true && 
+									TileUtils.compareSymbol(tile, tileInHand) == true) {
 					game.getCurrentPlayer().getHand().remove(tileInHand);
 					break;
 				}
@@ -300,19 +309,18 @@ public class MoveUtils {
 	}
 
 	/**
-	 * Geeft de opgeslagen tegels die geruilt moeten worden terug.s
+	 * Geeft de opgeslagen tegels die geruilt moeten worden terug.
 	 * @return tilesToSwap
 	 */
-	public ArrayList<Tile> getTilesToSwap(){
+	public ArrayList<Tile> getTilesToSwap() {
 		return tilesToSwap;
 	}
 	
 	/**
-	 * Zet de boolean die aangeeft of een speler al een zet heeft gedaan op een gegeven
-	 * waarde.
+	 * Zet de boolean die aangeeft of een speler al een zet heeft gedaan op een gegeven waarde.
 	 * @return
 	 */
-	public boolean madeMove(){
+	public boolean madeMove() {
 		return madeMove;
 	}
 	
@@ -320,7 +328,7 @@ public class MoveUtils {
 	 * Geeft aan of een speler heeft geruild.
 	 * @return hasTraded
 	 */
-	public boolean hasTraded(){
+	public boolean hasTraded() {
 		return hasTraded;
 	}
 	
@@ -334,7 +342,7 @@ public class MoveUtils {
 		boolean sameX = true;
 		boolean sameY = true;
 		boolean validSharedLine = false;
-		if (getLastMoves().size()<1){
+		if (getLastMoves().size() < 1) {
 			return true;
 		} else {
 			for (Tile tile : getLastMoves()) {

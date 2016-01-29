@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+<<<<<<< HEAD
 	<item value="false" key="TypeHierarchyViewPart.qualifiednames"/>
 	<item value="3" key="TypeHierarchyViewPart.orientation"/>
 	<item value="false" key="TypeHierarchyViewPart.linkeditors"/>
@@ -109,8 +110,12 @@
 	<section name="BuildPathsPropertyPage">
 		<item value="3" key="pageIndex"/>
 	</section>
+=======
+>>>>>>> 2ca6ad0b2a9d456cbc17436b6d1510f07eec74fc
 	<section name="completion_proposal_size">
 	</section>
 	<section name="JavaElementSearchActions">
+	</section>
+	<section name="quick_assist_proposal_size">
 	</section>
 </section>

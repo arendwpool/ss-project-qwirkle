@@ -9,7 +9,7 @@ package models;
  */
 public class ServerPlayer extends Player {
 	/**
-	 * Construeert een Serverspeler met een gegeven naam
+	 * Construeert een Serverspeler met een gegeven naam.
 	 * @param name
 	 * @param game
 	 */

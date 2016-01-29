@@ -22,17 +22,20 @@ public class TileUtils {
 	
 	/**
 	 * 
-	 * Kijkt hoeveel tegels een gegeven speler in zijn hand heeft. Als dit minder dan 6 is worden er 
-	 * een aantal willekeurige tegels gegeven zodat de hand weer 6 tegels heeft.
+	 * Kijkt hoeveel tegels een gegeven speler in zijn hand heeft.
+	 * Als dit minder dan 6 is worden er een aantal willekeurige tegels gegeven 
+	 * zodat de hand weer 6 tegels heeft.
 	 * @param pl
 	 * @param server 
 	 */
 	public static void setHand(Player pl, Pile pile, Server server, Game game) {
 		int noOfTilesToGive = Game.DEFAULT_HAND_SIZE - pl.getHand().size();
-		for(int i = 0; i < noOfTilesToGive; i++){
+		for (int i = 0; i < noOfTilesToGive; i++) {
 			Tile tile = giveRandomTile(pile);
 			pl.getHand().add(tile);
-			server.broadcastToPlayer(Protocol.SERVER_CORE_SEND_TILE + Protocol.MESSAGESEPERATOR + symbolToInt(tile.getSymbol()) + Protocol.MESSAGESEPERATOR + colorToInt(tile.getColor()), pl.getName());
+			server.broadcastToPlayer(Protocol.SERVER_CORE_SEND_TILE + Protocol.MESSAGESEPERATOR + 
+								symbolToInt(tile.getSymbol()) + Protocol.MESSAGESEPERATOR + 
+								colorToInt(tile.getColor()), pl.getName());
 			pile.getTiles().remove(tile);
 		}
 	}
@@ -95,7 +98,7 @@ public class TileUtils {
 	 * @return Tile.kleuren[integer-1]
 	 */
 	public static String intToColor(int integer) {
-		return Tile.kleuren[integer-1];
+		return Tile.kleuren[integer - 1];
 	}
 	
 	/**
@@ -118,6 +121,6 @@ public class TileUtils {
 	 * @return Tile.symbolen[integer-1]
 	 */
 	public static String intToSymbol(int integer) {
-		return Tile.symbolen[integer-1];
+		return Tile.symbolen[integer - 1];
 	}
 }

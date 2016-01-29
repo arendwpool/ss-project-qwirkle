@@ -5,7 +5,7 @@ package view;
  * @author Arend Pool en Bob Breemhaar
  *
  */
-public class StartTUI extends TUI{
+public class StartTUI extends TUI {
 	
 	public StartTUI() {
 	}

@@ -1,13 +1,14 @@
 package network;
 /**
- * Protocol groep 2 (BIT) 2016 
+ * Protocol groep 2 (BIT) 2016 .
  * Interface Protocol met daarin de gemaakte protocol afspraken
  * @author  Wouter Bolhuis & Cas Putman
  * @version 1.3.0 (18-01-2016)
  * 
  * @changelog
  * - Commands waarmee kan worden opgevraagd hoeveel spelers er in de game zitten.
- * - SERVER_CORE_DONE wordt niet meer gebruikt na het doorgeven van de moves naar andere spelers, ipv daarvan wordt meteen SERVER_CORE_TURN gestuurd.
+ * - SERVER_CORE_DONE wordt niet meer gebruikt na het doorgeven van de moves naar andere spelers,
+ *  ipv daarvan wordt meteen SERVER_CORE_TURN gestuurd.
  * 
  * Vragen of opmerkingen? 
  * Stuur ons een email: 
@@ -44,7 +45,8 @@ public interface Protocol {
 	 */
 	String CLIENT_CORE_EXTENSION = "ex";
 	
-	/* Wordt gebruikt om vanuit de server aan de client te melden welke extensies gebruikt kunnen worden.
+	/* Wordt gebruikt om vanuit de server aan de client te melden welke
+	 * extensies gebruikt kunnen worden.
 	 * De namen van de extensies staan onderaan aan gegeven
 	 * Richting: Server -> Client
 	 * 
@@ -56,7 +58,8 @@ public interface Protocol {
 	 */
 	String SERVER_CORE_EXTENSION = "returnEx";
 	
-	/* Manier om zelf een naam de definieren bij de server. Nodig voor bijvoorbeeld challenge en leaderboard plugins.
+	/* Manier om zelf een naam de definieren bij de server.
+	 * Nodig voor bijvoorbeeld challenge en leaderboard plugins.
 	 * Richting: Client -> Server
 	 * 
 	 * @param name = Naam waarmee men bekend wilt staan bij de server.
@@ -126,7 +129,8 @@ public interface Protocol {
 	 */
 	String SERVER_CORE_START = "starting";
 	
-	/* Het bericht van de server aan een client als respons op het start commando indien de server niet meteen gaat beginnen
+	/* Het bericht van de server aan een client als respons op het start 
+	 * commando indien de server niet meteen gaat beginnen.
 	 * Richting: Server -> Client 
 	 */
 	String SERVER_CORE_START_DENIED = "startDenied";
@@ -169,8 +173,10 @@ public interface Protocol {
 	 */
 	String SERVER_CORE_MOVE_DENIED = "moveDenied";
 	
-	/* Als de move geaccepteerd is door de server stuurt deze ook meteen dit command naar alle spelers.
-	 * Nadat de server alle gemaakt moves door een speler heeft doorgegeven stuurt de server ook het done command.
+	/* Als de move geaccepteerd is door de server 
+	 * stuurt deze ook meteen dit command naar alle spelers.
+	 * Nadat de server alle gemaakt moves door een speler heeft 
+	 * doorgegeven stuurt de server ook het done command.
 	 * Richting: Server -> Client (ALL)
 	 * 
 	 * @param x = x coordinaat van de plaatsing
@@ -213,7 +219,8 @@ public interface Protocol {
 	 */
 	String SERVER_CORE_SCORE = "score";
 	
-	/* Nadat een speler moves heeft gedaan, of tiles heeft geswapt stuurt de server deze clients genoeg tiles om ervoor te zorgen dat de speler weer zes tiles heeft.
+	/* Nadat een speler moves heeft gedaan, of tiles heeft geswapt stuurt de server 
+	 * deze clients genoeg tiles om ervoor te zorgen dat de speler weer zes tiles heeft.
 	 * Nadat alle tiles zijn doorgegeven gebruikt de server ook het done command.
 	 * Richting: Server -> Client
 	 * 
@@ -261,7 +268,8 @@ public interface Protocol {
 	 */
 	String SERVER_CORE_GAME_ENDED = "gameEnded";
 	
-	/* Als één van de spelers om één of andere reden verbinding verliest dan kan de server dat aan de clients doorgeven.
+	/* Als één van de spelers om één of andere reden verbinding 
+	 * verliest dan kan de server dat aan de clients doorgeven.
 	 * Richting: Server -> Client (ALL)
 	 * 
 	 * @param name = naam van de client die verbinding verloor
@@ -270,7 +278,8 @@ public interface Protocol {
 	 */
 	String SERVER_CORE_TIMEOUT_EXCEPTION = "exception timeout";
 	
-	/* Als één van de spelers om één of andere reden het spel wilt verlaten dan kan de client dit melden.
+	/* Als één van de spelers om één of andere reden het spel wilt 
+	 * verlaten dan kan de client dit melden.
 	 * Richting: Client -> Server
 	 */
 	String SERVER_CORE_EXIT = "exit";
@@ -449,7 +458,8 @@ public interface Protocol {
 	/* Als de challenge niet succesvol is
 	 * Bijvoorbeeld als één van de namen niet op de server online is
 	 * Bijvoorbeeld als één van de speler de uitdaging heeft afgeslagen
-	 * Als alle spelers de challenge accepteren wordt gewoon het starting command van de core gegeven.
+	 * Als alle spelers de challenge accepteren wordt gewoon het starting 
+	 * command van de core gegeven.
 	 * Richting: Server -> Client
 	 * 
 	 * @param name = naam van speler die de uitdaging hebben geaccepteerd
@@ -487,8 +497,10 @@ public interface Protocol {
 	String CLIENT_SECURE_LOGIN_LOGIN = "secure login";
 	
 	/* Het accepteren van een login
-	 * Als de login gegevens nog niet bekend zijn bij de server en er is niet al iemand online met die naam
-	 * dan worden de login gegevens gewoon toegevoegd aan de login database, zodat er geen apart register command nodig is.
+	 * Als de login gegevens nog niet bekend zijn bij de server 
+	 * en er is niet al iemand online met die naam
+	 * dan worden de login gegevens gewoon toegevoegd aan de login database,
+	 *  zodat er geen apart register command nodig is.
 	 * Richting: Server -> Client
 	 */
 	String SERVER_SECURE_LOGIN_ACCEPT = "secure loginAccepted";

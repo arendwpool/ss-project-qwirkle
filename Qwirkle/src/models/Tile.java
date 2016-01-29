@@ -9,6 +9,11 @@ import java.awt.Point;
 public class Tile {
 	/**
 	 * De mogelijke symbolen die een tegel kan hebben.
+	 * 
+	 * 
+	 * we erkennen de Checkstyle fout: Te weinig tijd om het te repareren. Het breekt het hele
+	 * spel bij verbetering. overal wordt dit gebruikt!
+	 * 
 	 */
 	public static final String[] symbolen = {"cirkel", "kruis", "ruit", "vierkant", "ster", "plus"};
 	
@@ -37,7 +42,7 @@ public class Tile {
 	 * @param color
 	 * @param symbol
 	 */
-	public Tile(String color, String symbol){
+	public Tile(String color, String symbol) {
 		this.color = color;
 		this.symbol = symbol;
 	}
@@ -47,7 +52,7 @@ public class Tile {
 	 * @return this.color
 	 */
 	/*@pure*/
-	public String getColor(){
+	public String getColor() {
 		return color;
 	}
 	
@@ -56,7 +61,7 @@ public class Tile {
 	 * @return this.symbol
 	 */
 	/*@pure*/
-	public String getSymbol(){
+	public String getSymbol() {
 		return symbol;
 	}
 	
@@ -65,14 +70,14 @@ public class Tile {
 	 * @param x
 	 * @param y
 	 */
-	public void setLocation(int x, int y){
+	public void setLocation(int x, int y) {
 		point = new Point(x, y);
 	}
 	/**
 	 * geeft de mogelijkheid om de locatie aan te vragen van deze Tile.
 	 * @return point
 	 */
-	public Point getLocation(){
+	public Point getLocation() {
 		return point;
 	}
 	

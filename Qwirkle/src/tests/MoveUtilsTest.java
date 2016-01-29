@@ -26,16 +26,20 @@ public class MoveUtilsTest {
 	}
 
 	@Test
-	public void testIsValidMove(){
+	public void testIsValidMove() {
 		Board board = testGame.getBoard();
 		testGame.getMoves().setInitialMove(false);
 		board.setTile(90, 90, new Tile("groen", "cirkel"));
 		assertTrue("De gelegde tegel is groen", board.getField(90, 90).getColor().equals("groen"));
-		assertTrue("Deze move mag gelegd worden",MoveUtils.isValidMove(91, 90, new Tile("groen", "vierkant"), board));
-		assertFalse("Deze tegel zit aan geen tegel vast", MoveUtils.isValidMove(98, 85, new Tile("rood", "ruit"), board));
+		assertTrue("Deze move mag gelegd worden", MoveUtils.isValidMove(91, 90, 
+							new Tile("groen", "vierkant"), board));
+		assertFalse("Deze tegel zit aan geen tegel vast", MoveUtils.isValidMove(98, 85, 
+							new Tile("rood", "ruit"), board));
 		board.setTile(91, 90, new Tile("groen", "vierkant"));
-		assertFalse("Een rode ruit mag hier niet", MoveUtils.isValidMove(90, 89, new Tile("rood", "ruit"), board));
-		assertTrue("Een rode circel mag hier wel", MoveUtils.isValidMove(90, 89, new Tile("rood", "cirkel"), board));
+		assertFalse("Een rode ruit mag hier niet", MoveUtils.isValidMove(90, 89, 
+							new Tile("rood", "ruit"), board));
+		assertTrue("Een rode circel mag hier wel", MoveUtils.isValidMove(90, 89, 
+							new Tile("rood", "cirkel"), board));
 		board.reset();
 		board.setTile(90, 90, new Tile("groen", "plus"));
 		board.setTile(90, 91, new Tile("groen", "ruit"));
@@ -45,7 +49,7 @@ public class MoveUtilsTest {
 		board.setTile(89, 89, new Tile("blauw", "cirkel"));
 		board.setTile(88, 89, new Tile("oranje", "cirkel"));
 		assertTrue(MoveUtils.isValidMove(90, 89, new Tile("groen", "cirkel"), board));
-		assertFalse(MoveUtils.isValidMove(90,89, new Tile("groen", "ster"), board));
+		assertFalse(MoveUtils.isValidMove(90, 89, new Tile("groen", "ster"), board));
 		board.reset();
 		board.setTile(90, 90, new Tile("groen", "kruis"));
 		board.setTile(91, 90, new Tile("groen", "cikel"));
@@ -58,7 +62,7 @@ public class MoveUtilsTest {
 	}
 	
 	@Test 
-	public void generateScore(){
+	public void generateScore() {
 		Board board = testGame.getBoard();
 		board.reset();
 		board.setTile(90, 90, new Tile("groen", "plus"));
@@ -135,7 +139,7 @@ public class MoveUtilsTest {
 	
 
 	@Test
-	public void testValidSharedLine(){
+	public void testValidSharedLine() {
 		Tile tile1 = new Tile("groen", "cirkel");
 		Tile tile2 = new Tile("groen", "ruit");
 		Tile tile3 = new Tile("groen", "vierkant");

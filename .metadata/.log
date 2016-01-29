@@ -1545,6 +1545,10 @@ java.lang.IllegalStateException: Expected the service to be TERMINATED, but the 
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1488)
+<<<<<<< HEAD
+>>>>>>> 0b219b28f51e38b82bfe0d0b899a0917a3c31985
+!SESSION 2016-01-28 20:31:12.814 -----------------------------------------------
+=======
 Caused by: java.lang.NumberFormatException: For input string: "9~6a8260f7fc01362810bad3df65c78b213a838917"
 	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
 	at java.lang.Long.parseLong(Long.java:441)
@@ -1562,6 +1566,7 @@ Caused by: java.lang.NumberFormatException: For input string: "9~6a8260f7fc01362
 	at com.google.common.util.concurrent.Callables$3.run(Callables.java:93)
 	at java.lang.Thread.run(Thread.java:745)
 !SESSION 2016-01-28 23:09:06.153 -----------------------------------------------
+>>>>>>> 90ec693b4e5d8ac9be6081be4b5bb63d88627283
 eclipse.buildId=4.5.1.M20150904-0015
 java.version=1.7.0_79
 java.vendor=Oracle Corporation
@@ -1569,7 +1574,89 @@ BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=nl_NL
 Framework arguments:  -product org.eclipse.epp.package.java.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
 
+<<<<<<< HEAD
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2016-01-28 20:31:15.383
+!MESSAGE Unable to load resource file:/C:/Users/Bob/Documents/ss-project-qwirkle/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
+!STACK 0
+org.eclipse.emf.ecore.resource.impl.ResourceSetImpl$1DiagnosticWrappedException: org.xml.sax.SAXParseExceptionpublicId: file:/C:/Users/Bob/Documents/ss-project-qwirkle/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; systemId: file:/C:/Users/Bob/Documents/ss-project-qwirkle/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; lineNumber: 2; columnNumber: 2; The markup in the document preceding the root element must be well-formed.
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.handleDemandLoadException(ResourceSetImpl.java:319)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:278)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.getResource(ResourceSetImpl.java:406)
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.getResource(ResourceHandler.java:351)
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.loadResource(ResourceHandler.java:327)
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.loadMostRecentModel(ResourceHandler.java:231)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.loadApplicationModel(E4Application.java:397)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.createE4Workbench(E4Application.java:254)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:620)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+Caused by: org.xml.sax.SAXParseExceptionpublicId: file:/C:/Users/Bob/Documents/ss-project-qwirkle/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; systemId: file:/C:/Users/Bob/Documents/ss-project-qwirkle/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; lineNumber: 2; columnNumber: 2; The markup in the document preceding the root element must be well-formed.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(Unknown Source)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl.parse(Unknown Source)
+	at org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl.load(XMLLoadImpl.java:175)
+	at org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl.doLoad(XMLResourceImpl.java:261)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1518)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1297)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoad(ResourceSetImpl.java:259)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:274)
+	... 23 more
+
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2016-01-28 20:31:15.388
+!MESSAGE The persisted workbench has no top-level windows, so reinitializing with defaults.
+!STACK 0
+java.lang.Exception
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.loadMostRecentModel(ResourceHandler.java:236)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.loadApplicationModel(E4Application.java:397)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.createE4Workbench(E4Application.java:254)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:620)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY org.eclipse.epp.logging.aeri.ui 2 5 2016-01-28 20:31:20.785
+=======
 !ENTRY org.eclipse.epp.logging.aeri.ui 2 5 2016-01-28 23:09:56.406
+>>>>>>> 90ec693b4e5d8ac9be6081be4b5bb63d88627283
 !MESSAGE The configuration download failed. Version: 1.0.1.v20150913-0716
 !STACK 0
 com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5 column 10
@@ -1590,7 +1677,11 @@ Caused by: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5
 	at com.google.gson.Gson.fromJson(Gson.java:803)
 	... 8 more
 
+<<<<<<< HEAD
+!ENTRY org.eclipse.epp.logging.aeri.ui 2 29 2016-01-28 20:31:20.813
+=======
 !ENTRY org.eclipse.epp.logging.aeri.ui 2 29 2016-01-28 23:09:56.412
+>>>>>>> 90ec693b4e5d8ac9be6081be4b5bb63d88627283
 !MESSAGE Startup failed, AERI is disabled until next restart. Version: 1.0.1.v20150913-0716
 !STACK 0
 com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5 column 10
@@ -1611,6 +1702,14 @@ Caused by: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5
 	at com.google.gson.Gson.fromJson(Gson.java:803)
 	... 8 more
 
+<<<<<<< HEAD
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-28 20:31:21.582
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Bob'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+=======
 !ENTRY org.eclipse.egit.ui 2 0 2016-01-28 23:09:56.816
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\Arend'. If this is
@@ -1622,7 +1721,12 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 !MESSAGE The 'org.eclipse.ui.startup' extension from 'com.vp.vpsde.ec' does not provide a 'class' attribute.
 This usage is deprecated and a 'class' attribute should be provided.
 The release after Mars (4.5) will no longer support the deprecated usage!
+<<<<<<< HEAD
+>>>>>>> 90ec693b4e5d8ac9be6081be4b5bb63d88627283
+!SESSION 2016-01-29 09:15:58.931 -----------------------------------------------
+=======
 !SESSION 2016-01-29 12:05:10.770 -----------------------------------------------
+>>>>>>> 1379ad154af1dd031fb9c4476480e76ed4df68cd
 eclipse.buildId=4.5.1.M20150904-0015
 java.version=1.7.0_79
 java.vendor=Oracle Corporation
@@ -1630,6 +1734,21 @@ BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=nl_NL
 Framework arguments:  -product org.eclipse.epp.package.java.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
 
+<<<<<<< HEAD
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2016-01-29 09:16:01.567
+!MESSAGE Unable to load resource file:/C:/Users/Bob/Documents/ss-project-qwirkle/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
+!STACK 0
+org.eclipse.emf.ecore.resource.impl.ResourceSetImpl$1DiagnosticWrappedException: org.xml.sax.SAXParseExceptionpublicId: file:/C:/Users/Bob/Documents/ss-project-qwirkle/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; systemId: file:/C:/Users/Bob/Documents/ss-project-qwirkle/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; lineNumber: 2; columnNumber: 2; The markup in the document preceding the root element must be well-formed.
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.handleDemandLoadException(ResourceSetImpl.java:319)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:278)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.getResource(ResourceSetImpl.java:406)
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.getResource(ResourceHandler.java:351)
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.loadResource(ResourceHandler.java:327)
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.loadMostRecentModel(ResourceHandler.java:231)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.loadApplicationModel(E4Application.java:397)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.createE4Workbench(E4Application.java:254)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:620)
+=======
 !ENTRY org.eclipse.epp.logging.aeri.ui 2 5 2016-01-29 12:05:20.196
 !MESSAGE The configuration download failed. Version: 1.0.1.v20150913-0716
 !STACK 0
@@ -4191,6 +4310,7 @@ org.eclipse.recommenders.utils.Logs$LogTraceException
 	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
 	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
 	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:654)
+>>>>>>> 1379ad154af1dd031fb9c4476480e76ed4df68cd
 	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
 	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
 	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
@@ -4201,6 +4321,46 @@ org.eclipse.recommenders.utils.Logs$LogTraceException
 	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
 	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<<<<<<< HEAD
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+Caused by: org.xml.sax.SAXParseExceptionpublicId: file:/C:/Users/Bob/Documents/ss-project-qwirkle/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; systemId: file:/C:/Users/Bob/Documents/ss-project-qwirkle/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; lineNumber: 2; columnNumber: 2; The markup in the document preceding the root element must be well-formed.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(Unknown Source)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl.parse(Unknown Source)
+	at org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl.load(XMLLoadImpl.java:175)
+	at org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl.doLoad(XMLResourceImpl.java:261)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1518)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1297)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoad(ResourceSetImpl.java:259)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:274)
+	... 23 more
+
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2016-01-29 09:16:01.571
+!MESSAGE The persisted workbench has no top-level windows, so reinitializing with defaults.
+!STACK 0
+java.lang.Exception
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.loadMostRecentModel(ResourceHandler.java:236)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.loadApplicationModel(E4Application.java:397)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.createE4Workbench(E4Application.java:254)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:620)
+=======
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:606)
@@ -4316,6 +4476,7 @@ java.lang.IllegalStateException: Expected the service to be TERMINATED, but the 
 	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
 	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
 	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:654)
+>>>>>>> 1379ad154af1dd031fb9c4476480e76ed4df68cd
 	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
 	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
 	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
@@ -4326,6 +4487,16 @@ java.lang.IllegalStateException: Expected the service to be TERMINATED, but the 
 	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
 	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<<<<<<< HEAD
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY org.eclipse.epp.logging.aeri.ui 2 5 2016-01-29 09:16:07.997
+=======
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:606)
@@ -4620,6 +4791,7 @@ Framework arguments:  -product org.eclipse.epp.package.java.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
 
 !ENTRY org.eclipse.epp.logging.aeri.ui 2 5 2016-01-29 19:37:22.422
+>>>>>>> 1379ad154af1dd031fb9c4476480e76ed4df68cd
 !MESSAGE The configuration download failed. Version: 1.0.1.v20150913-0716
 !STACK 0
 com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5 column 10
@@ -4640,7 +4812,11 @@ Caused by: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5
 	at com.google.gson.Gson.fromJson(Gson.java:803)
 	... 8 more
 
+<<<<<<< HEAD
+!ENTRY org.eclipse.epp.logging.aeri.ui 2 29 2016-01-29 09:16:08.008
+=======
 !ENTRY org.eclipse.epp.logging.aeri.ui 2 29 2016-01-29 19:37:22.436
+>>>>>>> 1379ad154af1dd031fb9c4476480e76ed4df68cd
 !MESSAGE Startup failed, AERI is disabled until next restart. Version: 1.0.1.v20150913-0716
 !STACK 0
 com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5 column 10
@@ -4661,6 +4837,14 @@ Caused by: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5
 	at com.google.gson.Gson.fromJson(Gson.java:803)
 	... 8 more
 
+<<<<<<< HEAD
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-29 09:16:08.999
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Bob'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+=======
 !ENTRY org.eclipse.egit.ui 2 0 2016-01-29 19:37:22.815
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\Arend'. If this is
@@ -4700,15 +4884,111 @@ Caused by: java.lang.UnsupportedClassVersionError: com/yattasolutions/umllab/val
 !MESSAGE The 'org.eclipse.ui.startup' extension from 'com.objectaid.uml' does not provide a 'class' attribute.
 This usage is deprecated and a 'class' attribute should be provided.
 The release after Mars (4.5) will no longer support the deprecated usage!
+<<<<<<< HEAD
 !SESSION 2016-01-29 21:31:09.544 -----------------------------------------------
 eclipse.buildId=4.5.1.M20150904-0015
 java.version=1.8.0_65
+=======
+>>>>>>> 1379ad154af1dd031fb9c4476480e76ed4df68cd
+!SESSION 2016-01-29 19:59:20.382 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.7.0_79
+>>>>>>> 2ca6ad0b2a9d456cbc17436b6d1510f07eec74fc
 java.vendor=Oracle Corporation
 BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=nl_NL
 Framework arguments:  -product org.eclipse.epp.package.java.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.epp.logging.aeri.ui 2 5 2016-01-29 21:31:20.309
+=======
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2016-01-29 19:59:25.543
+!MESSAGE Unable to load resource file:/C:/Users/Bob/Documents/ss-project-qwirkle/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
+!STACK 0
+org.eclipse.emf.ecore.resource.impl.ResourceSetImpl$1DiagnosticWrappedException: org.xml.sax.SAXParseExceptionpublicId: file:/C:/Users/Bob/Documents/ss-project-qwirkle/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; systemId: file:/C:/Users/Bob/Documents/ss-project-qwirkle/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; lineNumber: 2; columnNumber: 2; The markup in the document preceding the root element must be well-formed.
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.handleDemandLoadException(ResourceSetImpl.java:319)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:278)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.getResource(ResourceSetImpl.java:406)
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.getResource(ResourceHandler.java:351)
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.loadResource(ResourceHandler.java:327)
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.loadMostRecentModel(ResourceHandler.java:231)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.loadApplicationModel(E4Application.java:397)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.createE4Workbench(E4Application.java:254)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:620)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+Caused by: org.xml.sax.SAXParseExceptionpublicId: file:/C:/Users/Bob/Documents/ss-project-qwirkle/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; systemId: file:/C:/Users/Bob/Documents/ss-project-qwirkle/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; lineNumber: 2; columnNumber: 2; The markup in the document preceding the root element must be well-formed.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(Unknown Source)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl.parse(Unknown Source)
+	at org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl.load(XMLLoadImpl.java:175)
+	at org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl.doLoad(XMLResourceImpl.java:261)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1518)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1297)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoad(ResourceSetImpl.java:259)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:274)
+	... 23 more
+
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2016-01-29 19:59:25.562
+!MESSAGE The persisted workbench has no top-level windows, so reinitializing with defaults.
+!STACK 0
+java.lang.Exception
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.loadMostRecentModel(ResourceHandler.java:236)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.loadApplicationModel(E4Application.java:397)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.createE4Workbench(E4Application.java:254)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:620)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-29 19:59:38.890
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Bob'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.epp.logging.aeri.ui 2 5 2016-01-29 19:59:39.217
+>>>>>>> 2ca6ad0b2a9d456cbc17436b6d1510f07eec74fc
 !MESSAGE The configuration download failed. Version: 1.0.1.v20150913-0716
 !STACK 0
 com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5 column 10
@@ -4729,7 +5009,11 @@ Caused by: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5
 	at com.google.gson.Gson.fromJson(Gson.java:803)
 	... 8 more
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.epp.logging.aeri.ui 2 29 2016-01-29 21:31:20.333
+=======
+!ENTRY org.eclipse.epp.logging.aeri.ui 2 29 2016-01-29 19:59:39.221
+>>>>>>> 2ca6ad0b2a9d456cbc17436b6d1510f07eec74fc
 !MESSAGE Startup failed, AERI is disabled until next restart. Version: 1.0.1.v20150913-0716
 !STACK 0
 com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5 column 10
@@ -4750,6 +5034,7 @@ Caused by: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5
 	at com.google.gson.Gson.fromJson(Gson.java:803)
 	... 8 more
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.egit.ui 2 0 2016-01-29 21:31:21.219
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\Arend'. If this is
@@ -4792,12 +5077,126 @@ The release after Mars (4.5) will no longer support the deprecated usage!
 !SESSION 2016-01-29 22:23:44.591 -----------------------------------------------
 eclipse.buildId=4.5.1.M20150904-0015
 java.version=1.8.0_65
+=======
+!ENTRY net.sf.eclipsecs.core 4 4 2016-01-29 20:00:31.864
+!MESSAGE C:\Users\Arend\Documents\$SSHome\Programmeer project\ss-project-qwirkle\checkstyle-softwaresystems.xml (Het systeem kan het opgegeven pad niet vinden)
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: C:\Users\Arend\Documents\$SSHome\Programmeer project\ss-project-qwirkle\checkstyle-softwaresystems.xml (Het systeem kan het opgegeven pad niet vinden)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.config.configtypes.ConfigurationType.getCheckstyleConfiguration(ConfigurationType.java:167)
+	at net.sf.eclipsecs.core.config.CheckConfiguration.getCheckstyleConfiguration(CheckConfiguration.java:193)
+	at net.sf.eclipsecs.core.builder.CheckerFactory.getCacheKey(CheckerFactory.java:229)
+	at net.sf.eclipsecs.core.builder.CheckerFactory.createChecker(CheckerFactory.java:126)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:142)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.jobs.RunCheckstyleOnFilesJob.runInWorkspace(RunCheckstyleOnFilesJob.java:116)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:39)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.io.FileNotFoundException: C:\Users\Arend\Documents\$SSHome\Programmeer project\ss-project-qwirkle\checkstyle-softwaresystems.xml (Het systeem kan het opgegeven pad niet vinden)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at sun.net.www.protocol.file.FileURLConnection.connect(Unknown Source)
+	at net.sf.eclipsecs.core.config.configtypes.ConfigurationType.getCheckstyleConfiguration(ConfigurationType.java:148)
+	... 8 more
+
+!ENTRY net.sf.eclipsecs.core 4 4 2016-01-29 20:00:45.576
+!MESSAGE C:\Users\Arend\Documents\$SSHome\Programmeer project\ss-project-qwirkle\checkstyle-softwaresystems.xml (Het systeem kan het opgegeven pad niet vinden)
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: C:\Users\Arend\Documents\$SSHome\Programmeer project\ss-project-qwirkle\checkstyle-softwaresystems.xml (Het systeem kan het opgegeven pad niet vinden)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.config.configtypes.ConfigurationType.getCheckstyleConfiguration(ConfigurationType.java:167)
+	at net.sf.eclipsecs.core.config.CheckConfiguration.getCheckstyleConfiguration(CheckConfiguration.java:193)
+	at net.sf.eclipsecs.core.builder.CheckerFactory.getCacheKey(CheckerFactory.java:229)
+	at net.sf.eclipsecs.core.builder.CheckerFactory.createChecker(CheckerFactory.java:126)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:142)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.jobs.RunCheckstyleOnFilesJob.runInWorkspace(RunCheckstyleOnFilesJob.java:116)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:39)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.io.FileNotFoundException: C:\Users\Arend\Documents\$SSHome\Programmeer project\ss-project-qwirkle\checkstyle-softwaresystems.xml (Het systeem kan het opgegeven pad niet vinden)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at sun.net.www.protocol.file.FileURLConnection.connect(Unknown Source)
+	at net.sf.eclipsecs.core.config.configtypes.ConfigurationType.getCheckstyleConfiguration(ConfigurationType.java:148)
+	... 8 more
+
+!ENTRY org.eclipse.debug.ui 4 120 2016-01-29 20:23:31.666
+!MESSAGE Error logged from Debug UI: 
+!STACK 0
+org.xml.sax.SAXParseException; lineNumber: 7; columnNumber: 2; The content of elements must consist of well-formed character data or markup.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(Unknown Source)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.startOfMarkup(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(Unknown Source)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.restoreLaunchHistory(LaunchConfigurationManager.java:501)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.loadLaunchHistories(LaunchConfigurationManager.java:1066)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getLaunchHistory(LaunchConfigurationManager.java:1038)
+	at org.eclipse.debug.ui.actions.AbstractLaunchHistoryAction.internalGetHistory(AbstractLaunchHistoryAction.java:540)
+	at org.eclipse.debug.ui.actions.AbstractLaunchHistoryAction.getToolTip(AbstractLaunchHistoryAction.java:233)
+	at org.eclipse.debug.ui.actions.AbstractLaunchHistoryAction.updateTooltip(AbstractLaunchHistoryAction.java:198)
+	at org.eclipse.debug.ui.actions.AbstractLaunchHistoryAction.initialize(AbstractLaunchHistoryAction.java:168)
+	at org.eclipse.debug.ui.actions.AbstractLaunchHistoryAction.selectionChanged(AbstractLaunchHistoryAction.java:506)
+	at org.eclipse.ui.internal.PluginAction.refreshEnablement(PluginAction.java:206)
+	at org.eclipse.ui.internal.PluginAction.createDelegate(PluginAction.java:126)
+	at org.eclipse.ui.internal.WWinPluginAction.refreshActionList(WWinPluginAction.java:167)
+	at org.eclipse.ui.plugin.AbstractUIPlugin$1.run(AbstractUIPlugin.java:495)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:135)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4155)
+	at org.eclipse.swt.widgets.Display.msgFilterProc(Display.java:3487)
+	at org.eclipse.swt.internal.win32.OS.TrackPopupMenu(Native Method)
+	at org.eclipse.swt.widgets.Menu._setVisible(Menu.java:262)
+	at org.eclipse.swt.widgets.Display.runPopups(Display.java:4221)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3763)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:654)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+!SESSION 2016-01-29 21:30:24.941 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.7.0_79
+>>>>>>> 2ca6ad0b2a9d456cbc17436b6d1510f07eec74fc
 java.vendor=Oracle Corporation
 BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=nl_NL
 Framework arguments:  -product org.eclipse.epp.package.java.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.epp.logging.aeri.ui 2 5 2016-01-29 22:23:57.651
+=======
+!ENTRY org.eclipse.epp.logging.aeri.ui 2 5 2016-01-29 21:30:36.291
+>>>>>>> 2ca6ad0b2a9d456cbc17436b6d1510f07eec74fc
 !MESSAGE The configuration download failed. Version: 1.0.1.v20150913-0716
 !STACK 0
 com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5 column 10
@@ -4818,7 +5217,11 @@ Caused by: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5
 	at com.google.gson.Gson.fromJson(Gson.java:803)
 	... 8 more
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.epp.logging.aeri.ui 2 29 2016-01-29 22:23:57.667
+=======
+!ENTRY org.eclipse.epp.logging.aeri.ui 2 29 2016-01-29 21:30:36.537
+>>>>>>> 2ca6ad0b2a9d456cbc17436b6d1510f07eec74fc
 !MESSAGE Startup failed, AERI is disabled until next restart. Version: 1.0.1.v20150913-0716
 !STACK 0
 com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5 column 10
@@ -4839,6 +5242,7 @@ Caused by: com.google.gson.stream.MalformedJsonException: Expected ':' at line 5
 	at com.google.gson.Gson.fromJson(Gson.java:803)
 	... 8 more
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.egit.ui 2 0 2016-01-29 22:23:58.025
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\Arend'. If this is
@@ -5098,3 +5502,11 @@ Caused by: java.lang.NumberFormatException: For input string: "9~6a8260f7fc01362
 	at com.google.common.util.concurrent.AbstractIdleService$2$1.run(AbstractIdleService.java:54)
 	at com.google.common.util.concurrent.Callables$3.run(Callables.java:93)
 	at java.lang.Thread.run(Unknown Source)
+=======
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-29 21:30:40.446
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Bob'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+>>>>>>> 2ca6ad0b2a9d456cbc17436b6d1510f07eec74fc
