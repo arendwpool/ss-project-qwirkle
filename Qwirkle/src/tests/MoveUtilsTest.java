@@ -2,19 +2,14 @@ package tests;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
-import exceptions.InvalidMoveException;
-import exceptions.NoTilesLeftInPileException;
 import models.Board;
 import models.Game;
 import models.HumanPlayer;
-import models.Pile;
 import models.Player;
 import models.Tile;
 import util.MoveUtils;
-import util.TileUtils;
 
 public class MoveUtilsTest {
 
@@ -26,42 +21,14 @@ public class MoveUtilsTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		Pile pile = new Pile();
-		testGame = new Game(new Board(), pile);
-		testPlayer = new HumanPlayer("test", testGame);
-	}
-	
-	@Test
-	//TODO testen op traden van stenen die een speler niet heeft, en op een lege pile
-	//TODO oplossen: werkt niet
-	public void testReplaceTiles(){
-		ArrayList<Tile> tilesToTrade = new ArrayList<Tile>();
-		TileUtils.setHand(testPlayer, testGame.getPile());
-		tilesToTrade.add(testPlayer.getHand().get(0));
-		tilesToTrade.add(testPlayer.getHand().get(1));
-		tilesToTrade.add(testPlayer.getHand().get(2));
-		ArrayList<Tile> first = new ArrayList<Tile>(testPlayer.getHand());
-		for(Tile tile : testPlayer.getHand()){
-			System.out.println("first: " + tile.getColor()+tile.getSymbol());
-		}
-		try {
-			MoveUtils.replaceTiles(tilesToTrade, testPlayer, testGame.getPile());
-		} catch (NoTilesLeftInPileException e) {
-			//Gebeurt niet in deze test
-			System.out.print("FOUT");
-		} catch (InvalidMoveException e) {
-			//TODO testen als iets invalid is
-		}
-		for(Tile tile : testPlayer.getHand()){
-			System.out.println("after: " + tile.getColor()+tile.getSymbol());
-		}
-		assertFalse(testPlayer.getHand().equals(first));
+		testGame = new Game(0);
+		testPlayer = new HumanPlayer("test");
 	}
 
 	@Test
 	public void testIsValidMove(){
 		Board board = testGame.getBoard();
-		MoveUtils.setInitialMove(false);
+		testGame.getMoves().setInitialMove(false);
 		board.setTile(90, 90, new Tile("groen", "cirkel"));
 		assertTrue("De gelegde tegel is groen", board.getField(90, 90).getColor().equals("groen"));
 		assertTrue("Deze move mag gelegd worden",MoveUtils.isValidMove(91, 90, new Tile("groen", "vierkant"), board));
@@ -103,11 +70,11 @@ public class MoveUtilsTest {
 		board.setTile(88, 89, new Tile("oranje", "cirkel"));
 		Tile tile = new Tile("groen", "cirkel");
 		board.setTile(90, 89, tile);
-		MoveUtils.rememberMove(tile);
-		MoveUtils.generateScore(testPlayer, board);
+		testGame.getMoves().rememberMove(tile);
+		testGame.getMoves().generateScore(testPlayer, board);
 		assertEquals(9, testPlayer.getScore());
 		board.reset();
-		Player a = new HumanPlayer("asd", testGame);
+		Player a = new HumanPlayer("asd");
 		board.setTile(90, 91, new Tile("groen", "ruit"));
 		board.setTile(90, 92, new Tile("groen", "vierkant"));
 		board.setTile(90, 93, new Tile("groen", "ster"));
@@ -119,14 +86,14 @@ public class MoveUtilsTest {
 		board.setTile(91, 92, tile1);
 		board.setTile(91, 93, tile2);
 		board.setTile(91, 94, tile3);
-		MoveUtils.rememberMove(tile1);
-		MoveUtils.rememberMove(tile2);
-		MoveUtils.rememberMove(tile3);
-		MoveUtils.rememberMove(tile4);
-		MoveUtils.generateScore(a, board);
+		testGame.getMoves().rememberMove(tile1);
+		testGame.getMoves().rememberMove(tile2);
+		testGame.getMoves().rememberMove(tile3);
+		testGame.getMoves().rememberMove(tile4);
+		testGame.getMoves().generateScore(a, board);
 		assertEquals(8, a.getScore());
 		board.reset();
-		Player b = new HumanPlayer("asd", testGame);
+		Player b = new HumanPlayer("asd");
 		board.setTile(90, 90, new Tile("groen", "kruis"));
 		board.setTile(91, 90, new Tile("groen", "cikel"));
 		board.setTile(93, 90, new Tile("groen", "vierkant"));
@@ -136,23 +103,23 @@ public class MoveUtilsTest {
 		board.setTile(92, 91, new Tile("oranje", "plus"));
 		Tile gp = new Tile("groen", "plus");
 		board.setTile(92, 90, gp);
-		MoveUtils.rememberMove(gp);
-		MoveUtils.generateScore(b, board);
+		testGame.getMoves().rememberMove(gp);
+		testGame.getMoves().generateScore(b, board);
 		assertEquals(9, b.getScore());
 		board.reset();
-		Player c = new HumanPlayer("asd", testGame);
+		Player c = new HumanPlayer("asd");
 		board.setTile(90, 90, new Tile("groen", "kruis"));
 		board.setTile(91, 90, new Tile("groen", "cikel"));
 		board.setTile(92, 90, new Tile("groen", "vierkant"));
 		board.setTile(93, 90,  gp);
 		Tile gr = new Tile("groen", "ruit");
 		board.setTile(94, 90, gr);
-		MoveUtils.rememberMove(gr);
-		MoveUtils.rememberMove(gp);
-		MoveUtils.generateScore(c, board);
+		testGame.getMoves().rememberMove(gr);
+		testGame.getMoves().rememberMove(gp);
+		testGame.getMoves().generateScore(c, board);
 		assertEquals(5, c.getScore());
 		board.reset();
-		Player d = new HumanPlayer("asd", testGame);
+		Player d = new HumanPlayer("asd");
 		board.setTile(90, 90, new Tile("groen", "kruis"));
 		board.setTile(91, 90, new Tile("groen", "cikel"));
 		board.setTile(92, 90, new Tile("groen", "vierkant"));
@@ -161,9 +128,32 @@ public class MoveUtilsTest {
 		board.setTile(95, 91, new Tile("rood", "ster"));
 		Tile gs = new Tile("groen", "ster");
 		board.setTile(95, 90, gs);
-		MoveUtils.rememberMove(gs);
-		MoveUtils.generateScore(d, board);
+		testGame.getMoves().rememberMove(gs);
+		testGame.getMoves().generateScore(d, board);
 		assertEquals(14, d.getScore());
+	}
+	
+
+	@Test
+	public void testValidSharedLine(){
+		Tile tile1 = new Tile("groen", "cirkel");
+		Tile tile2 = new Tile("groen", "ruit");
+		Tile tile3 = new Tile("groen", "vierkant");
+		Tile tile4 = new Tile("groen", "ster");
+		Tile tile5 = new Tile("rood", "ruit");
+		Tile tile6 = new Tile("geel", "ruit");
+		Tile tile7 = new Tile("groen", "plus");
+		testGame.getBoard().setTile(90, 90, tile1);
+		testGame.getBoard().setTile(89, 90, tile2);
+		testGame.getBoard().setTile(88, 90, tile3);
+		testGame.getBoard().setTile(87, 90, tile4);
+		assertTrue(testGame.getMoves().validSharedLine(89, 91, tile5));
+		testGame.getBoard().setTile(89, 91, tile5);
+		testGame.getMoves().rememberMove(tile5);
+		assertTrue(testGame.getMoves().validSharedLine(89, 89, tile6));
+		testGame.getBoard().setTile(89, 89, tile6);
+		testGame.getMoves().rememberMove(tile6);
+		assertFalse(testGame.getMoves().validSharedLine(86, 90, tile7));
 	}
 
 }

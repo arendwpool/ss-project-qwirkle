@@ -109,8 +109,7 @@ public class Server {
 		try {
 			game = getGameByPlayer(client.getPlayerName());
 		} catch (PlayerNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ui.print("Het betreffende spel kon niet gevonden worden.");
 		}		
 		if (game.getPlayers().size() > 2) {
 			Player player = game.getPlayerByClient(client.getPlayerName());
@@ -145,8 +144,7 @@ public class Server {
 			}
 			client.sendMessage(msg);
 		} catch (PlayerNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ui.print("Het betreffende spel kon niet gevonden worden.");
 		}
 	}
 
@@ -167,7 +165,7 @@ public class Server {
 				portHasBeenSet = true;
 			} catch (IOException e) {
 				ui.print("Het ingevoerde nummer is ongeldig, probeer opnieuw of typ 0 voor de standaard poort: ");
-				port = 1337; //TODO loop error oplossen
+				port = 1337; //TODO de loop komt door weer de scanner fout
 			}
 		}
 	}
@@ -195,8 +193,8 @@ public class Server {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
 		}
+		shutDown();
 	}
 	
 	/**
@@ -286,7 +284,7 @@ public class Server {
 	 * @return
 	 * @throws PlayerNotFoundException
 	 */
-	private synchronized Game getGameByPlayer(String name) throws PlayerNotFoundException {
+	public synchronized Game getGameByPlayer(String name) throws PlayerNotFoundException {
 		for (Game game : games) {
 			for (Player player: game.getPlayers()) {				
 				if (player.getName().equals(name)) {
@@ -508,12 +506,21 @@ public class Server {
 	}
 
 	/**
-	 * Sluit de server af TODO wordt nu nog niet aangeroepen.
+	 * Sluit de server af.
 	 */
 	public void shutDown() {
 		for (ClientHandler ch : clients) {
 			broadcastToPlayer(Protocol.SERVER_CORE_TIMEOUT_EXCEPTION + Protocol.MESSAGESEPERATOR + ch.getPlayerName(), ch.getPlayerName());
 		}
 		terminated = true;
+	}
+	
+	public void deleteClient(ClientHandler client) {
+		clients.remove(client);
+		joint.remove(client);
+	}
+
+	public ArrayList<Game> getGames() {
+		return games;
 	}
 }

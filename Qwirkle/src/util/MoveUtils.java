@@ -110,7 +110,7 @@ public class MoveUtils {
 		} else if (retainMultipleY == true) {
 			score += column.size();
 		}
-		if (row.size() == 6 || column.size() == 6) { //TODO vraag: kan een bonus van 12?
+		if (row.size() == 6 || column.size() == 6) {
 			score += 6;
 		}
 		clearLastMoves();

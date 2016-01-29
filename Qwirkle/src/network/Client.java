@@ -35,7 +35,10 @@ public class Client extends Thread{
 	 * welk vraagnummer het programma is.
 	 */
 	private int currentQuestion = 0;
-	
+	/**
+	 * Geeft aan of de speler tijdens zijn beurt al om een hint heeft gevraagd.
+	 */
+	boolean askedForHint = false;
 	/**
 	 * De menu's die in dit programma weergegeven worden. De zin op index 0 worden als beschrijving
 	 * weergegeven.
@@ -111,7 +114,8 @@ public class Client extends Thread{
 	
 	/**
 	 * Als een speler een tegel wil ruilen wordt deze hier opgeslagen om later
-	 * terug naar te verwijzen. TODO waarnaar?
+	 * terug naar te verwijzen als de tegel uit de hand van de speler moet
+	 * worden verwijderd.
 	 */
 	private Tile tileToBeSwapped;
 	
@@ -227,8 +231,9 @@ public class Client extends Thread{
 			sendMessage("ex");
 			sendMessage("join");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ui.print("Er kon geen verbinding worden gemaakt, probeer opnieuw...");
+			currentQuestion = 0;
+			startClient();
 		}
 		start();
 	}
@@ -382,7 +387,7 @@ public class Client extends Thread{
 				}
 			}
 		} catch (IOException e) {
-			//TODO implement
+			ui.print("Er is iets fout gegaan bij het lezen van de commandos.");
 		}
 		
 	}
@@ -415,7 +420,11 @@ public class Client extends Thread{
 		for (int i = 1; i < nameScore.length; i += 2) {
 			ui.print(nameScore[i]+ " heeft een eindscore van " + nameScore[i+1]) ;
 		}
-		ui.print("De winnaar is: " + game.winner().getName());
+		try{
+			ui.print("De winnaar is: " + game.winner().getName());
+		} catch (NullPointerException e) {
+			ui.print("Het spel is waarschijnlijk vroegtijdig gestopt, er is geen winnaar.");
+		}
 		boolean bl = question5();
 		if (bl == true)
 			sendMessage(Protocol.CLIENT_CORE_JOIN);		
@@ -483,10 +492,17 @@ public class Client extends Thread{
 	}
 
 	/**
-	 * TODO implement de exceptie
 	 * @param name
 	 */
 	private void exception(String name) {
+		ui.print("De connectie met de server is verbroken, programma wordt afgesloten.");
+		try {
+			out.close();	
+			in.close();
+		} catch (IOException e) {
+			ui.print("De verbinding kon niet goed verbroken worden, programma wordt direct afgesloten.");
+		}
+		terminated = true;
 	}
 
 	/**
@@ -553,17 +569,22 @@ public class Client extends Thread{
 					tileToBeSwapped = new Tile(TileUtils.intToColor(color), TileUtils.intToSymbol(shape));
 					sendMessage(Protocol.CLIENT_CORE_SWAP + Protocol.MESSAGESEPERATOR + shape + Protocol.MESSAGESEPERATOR + color);
 				} else if (move[0].equals("hint")) {
-					ComputerPlayer playerForHint = new ComputerPlayer("forHint", 1);
-					for (Tile tile : localPlayer.getHand()) {
-						playerForHint.getHand().add(tile);
-					}
-					try {
-						String[] hint = playerForHint.determineMove(game);
-						String color = TileUtils.intToColor(Integer.parseInt(hint[3]));
-						String shape = TileUtils.intToSymbol(Integer.parseInt(hint[2]));
-						ui.print("U kan " + color+shape + " neerleggen op x = " + hint[0] + " en y = " + hint[1]);
-					} catch (NullPointerException e) {
-						ui.print("Er is nu geen geldige move, ruil één of meer tegels");
+					if (askedForHint == false) {
+						ComputerPlayer playerForHint = new ComputerPlayer("forHint", 1);
+						for (Tile tile : localPlayer.getHand()) {
+							playerForHint.getHand().add(tile);
+						}
+						try {
+							String[] hint = playerForHint.determineMove(game);
+							String color = TileUtils.intToColor(Integer.parseInt(hint[3]));
+							String shape = TileUtils.intToSymbol(Integer.parseInt(hint[2]));
+							ui.print("U kan " + color+shape + " neerleggen op x = " + hint[0] + " en y = " + hint[1]);
+						} catch (NullPointerException e) {
+							ui.print("Er is nu geen geldige move, ruil één of meer tegels");
+						}
+						askedForHint = true;
+					} else {
+						ui.print("U mag maar één keer per beurt om een hint vragen.");
 					}
 					turn(game.getCurrentPlayer().getName());
 				} else if (move[0].equals("quit")) {
@@ -572,12 +593,13 @@ public class Client extends Thread{
 						out.close();
 						in.close();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						ui.print("Er is iets verkeert gegaan, programma wordt afgesloten.");
+						terminated = true;
 					}
 					terminated = true;
 				}
 			} else {
+				askedForHint = false;
 				sendMessage(Protocol.CLIENT_CORE_DONE);
 			}
 		}
@@ -617,7 +639,7 @@ public class Client extends Thread{
 			ui.print("Uw naam is " + name + ". U zit nu in de wachtrij, druk op een willekeurige toets om te starten.");
 			playerName = name;
 			createLocalPlayer();
-			String input = ui.determineString(); //TODO vraag of deze vroegtijdig geskipt kan worden
+			String input = ui.determineString();
 			if (input != null) {
 				sendMessage(Protocol.CLIENT_CORE_START);
 			} else {
@@ -655,14 +677,19 @@ public class Client extends Thread{
 	 * @param ip
 	 * @return isValidInt == true && ints.length == 4
 	 */
-	private static boolean isValidIP(String ip){
+	private boolean isValidIP(String ip){
 		String[] ints = ip.split("\\.");
 		boolean isValidInt = true;
 		for(String integer : ints){
-			int i = Integer.parseInt(integer);
-				if(i > 255){
-					isValidInt = false;
-				}
+			int i = 0;
+			try{
+				i = Integer.parseInt(integer);
+			} catch (NumberFormatException e) {
+				isValidInt = false;
+			}
+			if(i > 255){
+				isValidInt = false;
+			}
 		}
 		return (isValidInt == true && ints.length == 4);
 	}

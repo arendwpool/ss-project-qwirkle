@@ -8,7 +8,6 @@
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.net.ServerSocket"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="java.net.Socket"/>
 <fullyQualifiedTypeName name="java.io.BufferedWriter"/>
 <fullyQualifiedTypeName name="java.io.OutputStreamWriter"/>
 <fullyQualifiedTypeName name="java.net.InetAddress"/>
@@ -22,21 +21,15 @@
 <fullyQualifiedTypeName name="models.ClientHandler2"/>
 <fullyQualifiedTypeName name="protocol.Protocol"/>
 <fullyQualifiedTypeName name="models.Game2"/>
-<fullyQualifiedTypeName name="network.ClientHandler"/>
 <fullyQualifiedTypeName name="models.ComputerPlayer"/>
 <fullyQualifiedTypeName name="models.HumanPlayer"/>
 <fullyQualifiedTypeName name="models.ClientPlayer"/>
-<fullyQualifiedTypeName name="models.Game"/>
 <fullyQualifiedTypeName name="models.ServerPlayer"/>
 <fullyQualifiedTypeName name="view.BoardTUI"/>
 <fullyQualifiedTypeName name="models.Tile"/>
-<fullyQualifiedTypeName name="network.Client"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="exceptions.InvalidMoveException"/>
-<fullyQualifiedTypeName name="network.Protocol"/>
 <fullyQualifiedTypeName name="java.io.InputStream"/>
-<fullyQualifiedTypeName name="network.Server"/>
-<fullyQualifiedTypeName name="models.Player"/>
 <fullyQualifiedTypeName name="util.TileUtils"/>
 <fullyQualifiedTypeName name="util.MoveUtils"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
@@ -44,4 +37,11 @@
 <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
 <fullyQualifiedTypeName name="view.TUI"/>
 <fullyQualifiedTypeName name="view.StartTUI"/>
+<fullyQualifiedTypeName name="network.Server"/>
+<fullyQualifiedTypeName name="network.ClientHandler"/>
+<fullyQualifiedTypeName name="java.net.Socket"/>
+<fullyQualifiedTypeName name="network.Client"/>
+<fullyQualifiedTypeName name="network.Protocol"/>
+<fullyQualifiedTypeName name="models.Game"/>
+<fullyQualifiedTypeName name="models.Player"/>
 </qualifiedTypeNameHistroy>
