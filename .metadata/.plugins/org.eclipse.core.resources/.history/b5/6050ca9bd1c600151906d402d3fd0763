@@ -6,8 +6,6 @@ import org.junit.Test;
 import models.Game;
 import models.HumanPlayer;
 import models.Player;
-import models.Tile;
-import util.TileUtils;
 
 /**
  * 
@@ -59,29 +57,5 @@ public class GameTest {
 		assertTrue("De eerste speler is \"6\".", game.getCurrentPlayer().getName().equals(test6.getName()));
 		game.nextPlayer();
 		assertTrue("De eerste speler is \"5\".", game.getCurrentPlayer().getName().equals(test5.getName()));
-	}
-	
-	@Test
-	public void testGiveRandomTile(){
-		Tile tile = testGame.giveRandomTile(testGame.getPile());
-		assertTrue(tile != null);
-	}
-	
-	@Test
-	public void testDetermineInitialPlayer(){
-		Player player1 = new HumanPlayer("1");
-		Player player2 = new HumanPlayer("2");
-		Player player3 = new HumanPlayer("3");
-		Tile[] a = {new Tile ("groen", "circel"), new Tile ("rood", "circel"), new Tile ("blauw", "circel"),
-				new Tile ("paars", "vierkant"), new Tile ("groen", "ruit"), new Tile ("geel", "circel")};
-		for(Player player : testGame.getPlayers()){
-			for(Tile tile : player.getHand()){
-				System.out.println(player.getName() + ": " + tile.getColor()+tile.getSymbol());
-			}
-		}
-		testGame.determineInitialPlayer();
-		Player player = testGame.getCurrentPlayer();
-		System.out.println(player.getName());
-		assertTrue(player != null);
 	}
 }
